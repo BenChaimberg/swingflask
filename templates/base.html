@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<h1>Product: {{ product.id }}</h1>
+		<img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg'>
+		<p>{{ product.text|safe }}</p>
+		<h2>Directions:</h2>
+		<p>{{ product.dir|safe }}</p>
+	</body>
+</html>
