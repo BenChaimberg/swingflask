@@ -1,0 +1,31 @@
+div#sidebar {
+	position:relative;
+	float:left;
+	background-color:#1D432F;
+	text-align:center;
+	width:160px;
+	color:#FFFFFF;
+	margin-top:1px;
+	padding-bottom:5px;
+}
+a.noscript2:link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:9px;
+}
+a.noscript2:visited {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size:9px;
+}
+a.noscript2:hover {
+    text-decoration: none;
+    color: #C0C0C0;
+    font-size:9px;
+}
+a.noscript2:active {
+    text-decoration: none;
+    color: #C0C0C0;
+    font-size:9px;
+}
