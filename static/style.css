@@ -1,3 +1,8 @@
+body,p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+}
 div#sidebar {
 	position:relative;
 	float:left;
@@ -28,4 +33,40 @@ div#sidebar a:active {
     text-decoration: none;
     color: #C0C0C0;
     font-size:9px;
+}
+div#header {
+	position:relative;
+    color: #336633;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:9px;
+    bottom:0px;
+    left:0px;
+    padding-top:0px;
+    padding-bottom:2px;
+}
+div#header a:link {
+    color: #336633;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:9px;
+    -webkit-text-size-adjust:none;
+}
+div#header a:visited {
+    text-decoration: none;
+    color: #336633;
+    font-size:9px;
+    -webkit-text-size-adjust:none;
+}
+div#header a:hover {
+    text-decoration: none;
+    color: #CCCC99;
+    font-size:9px;
+    -webkit-text-size-adjust:none;
+}
+div#header a:active {
+    text-decoration: none;
+    color: #CCCC99;
+    font-size:9px;
+    -webkit-text-size-adjust:none;
 }
