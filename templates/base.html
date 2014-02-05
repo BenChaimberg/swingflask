@@ -9,13 +9,15 @@
 	</head>
 	<body>
 		<div id="header">
+			{% block header %}
 			<a href="/about">ABOUT SWING PAINTS</a> &#x7c;
-			<a href="/locations.php">WHERE TO BUY</a> &#x7c;
+			<a href="/locations">WHERE TO BUY</a> &#x7c;
 			<a href="/faq">FAQ</a> &#x7c;
 			<a href="/contact">CONTACTS</a> &#x7c;
 			<a href="/marketing">MARKETING AND SALES ASSISTANCE</a> &#x7c;
 			<b><a href="/home">HOME</a></b>
 			<img src="{{ url_for('static', filename='headerswing.png') }}" width="172px" height="37px">
+			{% endblock %}
 		</div>
 		<div id="container" style="position:relative">
 			<div id="sidebar">
