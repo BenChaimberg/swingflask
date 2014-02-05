@@ -8,7 +8,7 @@ p {
 }
 div#container {
 	position:relative;
-	width:750px;
+	width:590px;
 	margin-left:165px;
 }
 div#sidebar {
@@ -79,7 +79,34 @@ div#header a:active,div#footer a:active {
 }
 div#footer {
 	position:relative;
-	margin-right:50px;
+	margin-right:10px;
 	clear:both;
 	text-align:right;
+	color: #336633;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:9px;
+}
+div#image {
+	float: left;
+    position: relative;
+    padding:0 10px;
+}
+div#text {
+    float: right;
+    position: relative;
+    text-align: justify;
+}
+div#category {
+	width: 590px;
+	position: relative;
+	margin-left: 160px;
+}
+div#content {
+	position:relative;
+	float:left;
+	width:580px;
+}
+div#facebook {
+	margin-top:5px;
 }
