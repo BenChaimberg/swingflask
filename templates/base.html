@@ -11,17 +11,17 @@
 		<div id="container" style="position:relative">
 			<div id="sidebar">
 			{% block sidebar %}
-				<img align="center" src="http://www.swingpaints.com/images/Swing Side.jpg" width="159" height="69"><br>
+				<img align="center" src="{{ url_for('static', filename='categoryswing.png') }}" width="159" height="69"><br>
 				<i style="font-size:9px;color:#FFFF00">NEW&nbsp;</i>
-				<a href="/category.php?type=nontoxic&id=8" class="noscript2">Non-Toxic Products</a></br>&#183;</br>
-				<a href="/category.php?type=oils&id=14" class="noscript2">Finishing Oils</a></br>&#183;</br>
-				<a href="/category.php?type=poly&id=14" class="noscript2">Varnishes &amp; Polyurethanes</a></br>&#183;</br>
-				<a href="/category.php?type=remover&id=10" class="noscript2">Paint &amp; Varnish Removers</a></br>&#183;</br>
-				<a href="/category.php?type=primer&id=6" class="noscript2">Paint &amp; Wallpaper Primers</a></br>&#183;</br>
-				<a href="/category.php?type=special&id=9" class="noscript2">Specialty Paints &amp; Coatings</a></br>&#183;</br>
-				<a href="/category.php?type=waxes&id=9" class="noscript2">Waxes, Polishers &amp; Cleaners</a></br>&#183;</br>
-				<a href="/category.php?type=stain&id=6" class="noscript2">Wood Stains &amp; Varnish Stains</a></br>&#183;</br>
-				<a href="/category.php?type=accessories&id=8" class="noscript2">Accessories</a>
+				<a href="/category/nontoxic">Non-Toxic Products</a></br>&#183;</br>
+				<a href="/category/oils">Finishing Oils</a></br>&#183;</br>
+				<a href="/category/poly">Varnishes &amp; Polyurethanes</a></br>&#183;</br>
+				<a href="/category/remover">Paint &amp; Varnish Removers</a></br>&#183;</br>
+				<a href="/category/primer">Paint &amp; Wallpaper Primers</a></br>&#183;</br>
+				<a href="/category/special">Specialty Paints &amp; Coatings</a></br>&#183;</br>
+				<a href="/category/waxes">Waxes, Polishers &amp; Cleaners</a></br>&#183;</br>
+				<a href="/category/stain">Wood Stains &amp; Varnish Stains</a></br>&#183;</br>
+				<a href="/category/accessories">Accessories</a>
 			{% endblock %}
 			</div>
 			<div id="content" style="position:relative;float:left;width:700px">

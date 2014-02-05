@@ -8,23 +8,23 @@ div#sidebar {
 	margin-top:1px;
 	padding-bottom:5px;
 }
-a.noscript2:link {
+div#sidebar a:link {
     color: #FFFFFF;
     text-decoration: none;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size:9px;
 }
-a.noscript2:visited {
+div#sidebar a:visited {
     text-decoration: none;
     color: #FFFFFF;
     font-size:9px;
 }
-a.noscript2:hover {
+div#sidebar a:hover {
     text-decoration: none;
     color: #C0C0C0;
     font-size:9px;
 }
-a.noscript2:active {
+div#sidebar a:active {
     text-decoration: none;
     color: #C0C0C0;
     font-size:9px;
