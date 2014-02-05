@@ -2,12 +2,24 @@
 <html>
 	<head>
 	{% block head %}
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
 	{% endblock %}
 	</head>
 	<body>
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+  				var js, fjs = d.getElementsByTagName(s)[0];
+  				if (d.getElementById(id)) return;
+  				js = d.createElement(s); js.id = id;
+  				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  				fjs.parentNode.insertBefore(js, fjs);
+			}
+			(document, 'script', 'facebook-jssdk'));
+		</script>
 		<div id="header">
 			{% block header %}
 			<a href="/about">ABOUT SWING PAINTS</a> &#x7c;
@@ -19,8 +31,7 @@
 			<img src="{{ url_for('static', filename='headerswing.png') }}" width="172px" height="37px">
 			{% endblock %}
 		</div>
-		<div id="container" style="position:relative">
-			<div id="sidebar">
+		<div id="sidebar">
 			{% block sidebar %}
 				<img align="center" src="{{ url_for('static', filename='categoryswing.png') }}" width="159" height="69"><br>
 				<i style="font-size:9px;color:#FFFF00">NEW&nbsp;</i>
@@ -35,8 +46,19 @@
 				<a href="/category/accessories">Accessories</a>
 			{% endblock %}
 			</div>
+		<div id="container">
 			<div id="content" style="position:relative;float:left;width:700px">
 			{% block content %}{% endblock %}
+			</div>
+			<div id="footer">
+				<a href="/forum.asp" class="noscript">INTERACTIVE FORUM</a> |
+				<a href="/a_coupon.htm" class="noscript">SWING COUPONS</a> |
+				<a href="/newsletter.php" class="noscript" target="_BLANK">NEWSLETTER</a> |
+				<a href="/refer.php" class="noscript" target="_BLANK">REFER A FRIEND</a> |
+				<a href="/a_free_brochure.php" class="noscript">FREE BROCHURE</a>
+				<div id="facebook">
+					<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
+				</div>
 			</div>
 		</div>
 	</body>

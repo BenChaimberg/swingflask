@@ -3,6 +3,14 @@ body,p {
 	font-size: 12px;
 	color: #000000;
 }
+p {
+	text-align:justify;
+}
+div#container {
+	position:relative;
+	width:750px;
+	margin-left:165px;
+}
 div#sidebar {
 	position:relative;
 	float:left;
@@ -45,28 +53,34 @@ div#header {
     padding-top:0px;
     padding-bottom:2px;
 }
-div#header a:link {
+div#header a:link,div#footer a:link {
     color: #336633;
     text-decoration: none;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size:9px;
     -webkit-text-size-adjust:none;
 }
-div#header a:visited {
+div#header a:visited,div#footer a:visited {
     text-decoration: none;
     color: #336633;
     font-size:9px;
     -webkit-text-size-adjust:none;
 }
-div#header a:hover {
+div#header a:hover,div#footer a:hover {
     text-decoration: none;
     color: #CCCC99;
     font-size:9px;
     -webkit-text-size-adjust:none;
 }
-div#header a:active {
+div#header a:active,div#footer a:active {
     text-decoration: none;
     color: #CCCC99;
     font-size:9px;
     -webkit-text-size-adjust:none;
+}
+div#footer {
+	position:relative;
+	margin-right:50px;
+	clear:both;
+	text-align:right;
 }
