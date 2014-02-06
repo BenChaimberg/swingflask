@@ -46,11 +46,7 @@
 			<a href="/category/accessories">Accessories</a>
 		{% endblock %}
 		</div>
-		<div id="category">
-		{% block category %}
-			<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" WIDTH=590 HEIGHT=29></img>
-		{% endblock %}
-		</div>
+		<div id="category">{% block category %}{% endblock %}</div>
 		<div id="container">
 			<div id="content">
 			{% block content %}{% endblock %}
