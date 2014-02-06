@@ -15,4 +15,4 @@ def product(productid):
     return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid]})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
