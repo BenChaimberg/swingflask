@@ -3,9 +3,8 @@ body,p {
 	font-size: 12px;
 	color: #000000;
 }
-p {
-	text-align:justify;
-}
+a { color:#1D432F; }
+p { text-align:justify; }
 div#container {
 	position:relative;
 	width:590px;

@@ -14,6 +14,10 @@ def index():
 def marketing():
     return render_template('marketing.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/product/<productid>')
 def product(productid):
     return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid]})
