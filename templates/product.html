@@ -3,14 +3,12 @@
 {% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" WIDTH=590 HEIGHT=29></img>{% endblock %}
 {% block content %}
 <div id="text">{{ product.text|safe }}</div>
-<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg'></div>
+<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture"></div>
 <script type='text/javascript'>
-	$(document).ready(function(){
-		setTimeout(function(){
-			var txt = $("#image").width();
-			var txt2 = 555 - txt
-			$("#text").css('width', txt2);
-		}, 1000);
+	$("#picture").load(function(){
+		var txt = $("#image").width();
+		var txt2 = 555 - txt
+		$("#text").css('width', txt2);
 	});
 </script>
 {% endblock %}
