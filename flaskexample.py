@@ -4,6 +4,8 @@ from flask import url_for
 import producttitle
 import producttext
 import productdir
+import categorytitle
+import categoryimg
 app = Flask(__name__)	
 
 @app.route('/')
@@ -21,6 +23,10 @@ def about():
 @app.route('/product/<productid>')
 def product(productid):
     return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid]})
+
+@app.route('/category/<categoryid>')
+def category(categoryid):
+    return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid]})
 
 if __name__ == '__main__':
     app.run()
