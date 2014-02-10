@@ -6,6 +6,7 @@ import producttext
 import productdir
 import categorytitle
 import categoryimg
+import categoryproducts
 app = Flask(__name__)	
 
 @app.route('/')
@@ -26,7 +27,7 @@ def product(productid):
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
-    return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid]})
+    return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
 
 if __name__ == '__main__':
     app.run()

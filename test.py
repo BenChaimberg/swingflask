@@ -1,2 +1,4 @@
-import productdir
-print productdir.dir['1800']
+import categoryproducts
+for x in products:
+	print products[x]
+	print x
