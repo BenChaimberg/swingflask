@@ -1,4 +1,3 @@
 import categoryproducts
-for x in products:
-	print products[x]
-	print x
+for x in categoryproducts.products['nontoxic']:
+	print categoryproducts.products['nontoxic'][x]
