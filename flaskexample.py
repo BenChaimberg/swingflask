@@ -27,7 +27,7 @@ def product(productid):
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
-    return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
+    return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid],'counter':1})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

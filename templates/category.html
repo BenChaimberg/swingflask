@@ -4,6 +4,7 @@
 {% block content %}
 <table><tr>
 {% for x in category.products: %}
+{% if loop.index is divisibleby(6) %}</tr><tr>{% endif %}
 <td valign="top" style="font-size: 10px">
 	<div align="center">
 		<a href="/product/{{ x }}">
