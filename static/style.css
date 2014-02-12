@@ -3,7 +3,10 @@ body,p {
 	font-size: 12px;
 	color: #000000;
 }
-a { color:#1D432F; }
+a {
+	color:#1D432F;
+	text-decoration:none;
+}
 p { text-align:justify; }
 div#container {
 	position:relative;
