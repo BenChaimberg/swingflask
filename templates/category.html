@@ -5,7 +5,7 @@
 <table><tr>
 {% for x in category.products: %}
 {% if loop.index is divisibleby(6) %}</tr><tr>{% endif %}
-<td valign="top" style="font-size: 10px">
+<td valign="top" style="font-size: 10px;width:112px">
 	<div align="center">
 		<a href="../product/{{ x }}">
 			<img src="http://swingpaints.com/images/tn/{{ x }}.jpg" width="102" height="102" alt="{{ category.products[x] }}" title="{{ category.products[x] }}">
