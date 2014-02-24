@@ -2,7 +2,7 @@ Flask for Swing Paints
 ======================
 Welcome to Swing Paints' python experiment using Flask. More to come!
 
-* [Functional Specification](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md)
+* [Functional Specification](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md#functional-specification)
 
 ####To install (Mac):
 First download and unzip file, then:
