@@ -11,6 +11,6 @@ $ cd /path/to/.../flaskexample-master
 $ sudo easy_install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
-$ pip install Flask
+$ pip install flask
 $ python flaskexample.py
 ```
