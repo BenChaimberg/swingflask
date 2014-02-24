@@ -10,7 +10,7 @@ The site is a gateway into our company for current and potential customers.  As 
 * **COMPANY PROFILE**:  A brief overview of the company stressing the fact that it is a family-owned business based in Montreal.
 * **CONTACTS**:  Information on telephone, fax, e-mail, etc.
 * **PRODUCT INFORMATION**:  Detailed information on each product, including information specific to dealers as well as consumers.  The potential for links to videos and photo galleries would be beneficial.
-* **E-MAIL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
+* **eMAL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
 * **ONLINE FORUM**:  The site must continue to maintain a high quality online forum where customers can discuss specific issues that relate to projects in our field.
 
 We propose to have the web site upgraded and redesigned to satisfy our current and future needs.
