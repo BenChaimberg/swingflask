@@ -25,7 +25,7 @@ Swing Paints FAQ
 
 5. **How do you solve the problem of a squeaky rocking chair?**
 
-The squeaking is probably caused by the rubbing of one of the legs inside the hole in the runner. The old glue has probably failed and the joint is slightly loose. If possible, determine which joint is causing the noise and force some glue around the post and in the hole. Stack some books on the seat overnight to serve as clamps while the glue dries. If you are lucky this may take care of it, but in extreme cases the chair may have to be taken apart, and reglued. P.S. If you can not get any glue in the hole, try a few drops of light oil. It will not cure the disease but it may eliminate the symptoms.
+  The squeaking is probably caused by the rubbing of one of the legs inside the hole in the runner. The old glue has probably failed and the joint is slightly loose. If possible, determine which joint is causing the noise and force some glue around the post and in the hole. Stack some books on the seat overnight to serve as clamps while the glue dries. If you are lucky this may take care of it, but in extreme cases the chair may have to be taken apart, and reglued. P.S. If you can not get any glue in the hole, try a few drops of light oil. It will not cure the disease but it may eliminate the symptoms.
 
 6. **Should veneer be repaired before or after stripping?**
 
