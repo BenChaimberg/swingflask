@@ -37,5 +37,5 @@ The home page will show image examples of products and provide links to common p
 
 About Page
 ----------
-The about page will contain a short description of the company, which may be found in its current version [here](http://swingpaints.com/a_about_swing.php).
+The about page will contain a short description of the company, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/about.md#about-swing-paints).
 
