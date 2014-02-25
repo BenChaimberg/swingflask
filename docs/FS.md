@@ -21,9 +21,17 @@ We propose to have the web site upgraded and redesigned to satisfy our current a
  
 The coder will coordinate with marketing to ensure the web site synchronizes with product packaging and other promotional tools.
 
-Page Setup
-----------
-Every page will include several elements standard throughout the site, for ease of altercations. These will include a header and footer with links to company information and "category" pages. In addition to these static elements, a generic space will be left, to be filled by whatever content is required for a certain page. URLs will be simplified in order to be remembered easier, no complicated page names or extensions.
+Static Layout
+-------------
+Every page will include several elements standard throughout the site, for ease of altercations. These will include a header and footer with links to company information and &ldquo;category&rdquo; pages. In addition to these static elements, a generic space will be left, to be filled by whatever content is required for a certain page. URLs will be simplified in order to be remembered easier, no complicated page names or extensions.
 
-### Home Page ###
+### Header ###
+The header will include links to the home, company information, FAQ, and resources for businesses or in-store purchase. It will also include drop-down sections by product category, producing links to the relevant products.
+
+### Footer ###
+The footer will contain links to miscellaneous pages such as the forum, newsletter sign-up, referring friends, and brochure request. It will also include copyright information, and last updated date.
+
+Home Page
+---------
 The home page will show image examples of products and provide links to common pages in addition to the static elements, such as the FAQ, contact, and forum.
+
