@@ -29,12 +29,12 @@ Swing Paints FAQ
 
 6. **Should veneer be repaired before or after stripping?**
 
-Under most circumstances, it is safer to reglue loose veneer before applying stripper. Don't rinse with water as it dissolves the old veneer glues. Use lacquer thinner or denaturated alcohol instead.
+  Under most circumstances, it is safer to reglue loose veneer before applying stripper. Don't rinse with water as it dissolves the old veneer glues. Use lacquer thinner or denaturated alcohol instead.
 
 7. **What is the best means for removing a modern polyurethane finish?**
 
-Use a good quality paint-and-varnish remover and lots of it. Polyurethanes have a way of soaking up stripper, so don't start scrubbing it down with medium steel wool until it is loosened all the way to the wood. After the first coat is absorbed, apply another. It is a bit more costly, but otherwise you end up with part of the finish still on the wood when you start sanding.
+  Use a good quality paint-and-varnish remover and lots of it. Polyurethanes have a way of soaking up stripper, so don't start scrubbing it down with medium steel wool until it is loosened all the way to the wood. After the first coat is absorbed, apply another. It is a bit more costly, but otherwise you end up with part of the finish still on the wood when you start sanding.
 
 8. **What can I do about the tiny bumps I get in my finish after I varnish?**
 
-Those tiny little bumps are particles of dust, and if they are not coming from your brush or up out of the pores of the wood, then they are dropping down out of the air. Since there is no practical way you can completely avoid dust in the air, the final solution to your problem comes after the varnish has dried. After your first coat has hardened (no less than twenty-four hours later), buff the surface with dry #000 steel wool. Repeat this after the final coat, but with #0000 steel wool moistened with lemon oil.
+  Those tiny little bumps are particles of dust, and if they are not coming from your brush or up out of the pores of the wood, then they are dropping down out of the air. Since there is no practical way you can completely avoid dust in the air, the final solution to your problem comes after the varnish has dried. After your first coat has hardened (no less than twenty-four hours later), buff the surface with dry #000 steel wool. Repeat this after the final coat, but with #0000 steel wool moistened with lemon oil.
