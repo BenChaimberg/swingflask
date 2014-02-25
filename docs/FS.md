@@ -37,8 +37,12 @@ The home page will show image examples of products and provide links to common p
 
 About Page
 ----------
-The about page will contain a short description of the company, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/about.md#about-swing-paints).
+The about page will contain a short description of the company, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/about.md#about-swing-paints), along with contact information, such as physical address, phone number, and support email.
 
 FAQ
 ---
-The FAQ will contain some frequently asked questions, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/faq.md#swing-paints-faq).
+The FAQ will contain some frequently asked questions, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/FAQ.md#swing-paints-faq).
+
+Marketing
+---------
+The marketing page will contain information to aid in marketing and sales assistance, including promotions, MSDS requests, sales support, packaging, and private label options. The current version can be found [here](https://github.com/Youppi3/flaskexample/blob/master/docs/marketing.md#marketing-and-sales-assistance).
