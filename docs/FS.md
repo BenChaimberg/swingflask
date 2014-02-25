@@ -35,3 +35,7 @@ Home Page
 ---------
 The home page will show image examples of products and provide links to common pages in addition to the static elements, such as the FAQ, contact, and forum.
 
+About Page
+----------
+The about page will contain a short description of the company, which may be found in its current version [here](http://swingpaints.com/a_about_swing.php).
+
