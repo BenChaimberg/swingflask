@@ -5,7 +5,7 @@ Swing Paints FAQ
 
 1. What is the best stripper to use to remove paint?
 2. What is the Plus in Prime-it Plus?
-3. Why should I use Stain'n Varnish instead of staining and varnishing?
+3. Why should I use Stain&apos;n Varnish instead of staining and varnishing?
 4. How do you repair cigarette burns?
 5. How do you solve the problem of a squeaky rocking chair?
 6. Should veneer be repaired before or after stripping?
