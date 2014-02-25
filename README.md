@@ -1,6 +1,6 @@
 Flask for Swing Paints
 ======================
-Welcome to the revamping of the Swing Paints [website](hhtp://www.swingpaints.com/), powered by [flask](http://http://flask.pocoo.org/). The Functional Specification can be found [here](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md#functional-specification).
+Welcome to the revamping of the Swing Paints [website](hhtp://www.swingpaints.com/), powered by [flask](http://http://flask.pocoo.org/). The functional specification for this product can be found [here](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md#functional-specification).
 
 #### To fiddle locally (Mac): ####
 First download and unzip file, then:
