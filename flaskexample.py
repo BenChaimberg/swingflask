@@ -11,7 +11,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Ben Chaimberg\'s Flask wrapper. More to come. Be patient.'
+	if request.args.get('french'):
+        return 'french french french french'
+	else:
+		return 'Ben Chaimberg\'s Flask wrapper. More to come. Be patient.'
 
 @app.route('/marketing')
 def marketing():
