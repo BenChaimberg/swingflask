@@ -10,7 +10,7 @@ The site is a gateway into our company for current and potential customers.  As 
 - **COMPANY PROFILE**:  A brief overview of the company stressing the fact that it is a family-owned business based in Montreal.
 - **CONTACTS**:  Information on telephone, fax, e-mail, etc.
 - **PRODUCT INFORMATION**:  Detailed information on each product, including information specific to dealers as well as consumers.  The potential for links to videos and photo galleries would be beneficial.
-- **eMAL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
+- **eMALL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
 - **ONLINE FORUM**:  The site must continue to maintain a high quality online forum where customers can discuss specific issues that relate to projects in our field.
 
 We propose to have the web site upgraded and redesigned to satisfy our current and future needs.
@@ -23,7 +23,7 @@ The coder will coordinate with marketing to ensure the web site synchronizes wit
 
 Static Layout
 -------------
-Every page will include several elements standard throughout the site, for ease of altercations. These will include a header and footer with links to company information and &ldquo;category&rdquo; pages. In addition to these static elements, a generic space will be left, to be filled by whatever content is required for a certain page. URLs will be simplified in order to be remembered easier, no complicated page names or extensions.
+Every page will include several elements standard throughout the site, for ease of modifications. These will include a header and footer with links to company information and &ldquo;category&rdquo; pages. In addition to these static elements, a generic space will be left, to be filled by whatever content is required for a certain page. URLs will be simplified so that they can be remembered easier, ie. no complicated page names or extensions.
 
 ### Header ###
 The header will include links to the home, company information, FAQ, and resources for businesses or in-store purchase. It will also include drop-down sections by product category, producing links to the relevant products.
