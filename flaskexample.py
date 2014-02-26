@@ -1,12 +1,12 @@
 from flask import Flask
 from flask import render_template
 from flask import url_for
-import producttitle
-import producttext
-import productdir
-import categorytitle
-import categoryimg
-import categoryproducts
+from static import producttitle
+from static import producttext
+from static import productdir
+from static import categorytitle
+from static import categoryimg
+from static import categoryproducts
 app = Flask(__name__)	
 
 @app.route('/')
