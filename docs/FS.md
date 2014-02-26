@@ -46,3 +46,11 @@ The FAQ will contain some frequently asked questions, which may be found in its 
 Marketing
 ---------
 The marketing page will contain information to aid in marketing and sales assistance, including promotions, MSDS requests, sales support, packaging, and private label options. The current version can be found [here](https://github.com/Youppi3/flaskexample/blob/master/docs/marketing.md#marketing-and-sales-assistance).
+
+Locations
+---------
+The locations page will list all well-known retail locations where the products can be found. They will be grouped by region and have a short description on the products available at that particular store.
+
+Forum
+-----
+The forum is a message board open to the public for discussion and questions on the products. It is written in ASP, and can be found [here](http://www.swingpaints.com/forum.asp). This page will not be modified in conjunction with this project.
