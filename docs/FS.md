@@ -43,14 +43,22 @@ FAQ
 ---
 The FAQ will contain some frequently asked questions, which may be found in its current version [here](https://github.com/Youppi3/flaskexample/blob/master/docs/FAQ.md#swing-paints-faq).
 
-Marketing
----------
+Marketing Page
+--------------
 The marketing page will contain information to aid in marketing and sales assistance, including promotions, MSDS requests, sales support, packaging, and private label options. The current version can be found [here](https://github.com/Youppi3/flaskexample/blob/master/docs/marketing.md#marketing-and-sales-assistance).
 
-Locations
----------
+Locations Page
+--------------
 The locations page will list all well-known retail locations where the products can be found. They will be grouped by region and have a short description on the products available at that particular store.
 
 Forum
 -----
 The forum is a message board open to the public for discussion and questions on the products. It is written in ASP, and can be found [here](http://www.swingpaints.com/forum.asp). This page will not be modified in conjunction with this project.
+
+Category Page
+-------------
+Each group of products, or category, will have its own page with pictures of all the corresponding products and links to the product pages. It will also possibly have a short description of what the category covers. This page will be dynamically produced based on the URL and all content will be shown based on the prodcuts in the category.
+
+Product Page
+------------
+Each product page will be dynamically produced, showing a picture, a short description, an option to buy online, directions, more information including sizes and tips for choosing correctly, and possibly links to demonstrations. These will sections manifest themselves into tabs or some other easy-to-read layout.
