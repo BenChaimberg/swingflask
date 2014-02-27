@@ -24,7 +24,10 @@ def marketing():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+	if request.query_string == 'french':
+		return render_template('frenchabout.html')
+	else:
+		return render_template('about.html')
 
 @app.route('/product/<productid>')
 def product(productid):
