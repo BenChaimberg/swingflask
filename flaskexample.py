@@ -11,11 +11,12 @@ from static import categoryproducts
 app = Flask(__name__)	
 
 @app.route('/')
+@app.route('/home')
 def index():
 	if request.query_string == 'french':
-		return "This page will display french."
+		return render_template('frenchmain.html')
 	else:
-		return "This page will display english."
+		return render_template('main.html')
 
 @app.route('/marketing')
 def marketing():
