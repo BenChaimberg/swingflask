@@ -20,7 +20,10 @@ def index():
 
 @app.route('/marketing')
 def marketing():
-    return render_template('marketing.html')
+	if request.query_string == 'french':
+		return render_template('frenchmarketing.html')
+	else:
+		return render_template('marketing.html')
 
 @app.route('/about')
 def about():
