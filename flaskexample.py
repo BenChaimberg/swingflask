@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import url_for
+from flask import request
 from static import producttitle
 from static import producttext
 from static import productdir
@@ -11,7 +12,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return request.args.get('lang')
+	if request.query_string == 'french':
+		return "This page will display french."
+	else:
+		return "This page will display english."
 
 @app.route('/marketing')
 def marketing():
