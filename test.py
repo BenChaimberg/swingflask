@@ -1,3 +1,3 @@
-import categoryproducts
+from static import categoryproducts
 for x in categoryproducts.products['nontoxic']:
 	print categoryproducts.products['nontoxic'][x]
