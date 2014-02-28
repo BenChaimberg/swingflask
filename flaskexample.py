@@ -35,7 +35,7 @@ def about():
 
 @app.route('/product/<productid>')
 def product(productid):
-    return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid]})
+    return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'info2':productinfo.info2[productid]})
 
 @app.route('/category/<categoryid>')
 def category(categoryid):

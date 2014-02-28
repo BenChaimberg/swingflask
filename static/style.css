@@ -99,6 +99,12 @@ div#text {
     position: relative;
     text-align: justify;
 }
+div#info td {
+	font-weight:bold;
+	background: #fff;
+	border: 1px solid #000;
+	height:17px;
+}
 div#category {
 	width: 590px;
 	position: relative;
