@@ -82,6 +82,7 @@ div#header a:active,div#footer a:active {
 div#footer {
 	position:relative;
 	margin-right:10px;
+	margin-top:10px;
 	clear:both;
 	text-align:right;
 	color: #336633;
