@@ -1,3 +1,3 @@
-from static import categoryproducts
-for x in categoryproducts.products['nontoxic']:
-	print categoryproducts.products['nontoxic'][x]
+from static import productinfo
+for item in productinfo.info['1800']:
+	print item

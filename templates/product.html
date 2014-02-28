@@ -11,4 +11,39 @@
 		$("#text").css('width', txt2);
 	});
 </script>
+<div id="info">
+									<table width="97%" align="center" style="text-align:center;font-size:10px">
+										<tr valign="top">
+											<td colspan="2" style="vertical-align: middle;background: #f6f6f6;border: 1px solid #000;height:24;">
+												<b>Product Code: </b>{{ product.id }}
+											</td>
+										</tr>
+										<tr>
+											<td style="font-weight:600;background: #fff;border: 1px solid #000;height:17px;width:58%">
+												Size:
+											</td>
+											<td style="font-weight:600;background: #fff;border: 1px solid #000;height:17px;width:42%">
+												Case Pack:
+											</td>
+										</tr>
+										<tr>
+											{% for item in product.info: %}
+											<td style="background: #fff;border: 1px solid #000;height:17px">
+											{{ item | safe }}
+											</td>
+										{% if loop.index is divisibleby(2) %}</tr><tr>{% endif %}
+										{% endfor %}
+							</table>
+							<div style="padding-right:10px">
+								{% if product.id == '400.499': %}
+								<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
+								{% elif product.id == '770.799': %}
+								<a href="/color_swatches.htm" class="directions">Colour Swatches</a>
+								{% elif product.id == '705' or product.id == '3220' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1800': %}
+								<a href="/right_stripper.htm" class="directions">Choosing the Right Stripper</a>
+								{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1604' or product.id ==  '1803' or product.id ==  '2101' or product.id ==  '1555' or product.id ==  '8172' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
+								<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
+								{% endif %}
+</div>
+</div>
 {% endblock %}

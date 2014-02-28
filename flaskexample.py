@@ -5,6 +5,7 @@ from flask import request
 from static import producttitle
 from static import producttext
 from static import productdir
+from static import productinfo
 from static import categorytitle
 from static import categoryimg
 from static import categoryproducts
@@ -34,7 +35,7 @@ def about():
 
 @app.route('/product/<productid>')
 def product(productid):
-    return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid]})
+    return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid]})
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
