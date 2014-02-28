@@ -5,20 +5,22 @@
 <div id="text">{{ product.text|safe }}</div>
 <div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture"></div>
 <script type='text/javascript'>
+	$("#text").css('display','none');
 	$("#picture").load(function(){
 		var txt = $("#image").width();
 		var txt2 = 555 - txt
+		$("#text").css('display','inline');
 		$("#text").css('width', txt2);
 	});
 </script>
 </div><div id="container2">
 <div id="info">
-	<div style="width:50%;position:relative;left:0px;top:0px;text-align:left;vertical-align:center;vertical-align:top;font-size:10px;font-weight:600;padding-left:10px;padding-top:10px">
+	<div style="width:50%;position:absolute;left:0px;top:0px;text-align:left;font-weight:bold">
 	{% for item in product.info2: %}
 		&#8226;{{ item | safe }}<br>
 	{% endfor %}
 	</div>
-	<table style="text-align:center;font-size:10px;width:50%">
+	<div id="infotable" style="position:absolute;right:0px;top:0px;width:50%"><table style="text-align:center;font-size:10px;width:100%">
 		<tr valign="top">
 			<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
 				<b>Product Code: </b>{{ product.id }}
@@ -34,7 +36,7 @@
 			{% if loop.index is divisibleby(2) %}</tr><tr>{% endif %}
 		{% endfor %}
 	</table>
-	<div style="padding-right:10px">
+	<div style="text-align:right;padding-right:2px">
 		{% if product.id == '400.499': %}
 		<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
 		{% elif product.id == '770.799': %}
@@ -44,6 +46,12 @@
 		{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1604' or product.id ==  '1803' or product.id ==  '2101' or product.id ==  '1555' or product.id ==  '8172' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
 		<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
 		{% endif %}
-	</div>
+	</div></div>
+<script type='text/javascript'>
+	$(window).load(function(){
+		var hht = $("#infotable").height();
+		$("#info").css('height', hht);
+	});
+</script>
 </div>
 {% endblock %}

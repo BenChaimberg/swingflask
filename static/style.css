@@ -99,11 +99,34 @@ div#text {
     position: relative;
     text-align: justify;
 }
+div#info {
+	clear: both;
+	font-size:10px;
+	position: relative;
+}
 div#info td {
 	font-weight:bold;
 	background: #fff;
 	border: 1px solid #000;
 	height:17px;
+}
+a.directions:link {
+    color: #336633;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+}
+a.directions:visited {
+    text-decoration: none;
+    color: #336633;
+}
+a.directions:hover {
+	text-decoration: underline;
+    color: #336633;
+}
+a.directions:active {
+    text-decoration: underline;
+    color: #CCCC99;
 }
 div#category {
 	width: 590px;
