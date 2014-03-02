@@ -8,7 +8,7 @@ def notfound(e):
 
 import logging
 from logging import FileHandler
-file_handler = FileHandler(log.txt)
+file_handler = FileHandler("log.txt")
 file_handler.setLevel(logging.WARNING)
 app.logger.addHandler(file_handler)
 
