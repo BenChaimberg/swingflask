@@ -7,6 +7,9 @@ def notfound(e):
     return render_template('404.html'), 404
 
 @app.route('/')
+def error():
+	raise Exception('Deliberate exception raised')
+
 @app.route('/home')
 def index():
 	if request.query_string == 'french':
