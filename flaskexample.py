@@ -2,6 +2,10 @@ from flask import Flask, render_template, url_for, request
 from static import producttitle, producttext, productdir, productinfo, categorytitle, categoryimg, categoryproducts
 app = Flask(__name__)	
 
+@app.errorhandler(404)
+def notfound(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
 @app.route('/home')
 def index():
