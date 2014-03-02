@@ -1,18 +1,20 @@
 from flask import Flask, render_template, url_for, request
 from static import producttitle, producttext, productdir, productinfo, categorytitle, categoryimg, categoryproducts
-app = Flask(__name__)	
+import logging
+from logging.handlers import RotatingFileHandler
 
-file_handler = logging.FileHandler(filename='/tmp/election_error.log')
-file_handler.setLevel(logging.WARNING)
-app.logger.addHandler(file_handler)
+app = Flask(__name__)
 
 @app.errorhandler(404)
 def notfound(e):
     return render_template('404.html'), 404
 
 @app.route('/')
-def error():
-	raise Exception('Deliberate exception raised')
+def foo():
+    app.logger.warning('A warning occurred (%d apples)', 42)
+    app.logger.error('An error occurred')
+    app.logger.info('Info')
+    return "foo"
 
 @app.route('/home')
 def index():
@@ -44,6 +46,7 @@ def category(categoryid):
     return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
 
 if __name__ == '__main__':
-    app.debug = False
-
+    handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
     app.run()
