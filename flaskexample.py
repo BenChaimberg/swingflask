@@ -37,7 +37,7 @@ def category(categoryid):
     return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.debug = False
     
     if not app.debug:
     	import logging
@@ -45,3 +45,5 @@ if __name__ == '__main__':
 	file_handler = FileHandler("log.txt")
 	file_handler.setLevel(logging.WARNING)
 	app.logger.addHandler(file_handler)
+
+    app.run()
