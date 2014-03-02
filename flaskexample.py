@@ -6,18 +6,11 @@ app = Flask(__name__)
 def notfound(e):
     return render_template('404.html'), 404
 
-if not app.debug:
-    import logging
-    from logging import FileHandler
-    file_handler = FileHandler(log.txt)
-    file_handler.setLevel(logging.WARNING)
-    app.logger.addHandler(file_handler)
-
-from logging import Formatter
-file_handler.setFormatter(Formatter(
-    '%(asctime)s %(levelname)s: %(message)s '
-    '[in %(pathname)s:%(lineno)d]'
-))
+import logging
+from logging import FileHandler
+file_handler = FileHandler(log.txt)
+file_handler.setLevel(logging.WARNING)
+app.logger.addHandler(file_handler)
 
 @app.route('/')
 @app.route('/home')
