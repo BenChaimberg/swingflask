@@ -12,6 +12,10 @@ def notfound(e):
 @app.errorhandler(500)
 def apperror(e):
     return render_template('500.html'), 500
+    
+@app.errorhandler(403)
+def forbidden(e):
+    return render_template('403.html'), 403
 
 @app.route('/')
 @app.route('/home')
