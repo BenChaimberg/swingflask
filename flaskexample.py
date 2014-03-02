@@ -46,7 +46,7 @@ def category(categoryid):
     return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+    handler = RotatingFileHandler('/u/benc/wsgi/flaskexample/foo.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
     app.run()
