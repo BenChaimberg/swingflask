@@ -6,12 +6,6 @@ app = Flask(__name__)
 def notfound(e):
     return render_template('404.html'), 404
 
-import logging
-from logging import FileHandler
-file_handler = FileHandler("log.txt")
-file_handler.setLevel(logging.WARNING)
-app.logger.addHandler(file_handler)
-
 @app.route('/')
 @app.route('/home')
 def index():
@@ -44,3 +38,10 @@ def category(categoryid):
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    if not app.debug:
+    	import logging
+	from logging import FileHandler
+	file_handler = FileHandler("log.txt")
+	file_handler.setLevel(logging.WARNING)
+	app.logger.addHandler(file_handler)
