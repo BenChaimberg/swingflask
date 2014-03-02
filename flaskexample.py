@@ -14,12 +14,6 @@ def apperror(e):
     return render_template('500.html'), 500
 
 @app.route('/')
-def foo():
-    app.logger.warning('A warning occurred (%d apples)', 42)
-    app.logger.error('An error occurred')
-    app.logger.info('Info')
-    return "foo"
-
 @app.route('/home')
 def index():
 	if request.query_string == 'french':
@@ -50,7 +44,4 @@ def category(categoryid):
     return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid]})
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('~/u/benc/wsgi/flaskexample/foo.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
     app.run()
