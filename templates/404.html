@@ -1,6 +1,14 @@
-{% extends "base.html" %}
-{% block title %}Peintures Swing Paints - Page Not Found{% endblock %}
-{% block content %}
-	The file you were searching for was not found on this server.<br><br>
-	Le fichier que vous cherchiez n'a pas été trouvée sur ce serveur.
-{% endblock %}
+<html lang="en">
+	<head>
+		<title>Peintures Swing Paints - Page Not Found</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	</head>
+	<body bgcolor="#C1C1C1">
+		<div style="color:#FFFFFF;font-weight:bold;padding:100px;font-size:36px;">
+			The file you were searching for was not found on this server.<br><br>
+			Le fichier que vous cherchiez n'a pas été trouvée sur ce serveur.
+		</div>
+	</body>
+</html>
