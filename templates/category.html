@@ -1,15 +1,21 @@
 {% extends "base.html" %}
+{% block head %}{{ super() }}<style>div#content td {font-size:10px;width:112px;text-align:center;}</style>{% endblock %}
 {% block title %}{{ category.title | safe }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename=category.img) }}" WIDTH=590 HEIGHT=29>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename=category.img) }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 <table><tr>
 {% for x in category.products: %}
-<td valign="top" style="font-size: 10px;width:112px;text-align:center">
+<td>
 	<a href="../product/{{ x }}">
 		<img src="http://swingpaints.com/images/tn/{{ x }}.jpg" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
 	</a><br />{{ category.products[x] | safe }}
 </td>
 {% if loop.index is divisibleby(5) %}</tr><tr>{% endif %}
 {% endfor %}
+{% if category.dictlen is not divisibleby(5) %}
+{% for i in range(0,5-(category.dictlen % 5)) %}
+<td></td>
+{% endfor %}
+{% endif %}
 </tr></table>
 {% endblock %}

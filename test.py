@@ -1,3 +1,2 @@
-from static import productinfo
-for item in productinfo.info['1800']:
-	print item
+from static import categoryproducts
+print len(categoryproducts.products['nontoxic'])
