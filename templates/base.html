@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 	{% block head %}
+		<meta charset="UTF-8">
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
@@ -28,13 +29,13 @@
 			<a href="/contact">CONTACTS</a> &#x7c;
 			<a href="/marketing">MARKETING AND SALES ASSISTANCE</a> &#x7c;
 			<b><a href="/home">HOME</a></b>
-			<img src="{{ url_for('static', filename='headerswing.png') }}" width="172px" height="37px">
+			<img src="{{ url_for('static', filename='headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
 		{% endblock %}
 		</div>
 		<div id="sidebar">
 		{% block sidebar %}
-			<img align="center" src="{{ url_for('static', filename='categoryswing.png') }}" width="159" height="69"><br />
-			<i style="font-size:9px;color:#FFFF00">NEW&nbsp;</i>
+			<img src="{{ url_for('static', filename='categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
+			<i style="font-size:9;color:#FFFF00">NEW&nbsp;</i>
 			<a href="/category/nontoxic">Non-Toxic Products</a><br />&#183;<br />
 			<a href="/category/oils">Finishing Oils</a><br />&#183;<br />
 			<a href="/category/poly">Varnishes &amp; Polyurethanes</a><br />&#183;<br />

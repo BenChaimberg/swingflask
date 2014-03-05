@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" WIDTH=590 HEIGHT=29></img>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 <div id="text">{{ product.text|safe }}</div>
-<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture"></div>
+<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture" alt="{{ product.title }}"></div>
 <script type='text/javascript'>
 	$("#text").css('display','none');
 	$("#picture").load(function(){
@@ -13,15 +13,15 @@
 		$("#text").css('width', txt2);
 	});
 </script>
-</div><div id="container2" style="width:580px">
+</div><div id="container2" style="width:580">
 <div id="info">
-	<div style="width:50%;position:absolute;left:0px;top:0px;text-align:left;font-weight:bold">
+	<div style="width:50%;position:absolute;left:0;top:0;text-align:left;font-weight:bold">
 	{% for item in product.info2: %}
 		&#8226;{{ item | safe }}<br />
 	{% endfor %}
 	</div>
-	<div id="infotable" style="position:absolute;right:0px;top:0px;width:50%"><table style="text-align:center;font-size:10px;width:100%">
-		<tr valign="top">
+	<div id="infotable" style="position:absolute;right:0;top:0;width:50%"><table style="text-align:center;font-size:10;width:100%">
+		<tr>
 			<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
 				<b>Product Code: </b>{{ product.id }}
 			</td>
@@ -29,14 +29,13 @@
 		<tr>
 			<td style="width:58%">Size:</td>
 			<td style="width:42%">Case Pack:</td>
-		</tr>
-		<tr>
 		{% for item in product.info: %}
+			{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
 			<td style="font-weight:normal">{{ item | safe }}</td>
-			{% if loop.index is divisibleby(2) %}</tr><tr>{% endif %}
 		{% endfor %}
+		</tr>
 	</table>
-	<div style="text-align:right;padding-right:2px">
+	<div style="text-align:right;padding-right:2">
 		{% if product.id == '400.499': %}
 		<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
 		{% elif product.id == '770.799': %}
