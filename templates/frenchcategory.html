@@ -1,6 +1,6 @@
 {% extends "frenchbase.html" %}
 {% block title %}{{ category.title | safe }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename=category.img) }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename=category.img) }}" alt="{{ category.title | safe }}" width=590 height=29>{% endblock %}
 {% block content %}
 <table><tr>
 {% for x in category.products: %}
