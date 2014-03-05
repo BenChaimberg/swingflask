@@ -46,7 +46,7 @@ def product(productid):
 @app.route('/category/<categoryid>')
 def category(categoryid):
 	if request.query_string == 'french':
-		return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid]})
+		return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
 	else:
 		return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
 

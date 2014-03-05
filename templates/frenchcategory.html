@@ -1,6 +1,6 @@
 {% extends "frenchbase.html" %}
 {% block title %}{{ category.title | safe }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename=category.img) }}" width=590 height=29>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename=category.img) }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 <table><tr>
 {% for x in category.products: %}
@@ -11,5 +11,10 @@
 </td>
 {% if loop.index is divisibleby(5) %}</tr><tr>{% endif %}
 {% endfor %}
+{% if category.dictlen is not divisibleby(5) %}
+{% for i in range(0,5-(category.dictlen % 5)) %}
+<td></td>
+{% endfor %}
+{% endif %}
 </tr></table>
 {% endblock %}
