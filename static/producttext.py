@@ -91,12 +91,12 @@ from spills and changes in humidity. Available in Original
 Antiquax formula (1600), Brown Wax(1601) for darker woods, and
 Marble Wax (1602) for marble and stone.''',
 '1604':'''Antiquax Silver Service - cleans protects and gives a lustrous
-shine to your silverware by adding a layer of pure silver as you polish.<br><br>
+shine to your silverware by adding a layer of pure silver as you polish.<br /><br />
 Antiquax Silver Plate - a simple and effective way to restore
 your worn silverware and silverplate. It also transforms
-copper and brass to silver plate.<br><br>
+copper and brass to silver plate.<br /><br />
 Antiquax Silver Polish - a non abrasive cleaner &amp, polish.
-Contains an effective anti tarnish additive.<br><br>
+Contains an effective anti tarnish additive.<br /><br />
 Antiquax Leather Cream - protects and feeds leather. The oils in Leather Cream feed the grain
 keeping the fibres supple and restoring the natural oil''',
 '1700':'''Gaudreault Antiques Brush-On Remover is a non-flammable 
@@ -226,15 +226,15 @@ difficult finishes and for standing baths. <p>
 4. Swing Professional Super Stripper, an acid-activated remover that is ideal for removing epoxies, catalyzed lacquers and
 other difficult finishes.''',	
 '1900':'''Circa 1850 Stripping Kit for DUMMIES contains all the items that you need
-to successfully complete your stripping project.  Each kit contains:<br>
-&#149 Circa 1850 Furniture Stripper - 1L size<br>
-&#149 Circa 1850 Stripping Gloves - medium size<br>
-&#149 Circa 1850 Maple Scraper - 2-inch size<br>
-&#149 Circa 1850 Finishing Pads - meduium grade (2)<br>
-&#149 Circa 1850 Pure Bristle Stripping Brush<br>
-&#149 Circa 1850 Detail Stripping Tool<br>
-&#149 Detailed instructions<br>
-<font color="ffgg">AVAILABLE AT ALL LOWES CANADA LOCATIONS <br>AND SELECTED HOME HARDWARE STORES''',
+to successfully complete your stripping project.  Each kit contains:<br />
+&#149 Circa 1850 Furniture Stripper - 1L size<br />
+&#149 Circa 1850 Stripping Gloves - medium size<br />
+&#149 Circa 1850 Maple Scraper - 2-inch size<br />
+&#149 Circa 1850 Finishing Pads - meduium grade (2)<br />
+&#149 Circa 1850 Pure Bristle Stripping Brush<br />
+&#149 Circa 1850 Detail Stripping Tool<br />
+&#149 Detailed instructions<br />
+<font color="ffgg">AVAILABLE AT ALL LOWES CANADA LOCATIONS <br />AND SELECTED HOME HARDWARE STORES''',
 '2100':'''Circa 1850 Terra Nova NaturOil is a blend of pure oils that does not contain any dyes,
 perfumes or additives. Prevents cracking. NaturOil contains oils that are FDA approved and
 certified Kosher. Contains no peanut oils. <p>
@@ -258,20 +258,20 @@ It cleans the surface of old polish build-up. Gentle in action with a pleasant o
 <p style="color:#0000ff"> Terra Nova products are non-toxic and environmentally friendly.</p>''',
 '2140':'''Circa 1850 Pure Walnut Oil contains only raw walnut, and does not contain any solvents 
 or other additives. Walnut Oil can be used as a natural inish, or can be mixed 
-with other varnishes or solvents to formulate custom finishes.<br><br>
+with other varnishes or solvents to formulate custom finishes.<br /><br />
 Although Circa 1850 Pure Walnut Oil is a natural product, it is can cause an allergic reaction to the nut. 
 For cutting boards, butcher blocks and other wood surfaces that will be used for cutting food,
 Terra Nova NaturOil is recommended. ''',
 '2142':'''Circa 1850 100% Pure Tung Oil contains only raw tung oil, and does not contain any solvents 
 or other additives. Tung Oil, extracted from the nut of the oriental tung tree, has been used for centuries
 to protect and beautify wood. Circa 1850 100% Pure Tung Oil can be used as a finish, or can be mixed 
-with other varnishes or solvents to formulate custom finishes.<br><br>
+with other varnishes or solvents to formulate custom finishes.<br /><br />
 Although Circa 1850 100% Pure Tung Oil is a natural product, it is not a food grade oil. 
 For cutting boards, butcher blocks and other wood surfaces that will be used for cutting food,
 Terra Nova NaturOil is recommended. ''',
 '2143':'''Circa 1850 Polymerized Tung Oil contains tung oil that has been heated to promote partial polymerization.
 Polyermized oils cure faster and produce a higher sheen than raw oils.  The polyermized tung oil is mixed
-with mineral spirits to allow for ease of application.<br><br>
+with mineral spirits to allow for ease of application.<br /><br />
 Circa 1850 Polymerized Tung Oil provides a finish that is suitable for heavy-use items. It provides good
 resistance to moisture, and produces a durable, hand-rubbed finish.''',	
 '2146':'''Circa 1850 Raw Linseed Oil contains only raw linseed oil, and does not contain any solvents 
