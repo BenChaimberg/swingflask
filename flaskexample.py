@@ -25,6 +25,13 @@ def index():
 	else:
 		return render_template('main.html')
 
+@app.route('/contact')
+def contact():
+	if request.query_string == 'french':
+		return render_template('frenchcontact.html')
+	else:
+		return render_template('contact.html')
+
 @app.route('/marketing')
 def marketing():
 	if request.query_string == 'french':
@@ -38,13 +45,6 @@ def about():
 		return render_template('frenchabout.html')
 	else:
 		return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-	if request.query_string == 'french':
-		return render_template('frenchcontact.html')
-	else:
-		return render_template('contact.html')
 
 @app.route('/product/<productid>')
 def product(productid):
