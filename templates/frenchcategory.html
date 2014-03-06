@@ -4,7 +4,7 @@
 {% block content %}
 <table><tr>
 {% for x in category.products: %}
-<td valign="top" style="font-size: 10px;width:112px;text-align:center">
+<td style="font-size:10px;width:112px;text-align:center">
 	<a href="../product/{{ x }}?french">
 		<img src="http://swingpaints.com/images/tn/{{ x }}.jpg" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
 	</a><br />{{ category.products[x] | safe }}
