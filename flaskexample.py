@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request
-from static import producttitle, producttext, productdir, productinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
+from static import producttitle, producttext, productdir, productinfo, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -48,12 +48,15 @@ def about():
 
 @app.route('/product/<productid>')
 def product(productid):
-    return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'info2':productinfo.info2[productid]})
+	if request.query_string == 'french':
+		return render_template('frenchproduct.html', product={'id':productid,'title':frenchproducttitle.title[productid],'text':frenchproducttext.text[productid],'dir':frenchproductdir.dir[productid],'info':frenchproductinfo.info[productid],'info2':frenchproductinfo.info2[productid]})
+	else:
+		return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'info2':productinfo.info2[productid]})
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
 	if request.query_string == 'french':
-		return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
+		return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid],'dictlen':len(frenchcategoryproducts.products[categoryid])})
 	else:
 		return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
 

@@ -1,0 +1,3 @@
+text = {
+'1800':'''Le d&#xe9;capant &#xe0; meubles Circa 1850 supprime la vieille peinture, le vernis, le shellac, la laque et l'ur&#xe9;thane sur plusieurs couches avec un simple coup de pinceau. Parce qu'il ne contient ni eau, ni produit chimique, il est s&#xe9;curitaire pour les beaux meubles. Il n'ab&#xee;mera pas la patine naturelle du bois et ne nuira pas aux joints de colle, ni au placage. Le d&#xe9;capant Circa 1850 est ininflammable et presque sans odeur. Il ne requiert aucun bain d'arr&#xea;t ou de neutralisant.'''
+}
