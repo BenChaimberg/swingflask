@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block head %}{{ super() }}<style>div#greenlink a:link{color:#1D432F;text-decoration:underline;}div#greenlink a:visited{color:#1D432F;text-decoration:underline;}div#greenlink a:active{color:#1D432F;text-decoration:underline;}div#greenlink{font-size:11px}</style>{% endblock %}
+{% block title %}Swing Paints - Contact Us{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='contact_swing_top.png') }}" alt="Contact Swing Paints" width=590 height=29>{% endblock %}
+{% block content %}
+<div id="greenlink"> 
+	<table style="width:100%">
+		<tr style="height:25">
+			<td>
+				Head Office:
+			</td>
+			<td style="padding-left:5px">
+				U.S. Offices:
+			</td>
+			<td></td>
+		</tr>
+		<tr style="height:75" >
+			<td style="width:33%"> 
+				2100 St-Patrick Street<br>
+				Montreal, Qu&#xe9;bec<br>
+				H3K 1B2 Canada<br>
+				Tel. 514.932.2157<br>
+				Fax. 514.932.2779</td>
+			<td style="border-left:thin solid black;padding-left:5px;width:33%">
+				612 S. La Brea Ave.<br>
+				Los Angeles, California <br>
+				90036 USA<br>
+				Tel. 323.816.3041<br>
+				Fax. 323.932.9026<br>
+			</td>
+			<td style="width:33%">
+				P.O. Box 18<br>
+				Etna, New Hampshire<br>
+				03750 USA<br>
+				Tel. 603.643.0396<br>
+				Fax. 603.643.9383<br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="vertical-align:top">
+				<table style="padding-top:15px;text-align:left;width:74%;margin-left:auto;margin-right:auto;">
+					<tr> 
+						<td>General Information:</td>
+						<td><a href="mailto:info@swingpaints.com">info@swingpaints.com</a></td>
+					</tr>
+					<tr>
+						<td>Canadian Retailers/Distributors:</td>
+						<td><a href="mailto:cdnsales@swingpaints.com">cdnsales@swingpaints.com</a></td>
+					</tr>
+					<tr>
+						<td>U.S. Retailers/Distributors:</td>
+						<td><a href="mailto:ussales@swingpaints.com">ussales@swingpaints.com</a></td>
+					</tr>
+					<tr>
+						<td>Advertising/Marketing:</td>
+						<td><a href="mailto:advert@swingpaints.com">advert@swingpaints.com</a></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+{% endblock %}

@@ -39,6 +39,13 @@ def about():
 	else:
 		return render_template('about.html')
 
+@app.route('/contact')
+def contact():
+	if request.query_string == 'french':
+		return render_template('frenchcontact.html')
+	else:
+		return render_template('contact.html')
+
 @app.route('/product/<productid>')
 def product(productid):
     return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'info2':productinfo.info2[productid]})
