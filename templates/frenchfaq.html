@@ -1,0 +1,50 @@
+{% extends "frenchbase.html" %}
+{% block head %}
+{{ super() }}
+<style>
+	div#content a {text-decoration:underline;color:#1D432F;}
+	div#content,div#content p{font-size:11px;}
+	div#content li{margin:10px 0}
+</style>
+<script type='text/javascript'>
+$(document).ready(function(){
+	$(".faq").click(function(){
+		$(this).siblings().children().not("a").slideUp("slow");
+		$(this).children().not("a").slideToggle("slow");
+	});
+});
+</script>{% endblock %}
+{% block title %}Peintures Swing - FAQ{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='french_faq_top.png') }}" alt="Swing Paints FAQ" width=590 height=29>{% endblock %}
+{% block content %}
+<p>Vous ne trouvez pas ce que vous cherchez? Est-ce que vous avez une question de votre part &#xe1; nous signaler ? S.V.P. vous r&#xe9;f&#xe9;rer &#xe1; notre <a href="http://www.swingpaints.com/forum.asp">FORUM INTERACTIF</a> o&#xf9; les autres " faites le vous m&#xea;me" et o&#xf9; les professionnels partagent leurs expertises.</p>
+<ul>
+	<li class="faq"><a href="#">Quelle est le meilleur d&#xe9;capant pour enlever la peinture?</a>
+		<div style="display:none"><p>Il y a trois facteurs qui déterminent le décapant à peinture le plus approprié : le type de peinture, le type de surface et l'endroit. Le décapant à meubles Circa 1850, fonctionne à son meilleur sur presque toutes les peintures et les finitions claires (vernis, polyuréthanes, laques). Sa formule liquide est préférée pour sa finition claire et les surfaces compliquées. Le décapant en pâte Circa 1850 haute performance est comme un gel décapant qui travaille à son meilleur sur plusieurs épaisseurs de peintures, sur des surfaces extérieures comme des maisons et des bateaux. Sa formule est idéale pour s'accrocher sur des murs, moulures et cadrages. Le DécapantoDoux Circa 1850 est un décapant qui est biodégradable et qui est un ami environnementale. Son odeur agréable est idéal pour l'utilisation intérieur et pendant que son évaporation se fait lentement, son utilisation extérieur en fait sa perfection. Il est très efficace sur du latex et la finition d'époxye.</p>
+		<p>Les décapants Gaudreault Antiques (Décapant, Formule Épaisse et Toujours Humide) sont des produit alternatifs et économiques. Les décapants Gaudreault Antiques agissent lentement et sûrement et requiert plus d'application pour enlever plusieurs épaisseurs de peinture.</p>
+		<p>Les produites de décapage Swing (flo, liquide et gel) ont une formule pour usage professionnel seulement.</p></div>
+	</li>
+	<li class="faq"><a href="#">C&apos;est quoi le &ldquo;Plus&rdquo; dans &ldquo;Prime-it Plus&rdquo;?</a>
+		<div style="display:none"><p>Prime-it est un apprêt qui est parfait pour une application conventionnelle: il resserre les surfaces poreuses comme le placoplâtre neuf, il enlève le brillant des surfaces de peinture, élimine l'éclat, on l'utilise en toute quiétude pour convertir du latex à l'huile ou de l'huile au latex. Prime-it Plus fait tout ça et plus encore. Il fera un effet de blocage pour presque toutes les taches, comme l'huile, crayon marqueur, la fumée et l'eau. Il bloquera aussi les taches de résine qui s'échappent du bois, comme le cèdre, le pin rouge et le contre-plaqué. Prime-it Plus adhère aussi aux surfaces de chaux ou de craie, qui sont normalement impossible à peindre. C'est vraiment la solution à beaucoup de problèmes.</p></div>
+	</li>
+	<li class="faq"><a href="#">Pourquoi devrais-je utiliser le Stain &apos;n Varnish au lieu d'une teinture et le vernis?</a>
+		<div style="display:none"><p>Parce que le produit Circa 1850 Stain 'n Varnish est un gel qui combine et la teinture et le vernissage. Ce gel est l'idéal pour teindre le bois mou comme le pin et le boulot parce qu'il donne une couleur uniforme. Ce vernis vous permet toute les surface: bois, le plastique, le métal, masonite et composite. C'est le meilleur moyen de donner un aspect de bois à des portes qui ne sont pas en bois et seulement aspect veiné; parce qu'il est transparent, une mince couche d'une couleur contrastante par dessus une couleur existante vous donnera un aspect antique ou faux fini.</p></div>
+	</li>
+	<li class="faq"><a href="#">Comment est-ce que l&apos;on r&#xe9;pare une br&#xfb;lure de cigarette ?</a>
+		<div style="display:none"><p>Quand vous découpez votre meuble, vous vous rendrez compte que la majeur partie de la brûlure s'enlève aussi. Ce qui reste pourra être enlevé avec une lame de rasoir. Une brûlure peut être aussi facile que cela à enlever, mais quelques cas difficile requièrent un peu plus de travail. Si la brûlure est profonde vous obtiendrai une dépression dans le bois quand vous aurez enlever le bois brûler. Vous aurez le choix de trois matériaux pour niveler le bois: des bâtonnets de couleur, de la pâte à bois ou du bois. Les bâtonnets viennent dans différents couleurs ainsi que la pâte a bois mais ni l'un ni l'autre peuvent redonner le grain du bois, c'est alors qu'on prend un morceau de plaquage pour remplir la crevasse, il faut le coller et ensuite finir avec le sablage pour niveler, certains trouvent que c'est un travail supplémentaire, mais vous y trouverai la satisfaction quand le travail sera terminé mieux que n'importe quelle alternative.</p></div>
+	</li>
+	<li class="faq"><a href="#">Comment est-ce que vous trouvez une solution &#xe1; un probl&#xe8;me de chaise ber&#xe7;ante qui grince?</a>
+		<div style="display:none"><p>Le problème de craquement vient du fait de un des berceaux de chaise se déloge de son trou il y a frottement. La vieille colle a lâché et le joint est agrandi. Déterminez le joint qui a lâché et qui cause le bruit, mettez de la colle au tour du berceau et dans le trou. Déposez des bottins ou des livres pour tenir la chaise en place, pour un effet de pesanteur pour toute une nuit. Si vous êtes chanceux, votre problème sera réglé, mais dans certains cas extrêmes on doit défaire la chaise complètement et la recoller entièrement.</p>
+		<p>P.S.: Si vous ne pouvez pas mettre de colle dans le trou, mettez quelques gouttes d'huile, ça n'éliminera pas le gros du problème mais au moins les symptômes.</p></div>
+	</li>
+	<li class="faq"><a href="#">Est-ce que l&apos;on devrait utiliser le placage avant ou apr&#xe8;s la r&#xe9;paration?</a>
+		<div style="display:none"><p>Dans presque toutes les circonstances, il est préférable de recoller le plaquage avant le décapage. Ne pas rincer à l'eau, ce qui risquerait de dissoudre la vieille colle. Utilisez un dissolvant pour laque.</p></div>
+	</li>
+	<li class="faq"><a href="#">Quelle est le meilleur moyen pour enlever une finition de polyur&#xe9;thane moderne?</a>
+		<div style="display:none"><p>Utiliser un bon produit de décapage pour vernis et peinture et mettez-en . Le polyuréthane a une façon d'absorber le produit de décapage, surtout n'essayez pas avec un grattoir, on risque d'endommager la surface. Prenez une laine d'acier et essuyer délicatement pour que le polyuréthane se relâche et se dissout jusqu'au bois. Après que la première couche est dissoute appliquez une seconde couche. C'est un peu plus cher à l'application mais c'est le seul moyen d'aller chercher toutes les particules de polyuréthane, sinon vous sablerez avec du polyuréthane qui aura adhéré au bois.</p></div>
+	</li>
+	<li class="faq"><a href="#">Apr&#xe8;s avoir vernis, que puis-je faire pour enlever les petites bosses que j&apos;ai dans ma finition?</a>
+		<div style="display:none"><p>Ces imperfections sont des particules de poussières. Si elles ne viennent pas de votre pinceau ou des pores du bois, c'est qu'elles viennent de l'air environnant. Comme il est presque impossible d'éviter la poussière dans l'air, la solution de votre problème sera au moment où votre vernis aura fini de sécher. Après que la première couche sera durcit (après 24 heures) sabler la surface avec une laine d'acier sèche #000. Répétez l'opération à la couche finale avec une laine d'acier #0000 trempée dans l'huile de citron.</p></div>
+	</li>
+</ul>
+{% endblock %}
