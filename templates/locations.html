@@ -4,7 +4,7 @@
 <script type='text/javascript'>
 $(document).ready(function(){
 	$("#labela").click(function(){
-		$("#stuffa").toggle(showOrHide,"slow");
+		$("#stuffa").toggle("slow");
 	});
 });
 </script>
@@ -15,7 +15,9 @@ $(document).ready(function(){
 <div id="labela" style="margin: 0;width: 33%;float: left;text-align: center;">Label A</div>
 <div id="labelb" style="margin: 0;width: 33%;float: left;text-align: center;">Label B</div>
 <div id="labelc" style="margin: 0;width: 33%;float: left;text-align: center;">Label C</div>
+<div>
 <div id="stuffa" style="display:none">Stuff A</div>
 <div id="stuffb" style="display:none">Stuff B</div>
 <div id="stuffc" style="display:none">Stuff C</div>
+</div>
 {% endblock %}
