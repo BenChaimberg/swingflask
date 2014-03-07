@@ -112,14 +112,7 @@ Gaudreault Antiques Tung Oil protects wood from accidental spills and water mark
 '1706':'''Gaudreault Antiques Heavy Body Remover is a non-flammable 
 paint and varnish remover that needs no neutralizing. Removes all finishes. 
 Heavy paste formula works particularly well on vertical surfaces, eliminating dripping and run off.''',  
-'1800':'''Circa 1850 Furniture Stripper removes old paint, varnish, 
-shellac, lacquer and urethane - even multiple coats with simple 
-brushing. Because it contains no water or harsh chemicals 
-it is safe to use on fine furniture. It will not disturb the 
-wood\'s natural patina or raise the grain, and it will not 
-harm glue joints or veneers. Circa 1850 Furniture Stripper 
-is non-flammable and almost odourless. It does not require 
-any afterwash or neutralizing.''',
+'1800':'''Circa 1850 Furniture Stripper removes old paint, varnish, shellac, lacquer and urethane - even multiple coats with simple brushing. Because it contains no water or harsh chemicals it is safe to use on fine furniture. It will not disturb the wood\'s natural patina or raise the grain, and it will not harm glue joints or veneers. Circa 1850 Furniture Stripper is non-flammable and almost odourless. It does not require any afterwash or neutralizing.''',
 '1801':'''Circa 1850 Furniture Refinisher is designed to refurbish 
 worn, scratched or cracked finishes on antiques and old furniture, as well as modern lacquered furniture.
 Circa 1850 Furniture Refinisher works by dissolving the old finish and reconstructing a new finish - without stripping.

@@ -1,6 +1,6 @@
 {% extends "frenchbase.html" %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS"  width=590 height=29>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 <div id="text">{{ product.text|safe }}</div>
 <div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture" alt="{{ product.title }}"></div>
@@ -35,7 +35,7 @@
 		{% endfor %}
 		</tr>
 	</table>
-	<div style="text-align:right;padding-right:2px">
+	<div style="text-align:right;padding-right:2">
 		{% if product.id == '400.499': %}
 		<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
 		{% elif product.id == '770.799': %}
