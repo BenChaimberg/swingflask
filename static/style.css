@@ -111,24 +111,11 @@ div#info td {
 	border: 1px solid #000;
 	height:17px;
 }
-a.directions:link {
+a.directions {
     color: #336633;
     text-decoration: none;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size:12px;
-}
-a.directions:visited {
-    text-decoration: none;
-    color: #336633;
-}
-a.directions:hover {
-	text-decoration: underline;
-    color: #336633;
-}
-a.directions:active {
-    text-decoration: underline;
-    color: #CCCC99;
-}
 div#category {
 	width: 590px;
 	position: relative;

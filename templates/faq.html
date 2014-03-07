@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}{{ super() }}<style>div#content a {text-decoration:underline;color:#1D432F;}div#content,div#content p{font-size:11px;}div#content li{margin:10px 0}</style>{% endblock %}
+{% block title %}Swing Paints - FAQ{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='faq_top.png') }}" alt="Swing Paints FAQ" width=590 height=29>{% endblock %}
+{% block content %}
+<p>Don&apos;t see the topic you're looking for? Do you have a question of your own to post? Please refer to our <a href="http://www.swingpaints.com/forum.asp">INTERACTIVE FORUM</a> where other do-it-yourselfers and professionals alike share their expertise.</p>
+<ol>
+	<li><a href="/faq/1">What is the best stripper to use to remove paint?</a></li>
+	<li><a href="a_faq2.htm">What is the Plus in Prime-it Plus?</a></li>
+	<li><a href="a_faq3.htm">Why should I use Stain'n Varnish instead of staining and varnishing?</a></li>
+	<li><a href="a_faq4.htm">How do you repair cigarette burns?</a></li>
+	<li><a href="a_faq5.htm">How do you solve the problem of a squeaky rocking chair?</a></li>
+	<li><a href="a_faq6.htm">Should veneer be repaired before or after stripping?</a></li>
+	<li><a href="a_faq7.htm">What is the best means for removing a modern polyurethane finish?</a></li>
+	<li><a href="a_faq8.htm">What can I do about the tiny bumps I get in my finish after I varnish?</a></li>
+</ol>
+{% endblock %}
