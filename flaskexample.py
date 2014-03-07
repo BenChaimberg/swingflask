@@ -32,10 +32,6 @@ def faq():
 	else:
 		return render_template('faq.html')
 		
-@app.route('/faq/<id>')
-def faqa(id):
-    return render_template('faqa.html', faqa={'id':id})
-		
 @app.route('/contact')
 def contact():
 	if request.query_string == 'french':
