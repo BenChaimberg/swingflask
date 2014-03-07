@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<script type='text/javascript'>
+$(document).ready(function(){
+	$("#labela").click(function(){
+		$("#stuffa").slideToggle("slow");
+	});
+});
+</script>
+{% endblock %}
+{% block title %}Swing Paints - Locations{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='where_buy_top.png') }}" alt="Swing Paints Locations" width=590 height=29>{% endblock %}
+{% block content %}
+<div id="labela" style="margin: 0;width: 33%;float: left;text-align: center;">Label A</div>
+<div id="labelb" style="margin: 0;width: 33%;float: left;text-align: center;">Label B</div>
+<div id="labelc" style="margin: 0;width: 33%;float: left;text-align: center;">Label C</div>
+<div id="stuffa" style="display:none">Stuff A</div>
+<div id="stuffb" style="display:none">Stuff B</div>
+<div id="stuffc" style="display:none">Stuff C</div>
+{% endblock %}

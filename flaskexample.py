@@ -25,6 +25,13 @@ def index():
 	else:
 		return render_template('main.html')
 
+@app.route('/locations')
+def locations():
+	if request.query_string == 'french':
+		return render_template('frenchlocations.html')
+	else:
+		return render_template('locations.html')
+
 @app.route('/faq')
 def faq():
 	if request.query_string == 'french':
