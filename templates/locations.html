@@ -4,13 +4,16 @@
 <script type='text/javascript'>
 $(document).ready(function(){
 	$("#labela").click(function(){
-		$("#stuffa").fadeToggle("slow");
+		$("#stuffa").siblings().fadeOut("fast");
+		$("#stuffa").fadeIn("fast");
 	});
 	$("#labelb").click(function(){
-		$("#stuffb").fadeToggle("slow");
+		$("#stuffb").siblings().fadeOut("fast");
+		$("#stuffb").fadeIn("fast");
 	});
 	$("#labelc").click(function(){
-		$("#stuffc").fadeToggle("slow");
+		$("#stuffc").siblings().fadeOut("fast");
+		$("#stuffc").fadeIn("fast");
 	});
 });
 </script>
@@ -18,12 +21,253 @@ $(document).ready(function(){
 {% block title %}Swing Paints - Locations{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='where_buy_top.png') }}" alt="Swing Paints Locations" width=590 height=29>{% endblock %}
 {% block content %}
-<div id="labela" style="margin: 0;width: 33%;float: left;text-align: center;">Label A</div>
-<div id="labelb" style="margin: 0;width: 33%;float: left;text-align: center;">Label B</div>
-<div id="labelc" style="margin: 0;width: 33%;float: left;text-align: center;">Label C</div>
+<div id="labela" style="margin: 0;width: 33%;float: left;text-align: center;">Canada</div>
+<div id="labelb" style="margin: 0;width: 33%;float: left;text-align: center;">Quebec</div>
+<div id="labelc" style="margin: 0;width: 33%;float: left;text-align: center;">Ontario</div>
 <div>
-<div id="stuffa" style="display:none">Stuff A</div>
-<div id="stuffb" style="display:none">Stuff B</div>
-<div id="stuffc" style="display:none">Stuff C</div>
+<div id="stuffa"><table width="100%">
+							<tr>
+								<td>Canadian Tire</td>
+								<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint & Varnish Remover</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.castle.ca/locator_nationalmap.php" target="_new">Castle Building Centres</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.icipaints.ca/about/store.jsp" target="_new">Color Your World</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td>Home Depot</td>
+								<td><p>- selection varies by individual store location<p></td>
+							</tr>
+							<tr>
+								<td>Home Hardware</td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.icipaints.ca/about/store.jsp" target="_new">ICI - Glidden</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td>Lowes</td>
+								<td><p> - Stripping Kit for Dummies<p></td>
+							</tr>
+							<tr>
+								<td>Pro Hardware</td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.rona.ca/webapp/wcs/stores/servlet/locators/storelocator.jsp?storeId=10001&langId=-1&height=#620px" target="_new">RoNa</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.timbr.com/geolocation.php">Tim-BR-Mart</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.truserv.ca/pls/truserv_pub/truserv.app?p_sec_id=3" target="_new">TruServe</a></td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+							</tr>
+							<tr>
+								<td>Wal-Mart</td>
+								<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint & Varnish Remover, Super DeGooper<p></td>
+							</tr>
+						</table>
+</div>
+<div id="stuffb" style="display:none">
+	<table width="100%">
+							<tr>
+								<td><a href="http://www.antiquerssupply.com" target="_new">Antiquers Supply</a> (Montreal)</td>
+								<td><p>- complete selection</p></td>
+							</tr>
+							<tr>
+								<td>Arthur Rivest (Ste-Julienne)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Au Balcon Rustique (Laval)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.bmr-legroupe.ca/bmr/dealers.asp" target="_new">BMR</a></td>
+								<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.algonquindirect.com" target="new">Boiseries Algonquin</a> (Mirabel)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Bois Ideal (Montreal)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.boiserieslachute.ca" target="new">Boiseries Lachute</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bonhomme</a></td>
+								<td><p> - selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td>Cantin et fils (Quebec)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Chez Le Peintre (Laval)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Co-op Federée</td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+							</tr>
+							<tr>
+								<td>Empire (Montreal)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Henri Jean et fils (La Malbaie)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>JTM Sawmill (St-Lazare)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.juneau.ca" target="new">Juneau et freres</a> (Quebec)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Materiaux Construction</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Robidoux (Cazaville)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.ocoderre.com" target="new">O. Coderre</a> (St-Jacques)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Patiorama (Quebec, Lévis, Vanier)</td>
+								<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.patrickmorin.com/magasins.asp" target="new">Patrick Morin</a></td>
+								<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+							</tr>
+							<tr>
+								<td>Pilon (Gatineau)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.potvinbouchard.qc.ca/succursales.htm" target="_blank">Potvin Bouchard</a></td>
+								<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+							</tr>
+							<tr>
+								<td>Probex (Roxboro)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Quincaillerie Delormier (Montréal)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Quincaillerie Gauthier (Labelle)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Quincaillerie Hogg (Montréal)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Quincaillerie Liege (Montréal)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Quincaillerie A. Pouliot (Beauharnois)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Renocentre DG (Montreal)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Reno Depot</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Trevi Pools & Spas (Quebec)</td>
+								<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+							</tr>
+						</table>
+
+</div>
+<div id="stuffc" style="display:none">
+	<table width="100%">
+							<tr>
+								<td>Bond's Décor (Ottawa)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bytown Lumber</a></td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td>Canadian Auto (Windsor)</td>
+								<td><p>- most products</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.europeanglass.ca/" target="new">EGP</a> (Ottawa)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td>Exclusive Paints (Toronto)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.houseofcolourinc.ca/" target="new">House of Colour</a> (Bolton)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>New York Paints (Toronto)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Newcastle Home Décor (Newcastle)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Orangeville Paint and Paper (Orangeville)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Paint Colours (Toronto)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Pierre Marcoux Decoration (Rockland)</td>
+								<td><p>- excellent selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.randallspaints.com/ran_2007/Index.html#" target="new">Randall's</a></td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td>Reims (Toronto)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Whitby Decorating Centre (Whitby)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Weeks Home Hardware (Waterdown)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+						</table>
+</div>
 </div>
 {% endblock %}
