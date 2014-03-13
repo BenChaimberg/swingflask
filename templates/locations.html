@@ -10,12 +10,17 @@
 	.hidden {
 		border-bottom:1px solid black;
 		background:#FFF;
+		color: #006633;
+	}
+	.hidden:hover{
+		background: #CCFFCC;
 	}
 	.label {
 		margin: 0;
-		width: 33%;
+		width: 14.2%;
 		float: left;
 		text-align: center;
+		padding: 2px 0;
 	}
 </style>
 <script type='text/javascript'>
@@ -24,8 +29,8 @@
 			var labelindex = $(this).index();
 			$(".stuff").eq(labelindex).siblings().hide("fast");
 			$(".stuff").eq(labelindex).show("fast");
-			$(this).attr("class", "shown");
-			$(this).siblings().attr("class", "hidden");
+			$(this).addClass("shown").removeClass("hidden");
+			$(this).siblings().addClass("hidden").removeClass("shown");
 		});
 	});
 </script>
@@ -36,7 +41,11 @@
 <a class="shown label" href="#">Canada</a>
 <a class="hidden label" href="#">Quebec</a>
 <a class="hidden label" href="#">Ontario</a>
-<div style="font-size:10px;background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.3%;">
+<a class="hidden label" href="#">W. Canada</a>
+<a class="hidden label" href="#">E. Canada</a>
+<a class="hidden label" href="#">US</a>
+<a class="hidden label" href="#">S. Pacific</a>
+<div style="font-size:10px;background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.6%;">
 	<div class="stuff"><table width="100%">
 								<tr>
 									<td>Canadian Tire</td>
@@ -280,6 +289,235 @@
 									<td><p>- good selection</p></td>
 								</tr>
 							</table>
+	</div>
+	<div class="stuff" style="display:none">
+		<table>
+							<tr>
+								<td>Cloverdale Paint</td>
+								<td><p>- Circa 1850 Furniture Stripper, Heavy Body Remover, Tung Oil</p><p>- Wallpaper Prep-Coat, Swing Professional Remover</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.paintedmonton.com/days" target="_blank">Day's Paint</a> (Edmonton)</td>
+								<td><p>- most products</p></td>
+							</tr>
+							<tr>
+								<td>Federated Co-op</td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.fargeys.com/" target="_new">Fargey's Paint<a/> (AB)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Freddie's Paint (AB)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>General Paint</td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.irlybird.com/dlrn.shtm" target="_new">IRLY</a> (BC)</td>
+								<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+							</tr>
+							<tr>
+								<td>Kans of Any Colour (Edmonton)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Overwall's Paint (Calgary)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.sunnysidehomeandgarden.com" target="_blank">Sunnyside Greenhouse</a> (Calgary)</td>
+								<td><p>- Tung'n Teak Oil</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.totembuildingsupplies.com/" target="_new">Totem Building Supplies (AB)</a></td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.windsorplywood.com" target="_blank">Windsor Plywood</a></td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+						</table>
+	</div>
+	<div class="stuff" style="display:none">
+		<table>
+							<tr>
+								<td><a href="http://www.centralns.ca/contact_us.html" target="_new">Central Supplies</a> (NS)</td>
+								<td><p>- selection varies by individual store location</p></td>
+							</tr>
+							<tr>
+								<td>Kent Building Supplies</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>MacKinnon&#x27;s Colour Centre</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.pierceys.ns.ca" target="_blank">Piercey&#x27;s</a></td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Schurman's Building Supplies (PE)</td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td>Wheaton's</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+						</table>
+	</div>
+	<div class="stuff" style="display:none">
+		<table>
+							<tr>
+								<td><a href="http://www.hamiltonmarine.com" target="_new">Hamilton Marine</a></td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.jamestowndistributors.com" target="_new">Jamestown Distributors</a></td>
+								<td><p>- good selection</p></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">EASTERN US</td>
+							</tr>
+							<tr>
+								<td><a href="http://www.hardwarestore.com" target="_new">Aubuchon Hardware</a></td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td>Litchfield Paint & Wallpaper (Litchfield, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>John Boyle Decorating Center (New Britain, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>McDermott Paint & Wallpaper (Greenwich, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Taylor's Paint Center (Fairfield, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>United Paint & Wallpaper (Wethersfield, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Branford Paint (Branford, CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Ring's End Lumber (CT)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Creative Walls (Springfield, MA)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.factorypaint.com" target="_new">Factory Paint</a> (S. Weymouth, Plymouth, N. Pembroke MA)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Hometown Paint (Franklin, MA)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Lexington, MA)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Needham, MA)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Waltham Wallpaper & Paint (MA)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Eagle Paint & Wallpaper (Englewood, NJ)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Painten Place (NJ)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Elmont Paint (NY)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Ring's End Lumber (NY)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Rochester, NY)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Southampton, NY)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Newtown Square, PA)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (VA)</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">CENTRAL US</td>
+							</tr>
+							<tr>
+								<td>Sherwin Williams (Columbia Heights, MN)<font style="color:#ff0000"> NEW</font></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td>Calumet Paint & Wallpaper</td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">WESTERN US</td>
+							</tr>
+							<tr>
+								<td><a href="http://www.canoeonline.net" target="_new">Canoe</a> (OR)</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.heathceramics.com" target="_new">Heath Ceramics</a> (CA)</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.hemingwayandpickett.com" target="_new">Hemingway and Pickett</a> (CA)</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://okstore.la/index.php" target="_new">OK</a> (CA)</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.tableartonline.com" target="_new">TableArt</a> (CA)</td>
+								<td><p>- Terra Nova</p></td>
+							</tr>
+							<tr>
+								<td><a href="http://www.dunnedwards.com" target="_new">Dunn Edwards</a></td>
+								<td><p>- Wallpaper Prep-Coat</p></td>
+							</tr>
+						</table>
+	</div>
+	<div class="stuff" style="display:none">
+		<table width="100%">
+							<tr>
+								<td>Mason's Hardware Do-It Center (Palau)</td>
+								<td><p>- Nu-Lustre-55</p></td>
+							</tr>
+						</table>
 	</div>
 </div>
 {% endblock %}
