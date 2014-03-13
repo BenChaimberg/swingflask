@@ -62,7 +62,7 @@ demo = {
 '2707':'No Demonstration Available',
 '2711':'No Demonstration Available',
 '2752':'No Demonstration Available',
-'2760':'No Demonstration Available',
+'2760':'Click <a href="http://youtu.be/ppS6AdeydNY">here</a> to watch a video demonstration.',
 
 '3100':'No Demonstration Available',
 '3107':'No Demonstration Available',
