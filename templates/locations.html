@@ -11,6 +11,12 @@
 		border-bottom:1px solid black;
 		background:#FFF;
 	}
+	.label {
+		margin: 0;
+		width: 33%;
+		float: left;
+		text-align: center;
+	}
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
@@ -27,9 +33,9 @@
 {% block title %}Swing Paints - Locations{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='where_buy_top.png') }}" alt="Swing Paints Locations" width=590 height=29>{% endblock %}
 {% block content %}
-<a style="margin: 0;width: 33%;float: left;text-align: center;" class="shown label" href="#">Canada</a>
-<a style="margin: 0;width: 33%;float: left;text-align: center;" class="hidden label" href="#">Quebec</a>
-<a style="margin: 0;width: 33%;float: left;text-align: center;" class="hidden label" href="#">Ontario</a>
+<a class="shown label" href="#">Canada</a>
+<a class="hidden label" href="#">Quebec</a>
+<a class="hidden label" href="#">Ontario</a>
 <div style="font-size:10px;background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.3%;">
 	<div class="stuff"><table width="100%">
 								<tr>
