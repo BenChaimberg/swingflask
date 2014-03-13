@@ -1,7 +1,8 @@
-{% extends "base.html" %}
+{% extends "frenchbase.html" %}
 {% block head %}
 {{ super() }}
 <style>
+	.stuff td{vertical-align:top;}
 	.stuff{
 		color:#000000;
 		font-size:10px;
@@ -51,65 +52,65 @@
 	});
 </script>
 {% endblock %}
-{% block title %}Swing Paints - Locations{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='where_buy_top.png') }}" alt="Swing Paints Locations" width=590 height=29>{% endblock %}
+{% block title %}Peintures Swing - Locations{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='french_where_buy_top.png') }}" alt="Peintures Swing Locations" width=590 height=29>{% endblock %}
 {% block content %}
 <a class="shown label" href="#">Canada</a>
 <a class="hidden label" href="#">Quebec</a>
 <a class="hidden label" href="#">Ontario</a>
-<a class="hidden label" href="#">W. Canada</a>
-<a class="hidden label" href="#">E. Canada</a>
-<a class="hidden label" href="#">US</a>
-<a class="hidden label" href="#">S. Pacific</a>
-<div style="background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.3%;">
+<a class="hidden label" href="#">Canada O.</a>
+<a class="hidden label" href="#">Canada E.</a>
+<a class="hidden label" href="#">&#xc9;-U</a>
+<a class="hidden label" href="#">Pacifique S.</a>
+<div style="background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.4%;">
 	<div class="stuff"><table width="100%">
 								<tr>
 									<td><p>Canadian Tire</p></td>
-									<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint & Varnish Remover</p></td>
+									<td><p>- Circa 1850 Décapant à meubles, Circa 1850 Décapant doux</p><p>- Circa 1850 Décapant en gel</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.castle.ca/locator_nationalmap.php" target="_new">Castle Building Centres</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.icipaints.ca/about/store.jsp" target="_new">Color Your World</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Home Depot</p></td>
-									<td><p>- selection varies by individual store location<p></td>
+									<td><p>- le choix varie par magasin individuel</p></td>
 								</tr>
 								<tr>
 									<td><p>Home Hardware</p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.icipaints.ca/about/store.jsp" target="_new">ICI - Glidden</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Lowes</p></td>
-									<td><p> - Stripping Kit for Dummies<p></td>
+									<td><p> - Stripping Kit for Dummies</p></td>
 								</tr>
 								<tr>
 									<td><p>Pro Hardware</p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.rona.ca/webapp/wcs/stores/servlet/locators/storelocator.jsp?storeId=10001&langId=-1&height=#620px" target="_new">RoNa</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.timbr.com/geolocation.php">Tim-BR-Mart</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.truserv.ca/pls/truserv_pub/truserv.app?p_sec_id=3" target="_new">TruServe</a></p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Wal-Mart</p></td>
-									<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint & Varnish Remover, Super DeGooper<p></td>
+									<td><p>- Circa 1850 Décapant à meubles, Circa 1850 Décapant doux</p><p>- Circa 1850 Décapant en gel , Super DeGooper</p></td>
 								</tr>
 							</table>
 	</div>
@@ -117,7 +118,7 @@
 		<table width="100%">
 								<tr>
 									<td><p><a href="http://www.antiquerssupply.com" target="_new">Antiquers Supply</a> (Montreal)</p></td>
-									<td><p>- complete selection</p></td>
+									<td><p>- selection compl&#xe8;te</p></td>
 								</tr>
 								<tr>
 									<td><p>Arthur Rivest (Ste-Julienne)</p></td>
@@ -129,7 +130,7 @@
 								</tr>
 								<tr>
 									<td><p><a href="http://www.bmr-legroupe.ca/bmr/dealers.asp" target="_new">BMR</a></p></td>
-									<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+									<td><p> - le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.algonquindirect.com" target="new">Boiseries Algonquin</a> (Mirabel)</p></td>
@@ -145,11 +146,11 @@
 								</tr>
 								<tr>
 									<td><p><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bonhomme</a></p></td>
-									<td><p> - selection varies by individual store location</p></td>
+									<td><p> - le choix varie par magasin individuel</p></td>
 								</tr>
 								<tr>
 									<td><p>Cantin et fils (Quebec)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Chez Le Peintre (Laval)</p></td>
@@ -157,7 +158,7 @@
 								</tr>
 								<tr>
 									<td><p>Co-op Federée</p></td>
-									<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+									<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Empire (Montreal)</p></td>
@@ -165,7 +166,7 @@
 								</tr>
 								<tr>
 									<td><p>Henri Jean et fils (La Malbaie)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>JTM Sawmill (St-Lazare)</p></td>
@@ -173,7 +174,7 @@
 								</tr>
 								<tr>
 									<td><p><a href="http://www.juneau.ca" target="new">Juneau et freres</a> (Quebec)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Materiaux Construction</p></td>
@@ -189,11 +190,11 @@
 								</tr>
 								<tr>
 									<td><p>Patiorama (Quebec, Lévis, Vanier)</p></td>
-									<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+									<td><p>- Huile Tung&apos;n Teak - Qualit&#xe9; Marine</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.patrickmorin.com/magasins.asp" target="new">Patrick Morin</a></p></td>
-									<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+									<td><p> - le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Pilon (Gatineau)</p></td>
@@ -201,7 +202,7 @@
 								</tr>
 								<tr>
 									<td><p><a href="http://www.potvinbouchard.qc.ca/succursales.htm" target="_blank">Potvin Bouchard</a></p></td>
-									<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+									<td><p> - le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 								</tr>
 								<tr>
 									<td><p>Probex (Roxboro)</p></td>
@@ -225,19 +226,19 @@
 								</tr>
 								<tr>
 									<td><p>Quincaillerie A. Pouliot (Beauharnois)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Renocentre DG (Montreal)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Reno Depot</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Trevi Pools & Spas (Quebec)</p></td>
-									<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+									<td><p>- Huile Tung&apos;n Teak - Qualit&#xe9; Marine</p></td>
 								</tr>
 							</table>
 	
@@ -246,15 +247,15 @@
 		<table width="100%">
 								<tr>
 									<td><p>Bond's Décor (Ottawa)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bytown Lumber</a></p></td>
-									<td><p>- selection varies by individual store location</p></td>
+									<td><p>- le choix varie par magasin individuel</p></td>
 								</tr>
 								<tr>
 									<td><p>Canadian Auto (Windsor)</p></td>
-									<td><p>- most products</p></td>
+									<td><p>- excellent selection</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.europeanglass.ca/" target="new">EGP</a> (Ottawa)</p></td>
@@ -262,27 +263,27 @@
 								</tr>
 								<tr>
 									<td><p>Exclusive Paints (Toronto)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p><a href="http://www.houseofcolourinc.ca/" target="new">House of Colour</a> (Bolton)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>New York Paints (Toronto)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Newcastle Home Décor (Newcastle)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Orangeville Paint and Paper (Orangeville)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Paint Colours (Toronto)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Pierre Marcoux Decoration (Rockland)</p></td>
@@ -290,19 +291,19 @@
 								</tr>
 								<tr>
 									<td><p><a href="http://www.randallspaints.com/ran_2007/Index.html#" target="new">Randall's</a></p></td>
-									<td><p>- selection varies by individual store location</p></td>
+									<td><p>- le choix varie par magasin individuel</p></td>
 								</tr>
 								<tr>
 									<td><p>Reims (Toronto)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Whitby Decorating Centre (Whitby)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 								<tr>
 									<td><p>Weeks Home Hardware (Waterdown)</p></td>
-									<td><p>- good selection</p></td>
+									<td><p>- bonne selection</p></td>
 								</tr>
 							</table>
 	</div>
@@ -310,51 +311,51 @@
 		<table>
 							<tr>
 								<td><p>Cloverdale Paint</p></td>
-								<td><p>- Circa 1850 Furniture Stripper, Heavy Body Remover, Tung Oil</p><p>- Wallpaper Prep-Coat, Swing Professional Remover</p></td>
+								<td><p>- Circa 1850 Décapant à meubles, Décapant en gel, Huile d'abrasin</p><p>- Prep-Coat pour tapisserie</p><p>- Swing Professional Remover</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.paintedmonton.com/days" target="_blank">Day's Paint</a> (Edmonton)</p></td>
-								<td><p>- most products</p></td>
+								<td><p>- excellent selection</p></td>
 							</tr>
 							<tr>
 								<td><p>Federated Co-op</p></td>
-								<td><p>- selection varies by individual store location</p></td>
+								<td><p>- le choix varie par magasin individuel</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.fargeys.com/" target="_new">Fargey's Paint<a/> (AB)</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>Freddie's Paint (AB)</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>General Paint</p></td>
-								<td><p>- selection varies by individual store location</p></td>
+								<td><p>- le choix varie par magasin individuel</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.irlybird.com/dlrn.shtm" target="_new">IRLY</a> (BC)</p></td>
-								<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+								<td><p>- le choix varie par magasin individuel</p><p>- les magasins peuvent commander la plupart des produits</p></td>
 							</tr>
 							<tr>
 								<td><p>Kans of Any Colour (Edmonton)</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>Overwall's Paint (Calgary)</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.sunnysidehomeandgarden.com" target="_blank">Sunnyside Greenhouse</a> (Calgary)</p></td>
-								<td><p>- Tung'n Teak Oil</p></td>
+								<td><p>- Huile Tung&apos;n Teak</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.totembuildingsupplies.com/" target="_new">Totem Building Supplies (AB)</a></p></td>
-								<td><p>- selection varies by individual store location</p></td>
+								<td><p>- le choix varie par magasin individuel</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.windsorplywood.com" target="_blank">Windsor Plywood</a></p></td>
-								<td><p>- selection varies by individual store location</p></td>
+								<td><p>- le choix varie par magasin individuel</p></td>
 							</tr>
 						</table>
 	</div>
@@ -362,23 +363,23 @@
 		<table>
 							<tr>
 								<td><p><a href="http://www.centralns.ca/contact_us.html" target="_new">Central Supplies</a> (NS)</p></td>
-								<td><p>- selection varies by individual store location</p></td>
+								<td><p>- le choix varie par magasin individuel</p></td>
 							</tr>
 							<tr>
 								<td><p>Kent Building Supplies</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>MacKinnon&#x27;s Colour Centre</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.pierceys.ns.ca" target="_blank">Piercey&#x27;s</a></p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>Schurman's Building Supplies (PE)</p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p>Wheaton's</p></td>
@@ -390,14 +391,14 @@
 		<table>
 							<tr>
 								<td><p><a href="http://www.hamiltonmarine.com" target="_new">Hamilton Marine</a></p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.jamestowndistributors.com" target="_new">Jamestown Distributors</a></p></td>
-								<td><p>- good selection</p></td>
+								<td><p>- bonne selection</p></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">EASTERN US</td>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">&#xc9;-U Est</td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.hardwarestore.com" target="_new">Aubuchon Hardware</a></p></td>
@@ -405,101 +406,101 @@
 							</tr>
 							<tr>
 								<td><p>Litchfield Paint & Wallpaper (Litchfield, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>John Boyle Decorating Center (New Britain, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>McDermott Paint & Wallpaper (Greenwich, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Taylor's Paint Center (Fairfield, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>United Paint & Wallpaper (Wethersfield, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Branford Paint (Branford, CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Ring's End Lumber (CT)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Creative Walls (Springfield, MA)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.factorypaint.com" target="_new">Factory Paint</a> (S. Weymouth, Plymouth, N. Pembroke MA)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Hometown Paint (Franklin, MA)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Lexington, MA)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Lexington, MA)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Needham, MA)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Needham, MA)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Waltham Wallpaper & Paint (MA)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Eagle Paint & Wallpaper (Englewood, NJ)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Painten Place (NJ)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Elmont Paint (NY)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Ring's End Lumber (NY)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Rochester, NY)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Rochester, NY)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Southampton, NY)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Southampton, NY)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Newtown Square, PA)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Newtown Square, PA)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Sherwin Williams (VA)</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">CENTRAL US</td>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">&#xc9;-U CENTRAL</td>
 							</tr>
 							<tr>
-								<td><p>Sherwin Williams (Columbia Heights, MN)<font style="color:#ff0000"> NEW</font></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>Sherwin Williams (Columbia Heights, MN)<font style="color:#ff0000"> NOUVEAU</font></p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
 								<td><p>Calumet Paint & Wallpaper</p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">WESTERN US</td>
+								<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">&#xc9;-U OUEST</td>
 							</tr>
 							<tr>
 								<td><p><a href="http://www.canoeonline.net" target="_new">Canoe</a> (OR)</p></td>
@@ -523,7 +524,7 @@
 							</tr>
 							<tr>
 								<td><p><a href="http://www.dunnedwards.com" target="_new">Dunn Edwards</a></p></td>
-								<td><p>- Wallpaper Prep-Coat</p></td>
+								<td><p>- Prep-Coat pour tapisserie</p></td>
 							</tr>
 						</table>
 	</div>
