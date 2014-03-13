@@ -100,12 +100,12 @@ div#text {
     position: relative;
     text-align: justify;
 }
-div#info {
+div#switch {
 	clear: both;
 	font-size:10px;
 	position: relative;
 }
-div#info td {
+div#infotable td {
 	font-weight:bold;
 	background: #fff;
 	border: 1px solid #000;
