@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request
-from static import producttitle, producttext, productdir, productinfo, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
+from static import producttitle, producttext, productdir, productinfo, productdemo, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -65,7 +65,7 @@ def product(productid):
 	if request.query_string == 'french':
 		return render_template('frenchproduct.html', product={'id':productid,'title':frenchproducttitle.title[productid],'text':frenchproducttext.text[productid],'dir':frenchproductdir.dir[productid],'info':frenchproductinfo.info[productid]})
 	else:
-		return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid]})
+		return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid]})
 
 @app.route('/category/<categoryid>')
 def category(categoryid):

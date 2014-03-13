@@ -2,6 +2,10 @@
 {% block head %}
 {{ super() }}
 <style>
+	.stuff a {
+		text-decoration:underline;
+		color: #336633;
+	}
 	.shown {
 		border-left:1px solid black;
 		border-right:1px solid black;
@@ -57,19 +61,19 @@
 	});
 </script>
 <div id="container2" style="width:580;position:relative;">
-	<div style="width:100%;height:19px;">
+	<div style="width:100%;height:19px;position:relative;z-index:2;">
 		<a class="shown label" href="#">More Info</a>
 		<a class="hidden label" href="#">Directions</a>
 		<a class="hidden label" href="#">Buy Now</a>
 		<a class="hidden label" href="#">Demonstrations</a>
 	</div>
-	<div id="switch" style="background:#eee;padding-top:24px;padding-left:5px;padding-right:5px;padding-bottom:5px;border:1px solid #000000;position:absolute;top:0px;width:97.3%;z-index:-1;">
+	<div id="switch" style="background:#eee;padding-top:24px;padding-left:5px;padding-right:5px;padding-bottom:5px;border:1px solid #000000;position:absolute;top:0px;width:97.3%;">
 		<!--<div style="width:50%;position:absolute;left:0;top:0;text-align:left;font-weight:bold">
 		{% for item in product.info2: %}
 			&#8226;{{ item | safe }}<br />
 		{% endfor %}
 		</div>-->
-		<div class="stuff"><div id="infotable" style="position:absolute;right:5px;top:24px;width:50%"><table style="text-align:center;font-size:10;width:100%">
+		<div class="stuff"><div id="infotable" style="position:absolute;left:5px;top:24px;width:50%"><table style="text-align:center;font-size:10;width:100%">
 			<tr>
 				<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
 					<b>Product Code: </b>{{ product.id }}
@@ -84,7 +88,7 @@
 			{% endfor %}
 			</tr>
 		</table>
-		<div style="text-align:right;padding-right:2">
+		<div style="text-align:left;padding-right:2">
 			{% if product.id == '400.499': %}
 			<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
 			{% elif product.id == '770.799': %}
@@ -95,9 +99,11 @@
 			<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
 			{% endif %}
 		</div></div></div>
-		<div class="stuff" style="display:none;">{{ product.dir }}</div>
+		<div class="stuff" style="display:none;">{{ product.dir | safe }}</div>
 		<div class="stuff" style="display:none;">stuff 3</div>
-		<div class="stuff" style="display:none;">stuff 4</div>
+		<div class="stuff" style="display:none;">
+		{{  product.demo | safe }}
+		</div>
 	</div>
 	<script type='text/javascript'>
 		$(window).load(function(){

@@ -91,4 +91,5 @@ title = {
 
 '9000':'Swing Paints Klenk\'s Odourless Thinner',
 '9001':'Swing Paints Klenk\'s Acetone',	
-'9008':'Swing Paints Klenk\'s Toluene'}
+'9008':'Swing Paints Klenk\'s Toluene'
+}
