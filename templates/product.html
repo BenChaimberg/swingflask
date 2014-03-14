@@ -41,10 +41,10 @@
 <script type='text/javascript'>
 	$(document).ready(function(){
 		$(".buybutt").click(function(){
-			$(".buybutt").show("fast");
-			$(".buystuff").hide("fast");
-			$(this).hide("fast");
-			$(this).next().show("fast");
+			$(".buybutt").fadeIn("fast");
+			$(".buystuff").fadeOut("fast");
+			$(this).fadeOut("fast");
+			$(this).next().fadeIn("fast");
 		});
 	});
 </script>
@@ -114,13 +114,13 @@
 			<div class="buybutt">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" width="214" height="80" border="0"></a>
 			</div>
-			<div class="buystuff" style="display:none;">
+			<div class="buystuff" style="display:none;height:80;">
 				us stuff
 			</div>
 			<div class="buybutt">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_can_grey.png') }}" width="214" height="80" border="0"></a>
 			</div>
-			<div class="buystuff" style="display:none;">
+			<div class="buystuff" style="display:none;height:80;">
 				can stuff
 			</div>
 		</div>
