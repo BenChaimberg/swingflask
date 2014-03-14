@@ -38,6 +38,16 @@
 		});
 	});
 </script>
+<script type='text/javascript'>
+	$(document).ready(function(){
+		$(".buybutt").click(function(){
+			$(".buybutt").show("fast");
+			$(".buystuff").hide("fast");
+			$(this).hide("fast");
+			$(this).next().show("fast");
+		});
+	});
+</script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
@@ -100,7 +110,20 @@
 			{% endif %}
 		</div></div></div>
 		<div class="stuff" style="display:none;">{{ product.dir | safe }}</div>
-		<div class="stuff" style="display:none;">stuff 3</div>
+		<div class="stuff" style="display:none;text-align:center;">
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" width="214" height="80" border="0"></a>
+			</div>
+			<div class="buystuff" style="display:none;">
+				us stuff
+			</div>
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='buy_butt_can_grey.png') }}" width="214" height="80" border="0"></a>
+			</div>
+			<div class="buystuff" style="display:none;">
+				can stuff
+			</div>
+		</div>
 		<div class="stuff" style="display:none;">
 		{{  product.demo | safe }}
 		</div>
