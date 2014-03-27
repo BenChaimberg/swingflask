@@ -15,6 +15,9 @@
 		text-decoration:underline;
 		color: #336633;
 	}
+	.stuff p {
+		margin:0 0 5px;
+	}
 	.shown {
 		border-left:1px solid black;
 		border-right:1px solid black;
@@ -55,6 +58,13 @@
 			$(this).hide("fast");
 			$(this).next().show("fast");
 		});
+	});
+</script>
+<script type='text/javascript'>
+	$(window).load(function(){
+		var hht = $("#infotable").height();
+		$("#switch").css('height', hht);
+		$("#container2").css('height', hht+31);
 	});
 </script>
 {% endblock %}
@@ -118,7 +128,7 @@
 			<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
 			{% endif %}
 		</div></div></div>
-		<div class="stuff" style="display:none;">{{ product.dir | safe }}</div>
+		<div class="stuff" style="display:none;"><p>{{ product.dir | safe }}</p></div>
 		<div class="stuff" style="display:none;text-align:center;">
 			<div class="buybutt" style="float:left;">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
@@ -133,15 +143,6 @@
 				<p>can stuff</p>
 			</div>
 		</div>
-		<div class="stuff" style="display:none;">
-		{{  product.demo | safe }}
-		</div>
+		<div class="stuff" style="display:none;"><p>{{ product.demo | safe }}</p></div>
 	</div>
-	<script type='text/javascript'>
-		$(window).load(function(){
-			var hht = $("#infotable").height();
-			$("#switch").css('height', hht);
-			$("#container2").css('height', hht+50);
-		});
-	</script>
 {% endblock %}

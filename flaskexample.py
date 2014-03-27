@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, abort
 from static import producttitle, producttext, productdir, productinfo, productdemo, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
 import logging
 from logging.handlers import RotatingFileHandler
@@ -63,16 +63,24 @@ def about():
 @app.route('/product/<productid>')
 def product(productid):
 	if request.query_string == 'french':
-		return render_template('frenchproduct.html', product={'id':productid,'title':frenchproducttitle.title[productid],'text':frenchproducttext.text[productid],'dir':frenchproductdir.dir[productid],'info':frenchproductinfo.info[productid]})
+		if frenchproducttitle.title.get(productid):
+			return render_template('frenchproduct.html', product={'id':productid,'title':frenchproducttitle.title[productid],'text':frenchproducttext.text[productid],'dir':frenchproductdir.dir[productid],'info':frenchproductinfo.info[productid]})
+		else: abort(404)
 	else:
-		return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid]})
+		if producttitle.title.get(productid):
+			return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid]})
+		else: abort(404)
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
 	if request.query_string == 'french':
-		return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid],'dictlen':len(frenchcategoryproducts.products[categoryid])})
+		if frenchcategorytitle.title.get(categoryid):
+			return render_template('frenchcategory.html', category={'id':categoryid,'title':frenchcategorytitle.title[categoryid],'img':frenchcategoryimg.img[categoryid],'products':frenchcategoryproducts.products[categoryid],'dictlen':len(frenchcategoryproducts.products[categoryid])})
+		else: abort(404)
 	else:
-		return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
+		if categorytitle.title.get(categoryid):
+			return render_template('category.html', category={'id':categoryid,'title':categorytitle.title[categoryid],'img':categoryimg.img[categoryid],'products':categoryproducts.products[categoryid],'dictlen':len(categoryproducts.products[categoryid])})
+		else: abort(404)
 
 if __name__ == '__main__':
     app.run(debug=True)
