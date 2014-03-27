@@ -1,2 +1,2 @@
-from static import categoryproducts
-print len(categoryproducts.products['nontoxic'])
+from static import productforms
+print productforms.forms['1802'+'can']

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, abort
-from static import producttitle, producttext, productdir, productinfo, productdemo, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
+from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -68,7 +68,7 @@ def product(productid):
 		else: abort(404)
 	else:
 		if producttitle.title.get(productid):
-			return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid]})
+			return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid],'canforms':productforms.forms[productid + 'can'],'usforms':productforms.forms[productid + 'us']})
 		else: abort(404)
 
 @app.route('/category/<categoryid>')

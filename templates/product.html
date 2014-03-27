@@ -53,10 +53,10 @@
 <script type='text/javascript'>
 	$(document).ready(function(){
 		$(".buybutt").click(function(){
-			$(".buybutt").show("fast");
-			$(".buystuff").hide("fast");
-			$(this).hide("fast");
-			$(this).next().show("fast");
+			$(".buybutt").show("slow");
+			$(".buystuff").hide("slow");
+			$(this).hide("slow");
+			$(this).next().show("slow");
 		});
 	});
 </script>
@@ -134,13 +134,29 @@
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
 			</div>
 			<div class="buystuff" style="float:left;">
-				<p>us stuff</p>
+				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
+					<input type="hidden" value="4388412" name="userid">
+					<input type="hidden" value="1" name="currency">
+					<select style="font-size:12px" name="productpr">
+						{{ product.usforms | safe }}
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to US cart">
+				</form>
 			</div>
 			<div class="buybutt" style="float:right;">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
 			</div>
 			<div class="buystuff" style="float:right;">
-				<p>can stuff</p>
+				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
+					<input type="hidden" value="4388412" name="userid">
+					<input type="hidden" value="0" name="currency">
+					<select style="font-size:12px" name="productpr">
+						{{ product.canforms | safe }}
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to Canada cart">
+				</form>
 			</div>
 		</div>
 		<div class="stuff" style="display:none;"><p>{{ product.demo | safe }}</p></div>

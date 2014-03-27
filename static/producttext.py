@@ -149,19 +149,19 @@ it is safe to use on fine furniture. It will not disturb the
 wood&amp,s natural patina or raise the grain, and it will not 
 harm glue joints or veneers. Circa 1850 Heavy Body Paint &amp, 
 Varnish Remover is non-flammable and almost odourless.''',	
-'1807':'''Circa 1850 Tung&\'n Teak Oil is a unique blend of tung oil and teak 
+'1807':'''Circa 1850 Tung&apos;n Teak Oil is a unique blend of tung oil and teak 
 oil. Tung oil, a natural oil extracted from the nut of an 
 oriental tree, has been used for centuries to protect and 
 beautify wood. Teak Oil is commonly used on teak furniture 
-and boats. Circa 1850 Tung&\'n Teak Oil combines the penetration 
+and boats. Circa 1850 Tung&apos;n Teak Oil combines the penetration 
 of teak with the durability of tung oil. It penetrates deep 
 into the pores of wood to strengthen the fibres of the wood 
 while providing a low lustre, hand-rubbed finish. Circa 1850 
-Tung&\'n Teak Oil is ideal for interior and exterior wood.''',
-'1809':'''Circa 1850 Woodturner&\'s Jelly is a gelled modified 
+Tung&apos;n Teak Oil is ideal for interior and exterior wood.''',
+'1809':'''Circa 1850 Woodturner&apos;s Jelly is a gelled modified 
 polyurethane varnish. It creates a rich patina and 
 provides a true hand-rubbed finish that protects against 
-heat, water and alcohol. Circa 1850 Woodturner&\'s Jelly 
+heat, water and alcohol. Circa 1850 Woodturner&apos;s Jelly 
 dries quickly - free from dust specks and brush marks. 
 It is ideal for any woodturning projects and all wood furniture.''',
 '1815':'''Circa 1850 Exterior Varnish is a clear, tough coating 
@@ -186,7 +186,7 @@ Strip is an alternative way to effectively remove paint,
 varnish, shellac, lacquer and polyurethane from all your 
 fine furniture, woodwork and metal. With its pleasant odour, 
 Circa 1850 Soft Strip can easily be used indoors. Because 
-it stays wet longer, you&\'ll see it remove multiple layers 
+it stays wet longer, you&apos;ll see it remove multiple layers 
 with ease. Of course, it is non-flammable and biodegradable.''',
 '1821':'''Circa 1850 Bare Floor is formulated to clean wood, vinyl and laminate floors.
 It quickly and easily removes dirt and grime, shoe marks and stains.
