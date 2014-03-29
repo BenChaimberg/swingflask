@@ -10,7 +10,7 @@ The site is a gateway into our company for current and potential customers.  As 
 - **COMPANY PROFILE**:  A brief overview of the company stressing the fact that it is a family-owned business based in Montreal.
 - **CONTACTS**:  Information on telephone, fax, e-mail, etc.
 - **PRODUCT INFORMATION**:  Detailed information on each product, including information specific to dealers as well as consumers.  The potential for links to videos and photo galleries would be beneficial.
-- **eMALL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
+- **eMAL**:  Most products should be made available for online purchase.  We currently work with a third party to securely collect credit card information
 - **ONLINE FORUM**:  The site must continue to maintain a high quality online forum where customers can discuss specific issues that relate to projects in our field.
 
 We propose to have the web site upgraded and redesigned to satisfy our current and future needs.
@@ -33,7 +33,7 @@ The footer will contain links to miscellaneous pages such as the forum, newslett
 
 Home Page
 ---------
-The home page will show image examples of products and provide links to common pages in addition to the static elements, such as the FAQ, contact, and forum.
+The home page will show image examples of products and provide links to common pages, such as the FAQ, contact, and forum, in addition to the static elements. It will also provide links to the category pages.
 
 About Page
 ----------
@@ -61,4 +61,4 @@ Each group of products, or category, will have its own page with pictures of all
 
 Product Page
 ------------
-Each product page will be dynamically produced, showing a picture, a short description, an option to buy online, directions, more information including sizes and tips for choosing correctly, and possibly links to demonstrations. These will sections manifest themselves into tabs or some other easy-to-read layout.
+Each product page will be dynamically produced, showing a picture, a short description, an option to buy online, directions, more information including sizes and tips for choosing correctly, and possibly links to demonstrations. These will sections manifest themselves into tabs or some other easy-to-read layout. Visitors will only arrive at these pages through the category pages, or a direct link from another site.
