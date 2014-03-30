@@ -6,15 +6,14 @@ The Swing Paints website revamp will create a dynamic website with the criteria 
 * [Client side programming language](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#client-side-programming-language).
 * [Data storage requirements and tool choices](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#data-storage-requirements-and-tool-choices).
 * [Server system architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#server-system-architecture).
-* [Client system architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#client-system-architecure).
-* [Major entry points (URLs) to the site](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#marjor-entry-points--urls--to-the-site).
+* [Client system architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#client-system-architecture).
 * [Software test strategy](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#software-test-strategy).
 * [Bug tracking strategy](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#bug-tracking-strategy).
 * [Software deployment instructions](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#software-deployment-instructions).
 
 Server Software and Overall Architecture
 ----------------------------------------
-Development software will run locally on a virtual environment, and publically through a app hosting service, using Gunicorn and venv. Deployment software is to be determined by the employer, but will most likely be run on a *nix server using wsgi to handle the Flask app.
+Development software will run locally on a virtual environment, and publically through a app hosting service, using Gunicorn and venv. Deployment software is to be determined by the employer, but will most likely be run on a *nix server using WSGI to handle the Flask app.
 
 Server Side Programming Language
 --------------------------------
@@ -28,3 +27,31 @@ Data Storage Requirements and Tool Choices
 ------------------------------------------
 Data storage at this time will only be static, but could be tweaked to allow for user input as well. Until that change has been made, data will be stored in readable Python dictionaries. Examples of such are [producttitle.py](https://github.com/Youppi3/flaskexample/blob/master/static/producttitle.py) and [categoryproducts.py](https://github.com/Youppi3/flaskexample/blob/master/static/categoryproducts.py).
 
+Server System Architecture
+--------------------------
+The server will utilize (most likely) a WSGI wrapper of a Flask-enhanced Python app, with Jinja template dependencies and static files in child folders. A vitrualenv will be created with the latest versions of Python, Flask, and its dependencies, and the server will reroute itself through this vitrual environment.
+
+Client System Architecture
+--------------------------
+On the client side, a fluid blend of HTML, CSS, and Javascript + jQuery will produce a wonderful example of fung shui in byte form. Dynamic elements will respond to the browser, OS, screen size etc. while also providing for a mobile-optimized web experience.
+
+Software Test Strategy
+----------------------
+A URL will be given to some choice few known for their aptitude in breaking technology with the hopes that if bugs are to be found, they will me attracted to the use of these "tech wrecks." Flask will handle all server-side testing with its built-in capability for such. Obviously, no code will be deployed in an unfinished state or one of undeterminable stability.
+
+Bug Tracking Strategy
+---------------------
+All code will be hosted on the Github public repository, with any sensitive date, if existent, purged and added to the .gitignore before upload. Users may submit comments and suggestions through the issues and code through the pull requests. All client data will be carefully considered and inspected before acceptance or rejection.
+
+Software Deployment Instructions
+--------------------------------
+The following must be completed before code is made live:
+
+1. The code is tested in full, and runs with no errors, warnings, or issues.
+2. A tarball will be created from the code to be pushed (.tar.gz file compressed from the entire folder of code, excluding system requirements such as WSGI).
+3. Create a new release on Github, tagged and semantically versioned, and upload the tarball to the release.
+4. Copy the URL of the distribution binary file.
+5. SSH into the server and navigate to the server document root.
+6. Download the release using the noted URL: ```$ wget <URL>```
+7. Expand the downloaded binary: ```$ tar -xvf <filename>```
+8. Replace the old folder with the new folder: ```$ mv <newfolder> <oldfolder>```
