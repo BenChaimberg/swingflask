@@ -7,7 +7,7 @@
 {% for x in category.products: %}
 <td>
 	<a href="../product/{{ x }}">
-		<img src="http://swingpaints.com/images/tn/{{ x }}.jpg" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
+		<img src="{{ url_for('static', filename='images/tn/%s.jpg' % x ) }}" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
 	</a><br />{{ category.products[x] | safe }}
 </td>
 {% if loop.index is divisibleby(5) %}</tr><tr>{% endif %}
