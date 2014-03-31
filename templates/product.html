@@ -3,9 +3,10 @@
 {{ super() }}
 <style>
 	.buystuff {
+		text-align:center;
 		display:none;
 		height:100%;
-		width:50%;
+		width:100%;
 	}
 	.buybutt {
 		height:100%;
@@ -43,27 +44,34 @@
 	$(document).ready(function(){
 		$(".label").click(function(){
 			var labelindex = $(this).index();
+			$("#footer").fadeOut(100);
 			$(".stuff").eq(labelindex).siblings().hide("fast");
-			$(".stuff").eq(labelindex).show("fast");
+			$(".stuff").eq(labelindex).show("fast",function(){
+				var hht = $(this).height();
+				$("#container2").css('height', hht+31);
+				$("#footer").fadeIn(100);
+			});
 			$(this).addClass("shown").removeClass("hidden");
 			$(this).siblings().addClass("hidden").removeClass("shown");
+			$(".buystuff").hide("fast",function(){
+				$(".buybutt").show("fast");
+			});
 		});
 	});
 </script>
 <script type='text/javascript'>
 	$(document).ready(function(){
 		$(".buybutt").click(function(){
-			$(".buybutt").show("slow");
-			$(".buystuff").hide("slow");
-			$(this).hide("slow");
-			$(this).next().show("slow");
+			var clicked = $(this)
+			$(".buybutt").fadeOut("slow",function(){
+				clicked.next().fadeIn("slow");
+			});
 		});
 	});
 </script>
 <script type='text/javascript'>
 	$(window).load(function(){
 		var hht = $("#infotable").height();
-		$("#switch").css('height', hht);
 		$("#container2").css('height', hht+31);
 	});
 </script>
@@ -72,7 +80,7 @@
 {% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 	<div id="text">{{ product.text|safe }}</div>
-	<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture" alt="{{ product.title }}"></div>
+	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
 	<script type='text/javascript'>
 		$("#text").css('display','none');
 		$("#picture").load(function(){
@@ -102,38 +110,42 @@
 			&#8226;{{ item | safe }}<br />
 		{% endfor %}
 		</div>-->
-		<div class="stuff"><div id="infotable" style="position:absolute;left:5px;top:24px;width:50%"><table style="text-align:center;font-size:10;width:100%">
-			<tr>
-				<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
-					<b>Product Code: </b>{{ product.id }}
-				</td>
-			</tr>
-			<tr>
-				<td style="width:58%">Size:</td>
-				<td style="width:42%">Case Pack:</td>
-			{% for item in product.info: %}
-				{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
-				<td style="font-weight:normal">{{ item | safe }}</td>
-			{% endfor %}
-			</tr>
-		</table>
-		<div style="text-align:left;padding-right:2">
-			{% if product.id == '400.499': %}
-			<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
-			{% elif product.id == '770.799': %}
-			<a href="/color_swatches.htm" class="directions">Colour Swatches</a>
-			{% elif product.id == '3220' or product.id == '3200' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1801': %}
-			<a href="/right_stripper.htm" class="directions">Choosing the Right Stripper</a>
-			{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1807' or product.id ==  '1802' or product.id ==  '1604' or product.id ==  '1819' or product.id ==  '1818' or product.id ==  '1817' or product.id ==  '1805' or product.id ==  '1815' or product.id ==  '1803' or product.id ==  '2100' or product.id ==  '1555' or product.id ==  '8100' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
-			<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
-			{% endif %}
-		</div></div></div>
+		<div class="stuff">
+			<div id="infotable" style="position:relative;left:5px;top:5px;width:50%;padding-bottom:5px;">
+				<table style="text-align:center;font-size:10;width:100%">
+					<tr>
+						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
+							<b>Product Code: </b>{{ product.id }}
+						</td>
+					</tr>
+					<tr>
+						<td style="width:58%">Size:</td>
+						<td style="width:42%">Case Pack:</td>
+					{% for item in product.info: %}
+						{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
+						<td style="font-weight:normal">{{ item | safe }}</td>
+					{% endfor %}
+					</tr>
+				</table>
+				<div style="text-align:left;">
+					{% if product.id == '400.499': %}
+					<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
+					{% elif product.id == '770.799': %}
+					<a href="/color_swatches.htm" class="directions">Colour Swatches</a>
+					{% elif product.id == '3220' or product.id == '3200' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1801': %}
+					<a href="/right_stripper.htm" class="directions">Choosing the Right Stripper</a>
+					{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1807' or product.id ==  '1802' or product.id ==  '1604' or product.id ==  '1819' or product.id ==  '1818' or product.id ==  '1817' or product.id ==  '1805' or product.id ==  '1815' or product.id ==  '1803' or product.id ==  '2100' or product.id ==  '1555' or product.id ==  '8100' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
+					<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 		<div class="stuff" style="display:none;"><p>{{ product.dir | safe }}</p></div>
-		<div class="stuff" style="display:none;text-align:center;">
+		<div class="stuff" style="display:none;">
 			<div class="buybutt" style="float:left;">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
 			</div>
-			<div class="buystuff" style="float:left;">
+			<div class="buystuff" style="padding:0 auto;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
@@ -147,7 +159,7 @@
 			<div class="buybutt" style="float:right;">
 				<a href="#"><img src="{{ url_for('static', filename='buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
 			</div>
-			<div class="buystuff" style="float:right;">
+			<div class="buystuff" style="padding:0 auto;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
