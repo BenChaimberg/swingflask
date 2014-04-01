@@ -82,7 +82,9 @@
 </script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
+{% block category %}
+<img src="{{ url_for('static', filename='images/%s' % product.categoryimg[product_category(product.category,product.id)]) }}" alt="{{ product.categorytitle[product_category(product.category,product.id)] }}" width=590 height=29>
+{% endblock %}
 {% block content %}
 	<div id="text">{{ product.text|safe }}</div>
 	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>

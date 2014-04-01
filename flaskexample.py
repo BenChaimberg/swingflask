@@ -1,9 +1,19 @@
 from flask import Flask, render_template, url_for, request, abort
+from jinja2 import Environment
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
 import logging
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
+
+@app.context_processor
+def utility_processor():
+	def product_category(category,id):
+		for item in category:
+			for item2 in category[item]:
+				if item2 == id:
+					return item
+	return dict(product_category=product_category)
 
 @app.errorhandler(404)
 def notfound(e):
@@ -68,7 +78,7 @@ def product(productid):
 		else: abort(404)
 	else:
 		if producttitle.title.get(productid):
-			return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid],'canforms':productforms.forms[productid + 'can'],'usforms':productforms.forms[productid + 'us']})
+			return render_template('product.html', product={'id':productid,'title':producttitle.title[productid],'text':producttext.text[productid],'dir':productdir.dir[productid],'info':productinfo.info[productid],'demo':productdemo.demo[productid],'canforms':productforms.forms[productid + 'can'],'usforms':productforms.forms[productid + 'us'],'category':categoryproducts.products,'categoryimg':categoryimg.img,'categorytitle':categorytitle.title})
 		else: abort(404)
 
 @app.route('/category/<categoryid>')
