@@ -17,7 +17,7 @@ title = {
 '1557':'Swing Paints Circa 1850 Nu-Lustre-57 UV-Resistant',
 '1566':'Swing Paints Circa 1850 Nu-Lustre-66 Heat-Resistant',
 
-'1600.1603':'Swing Paints Antiquax Wax Polish',
+'1600':'Swing Paints Antiquax Wax Polish',
 '1604':'Swing Paints Antiquax Silver and Leather',
 
 '1700':'Swing Paints Gaudreault Antiques Brush-On Remover',
@@ -34,7 +34,9 @@ title = {
 '1807':'Swing Paints Circa 1850 Tung\'n Teak Oil',
 '1809':'Swing Paints Circa 1850 Woodturner\'s Jelly',
 '1815':'Swing Paints Circa 1850 Marine Grade Exterior Varnish',
-'1817.1819':'Swing Paints Circa 1850 Fast Dry Polyurethane',
+'1817':'Swing Paints Circa 1850 Fast Dry Polyurethane',
+'1818':'Swing Paints Circa 1850 Fast Dry Polyurethane',
+'1819':'Swing Paints Circa 1850 Fast Dry Polyurethane',
 '1820':'Swing Paints Circa 1850 Soft Strip',
 '1821':'Swing Paints Circa 1850 Bare Floor',
 '1822':'Swing Paints Circa 1850 Bare Metal',
@@ -76,16 +78,16 @@ title = {
 '3220':'Swing Paints Circa 1850 Wood Bleach',
 '3230':'Swing Paints Circa 1850 Super DeGluer',
 
-'400.499':'Swing Paints Circa 1850 Aqua Wood Stain',
+'400':'Swing Paints Circa 1850 Aqua Wood Stain',
 
 '705':'Swing Paints Circa 1850 Wood Conditioner',
-'709.750':'Swing Paints Circa 1850 Fine Wood Stain',
+'709':'Swing Paints Circa 1850 Fine Wood Stain',
 
-'760.769':'Swing Paints Circa 1850 Antique Danish Oil',
+'760':'Swing Paints Circa 1850 Antique Danish Oil',
 	
-'770.799':'Swing Paints Circa 1850 Stain\'n Varnish',
+'770':'Swing Paints Circa 1850 Stain\'n Varnish',
 
-'8100.8199':'Swing Paints Klenk\'s Epoxy',
+'8100':'Swing Paints Klenk\'s Epoxy',
 '8172':'Swing Paints Klenk\'s Fish Eye Eliminator',	
 '8200':'Swing Paints Klenk\'s ACR',
 
