@@ -23,13 +23,69 @@ oilsproducts['1805']='Circa 1850<br />Antique Paste Varnish'
 oilsproducts['1809']='Circa 1850<br />Wood Turners Jelly'
 oilsproducts['1702']='Gaudreault<br />Tung Oil'
 oilsproducts['2142']='Circa 1850<br />Pure Raw Tung Oil'
+removersproducts = OrderedDict()
+removersproducts['1800']='Circa 1850<br />Furniture Stripper'
+removersproducts['1806']='Circa 1850<br />Heavy Body P&amp;V<br />Remover'
+removersproducts['1820']='Circa 1850<br />Soft Strip'
+removersproducts['1801']='Circa 1850<br />Furniture Refinisher'
+removersproducts['3200']='Circa 1850<br />The Super DeGooper'
+removersproducts['1700']='Gaudreault Antiques<br />Brush-On Remover'
+removersproducts['1706']='Gaudreault Antiques<br />Heavy Body Remover'
+removersproducts['1824']='Circa 1850<br />Bio DeGluer'
+removersproducts['1897']='Swing<br />Professional Removers'
+removersproducts['1900']='Stripping Kit<br />for DUMMIES'
+primerproducts = OrderedDict()
+primerproducts['3100']='Prime-It'
+primerproducts['3133']='Prime-It Plus'
+primerproducts['3107']='Wallpaper Prep-Coat '
+primerproducts['3150']='Wallpaper Hang-Rite'
+primerproducts['1823']='Bare Concrete'
+primerproducts['1822']='Bare Metal'
+specialproducts = OrderedDict()
+specialproducts['8200']='Swiss Formula<br />ACR'
+specialproducts['8100_8199']='Klenk&#x27s<br />Epoxy Enamel'
+specialproducts['7900']='Swiss Formula<br />Epoxy Enamel'
+specialproducts['8172']='Fish Eye<br />Eliminator'
+specialproducts['3160']='Rust<br />Treatment'
+specialproducts['1555']='Circa 1850<br />NU-LUSTRE-55'
+specialproducts['1527']='NU-LUSTRE-27<br />BRUSH-ON'
+specialproducts['1557']='NU-LUSTRE-57<br />UV-STABLE'
+specialproducts['1566']='NU-LUSTRE-66<br />HEAT-STABLE'
+specialproducts['1815']='Plastic<br />Resin Glue'
+waxesproducts = OrderedDict()
+waxesproducts['1600_1603']='Antiquax<br />Specialty Waxes'
+waxesproducts['1604']='Antiquax<br />Specialty Polishes'
+waxesproducts['3200']='Circa 1850<br />The Super DeGooper'
+waxesproducts['1804']='Circa 1850<br />Furniture Cleaner'
+waxesproducts['1803']='Circa 1850<br />Lemon Oil'
+waxesproducts['2103']='Terra Nova<br />Liquid Pumice Stone'
+waxesproducts['2101']='Terra Nova<br />Cream Polish'
+waxesproducts['2104']='Terra Nova<br />Furniture Cleaner'
+waxesproducts['1821']='Circa 1850<br />Bare Floor'
+waxesproducts['8175']='Klenk&apos;s<br />Bare Bath'
+stainproducts = OrderedDict()
+stainproducts['770_799']='Circa 1850<br />Stain&#x27;n Varnish'
+stainproducts['709_750']='Circa 1850<br />Fine Wood Stain'
+stainproducts['705']='Circa 1850<br />Wood Conditioner'
+stainproducts['400_499']='Circa 1850<br />Aqua Wood Stain'
+stainproducts['760_769']='Circa 1850<br />Antique Danish Oil'
+stainproducts['3220']='Circa 1850<br />Wood Bleach'
+accessoriesproducts = OrderedDict()
+accessoriesproducts['1301']='Circa 1850<br />Stripping Gloves'
+accessoriesproducts['1300']='Circa 1850<br />Maple Scraper'
+accessoriesproducts['1302']='Circa 1850<br />Stripping Tool'
+accessoriesproducts['1303']='Circa 1850<br />Finishing Pads'
+accessoriesproducts['1310']='Circa 1850<br />Cheese Cloth'
+accessoriesproducts['1315']='Circa 1850<br />Staining Essentials'
+accessoriesproducts['1316']='Circa 1850 Staining<br />&amp; Mixing Essentials'
+accessoriesproducts['1201']='Chair-Loc'
 products = {
 'nontoxic' : nontoxicproducts,
-'oils':oilsproducts
-#'removers':removersproducts,
-#'primer':primerproducts,
-#'special':specialproducts,
-#'waxes':waxesproducts,
-#'stain':stainproducts,
-#'accessories':accessoriesproducts
+'oils':oilsproducts,
+'removers':removersproducts,
+'primer':primerproducts,
+'special':specialproducts,
+'waxes':waxesproducts,
+'stain':stainproducts,
+'accessories':accessoriesproducts
 }
