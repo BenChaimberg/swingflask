@@ -98,7 +98,7 @@ forms = {
 	<option value=":0.00">_____________________________________________</option>
 	<option value=":0.00"></option>
 	<option value="152701 Nu-Lustre-27 Brush-On (UV-STABLE) 710mL:59.00"> Nu-Lustre Brush-On (UV-STABLE) 710mL - 59.00 </option>''',
-   '''1555us''':'''<option value=":0.00" selected> -----------Select Format &amp, Size----------- </option>
+'''1555us''':'''<option value=":0.00" selected> -----------Select Format &amp, Size----------- </option>
 	<option value="155525 Nu-Lustre-55, 236mL:14.00"> Nu-Lustre-55 236mL - 14.00 </option>
 	<option value="155550 Nu-Lustre-55, 473mL:22.00"> Nu-Lustre-55 473mL - 22.00 </option>
 	<option value="155501 Nu-Lustre-55, 946mL:39.00"> Nu-Lustre-55 946mL - 39.00 </option>
@@ -116,7 +116,7 @@ forms = {
 	<option value="152701 Nu-Lustre-27 Brush-On (UV-STABLE) 710mL:59.00"> Nu-Lustre Brush-On (UV-STABLE) 710mL - 59.00 </option>''',
 
 
-'''1600.1603can''':'''<option value=":0.00" selected> ------Select Size------ </option>
+'''1600can''':'''<option value=":0.00" selected> ------Select Size------ </option>
 	<option value="160000 Original Antiquax, Aerosol:9.00"> Original - AerosoL - 9.00 </option>
 	<option value="160010 Original Antiquax, 100mL:8.00"> Original - 100mL - 8.00 </option>
 	<option value="160025 Original Antiquax, 250mL:15.00"> Original - 250mL - 15.00 </option>
@@ -128,7 +128,7 @@ forms = {
 	<option value="160225 Marble Wax, 250mL:16.00"> Marble Wax - 250mL - 16.00 </option>
 	<option value=""> ------------------------ </option>
 	<option value="160300 Quick Polish Antiquax, Aerosol:9.00"> Quick Polish - AerosoL - 9.00 </option>''',
-'''1600.1603us''':'''<option value=":0.00" selected> ------Select Size------ </option>
+'''1600us''':'''<option value=":0.00" selected> ------Select Size------ </option>
 	<option value="160000 Original Antiquax, Aerosol:9.00"> Original - AerosoL - 9.00 </option>
 	<option value="160010 Original Antiquax, 100mL:8.00"> Original - 100mL - 8.00 </option>
 	<option value="160025 Original Antiquax, 250mL:15.00"> Original - 250mL - 15.00 </option>
@@ -339,7 +339,7 @@ forms = {
 	<option value="320025 Super DeGooper, pint:5.00"> pint - 5.00 </option>
 	<option value="320001 Super DeGooper, quart:15.00"> quart - 15.00 </option>''',
 
-'''400.499can''':'''
+'''400can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="40112 Aqua Wood Stain, Caramel (125mL):6.00"> Caramel 401 (125 mL) - 6.00 </option>
 	<option value="40212 Aqua Wood Stain, Cherry (125mL):6.00"> Cherry 402 (125 mL) - 6.00 </option>
@@ -403,7 +403,7 @@ forms = {
 	<option value="43425 Aqua Wood Stain, Midnight (250mL):9.00"> Midnight 434 (250 mL) - 9.00 </option>
 	<option value="43525 Aqua Wood Stain, Cobalt (250mL):9.00"> Cobalt 435 (250 mL) - 9.00 </option>
 	<option value="43625 Aqua Wood Stain, Blueberry (250mL):9.00"> Blueberry 436 (250 mL) - 9.00 </option>''',
-'''400.499us''':'''
+'''400us''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="40112 Aqua Wood Stain, Caramel (4 ounce):6.00"> Caramel 401 (4 ounce) - 6.00 </option>
 	<option value="40212 Aqua Wood Stain, Cherry (4 ounce):6.00"> Cherry 402 (4 ounce) - 6.00 </option>
@@ -468,7 +468,7 @@ forms = {
 	<option value="43525 Aqua Wood Stain, Cobalt (8 ounce):9.00"> Cobalt 435 (8 ounce) - 9.00 </option>
 	<option value="43625 Aqua Wood Stain, Blueberry (8 ounce):9.00"> Blueberry 436 (8 ounce) - 9.00 </option>''',
 
-'''709.750can''':'''
+'''709can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="70925 Fine Wood Stain, Natural (250mL):7.00"> Natural 709 (250 mL) - 7.00 </option>
 	<option value="71025 Fine Wood Stain, Golden Oak (250mL):7.00"> Golden Oak 710 (250 mL) - 7.00 </option>
@@ -498,7 +498,7 @@ forms = {
 	<option value="73501 Fine Wood Stain, Cherry (1L):15.00"> Cherry 735 (1L) - 15.00</option>
 	<option value="74101 Fine Wood Stain, Fruitwood (1L):15.00"> Fruitwood 741 (1L) - 15.00</option>
 	<option value="75001 Fine Wood Stain, Dark Oak (1L):15.00"> Dark Oak 750 (1L) - 15.00</option>''',
-'''709.750us''':'''
+'''709us''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="70925 Fine Wood Stain, Natural (1/2 pint):7.00"> Natural 709 (1/2 pint) - 7.00 </option>
 	<option value="71025 Fine Wood Stain, Golden Oak (1/2 pint):7.00"> Golden Oak 710 (1/2 pint) - 7.00 </option>
@@ -529,7 +529,7 @@ forms = {
 	<option value="74101 Fine Wood Stain, Fruitwood (quart):15.00"> Fruitwood 741 (quart) - 15.00</option>
 	<option value="75001 Fine Wood Stain, Dark Oak (quart):15.00"> Dark Oak 750 (quart) - 15.00</option>''',
 
-'''760.769can''':'''
+'''760can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="76025 Antique Danish Oil, Natural (250mL):8.00"> Natural 760  (250 mL)- 8.00 </option>
 	<option value="76125 Antique Danish Oil, Walnut (250mL):8.00"> Walnut 761  (250 mL)- 8.00 </option>
@@ -557,7 +557,7 @@ forms = {
 	<option value="76704 Antique Danish Oil, Bamboo (3.78L):55.00"> Bamboo 767 (3.78L) - 55.00 </option>
 	<option value="76804 Antique Danish Oil, Coal (3.78L):55.00"> Coal 768 (3.78L) - 55.00 </option>
 	<option value="76904 Antique Danish Oil, Portabello (3.78L):55.00"> Portabello 769 (3.78L) - 55.00 </option>''',
-'''760.769us''':'''
+'''760us''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="76025 Antique Danish Oil, Natural (1/2 pint):8.00"> Natural 760 (1/2 pint) - 8.00 </option>
 	<option value="76125 Antique Danish Oil, Walnut (1/2 pint):8.00"> Walnut 761 (1/2 pint) - 8.00 </option>
@@ -586,7 +586,7 @@ forms = {
 	<option value="76804 Antique Danish Oil, Coal (gallon):55.00"> Coal 768 (gallon) - 55.00 </option>
 	<option value="76904 Antique Danish Oil, Portabello (gallon):55.00"> Portabello 769 (gallon) - 55.00 </option>''',
 
-'''770.799can''':'''
+'''770can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="77025 Stain&apos;n Varnish, Natural (250mL):9.00"> Natural 770 (250 mL) - 9.00 </option>
 	<option value="77125 Stain&apos;n Varnish, Teak (250mL):9.00"> Teak 771 (250 mL) - 9.00 </option>
@@ -634,7 +634,7 @@ forms = {
 	<option value="78901 Stain&apos;n Varnish, Steel Blue (1L):20.00"> Steel Blue 789 (1L) - 20.00 </option>
 	<option value="79001 Stain&apos;n Varnish, Satin Black (1L):20.00"> Satin Black 790 (1L) - 20.00 </option>
 	<option value="79101 Stain&apos;n Varnish, Black Cherry (1L):20.00"> Black Cherry 791 (1L) - 20.00 </option>''',
-'''770.799us''':'''
+'''770us''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="77025 Stain&apos;n Varnish, Natural (1/2 pint):9.00"> Natural 770 (1/2 pint) - 9.00 </option>
 	<option value="77125 Stain&apos;n Varnish, Teak (1/2 pint):9.00"> Teak 771 (1/2 pint) - 9.00 </option>
