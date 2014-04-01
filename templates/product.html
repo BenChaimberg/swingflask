@@ -75,9 +75,14 @@
 	});
 </script>
 <script type='text/javascript'>
-	$(window).load(function(){
-		var hht = $("#infotable").height();
-		$("#container2").css('height', hht+31);
+	$(document).ready(function(){
+		$("#container2").hide("fast");
+		$(window).load(function(){
+			$("#container2").show("fast",function(){
+				var hht = $("#infotable").height();
+				$("#container2").css('height', hht+31);
+			});
+		});
 	});
 </script>
 {% endblock %}
@@ -150,7 +155,7 @@
 		<div class="stuff" style="display:none;"><p>{{ product.dir | safe }}</p></div>
 		<div class="stuff" style="display:none;">
 			<div class="buybutt" style="float:right;">
-				<a href="#"><img src="{{ url_for('static', filename='buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
 			</div>
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
@@ -164,7 +169,7 @@
 				</form>
 			</div>
 			<div class="buybutt">
-				<a href="#"><img src="{{ url_for('static', filename='buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
 			</div>
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
