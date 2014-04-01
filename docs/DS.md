@@ -1,15 +1,17 @@
 Design Specification
 ====================
 The Swing Paints website revamp will create a dynamic website with the criteria listed in the [Functional Specification](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md#functional-specification). This document will outline the following inner workings of the website with the new Python-based Flask back end:
-* [Server software and overall architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#server-software-and-overall-architecture).
-* [Server side programming language](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#server-side-programming-language).
-* [Client side programming language](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#client-side-programming-language).
-* [Data storage requirements and tool choices](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#data-storage-requirements-and-tool-choices).
-* [Server system architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#server-system-architecture).
-* [Client system architecture](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#client-system-architecture).
-* [Software test strategy](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#software-test-strategy).
-* [Bug tracking strategy](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#bug-tracking-strategy).
-* [Software deployment instructions](https://github.com/Youppi3/flaskexample/edit/master/docs/DS.md#software-deployment-instructions).
+* [Server software and overall architecture](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#server-software-and-overall-architecture)
+* [Server side programming language](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#server-side-programming-language)
+* [Client side programming language](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#client-side-programming-language)
+* [Data storage requirements and tool choices](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#data-storage-requirements-and-tool-choices)
+* [Server system architecture](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#server-system-architecture)
+* [Client system architecture](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#client-system-architecture)
+* [Product page creation](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#product-page-creation)
+* [Category page creation](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#category-page-creation)
+* [Software test strategy](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#software-test-strategy)
+* [Bug tracking strategy](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#bug-tracking-strategy)
+* [Software deployment instructions](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#software-deployment-instructions)
 
 Server Software and Overall Architecture
 ----------------------------------------
@@ -34,6 +36,14 @@ The server will utilize (most likely) a WSGI wrapper of a Flask-enhanced Python 
 Client System Architecture
 --------------------------
 On the client side, a fluid blend of HTML, CSS, and Javascript + jQuery will produce a wonderful example of fung shui in byte form. Dynamic elements will respond to the browser, OS, screen size etc. while also providing for a mobile-optimized web experience.
+
+Product Page Creation
+---------------------
+Each product page will be created off of its product ID, generally a four digit number, which is also the URL (http://www.swingpaints.com/product/####). In addition to the static elements, the product's category will be found and printed, as well as its image, general description, directions, more information, demonstration, and buying options. This information will be found in Python dictionaries, see more above. Data in dictionaries will be kept in a minimal fashion, so the exterior structure elements will be produced automatically while displaying.
+
+Category Page Creation
+----------------------
+As with the above, each category page will be created from its category ID, a string, which is pulled from the URL (http://www.swingpaints.com/category/<string>). Once again, in addition to the static elements, the category page will pull its correct image, its products and their respective products, and possibly a brief descriptions of the products to be found within.
 
 Software Test Strategy
 ----------------------
