@@ -1,9 +1,9 @@
 {% extends "frenchbase.html" %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
 {% block content %}
 <div id="text">{{ product.text|safe }}</div>
-<div id="image"><img src='http://www.swingpaints.com/images/lg/{{ product.id }}.jpg' id="picture" alt="{{ product.title }}"></div>
+<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
 <script type='text/javascript'>
 	$("#text").css('display','none');
 	$("#picture").load(function(){
