@@ -13,6 +13,8 @@ def utility_processor():
 			for item2 in category[item]:
 				if item2 == id:
 					return item
+				if (id == '1818' or id == '1819') and item2 == '1817':
+					return item
 	return dict(product_category=product_category)
 
 @app.errorhandler(404)
