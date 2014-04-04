@@ -195,7 +195,7 @@ forms = {
 	<option value="180101 Furniture Refinisher, 1L:13.00"> 1L - 13.00 </option>
 	<option value="180104 Furniture Refinisher, 3.78L:42.00"> 3.78L - 42.00 </option>''',
 '''1801us''':'''<option value=":0.00" selected> ---Select Size--- </option>
-	<option value="180125 Furniture Refinisher, &frac12 pint:5.50"> &frac12 pint - 5.50 </option>
+	<option value="180125 Furniture Refinisher, &frac12; pint:5.50"> &frac12; pint - 5.50 </option>
 	<option value="180101 Furniture Refinisher, quart:13.00"> quart - 13.00 </option>''',
 
 '''1802can''':'''<option value=":0.00" selected> ---Select Size--- </option>
@@ -204,12 +204,12 @@ forms = {
 	<option value="180201 Tung Oil, 1L:16.00"> 1L - 16.00 </option>
 	<option value="180204 Tung Oil, 3.78L:55.00"> 3.78L - 55.00 </option>''',
 '''1802us''':'''<option value=":0.00" selected> ---Select Size--- </option>
-	<option value="180225 Tung Oil, &frac12 pint:7.00"> &frac12 pint - 7.00 </option>
+	<option value="180225 Tung Oil, &frac12; pint:7.00"> &frac12; pint - 7.00 </option>
 	<option value="180250 Tung Oil, pint:10.00"> pint - 10.00 </option>
 	<option value="180201 Tung Oil, quart:16.00"> quart - 16.00 </option>''',
 
 '''1803us''':'''<option value=":0.00"> ---Select Size--- </option>
-	<option value="180325 Lemon Oil, &frac12 pint:5.50"> &frac12 pint - 5.50 </option>
+	<option value="180325 Lemon Oil, &frac12; pint:5.50"> &frac12; pint - 5.50 </option>
 	<option value="180350 Lemon OIl, pint:7.00"> pint - 7.00 </option>''',
 '''1803can''':'''<option value=":0.00"> ---Select Size--- </option>
 	<option value="180325 Lemon Oil, 250mL:5.50"> 250mL - 5.50 </option>
@@ -219,14 +219,14 @@ forms = {
 	<option value="180425 Furniture Cleaner, 250mL:5.50"> 250mL - 5.50 </option>
 	<option value="180450 Furniture Cleaner, 500mL:7.00"> 500mL - 7.00 </option>''',
 '''1804us''':'''<option value=":0.00"> ---Select Size--- </option>
-	<option value="180425 Furniture Cleaner, &frac12 pint:5.50"> &frac12 pint - 5.50 </option>
+	<option value="180425 Furniture Cleaner, &frac12; pint:5.50"> &frac12; pint - 5.50 </option>
 	<option value="180450 Furniture Cleaner, pint:7.00"> pint - 7.00 </option>''',
 
 '''1805can''':'''<option value=":0.00"> ---Select Size--- </option>
 	<option value="180525 Antique Paste Varnish, 250mL:9.00"> 250mL - 9.00 </option>
 	<option value="180501 Antique Paste Varnish, 1L:19.00"> 1L - 19.00 </option>''',
 '''1805us''':'''<option value=":0.00"> ---Select Size--- </option>
-	<option value="180525 Antique Paste Varnish, &frac12 pint:9.00"> &frac12 pint - 9.00 </option>
+	<option value="180525 Antique Paste Varnish, &frac12; pint:9.00"> &frac12; pint - 9.00 </option>
 	<option value="180501 Antique Paste Varnish, quart:19.00"> quart - 19.00 </option>''',
 
 '''1806can''':'''<option value=":0.00" selected> ---Select Size--- </option>
@@ -243,7 +243,7 @@ forms = {
 	<option value="180750 Tung&#x27,n Teak Oil, 500mL:10.50"> 500mL - 10.50 </option>
 	<option value="180701 Tung&#x27,n Teak Oil, 1L:17.00"> 1L - 17.00 </option>''',
 '''1807us''':'''<option value=":0.00"> ---Select Size--- </option>
-	<option value="180725 Tung&#x27,n Teak Oil, &frac12 pint:7.50"> &frac12 pint - 7.50 </option>
+	<option value="180725 Tung&#x27,n Teak Oil, &frac12; pint:7.50"> &frac12; pint - 7.50 </option>
 	<option value="180750 Tung&#x27,n Teak Oil, pint:10.50"> pint - 10.50 </option>
 	<option value="180701 Tung&#x27,n Teak Oil, quart:17.00"> quart - 17.00 </option>''',
 
