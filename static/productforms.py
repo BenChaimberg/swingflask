@@ -4,6 +4,7 @@ forms = {
 '''1201us''':'''<option value=":0.00" selected> ----Select Size---- </option>
 	<option value="1201 Chair-Loc:5.50"> Chair-Loc - 5.50 </option>''',
 
+
 '''1300can''':'''<option value=":0.00" selected> ----Select Size---- </option>
 	<option value="130002 Maple Scraper, 2 in.:5.00"> 2 in. - 5.00 </option>
 	<option value="130003 Maple Scraper, 3 in.:6.50"> 3 in. - 6.50 </option>''',
@@ -53,6 +54,7 @@ forms = {
 '''1316us''':'''<option value=":0.00" selected> ----------Select Item---------- </option>
 	<option value="131601 Staining/Mixing Essentials:9.00"> Staining/Mixing Essentials - 9.00 </option>''',
 
+
 '''1418can''':'''<option value=":0.00" selected> -------Select  Size & Sheen-------- </option>
 	<option value="141725 Aqua Varnish, Semi-Gloss - 250mL:10.00"> Semi-Gloss (250mL) - 10.00 </option>
 	<option value="141825 Aqua Varnish, Gloss - 250mL:10.00"> Gloss (250mL) - 10.00 </option>
@@ -81,6 +83,13 @@ forms = {
 	<option value="141704 Aqua Varnish, Semi-Gloss - gallon:60.00"> Semi-Gloss (gallon) - 60.00 </option>
 	<option value="141804 Aqua Varnish, Gloss - gallon:60.00"> Gloss (gallon) - 60.00 </option>
 	<option value="141904 Aqua Varnish, Satin - gallon:60.00"> Satin (gallon) - 60.00 </option>''',
+
+
+'1518can':'''''',
+'1518us':'''''',
+'1527can':'''''',
+'1527us':'''''',
+
 
 '''1555can''':'''<option value=":0.00" selected> -----------Select Format &amp, Size----------- </option>
 	<option value="155525 Nu-Lustre-55, 236mL:14.00"> Nu-Lustre-55 236mL - 14.00 </option>
@@ -114,6 +123,10 @@ forms = {
 	<option value=":0.00">_____________________________________________</option>
 	<option value=":0.00"></option>
 	<option value="152701 Nu-Lustre-27 Brush-On (UV-STABLE) 710mL:59.00"> Nu-Lustre Brush-On (UV-STABLE) 710mL - 59.00 </option>''',
+'1557can':'''''',
+'1557us':'''''',
+'1566can':'''''',
+'1566us':'''''',
 
 
 '''1600can''':'''<option value=":0.00" selected> ------Select Size------ </option>
@@ -155,6 +168,15 @@ forms = {
 	<option value="160720 Antiquax Silver Polish,200mL:10.00">Silver Polish - 200mL - 10.00 </option>
 	<option value="160820 Antiquax Silver Service,100mL:15.00">Silver Service - 100mL - 15.00 </option>
 	<option value="160820 Antiquax Silver Plate,100mL:20.00">Silver Plate - 100mL - 20.00 </option>''',
+
+
+'1700can':'''''',
+'1700us':'''''',
+'1702can':'''''',
+'1702us':'''''',
+'1706can':'''''',
+'1706us':'''''',
+
 
 '''1800can''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="180099 Furniture Stripper, Aerosol:6.00"> Aerosol - 6.00 </option>
@@ -305,10 +327,53 @@ forms = {
 	<option value="182401 Bio DeGluer, quart:14.00"> quart - 14.00 </option>
 	<option value="182404 Bio DeGluer, gallon:44.00"> gallon - 44.00 </option>''',
 
+
+'1890can':'''''',
+'1890us':'''''',
+
+
+'1900can':'''''',
+'1900us':'''''',
+
+
+'2100can':'''''',
+'2100us':'''''',
+
 '''2101us''':'''<option value=":0.00" selected> ----------Select Size---------- </option>
 	<option value="210125 Terra Nova Cream Polish, 250mL:4.50"> 250mL - 4.50 </option>''',
 '''2101can''':'''<option value=":0.00" selected> ----------Select Size---------- </option>
 	<option value="210125 Terra Nova Cream Polish, 8 ounce:4.50"> 8 ounce - 4.50 </option>''',
+'2103can':'''''',
+'2103us':'''''',
+'2103can':'''''',
+'2103us':'''''',
+'2104can':'''''',
+'2104us':'''''',
+
+'2140can':'''''',
+'2140us':'''''',
+'2142can':'''''',
+'2142us':'''''',
+'2143can':'''''',
+'2143us':'''''',
+'2146can':'''''',
+'2146us':'''''',
+'2147can':'''''',
+'2147us':'''''',
+
+'2705can':'''''',
+'2705us':'''''',
+'2706can':'''''',
+'2706us':'''''',
+'2707can':'''''',
+'2707us':'''''',
+'2711can':'''''',
+'2711us':'''''',
+'2752can':'''''',
+'2752us':'''''',
+'2760can':'''''',
+'2760us':'''''',
+
 
 '''3100can''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="310001 Prime-It, 1L:11.00"> 1L - 11.00 </option>
@@ -331,6 +396,9 @@ forms = {
 '''3133us''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="313301 Prime-It Plus,  quart:19.00"> quart - 19.00 </option>
 	<option value="313304 Prime-It Plus, gallon:52.00"> gallon - 52.00 </option>''',
+'3150can':'''''',
+'3150us':'''''',
+
 
 '''3200can''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="320025 Super DeGooper, 250mL:5.00"> 250mL - 5.00 </option>
@@ -338,6 +406,17 @@ forms = {
 '''3200us''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="320025 Super DeGooper, pint:5.00"> pint - 5.00 </option>
 	<option value="320001 Super DeGooper, quart:15.00"> quart - 15.00 </option>''',
+'3207can':'''''',
+'3207us':'''''',
+'3208can':'''''',
+'3208us':'''''',
+'3211can':'''''',
+'3211us':'''''',
+'3220can':'''''',
+'3220us':'''''',
+'3230can':'''''',
+'3230us':'''''',
+
 
 '''400can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
@@ -468,6 +547,8 @@ forms = {
 	<option value="43525 Aqua Wood Stain, Cobalt (8 ounce):9.00"> Cobalt 435 (8 ounce) - 9.00 </option>
 	<option value="43625 Aqua Wood Stain, Blueberry (8 ounce):9.00"> Blueberry 436 (8 ounce) - 9.00 </option>''',
 
+'''705can''':'''''',
+'''705us''':'''''',
 '''709can''':'''
 	<option value=":0.00" selected> ---------Select Colour/Size--------- </option>
 	<option value="70925 Fine Wood Stain, Natural (250mL):7.00"> Natural 709 (250 mL) - 7.00 </option>
@@ -682,4 +763,18 @@ forms = {
 	<option value="78901 Stain&apos;n Varnish, Steel Blue (quart):20.00"> Steel Blue 789 (quart) - 20.00 </option>
 	<option value="79001 Stain&apos;n Varnish, Satin Black (quart):20.00"> Satin Black 790 (quart) - 20.00 </option>
 	<option value="79101 Stain&apos;n Varnish, Black Cherry (quart):20.00"> Black Cherry 791 (quart) - 20.00 </option>''',
+
+'8100can':'''''',
+'8100us':'''''',
+'8172can':'''''',
+'8172us':'''''',
+'8200can':'''''',
+'8200us':'''''',
+
+'9000can':'''''',
+'9000us':'''''',
+'9001can':'''''',
+'9001us':'''''',
+'9008can':'''''',
+'9008us':''''''
 }
