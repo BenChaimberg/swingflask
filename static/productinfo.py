@@ -59,18 +59,18 @@ info = {
 '2146':[],
 '2147':[],
 
-'2705':['11 litre (quart)', '6'],
-'2706':['1 litre (1 quart)', '12', '3.78 litre (gallon)', '2'],
+'2705':['1 litre (1 quart)', '6'],
+'2706':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
 '2711':[],
 '2752':[],
-'2760':['11 litre (quart)', '12', '3.78 litre(gallon)', '2'],
+'2760':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
 
 '3100':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
 '3107':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
 '3133':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
-'3150':['60 mL (2 oz)', '24', '250 mL (8 oz)', '12'],
+'3150':['60 mL (2 oz.)', '24', '250 mL (8 oz.)', '12'],
 
-'3200':['125 mL (4oz.) CARDED', '12', '250 mL (&frac12; pint)', '12', '1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
+'3200':['125 mL (4 oz.) CARDED', '12', '250 mL (&frac12; pint)', '12', '1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
 '3207':[],
 '3208':[],
 '3211':[],
