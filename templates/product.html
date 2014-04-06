@@ -122,11 +122,13 @@
 	<div id="switch" style="background:#eee;padding-top:24px;padding-left:5px;padding-right:5px;padding-bottom:5px;border:1px solid #000000;position:absolute;top:0px;width:97.3%;">
 		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
 		<div class="stuff" style="display:none;">
-		<!--<div style="width:50%;position:absolute;left:0;top:0;text-align:left;font-weight:bold">
-		{% for item in product.info2: %}
-			&#8226;{{ item | safe }}<br />
-		{% endfor %}
-		</div>-->
+			<div style="position:relative;right:5px;top:5px;width:50%;text-align:left;font-weight:bold;float:right;">
+				<ul>
+				{% for item in product.info2: %}
+					<li>{{ item | safe }}</li>
+				{% endfor %}
+				</ul>
+			</div>
 			<div id="infotable" style="position:relative;left:5px;top:5px;width:50%;padding-bottom:5px;">
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
