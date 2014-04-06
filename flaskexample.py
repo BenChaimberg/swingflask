@@ -92,6 +92,7 @@ def product(productid):
 															'text':producttext.text[productid],
 															'dir':productdir.dir[productid],
 															'info':productinfo.info[productid],
+															'info2':productinfo.info2[productid],
 															'demo':productdemo.demo[productid],
 															'canforms':productforms.forms[productid + 'can'],
 															'usforms':productforms.forms[productid + 'us'],
