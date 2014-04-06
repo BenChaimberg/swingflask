@@ -43,7 +43,7 @@ title = {
 '1823':'Swing Paints Circa 1850 Bare Concrete',
 '1824':'Swing Paints Circa 1850 Bio DeGluer',
 
-'1890':'Swing Paints Professionel Remover',
+'1897':'Swing Paints Professional Removers',
 
 '1900':'Swing Paints Circa 1850 Stripping for Dummies',
 

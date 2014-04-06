@@ -328,8 +328,8 @@ forms = {
 	<option value="182404 Bio DeGluer, gallon:44.00"> gallon - 44.00 </option>''',
 
 
-'1890can':'''''',
-'1890us':'''''',
+'1897can':'''''',
+'1897us':'''''',
 
 
 '1900can':'''''',
