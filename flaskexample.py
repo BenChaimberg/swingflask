@@ -86,21 +86,19 @@ def product(productid):
 		else: abort(404)
 	else:
 		if producttitle.title.get(productid):
-			if productforms.forms[productid + 'can']:
-				return render_template('product.html',product={
-																'id':productid,
-																'title':producttitle.title[productid],
-																'text':producttext.text[productid],
-																'dir':productdir.dir[productid],
-																'info':productinfo.info[productid],
-																'demo':productdemo.demo[productid],
-																'canforms':productforms.forms[productid + 'can'],
-																'usforms':productforms.forms[productid + 'us'],
-																'category':categoryproducts.products,
-																'categoryimg':categoryimg.img,
-																'categorytitle':categorytitle.title
-															})
-			else: abort(403)
+			return render_template('product.html',product={
+															'id':productid,
+															'title':producttitle.title[productid],
+															'text':producttext.text[productid],
+															'dir':productdir.dir[productid],
+															'info':productinfo.info[productid],
+															'demo':productdemo.demo[productid],
+															'canforms':productforms.forms[productid + 'can'],
+															'usforms':productforms.forms[productid + 'us'],
+															'category':categoryproducts.products,
+															'categoryimg':categoryimg.img,
+															'categorytitle':categorytitle.title
+														})
 		else: abort(404)
 
 @app.route('/category/<categoryid>')

@@ -88,6 +88,7 @@
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
 {% block category %}
+
 <img src="{{ url_for('static', filename='images/%s' % product.categoryimg[product_category(product.category,product.id)]) }}" alt="{{ product.categorytitle[product_category(product.category,product.id)] }}" width=590 height=29>
 {% endblock %}
 {% block content %}
@@ -105,7 +106,9 @@
 </div>
 <script type='text/javascript'>
 	$(window).load(function(){
-		var hgt = $("#image").height();
+		var imghgt = $("#image").height();
+		var txthgt = $("#text").height();
+		var hgt = Math.max(imghgt,txthgt);
 		$("#content").css('height', hgt+10);
 	});
 </script>
@@ -117,13 +120,13 @@
 		<a class="hidden label" href="#">Demonstrations</a>
 	</div>
 	<div id="switch" style="background:#eee;padding-top:24px;padding-left:5px;padding-right:5px;padding-bottom:5px;border:1px solid #000000;position:absolute;top:0px;width:97.3%;">
+		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
+		<div class="stuff" style="display:none;">
 		<!--<div style="width:50%;position:absolute;left:0;top:0;text-align:left;font-weight:bold">
 		{% for item in product.info2: %}
 			&#8226;{{ item | safe }}<br />
 		{% endfor %}
 		</div>-->
-		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
-		<div class="stuff" style="display:none;">
 			<div id="infotable" style="position:relative;left:5px;top:5px;width:50%;padding-bottom:5px;">
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
@@ -161,11 +164,19 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
+					{% if product.demo %}
 					<select style="font-size:12px" name="productpr">
-						{{ product.canforms | safe }}
+					{{ product.canforms | safe }}
 					</select>
 					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart">
+					{% else %}
+					<select style="font-size:12px" name="productpr" disabled>
+						<option value=":0.00"> Not Available for Purchase </option>
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to Canada cart" disabled>
+					{% endif %}
 				</form>
 			</div>
 			<div class="buybutt">
@@ -175,11 +186,19 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
+					{% if product.demo %}
 					<select style="font-size:12px" name="productpr">
-						{{ product.usforms | safe }}
+					{{ product.usforms | safe }}
 					</select>
 					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart">
+					{% else %}
+					<select style="font-size:12px" name="productpr" disabled>
+						<option value=":0.00"> Not Available for Purchase </option>
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to US cart" disabled>
+					{% endif %}
 				</form>
 			</div>
 		</div>
