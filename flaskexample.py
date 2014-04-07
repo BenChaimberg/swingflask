@@ -1,90 +1,89 @@
 from flask import Flask, render_template, url_for, request, abort
-from jinja2 import Environment
-from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts
-import logging
-from logging.handlers import RotatingFileHandler
+from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
+#import logging
+#from logging.handlers import RotatingFileHandler
 
-app = Flask(__name__)
+app = Flask(__name__) #created app as instance of Flask
 
 @app.context_processor
-def utility_processor():
-	def product_category(category,id):
-		for item in category:
-			for item2 in category[item]:
-				if item2 == id:
-					return item
-				if (id == '1818' or id == '1819') and item2 == '1817':
-					return item
-	return dict(product_category=product_category)
+def utility_processor(): #creates template context processor function
+	def product_category(category,id): #creates specific category for product function, takes arguments of all products in all categories and product id
+		for item in category: #for every category in categories
+			for item2 in category[item]: #for every product in category
+				if item2 == id: #if product is equal to productid
+					return item #return category
+				if (id == '1818' or id == '1819') and item2 == '1817': #if productid is 1818 or 1819, not in list, so uses 1817 instead
+					return item #return category
+	return dict(product_category=product_category) #returns function result
 
 @app.errorhandler(404)
-def notfound(e):
-    return render_template('404.html'), 404
+def notfound(e): #if HTTP returns 404 error
+    return render_template('404.html'), 404 #render 404 template and return 404 error
     
 @app.errorhandler(500)
-def apperror(e):
-    return render_template('500.html'), 500
+def apperror(e): #if HTTP returns 500 error
+    return render_template('500.html'), 500 #render 500 template and return 500 error
     
 @app.errorhandler(403)
-def forbidden(e):
-    return render_template('403.html'), 403
+def forbidden(e): #if HTTP returns 403 error
+    return render_template('403.html'), 403 #render 403 template and return 403 error
 
 @app.route('/')
 @app.route('/home')
-def index():
-	if request.query_string == 'french':
-		return render_template('frenchmain.html')
-	else:
-		return render_template('main.html')
+def index(): #if URL is at root or at home
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchmain.html') #render french home page
+	else: #if URL does not end with ?french
+		return render_template('main.html') #return english home page
 
 @app.route('/locations')
-def locations():
-	if request.query_string == 'french':
-		return render_template('frenchlocations.html')
-	else:
-		return render_template('locations.html')
+def locations(): #if URL is at locations
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchlocations.html') #render french locations page
+	else: #if URL does not end with ?french
+		return render_template('locations.html') #return english locations page
 
 @app.route('/faq')
-def faq():
-	if request.query_string == 'french':
-		return render_template('frenchfaq.html')
-	else:
-		return render_template('faq.html')
+def faq(): #if URL is at faq
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchfaq.html') #render french locations page
+	else: #if URL does not end with ?french
+		return render_template('faq.html') #return english locations page
 		
 @app.route('/contact')
-def contact():
-	if request.query_string == 'french':
-		return render_template('frenchcontact.html')
-	else:
-		return render_template('contact.html')
+def contact(): #if URL is at contact
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchcontact.html') #render french contact page
+	else: #if URL does not end with ?french
+		return render_template('contact.html') #return english contact page
 
 @app.route('/marketing')
-def marketing():
-	if request.query_string == 'french':
-		return render_template('frenchmarketing.html')
-	else:
-		return render_template('marketing.html')
+def marketing(): #if URL is at marketing
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchmarketing.html') #render french marketing page
+	else: #if URL does not end with ?french
+		return render_template('marketing.html') #return english marketing page
 
 @app.route('/about')
-def about():
-	if request.query_string == 'french':
-		return render_template('frenchabout.html')
-	else:
-		return render_template('about.html')
+def about(): #if URL is at about
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchabout.html') #render french about page
+	else: #if URL does not end with ?french
+		return render_template('about.html') #return english about page
 
 @app.route('/product/<productid>')
-def product(productid):
-	if request.query_string == 'french':
-		if frenchproducttitle.title.get(productid):
-			return render_template('frenchproduct.html', product={
-																'id':productid,
-																'title':frenchproducttitle.title[productid],
-																'text':frenchproducttext.text[productid],
-																'dir':frenchproductdir.dir[productid],
-																'info':frenchproductinfo.info[productid]
+def product(productid): #if URL is at /product/####
+	if request.query_string == 'french': #if URL ends with ?french
+		if frenchproducttitle.title.get(productid): #if product exists in list of product titles (should contain all products)
+			return render_template('frenchproduct.html', product={ #renders french product page with the following parameters
+																'id':productid, #product.id = productid
+																'title':frenchproducttitle.title[productid], #product.title = string with product name
+																'text':frenchproducttext.text[productid], #product.text = string with product text
+																'dir':frenchproductdir.dir[productid], #product.dir = string with product directions
+																'info':frenchproductinfo.info[productid] #product.info = string with product info (table)
 															})
-		else: abort(404)
-	else:
+		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
+	else: #if URL does not end with ?french
 		if producttitle.title.get(productid):
 			return render_template('product.html',product={
 															'id':productid,
@@ -125,5 +124,5 @@ def category(categoryid):
 															})
 		else: abort(404)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == '__main__': #only run if executed directly from interpreter
+    app.run(debug=True) #run server with application (debug on, must be turned off for deployment
