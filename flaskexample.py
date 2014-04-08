@@ -35,6 +35,7 @@ def submit():
 		friendemail = form.friendemail.data
 		msg = Message()
 		msg.recipients = [friendemail]
+		msg.bcc = ['echaimberg@swingpaints.com']
 		msg.sender = (visitorname, visitoremail)
 		msg.subject = "Check out Swing Paints!"
 		msg.html = "Hey %s,<br />Take a look at this a pretty cool wood finishing company, Swing Paints. Find them online at <a href='swingpaints.herokuapp.com'>swingpaints.com</a>." % (friendname)
