@@ -1,9 +1,46 @@
 from flask import Flask, render_template, url_for, request, abort
+from flask.ext.mail import Mail, Message
+from flask_wtf import Form, validators
+from wtforms.fields import TextField, TextAreaField, SubmitField
+import wtforms
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
 
+MAIL_SERVER='mail.swingpaints.com'
+MAIL_PORT=25
+MAIL_USE_TLS = False
+MAIL_USE_SSL= False
+MAIL_USERNAME = 'bchaimberg@swingpaints.com'
+MAIL_PASSWORD = 'webmaster'
+
 app = Flask(__name__) #created app as instance of Flask
+app.config.from_object(__name__)
+mail = Mail(app)
+app.secret_key = 'blahblahblah' #change later to random
+
+class MyForm(Form):
+    visitorname = TextField("Your name:", [wtforms.validators.Required('Please enter your name')])
+    visitoremail = TextField("Your email:", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
+    friendname = TextField("Your friend's name:", [wtforms.validators.Required('Please enter your friend&apos;s name')])
+    friendemail = TextField("Your friend's email:", [wtforms.validators.Required('Please enter your friend&apos;s email'), wtforms.validators.Email()])
+
+@app.route('/submit', methods=('GET', 'POST'))
+def submit():
+	form = MyForm()
+	if form.validate_on_submit():
+		visitorname = form.visitorname.data
+		visitoremail = form.visitoremail.data
+		friendname = form.friendname.data
+		friendemail = form.friendemail.data
+		msg = Message()
+		msg.recipients = [friendemail]
+		msg.sender = ("Swing Paints", "advert@swingpaints.com")
+		msg.subject = "%s says to check out Swing Paints!" % (visitorname)
+		msg.html = "%s,<br />Your friend %s wants you to take a look at this a pretty cool company. Find them <a href='swingpaints.herokuapp.com'>here</a>." % (friendname,visitorname)
+		mail.send(msg)
+		return "SUCCESS!"
+    return render_template('submit.html', form=form)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
