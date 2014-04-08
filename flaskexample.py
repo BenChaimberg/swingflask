@@ -40,7 +40,7 @@ def submit():
 		msg.html = "%s,<br />Your friend %s wants you to take a look at this a pretty cool company. Find them <a href='swingpaints.herokuapp.com'>here</a>." % (friendname,visitorname)
 		mail.send(msg)
 		return "SUCCESS!"
-    return render_template('submit.html', form=form)
+	return render_template('submit.html', form=form)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
