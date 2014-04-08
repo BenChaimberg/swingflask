@@ -35,9 +35,9 @@ def submit():
 		friendemail = form.friendemail.data
 		msg = Message()
 		msg.recipients = [friendemail]
-		msg.sender = ("Swing Paints", "advert@swingpaints.com")
-		msg.subject = "%s says to check out Swing Paints!" % (visitorname)
-		msg.html = "%s,<br />Your friend %s wants you to take a look at this a pretty cool company. Find them <a href='swingpaints.herokuapp.com'>here</a>." % (friendname,visitorname)
+		msg.sender = (visitorname, visitoremail)
+		msg.subject = "Check out Swing Paints!"
+		msg.html = "Hey %s,<br />Take a look at this a pretty cool wood finishing company, Swing Paints. Find them online at <a href='swingpaints.herokuapp.com'>swingpaints.com</a>." % (friendname)
 		mail.send(msg)
 		return "SUCCESS!"
 	return render_template('submit.html', form=form)
