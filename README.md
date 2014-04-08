@@ -9,6 +9,6 @@ $ cd /path/to/.../flaskexample-master
 $ sudo easy_install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
-$ pip install flask
+$ pip install flask Flask-Mail Flask-WTF
 $ python flaskexample.py
 ```
