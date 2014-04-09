@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}{{ super() }}<style>p{text-align:center;}label{float:left;}input{float:right;}</style>{% endblock %}
+{% block title %}Swing Paints - Refer a Friend{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
+{% block content %}
+<p>Know anyone who would enjoy visiting our Website?</p>
+<p>Please enter the information requested below and your friend will receive an email containing a link which leads directly to the Swing Paints Website.</p>
+<p>Don&apos;t worry, we will NEVER share your e-mail address with any other company.</p>
+<div style="width:50%;margin:0 auto;"><form method="POST" action="/refer">
+    {{ form.hidden_tag() }}
+    <div style="clear:right;">{{ form.visitorname.label }} {{ form.visitorname(size=20) }} {% for error in form.visitorname.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.visitoremail.label }} {{ form.visitoremail(size=20) }} {% for error in form.visitoremail.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.friendname.label }} {{ form.friendname(size=20) }} {% for error in form.friendname.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.friendemail.label }} {{ form.friendemail(size=20) }} {% for error in form.friendemail.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;"><input type="submit" value="Submit"><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
+</form></div>
+{% endblock %}

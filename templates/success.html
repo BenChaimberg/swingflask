@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<style>
+	p { text-align:center; }
+</style>
+<script>
+	var i = 1;
+	
+	function countdown() {
+		window.clearTimeout(timeoutID);
+		$('#countdown').html(5-i);
+		if (i >= 5) {
+			closeWindow();
+		} else {
+			i++;
+			countdownTimer();
+		}
+	}
+	
+	function closeWindow() {
+		window.open("", "_self", "")
+		window.close();
+	}
+	
+	function countdownTimer() {
+		timeoutID = window.setTimeout(countdown, 1000);
+	}
+	
+	$(document).ready(function(){
+		countdownTimer();
+	});
+</script>
+{% endblock %}
+{% block title %}Swing Paints - Refer a Friend{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
+{% block content %}
+<p>Thank you for recommending Swing Paints.</p>
+<p>We hope the friend you referred will enjoy visiting our website.</p>
+<p>Window closes in:<span id="countdown">5</span></p>
+{% endblock %}
