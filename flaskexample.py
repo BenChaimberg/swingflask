@@ -37,8 +37,8 @@ def refer():
 		msg.recipients = [friendemail]
 		msg.bcc = ['echaimberg@swingpaints.com']
 		msg.sender = (visitorname, visitoremail)
-		msg.subject = "Check out Swing Paints!"
-		msg.html = "Hey %s,<br />Take a look at this a pretty cool wood finishing company, Swing Paints. Find them online at <a href='http://swingpaints.herokuapp.com'>http://swingpaints.herokuapp.com</a>." % (friendname)
+		msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
+		msg.html = "%s,<br />Please forgive the intrusion but, as I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, I thought this might be something that you'd be interested in too. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
 		mail.send(msg)
 		return render_template('success.html')
 	return render_template('refer.html', form=form)
