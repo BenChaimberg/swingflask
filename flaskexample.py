@@ -25,8 +25,8 @@ class MyForm(Form):
     friendname = TextField("Your friend's name:", [wtforms.validators.Required('Please enter your friend&apos;s name')])
     friendemail = TextField("Your friend's email:", [wtforms.validators.Required('Please enter your friend&apos;s email'), wtforms.validators.Email()])
 
-@app.route('/submit', methods=('GET', 'POST'))
-def submit():
+@app.route('/refer', methods=('GET', 'POST'))
+def refer():
 	form = MyForm()
 	if form.validate_on_submit():
 		visitorname = form.visitorname.data
@@ -35,13 +35,13 @@ def submit():
 		friendemail = form.friendemail.data
 		msg = Message()
 		msg.recipients = [friendemail]
-		msg.bcc = ['echaimberg@swingpaints.com']
+		msg.bcc = ['bchaimberg@swingpaints.com']
 		msg.sender = (visitorname, visitoremail)
 		msg.subject = "Check out Swing Paints!"
 		msg.html = "Hey %s,<br />Take a look at this a pretty cool wood finishing company, Swing Paints. Find them online at <a href='swingpaints.herokuapp.com'>swingpaints.com</a>." % (friendname)
 		mail.send(msg)
-		return "SUCCESS!"
-	return render_template('submit.html', form=form)
+		return render_template('success.html')
+	return render_template('refer.html', form=form)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
