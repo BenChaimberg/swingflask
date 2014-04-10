@@ -3,9 +3,15 @@ from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators
 from wtforms.fields import TextField, TextAreaField, SubmitField
 import wtforms
+from werkzeug.routing import BaseConverter
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
+
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
 
 MAIL_SERVER='mail.swingpaints.com'
 MAIL_PORT=25
@@ -18,30 +24,13 @@ app = Flask(__name__) #created app as instance of Flask
 app.config.from_object(__name__)
 mail = Mail(app)
 app.secret_key = 'blahblahblah' #change later to random
+app.url_map.converters['regex'] = RegexConverter
 
 class MyForm(Form):
     visitorname = TextField("Your name:", [wtforms.validators.Required('Please enter your name')])
     visitoremail = TextField("Your email:", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
     friendname = TextField("Your friend's name:", [wtforms.validators.Required('Please enter your friend&apos;s name')])
     friendemail = TextField("Your friend's email:", [wtforms.validators.Required('Please enter your friend&apos;s email'), wtforms.validators.Email()])
-
-@app.route('/refer', methods=('GET', 'POST'))
-def refer():
-	form = MyForm()
-	if form.validate_on_submit():
-		visitorname = form.visitorname.data
-		visitoremail = form.visitoremail.data
-		friendname = form.friendname.data
-		friendemail = form.friendemail.data
-		msg = Message()
-		msg.recipients = [friendemail]
-		msg.bcc = ['echaimberg@swingpaints.com']
-		msg.sender = (visitorname, visitoremail)
-		msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
-		msg.html = "%s,<br />Please forgive the intrusion but, as I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, I thought this might be something that you'd be interested in too. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
-		mail.send(msg)
-		return render_template('success.html')
-	return render_template('refer.html', form=form)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
@@ -65,6 +54,10 @@ def apperror(e): #if HTTP returns 500 error
 @app.errorhandler(403)
 def forbidden(e): #if HTTP returns 403 error
     return render_template('403.html'), 403 #render 403 template and return 403 error
+
+@app.route('/static/<regex("[a-z_.-]*.py[ocd]{0,1}"):uid>')
+def error(uid):
+	abort(404)
 
 @app.route('/')
 @app.route('/home')
@@ -108,6 +101,24 @@ def about(): #if URL is at about
 		return render_template('frenchabout.html') #render french about page
 	else: #if URL does not end with ?french
 		return render_template('about.html') #return english about page
+
+@app.route('/refer', methods=('GET', 'POST'))
+def refer():
+	form = MyForm()
+	if form.validate_on_submit():
+		visitorname = form.visitorname.data
+		visitoremail = form.visitoremail.data
+		friendname = form.friendname.data
+		friendemail = form.friendemail.data
+		msg = Message()
+		msg.recipients = [friendemail]
+		msg.bcc = ['echaimberg@swingpaints.com']
+		msg.sender = (visitorname, visitoremail)
+		msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
+		msg.html = "%s,<br />Please forgive the intrusion but, as I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, I thought this might be something that you'd be interested in too. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
+		mail.send(msg)
+		return render_template('success.html')
+	return render_template('refer.html', form=form)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
