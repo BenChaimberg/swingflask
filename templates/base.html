@@ -22,15 +22,17 @@
 			(document, 'script', 'facebook-jssdk'));
 		</script>-->
 		<div id="header">
-		{% block header %}
-			<a href="/about">ABOUT SWING PAINTS</a> &#x7c;
-			<a href="/locations">WHERE TO BUY</a> &#x7c;
-			<a href="/faq">FAQ</a> &#x7c;
-			<a href="/contact">CONTACTS</a> &#x7c;
-			<a href="/marketing">MARKETING AND SALES ASSISTANCE</a> &#x7c;
-			<b><a href="/home">HOME</a></b>
-			<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
-		{% endblock %}
+			<ul>
+			{% block header %}
+				<li><a href="/about">ABOUT SWING PAINTS</a></li></li>
+				<li><a href="/locations">WHERE TO BUY</a></li>
+				<li><a href="/faq">FAQ</a></li>
+				<li><a href="/contact">CONTACTS</a></li>
+				<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
+				<li><b><a href="/home">HOME</a></b></li>
+				<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
+			{% endblock %}
+			</ul>
 		</div>
 		<div id="sidebar">
 		{% block sidebar %}
@@ -53,11 +55,13 @@
 			{% block content %}{% endblock %}
 			</div>
 			<div id="footer">
-				<a href="/forum.asp" class="noscript">INTERACTIVE FORUM</a> |
-				<!--<a href="/coupon" class="noscript">SWING COUPONS</a> |-->
-				<a href="/newsletter" class="noscript" target="_BLANK">NEWSLETTER</a> |
-				<a href="/refer" class="noscript" target="_BLANK">REFER A FRIEND</a> |
-				<a href="/brochure" class="noscript">FREE BROCHURE</a>
+				<ul>
+					<li><a href="/forum.asp" class="noscript">INTERACTIVE FORUM</a></li>
+					<!--<li><a href="/coupon" class="noscript">SWING COUPONS</a></li>-->
+					<li><a href="/newsletter" class="noscript" target="_BLANK">NEWSLETTER</a></li>
+					<li><a href="/refer" class="noscript" target="_BLANK">REFER A FRIEND</a></li>
+					<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
+				</ul>
 				<div id="facebook">
 					<!--<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>-->
 				</div>
