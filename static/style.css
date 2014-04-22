@@ -8,6 +8,22 @@ a {
 	text-decoration:none;
 }
 p { text-align:justify; }
+#sidebar ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	text-align:center;
+}
+#sidebar li:before{
+	content:"\00b7";
+	margin: 0 78px;
+}
+#sidebar li:nth-child(3){
+	margin-top:-15px;
+}
+#sidebar li:nth-child(3):before{
+	content: "";
+}
 #header ul,#footer ul {
 	list-style: none;
 	padding: 0px;

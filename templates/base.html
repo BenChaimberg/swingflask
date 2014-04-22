@@ -7,24 +7,6 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
-				<style>
-#sidebar ul {
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
-	text-align:center;
-}
-#sidebar li:before{
-	content:"\00b7";
-	margin: 0 78px;
-}
-#sidebar li:nth-child(3){
-	margin-top:-15px;
-}
-#sidebar li:nth-child(3):before{
-	content: "";
-}
-		</style>
 	{% endblock %}
 	</head>
 	<body>
@@ -40,8 +22,8 @@
 			(document, 'script', 'facebook-jssdk'));
 		</script>-->
 		<div id="header">
+		{% block header %}
 			<ul>
-			{% block header %}
 				<li><a href="/about">ABOUT SWING PAINTS</a></li></li>
 				<li><a href="/locations">WHERE TO BUY</a></li>
 				<li><a href="/faq">FAQ</a></li>
@@ -49,23 +31,23 @@
 				<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
 				<li><b><a href="/home">HOME</a></b></li>
 				<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
-			{% endblock %}
 			</ul>
+		{% endblock %}
 		</div>
 		<div id="sidebar">
 		{% block sidebar %}
 			<ul>
-			<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
-			<li><i style="font-size:9px;color:#FFFF00"> NEW&nbsp;</i><a href="/category/nontoxic"> Non-Toxic Products</a></li>
-			<li><a href="/category/oils"> Finishing Oils</a></li>
-			<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
-			<li><a href="/category/removers"> Paint &amp; Varnish Removers</a></li>
-			<li><a href="/category/primer"> Paint &amp; Wallpaper Primers</a></li>
-			<li><a href="/category/special"> Specialty Paints &amp; Coatings</a></li>
-			<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
-			<li><a href="/category/stain"> Wood Stains &amp; Varnish Stains</a></li>
-			<li><a href="/category/accessories"> Accessories</a>
-		</ul>
+				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
+				<li><i style="font-size:9px;color:#FFFF00"> NEW&nbsp;</i><a href="/category/nontoxic"> Non-Toxic Products</a></li>
+				<li><a href="/category/oils"> Finishing Oils</a></li>
+				<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
+				<li><a href="/category/removers"> Paint &amp; Varnish Removers</a></li>
+				<li><a href="/category/primer"> Paint &amp; Wallpaper Primers</a></li>
+				<li><a href="/category/special"> Specialty Paints &amp; Coatings</a></li>
+				<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
+				<li><a href="/category/stain"> Wood Stains &amp; Varnish Stains</a></li>
+				<li><a href="/category/accessories"> Accessories</a>
+			</ul>
 		{% endblock %}
 		</div>
 		<div id="category">{% block category %}{% endblock %}</div>
