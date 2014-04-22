@@ -7,6 +7,24 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
+				<style>
+#sidebar ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	text-align:center;
+}
+#sidebar li:before{
+	content:"\00b7";
+	margin: 0 78px;
+}
+#sidebar li:nth-child(3){
+	margin-top:-15px;
+}
+#sidebar li:nth-child(3):before{
+	content: "";
+}
+		</style>
 	{% endblock %}
 	</head>
 	<body>
@@ -36,17 +54,18 @@
 		</div>
 		<div id="sidebar">
 		{% block sidebar %}
+			<ul>
 			<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
-			<i style="font-size:9;color:#FFFF00">NEW&nbsp;</i>
-			<a href="/category/nontoxic">Non-Toxic Products</a><br />&#183;<br />
-			<a href="/category/oils">Finishing Oils</a><br />&#183;<br />
-			<a href="/category/poly">Varnishes &amp; Polyurethanes</a><br />&#183;<br />
-			<a href="/category/removers">Paint &amp; Varnish Removers</a><br />&#183;<br />
-			<a href="/category/primer">Paint &amp; Wallpaper Primers</a><br />&#183;<br />
-			<a href="/category/special">Specialty Paints &amp; Coatings</a><br />&#183;<br />
-			<a href="/category/waxes">Waxes, Polishers &amp; Cleaners</a><br />&#183;<br />
-			<a href="/category/stain">Wood Stains &amp; Varnish Stains</a><br />&#183;<br />
-			<a href="/category/accessories">Accessories</a>
+			<li><i style="font-size:9px;color:#FFFF00"> NEW&nbsp;</i><a href="/category/nontoxic"> Non-Toxic Products</a></li>
+			<li><a href="/category/oils"> Finishing Oils</a></li>
+			<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
+			<li><a href="/category/removers"> Paint &amp; Varnish Removers</a></li>
+			<li><a href="/category/primer"> Paint &amp; Wallpaper Primers</a></li>
+			<li><a href="/category/special"> Specialty Paints &amp; Coatings</a></li>
+			<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
+			<li><a href="/category/stain"> Wood Stains &amp; Varnish Stains</a></li>
+			<li><a href="/category/accessories"> Accessories</a>
+		</ul>
 		{% endblock %}
 		</div>
 		<div id="category">{% block category %}{% endblock %}</div>
