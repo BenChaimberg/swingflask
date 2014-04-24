@@ -18,7 +18,7 @@
     <div style="clear:right;">{{ form.stateprov.label }} {{ form.stateprov }} {% for error in form.stateprov.errors %} {{ error | safe }} {% endfor %}</div>
     <div style="clear:right;">{{ form.zipcode.label }} {{ form.zipcode(size=20) }} {% for error in form.zipcode.errors %} {{ error | safe }} {% endfor %}</div>
     <div style="clear:right;">{{ form.country.label }} {{ form.country }} {% for error in form.country.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;"><input type="submit" value="Submit"><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
+    <div style="clear:right;"><input type="submit" value="Submit"></div>
     </div>
 </form>
 {% endblock %}
