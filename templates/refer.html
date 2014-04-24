@@ -8,10 +8,18 @@
 <p>Don&apos;t worry, we will NEVER share your e-mail address with any other company.</p>
 <div style="width:50%;margin:0 auto;"><form method="POST" action="/refer">
     {{ form.hidden_tag() }}
-    <div style="clear:right;">{{ form.visitorname.label }} {{ form.visitorname(size=20) }} {% for error in form.visitorname.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.visitoremail.label }} {{ form.visitoremail(size=20) }} {% for error in form.visitoremail.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.friendname.label }} {{ form.friendname(size=20) }} {% for error in form.friendname.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.friendemail.label }} {{ form.friendemail(size=20) }} {% for error in form.friendemail.errors %} {{ error | safe }} {% endfor %}</div>
+    {% for field in form %}
+    	{% if loop.index == 1 %}
+		{% else %}
+    <div style="clear:right;">
+    {{ field.label }}:
+    {{ field(size=20) }}
+    {% for error in field.errors %}
+    	{{ error | safe }}
+    {% endfor %}
+    </div>
+    	{% endif %}
+    {% endfor %}
     <div style="clear:right;"><input type="submit" value="Submit"><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
 </form></div>
 {% endblock %}
