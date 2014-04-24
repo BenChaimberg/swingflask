@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators
-from wtforms.fields import TextField, PasswordField
+from wtforms.fields import TextField, PasswordField, SelectField
 import wtforms
 from werkzeug.routing import BaseConverter
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
@@ -51,9 +51,9 @@ class BrochureForm(Form):
     email = TextField("E-mail:", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
     address = TextField("Address:", [wtforms.validators.Required('Please enter your address')])
     city = TextField("City:", [wtforms.validators.Required('Please enter your city')])
-    stateprov = TextField("State/Prov:", [wtforms.validators.Required('Please enter your state or province')])
+    stateprov = SelectField("State/Prov:", [wtforms.validators.Required('Please enter your state or province')], choices=[('',''),('Alberta','Alberta'),('British Columbia','British Columbia'),('Manitoba','Manitoba'),('New Brunswick','New Brunswick'),('Newfoundland and Labrador','Newfoundland and Labrador'),('Northwest Territories','Northwest Territories'),('Nova Scotia','Nova Scotia'),('Nunavut','Nunavut'),('Ontario','Ontario'),('Prince Edward Island','Prince Edward Island'),('Quebec','Quebec'),('Saskatchewan','Saskatchewan'),('Yukon Territory','Yukon Territory'),('','__________________'),('Alabama','Alabama'),('Alaska','Alaska'),('Arizona','Arizona'),('Arkansas','Arkansas'),('California','California'),('Colorado','Colorado'),('Connecticut','Connecticut'),('Delaware','Delaware'),('Florida','Florida'),('Georgia','Georgia'),('Hawaii','Hawaii'),('Idaho','Idaho'),('Illinois','Illinois'),('Indiana','Indiana'),('Iowa','Iowa'),('Kansas','Kansas'),('Kentucky','Kentucky'),('Louisiana','Louisiana'),('Maine','Maine'),('Maryland','Maryland'),('Massachusetts','Massachusetts'),('Michigan','Michigan'),('Minnesota','Minnesota'),('Mississippi','Mississippi'),('Missouri','Missouri'),('Montana','Montana'),('Nebraska','Nebraska'),('Nevada','Nevada'),('New Hampshire','New Hampshire'),('New Jersey','New Jersey'),('New Mexico','New Mexico'),('New York','New York'),('North Carolina','North Carolina'),('North Dakota','North Dakota'),('Ohio','Ohio'),('Oklahoma','Oklahoma'),('Oregon','Oregon'),('Pennsylvania','Pennsylvania'),('Rhode Island','Rhode Island'),('South Carolina','South Carolina'),('South Dakota','South Dakota'),('Tennessee','Tennessee'),('Texas','Texas'),('Utah','Utah'),('Vermont','Vermont'),('Virginia','Virginia'),('Washington','Washington'),('West Virginia','West Virginia'),('Wisconsin','Wisconsin'),('Wyoming','Wyoming')])
     zipcode = TextField("Zip/Postal Code:", [wtforms.validators.Required('Please enter your zip or postal code')])
-    country = TextField("Country:", [wtforms.validators.Required('Please enter your country')])
+    country = SelectField("Country:", [wtforms.validators.Required('Please enter your country')], choices=[('',''),('Canada','Canada'),('US','US')])
 
 class ReferForm(Form):
     visitorname = TextField("Your name:", [wtforms.validators.Required('Please enter your name')])
