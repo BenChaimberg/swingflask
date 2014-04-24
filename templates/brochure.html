@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block head %}{{ super() }}<style>label{float:left;}input{float:right;}</style>{% endblock %}
+{% block title %}Swing Paints - Free Brochure{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/free_brochure_top.png') }}" alt="Free Brochure Swing Paints" width=590 height=29>{% endblock %}
+{% block content %}
+<p>At Swing Paints, we know that refinishing is much easier than most people imagine, you just have to go about it one step at a time. But take a tip from us, a tip based on years of experience and know-how: a good start means a good finish.</p>
+<p>To ensure you get the best possible start, please send away for our FREE BROCHURE on Refinishing.</p>
+<p>Don't worry, we will NEVER share your e-mail address with any other company</p>
+<form method="POST" action="/brochure">
+{{ form.hidden_tag() }}
+	<div style="width:48%;float:left;">
+    <div style="clear:right;">{{ form.name.label }} {{ form.name(size=20) }} {% for error in form.name.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.email.label }} {{ form.email(size=20) }} {% for error in form.email.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.address.label }} {{ form.address(size=20) }} {% for error in form.address.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.city.label }} {{ form.city(size=20) }} {% for error in form.city.errors %} {{ error | safe }} {% endfor %}</div>
+    </div>
+	<div style="width:48%;float:right;">
+    <div style="clear:right;">{{ form.stateprov.label }} {{ form.stateprov(size=20) }} {% for error in form.stateprov.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.zipcode.label }} {{ form.zipcode(size=20) }} {% for error in form.zipcode.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;">{{ form.country.label }} {{ form.country(size=20) }} {% for error in form.country.errors %} {{ error | safe }} {% endfor %}</div>
+    <div style="clear:right;"><input type="submit" value="Submit"><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
+    </div>
+</form>
+{% endblock %}
