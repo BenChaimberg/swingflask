@@ -1,3 +1,4 @@
+import json,time
 from flask import Flask, render_template, url_for, request, abort
 from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators
@@ -26,7 +27,16 @@ mail = Mail(app)
 app.secret_key = 'blahblahblah' #change later to random
 app.url_map.converters['regex'] = RegexConverter
 
-class MyForm(Form):
+class BrochureForm(Form):
+    name = TextField("Name:", [wtforms.validators.Required('Please enter your name')])
+    email = TextField("E-mail:", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
+    address = TextField("Address:", [wtforms.validators.Required('Please enter your address')])
+    city = TextField("City:", [wtforms.validators.Required('Please enter your city')])
+    stateprov = TextField("State/Prov:", [wtforms.validators.Required('Please enter your state or province')])
+    zipcode = TextField("Zip/Postal Code:", [wtforms.validators.Required('Please enter your zip or postal code')])
+    country = TextField("Country:", [wtforms.validators.Required('Please enter your country')])
+
+class ReferForm(Form):
     visitorname = TextField("Your name:", [wtforms.validators.Required('Please enter your name')])
     visitoremail = TextField("Your email:", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
     friendname = TextField("Your friend's name:", [wtforms.validators.Required('Please enter your friend&apos;s name')])
@@ -104,7 +114,7 @@ def about(): #if URL is at about
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
-	form = MyForm()
+	form = ReferForm()
 	if form.validate_on_submit():
 		visitorname = form.visitorname.data
 		visitoremail = form.visitoremail.data
@@ -117,8 +127,32 @@ def refer():
 		msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
 		msg.html = "%s,<br />Please forgive the intrusion but, as I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, I thought this might be something that you'd be interested in too. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
 		mail.send(msg)
-		return render_template('success.html')
+		return render_template('refersuccess.html')
 	return render_template('refer.html', form=form)
+
+@app.route('/brochure', methods=('GET', 'POST'))
+def brochure():
+	form = BrochureForm()
+	if form.validate_on_submit():
+		with open('brochurelist', 'r') as file:
+			data = json.load(file)
+		i=0
+		for item in data:
+			i+=1
+		name = form.name.data
+		email = form.email.data
+		address = form.address.data
+		city = form.city.data
+		stateprov = form.stateprov.data
+		zipcode = form.zipcode.data
+		country = form.country.data
+		thetime = time.asctime()
+		writedata = {i:{'name':name,'email':email,'address':address,'city':city,'stateprov':stateprov,'zipcode':zipcode,'country':country,'time':thetime}}
+		data.update(writedata)
+		with open('brochurelist', 'w') as file:
+			json.dump(data,file,sort_keys=True,indent=4)
+		return render_template('brochuresuccess.html')
+	return render_template('brochure.html', form=form)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
