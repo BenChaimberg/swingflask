@@ -9,16 +9,35 @@
 <form method="POST" action="/brochure">
 {{ form.hidden_tag() }}
 	<div style="width:48%;float:left;">
-    <div style="clear:right;">{{ form.name.label }} {{ form.name(size=20) }} {% for error in form.name.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.email.label }} {{ form.email(size=20) }} {% for error in form.email.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.address.label }} {{ form.address(size=20) }} {% for error in form.address.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.city.label }} {{ form.city(size=20) }} {% for error in form.city.errors %} {{ error | safe }} {% endfor %}</div>
-    </div>
+	{% for field in form %}
+		<div style="clear:right;">
+		{% if loop.index == 1 %}
+		{% else %}
+			{{ field.label }}:
+			{% if field.type == "SelectField" %}
+				<select id="{{ field.name }}" name="{{ field.name }}" style="width:50%">
+				{% for option in field %}
+					{% if option.data == '_' %}
+						{{ option(disabled=True) }}
+					{% else %}
+						{{ option }}
+					{% endif %}
+				{% endfor %}
+				</select>
+			{% else %}
+				{{ field(style="width:50%") }}
+				{% for error in field.errors %}
+					{{ error | safe }}
+				{% endfor %}
+			{% endif %}
+		{% endif %}
+		</div>
+		{% if loop.index == 5 %}
+	</div>
 	<div style="width:48%;float:right;">
-    <div style="clear:right;">{{ form.stateprov.label }} {{ form.stateprov }} {% for error in form.stateprov.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.zipcode.label }} {{ form.zipcode(size=20) }} {% for error in form.zipcode.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ form.country.label }} {{ form.country }} {% for error in form.country.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;"><input type="submit" value="Submit"></div>
+		{% endif %}
+	{% endfor %}
+		<div style="clear:right;"><input type="submit" value="Submit"></div>
     </div>
 </form>
 {% endblock %}
