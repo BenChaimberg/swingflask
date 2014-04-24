@@ -1,8 +1,9 @@
 import json,time
-from flask import Flask, render_template, url_for, request, abort
+from flask import Flask, render_template, url_for, request, abort, redirect
+from flask.ext.login import login_user, logout_user, current_user, login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators
-from wtforms.fields import TextField, TextAreaField, SubmitField
+from wtforms.fields import TextField, PasswordField
 import wtforms
 from werkzeug.routing import BaseConverter
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
@@ -26,6 +27,24 @@ app.config.from_object(__name__)
 mail = Mail(app)
 app.secret_key = 'blahblahblah' #change later to random
 app.url_map.converters['regex'] = RegexConverter
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+@login_manager.user_loader
+def load_user(userid):
+    return User(userid)
+
+@login_manager.unauthorized_handler
+def unauthorized():
+	abort(401)
+
+class LoginForm(Form):
+    username = TextField("Username:", [wtforms.validators.Required('Please enter your username')])
+    password = PasswordField("Password:", [wtforms.validators.Required('Please enter your password')])
 
 class BrochureForm(Form):
     name = TextField("Name:", [wtforms.validators.Required('Please enter your name')])
@@ -64,10 +83,35 @@ def apperror(e): #if HTTP returns 500 error
 @app.errorhandler(403)
 def forbidden(e): #if HTTP returns 403 error
     return render_template('403.html'), 403 #render 403 template and return 403 error
+    
+@app.errorhandler(401)
+def forbidden(e): #if HTTP returns 401 error
+    return render_template('401.html'), 401 #render 401 template and return 401 error
 
 @app.route('/static/<regex("[a-z_.-]*.py[ocd]{0,1}"):uid>')
 def error(uid):
 	abort(404)
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+    	if form.username.data == 'administrator' and form.password.data == 'supersecurepassword':
+    		user = load_user(form.username.data)
+        	login_user(user)
+        	return redirect('/admin')
+    return render_template("login.html", form=form)
+
+@app.route('/admin')
+@login_required
+def admin():
+	return 'protected'
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect('/home')
 
 @app.route('/')
 @app.route('/home')
