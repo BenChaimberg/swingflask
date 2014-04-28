@@ -1,6 +1,6 @@
 import json,time
 from flask import Flask, render_template, url_for, request, abort, redirect
-from flask.ext.login import login_user, logout_user, current_user, login_required, LoginManager, UserMixin
+from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators
 from wtforms.fields import TextField, PasswordField, SelectField
@@ -103,9 +103,11 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route('/admin')
-@login_required
+@fresh_login_required
 def admin():
-	return 'protected'
+	with open('brochurelist', 'r') as file:
+		data = json.load(file)
+	return render_template('admin.html',data=data)
 
 @app.route("/logout")
 @login_required

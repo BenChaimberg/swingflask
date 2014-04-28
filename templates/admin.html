@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<table width="100%" >
+  <tr bgcolor="#CCCCCC" height="25">
+    <td>Name</td>
+    <td>E-mail</td>
+    <td>Address</td>
+    <td>City</td>
+    <td>State/Prov</td>
+    <td>Zip/Postal</td>
+    <td>Country</td>
+    <td><strong>Date</strong></td>
+	<td><strong>Language</strong></td>
+  </tr>
+  
+{% for x in data %}
+<tr class="style3" bgcolor="#cccccc">
+{% for y in data[x] %}
+<td class="style3">{{ data[x][y] }}</td>
+{% endfor %}
+{% endfor %}
+</tr>
+</table>
+{% endblock %}
