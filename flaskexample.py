@@ -70,7 +70,9 @@ def utility_processor(): #creates template context processor function
 					return item #return category
 				if (id == '1818' or id == '1819') and item2 == '1817': #if productid is 1818 or 1819, not in list, so uses 1817 instead
 					return item #return category
-	return dict(product_category=product_category) #returns function result
+	def string_convert(x):
+		return str(x)
+	return dict(string_convert=string_convert,product_category=product_category) #returns function result)
 
 @app.errorhandler(404)
 def notfound(e): #if HTTP returns 404 error
@@ -107,7 +109,7 @@ def login():
 def admin():
 	with open('brochurelist', 'r') as file:
 		data = json.load(file)
-	return render_template('admin.html',data=data)
+	return render_template('admin.html',data=data,len=len(data))
 
 @app.route("/logout")
 @login_required
@@ -185,15 +187,7 @@ def brochure():
 		i=0
 		for item in data:
 			i+=1
-		name = form.name.data
-		email = form.email.data
-		address = form.address.data
-		city = form.city.data
-		stateprov = form.stateprov.data
-		zipcode = form.zipcode.data
-		country = form.country.data
-		thetime = time.asctime()
-		writedata = {i:{'name':name,'email':email,'address':address,'city':city,'stateprov':stateprov,'zipcode':zipcode,'country':country,'time':thetime}}
+		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.asctime(),'lang':'en'}}
 		data.update(writedata)
 		with open('brochurelist', 'w') as file:
 			json.dump(data,file,sort_keys=True,indent=4)
