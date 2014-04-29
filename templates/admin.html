@@ -1,24 +1,38 @@
-{% extends "base.html" %}
-{% block content %}
-<table width="100%" >
-  <tr bgcolor="#CCCCCC" height="25">
-    <td>Name</td>
-    <td>E-mail</td>
-    <td>Address</td>
-    <td>City</td>
-    <td>State/Prov</td>
-    <td>Zip/Postal</td>
-    <td>Country</td>
-    <td><strong>Date</strong></td>
-	<td><strong>Language</strong></td>
-  </tr>
-  
-{% for x in data %}
-<tr class="style3" bgcolor="#cccccc">
-{% for y in data[x] %}
-<td class="style3">{{ data[x][y] }}</td>
-{% endfor %}
-{% endfor %}
-</tr>
-</table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<title>Brochure List</title>
+	</head>
+	<body>
+		<table width="100%" >
+			<tr bgcolor="#CCCCCC" height="25" style="font-weight:bold;">
+				<td>Name</td>
+				<td>E-mail</td>
+				<td>Address</td>
+				<td>City</td>
+				<td>State/Prov</td>
+				<td>Zip/Postal</td>
+				<td>Country</td>
+				<td>Date</td>
+				<td>Language</td>
+			</tr>
+		{% for x in range(len-1,0,-1) %}
+			<tr class="style3" bgcolor="#cccccc">
+				<td class="style3">{{ data[string_convert(x)]['name'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['email'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['address'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['city'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['stateprov'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['country'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['zipcode'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['time'] }}</td>
+				<td class="style3">{{ data[string_convert(x)]['lang'] }}</td>
+		{% endfor %}
+			</tr>
+		</table>
+	</body>
+</html>
