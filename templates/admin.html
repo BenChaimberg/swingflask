@@ -6,10 +6,22 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>Brochure List</title>
+		<style>
+			tr:nth-child(even) {
+				background-color:#CCCCCC;
+			}
+			tr:nth-child(odd) {
+				background-color:#F6F6F6;
+			}
+			tr:nth-child(1) td {
+				border-bottom:1px solid black;
+				background-color:#FFFFFF;
+			}
+		</style>
 	</head>
 	<body>
-		<table width="100%" >
-			<tr bgcolor="#CCCCCC" height="25" style="font-weight:bold;">
+		<table>
+			<tr style="font-weight:bold;border:1px solid black;">
 				<td>Name</td>
 				<td>E-mail</td>
 				<td>Address</td>
@@ -21,16 +33,16 @@
 				<td>Language</td>
 			</tr>
 		{% for x in range(len-1,0,-1) %}
-			<tr class="style3" bgcolor="#cccccc">
-				<td class="style3">{{ data[string_convert(x)]['name'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['email'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['address'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['city'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['stateprov'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['country'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['zipcode'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['time'] }}</td>
-				<td class="style3">{{ data[string_convert(x)]['lang'] }}</td>
+			<tr>
+				<td>{{ data[string_convert(x)]['name'] }}</td>
+				<td>{{ data[string_convert(x)]['email'] }}</td>
+				<td>{{ data[string_convert(x)]['address'] }}</td>
+				<td>{{ data[string_convert(x)]['city'] }}</td>
+				<td>{{ data[string_convert(x)]['stateprov'] }}</td>
+				<td>{{ data[string_convert(x)]['zipcode'] }}</td>
+				<td>{{ data[string_convert(x)]['country'] }}</td>
+				<td>{{ data[string_convert(x)]['time'] }}</td>
+				<td>{{ data[string_convert(x)]['lang'] }}</td>
 		{% endfor %}
 			</tr>
 		</table>
