@@ -1,15 +1,4 @@
-{
-    "2673": {
-        "address": "2gew", 
-        "city": "sfgsdfg", 
-        "country": "Antigua And Barbuda", 
-        "email": "asdg@gmail.com", 
-        "lang": "en", 
-        "name": "dsfasg", 
-        "stateprov": "Northwest Territories", 
-        "time": "Tue Apr 29 14:01:51 2014", 
-        "zipcode": "345454"
-    }, 
+{ 
     "0": {
         "address": "PO Box 179", 
         "city": "Frost", 
@@ -20469,18 +20458,7 @@
         "stateprov": "on", 
         "time": "4/9/2014 10:06:43 PM", 
         "zipcode": "k1e1l6"
-    }, 
-    "2672": {
-        "address": "sfdg", 
-        "city": "sfg", 
-        "country": "American Samoa", 
-        "email": "asdg@aol.com", 
-        "lang": "en", 
-        "name": "asdf", 
-        "stateprov": "Nova Scotia", 
-        "time": "Tue Apr 29 14:01:27 2014", 
-        "zipcode": "123452"
-    }, 
+    },
     "268": {
         "address": "27 Shauna Court", 
         "city": "St. Catharines", 
