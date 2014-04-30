@@ -18,8 +18,15 @@
 				background-color:#FFFFFF;
 			}
 		</style>
+		<script>
+			$(document).ready(function(){
+				var data = {{ data | replace("u'","'") | safe }};
+				$("#write").text(data['0']['name']);
+			});
+		</script>
 	</head>
 	<body>
+		<div id="write"></div>
 		<table>
 			<tr style="font-weight:bold;border:1px solid black;">
 				<td>Name</td>
@@ -32,7 +39,7 @@
 				<td>Date</td>
 				<td>Language</td>
 			</tr>
-		{% for x in range(len-1,0,-1) %}
+		<!--{% for x in range(len-1,0,-1) %}
 			<tr>
 				<td>{{ data[string_convert(x)]['name'] }}</td>
 				<td>{{ data[string_convert(x)]['email'] }}</td>
@@ -43,7 +50,7 @@
 				<td>{{ data[string_convert(x)]['country'] }}</td>
 				<td>{{ data[string_convert(x)]['time'] }}</td>
 				<td>{{ data[string_convert(x)]['lang'] }}</td>
-		{% endfor %}
+		{% endfor %}-->
 			</tr>
 		</table>
 	</body>
