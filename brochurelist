@@ -473,7 +473,7 @@
         "zipcode": ""
     }, 
     "1036": {
-        "address": "rue du Comte d'Auve", 
+        "address": "rue du Comte d&#x27;Auve", 
         "city": "Lauw", 
         "country": "France", 
         "email": "guygillet@wanadoo.fr", 
@@ -518,7 +518,7 @@
     }, 
     "104": {
         "address": "831 S. Valleywind Ct", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "haroldwrunyan@msn.com", 
         "lang": "en", 
@@ -529,7 +529,7 @@
     }, 
     "1040": {
         "address": "5 Warren Place", 
-        "city": "St. John's", 
+        "city": "St. John&#x27;s", 
         "country": "Canada", 
         "email": "gordbutler@nl.rogers.com", 
         "lang": "en", 
@@ -759,7 +759,7 @@
         "zipcode": "T0E1E0"
     }, 
     "106": {
-        "address": "130 Terrasse D'auteuil", 
+        "address": "130 Terrasse D&#x27;auteuil", 
         "city": "Laval", 
         "country": "Canada", 
         "email": "cgermain@videotron.ca", 
@@ -1001,7 +1001,7 @@
         "zipcode": "17834"
     }, 
     "108": {
-        "address": "4296 ave de l'H\u00f4tel-de-Ville", 
+        "address": "4296 ave de l&#x27;H\u00f4tel-de-Ville", 
         "city": "Montr\u00e9al", 
         "country": "", 
         "email": "lubelan@sympatico.ca", 
@@ -1342,7 +1342,7 @@
         "zipcode": "92211"
     }, 
     "1107": {
-        "address": "270 De L'\u00c9p\u00e9e", 
+        "address": "270 De L&#x27;\u00c9p\u00e9e", 
         "city": "Outremont", 
         "country": "Canada", 
         "email": "JBHache@hotmail.com", 
@@ -1860,7 +1860,7 @@
     }, 
     "115": {
         "address": "111 Merrymeeting Rd", 
-        "city": "St. John's", 
+        "city": "St. John&#x27;s", 
         "country": "CA", 
         "email": "furniture.works@nf.sympatico.ca", 
         "lang": "en", 
@@ -2002,7 +2002,7 @@
         "zipcode": "JOW 1HO"
     }, 
     "1161": {
-        "address": "590 Webster's Chapel Road", 
+        "address": "590 Webster&#x27;s Chapel Road", 
         "city": "Wellington", 
         "country": "United States", 
         "email": "wright9123@aol.com", 
@@ -2740,7 +2740,7 @@
     }, 
     "1221": {
         "address": "", 
-        "city": "St. John's", 
+        "city": "St. John&#x27;s", 
         "country": "CANADA", 
         "email": "dhackett@nf.sympatico.ca", 
         "lang": "en", 
@@ -4383,7 +4383,7 @@
         "country": "Canada", 
         "email": "william4willow@yahoo.ca", 
         "lang": "en", 
-        "name": "Glass Inn & Artists' Studios", 
+        "name": "Glass Inn & Artists&#x27; Studios", 
         "stateprov": "Alberta", 
         "time": "4/30/2007 4:48:45 PM", 
         "zipcode": "T0B 1N0"
@@ -4526,7 +4526,7 @@
         "country": "Canada", 
         "email": "rene.labbe@videotron.ca", 
         "lang": "fr", 
-        "name": "L'Abb\u00e9, Ren\u00e9", 
+        "name": "L&#x27;Abb\u00e9, Ren\u00e9", 
         "stateprov": "Qu\u00e9bec", 
         "time": "5/13/2007 1:04:28 PM", 
         "zipcode": "J7C 3S5"
@@ -4687,7 +4687,7 @@
     }, 
     "1381": {
         "address": "101, Chevalier", 
-        "city": "L'Assomption", 
+        "city": "L&#x27;Assomption", 
         "country": "canada", 
         "email": "hen-die@hotmail.com", 
         "lang": "fr", 
@@ -4698,7 +4698,7 @@
     }, 
     "1382": {
         "address": "101, Chevalier", 
-        "city": "L'Assomption", 
+        "city": "L&#x27;Assomption", 
         "country": "canada", 
         "email": "hen-die@hotmail.com", 
         "lang": "fr", 
@@ -4907,7 +4907,7 @@
     }, 
     "14": {
         "address": "1870 Ch. Roy", 
-        "city": "St-Elie D'Orford", 
+        "city": "St-Elie D&#x27;Orford", 
         "country": "Canada", 
         "email": "catoumatou@hotmail.com", 
         "lang": "fr", 
@@ -5490,7 +5490,7 @@
     }, 
     "1447": {
         "address": "29 du Verger", 
-        "city": "L'Isle-Verte", 
+        "city": "L&#x27;Isle-Verte", 
         "country": "canada", 
         "email": "christiane.dostie@sympatico.ca", 
         "lang": "fr", 
@@ -6374,7 +6374,7 @@
         "country": "USA", 
         "email": "carrieob@excite.com", 
         "lang": "en", 
-        "name": "Carrie O'Brien", 
+        "name": "Carrie O&#x27;Brien", 
         "stateprov": "VA", 
         "time": "9/25/2007 3:12:21 PM", 
         "zipcode": "22201"
@@ -6402,7 +6402,7 @@
         "zipcode": "h7n 3x7"
     }, 
     "1521": {
-        "address": "3007 rue d'Orsennens", 
+        "address": "3007 rue d&#x27;Orsennens", 
         "city": "Lac-M\u00e9gantic", 
         "country": "Canada", 
         "email": "gillesgaron1@sympatico.ca", 
@@ -6946,7 +6946,7 @@
         "country": "USA", 
         "email": "eosullivan2@verizon.net", 
         "lang": "en", 
-        "name": "Eileen O' Sullivan", 
+        "name": "Eileen O&#x27; Sullivan", 
         "stateprov": "PA", 
         "time": "10/30/2007 10:19:35 AM", 
         "zipcode": "18914"
@@ -7008,7 +7008,7 @@
     }, 
     "1571": {
         "address": "287 rue De la licorne", 
-        "city": "L'\u00e9piphanie", 
+        "city": "L&#x27;\u00e9piphanie", 
         "country": "Canada", 
         "email": "sanjajennifer@videotron.ca", 
         "lang": "fr", 
@@ -7492,7 +7492,7 @@
     }, 
     "1610": {
         "address": "33 rue Gray", 
-        "city": "Baie d'Urf\u00e9", 
+        "city": "Baie d&#x27;Urf\u00e9", 
         "country": "Canada", 
         "email": "", 
         "lang": "fr", 
@@ -7678,7 +7678,7 @@
         "zipcode": "11743"
     }, 
     "1626": {
-        "address": "10 rue de l'europe", 
+        "address": "10 rue de l&#x27;europe", 
         "city": "sanvignes les mines", 
         "country": "france", 
         "email": "danielle.thevenot@laposte.net", 
@@ -7711,7 +7711,7 @@
         "zipcode": "L4L7S9"
     }, 
     "1629": {
-        "address": "12 D'Auteuil", 
+        "address": "12 D&#x27;Auteuil", 
         "city": "Chelsea", 
         "country": "Canada", 
         "email": "bmonette@storm.ca", 
@@ -8404,7 +8404,7 @@
         "zipcode": ""
     }, 
     "1686": {
-        "address": "52 ranstone garden's", 
+        "address": "52 ranstone garden&#x27;s", 
         "city": "Scarborough", 
         "country": "Canada", 
         "email": "mustangtom_219@hotmail.com", 
@@ -8497,7 +8497,7 @@
         "country": "Canada", 
         "email": "dhiraj.dsouza@gmail.com", 
         "lang": "en", 
-        "name": "Dhiraj D'Souza", 
+        "name": "Dhiraj D&#x27;Souza", 
         "stateprov": "ON", 
         "time": "3/16/2008 8:13:01 PM", 
         "zipcode": "L6T 1L7"
@@ -8724,7 +8724,7 @@
     }, 
     "1711": {
         "address": "855 chemin Gros Cap", 
-        "city": "L'Etang du Nord", 
+        "city": "L&#x27;Etang du Nord", 
         "country": "Can.", 
         "email": "gastonbourg@tlb.sympatico.ca", 
         "lang": "fr", 
@@ -9538,7 +9538,7 @@
     }, 
     "1779": {
         "address": "65, rue St-Jean-Baptiste", 
-        "city": "L'Isle-Verte", 
+        "city": "L&#x27;Isle-Verte", 
         "country": "Canada", 
         "email": "michaud169@hotmail.com", 
         "lang": "fr", 
@@ -9581,7 +9581,7 @@
         "zipcode": "J0J 1A0"
     }, 
     "1782": {
-        "address": "1951 bord de l'eau", 
+        "address": "1951 bord de l&#x27;eau", 
         "city": "noyan", 
         "country": "canada", 
         "email": "jprls@ihr.netc.net", 
@@ -9857,7 +9857,7 @@
     }, 
     "1804": {
         "address": "60 rue Giffard", 
-        "city": "L'ile Perrot", 
+        "city": "L&#x27;ile Perrot", 
         "country": "Canada", 
         "email": "lornelapointe@videotron.ca", 
         "lang": "en", 
@@ -9978,7 +9978,7 @@
     }, 
     "1814": {
         "address": "3200 L\u00e9on Brisebois", 
-        "city": "L'Ile Bizard", 
+        "city": "L&#x27;Ile Bizard", 
         "country": "Canada", 
         "email": "sylvain.lavigne@zenexpression.com", 
         "lang": "en", 
@@ -10241,7 +10241,7 @@
         "zipcode": "G1C 2V4"
     }, 
     "1836": {
-        "address": "4605 Hunter's Creek Lane", 
+        "address": "4605 Hunter&#x27;s Creek Lane", 
         "city": "Raleigh", 
         "country": "USA", 
         "email": "", 
@@ -10263,7 +10263,7 @@
         "zipcode": "G0C2N0"
     }, 
     "1838": {
-        "address": "1220 de l'escarbot suite1", 
+        "address": "1220 de l&#x27;escarbot suite1", 
         "city": "qu\u00e9bec", 
         "country": "canada", 
         "email": "lambertmarcoux@sympatico.ca", 
@@ -10692,7 +10692,7 @@
         "zipcode": "J0W1E0"
     }, 
     "1873": {
-        "address": "RR#2, 165 Pitt's Cove Road", 
+        "address": "RR#2, 165 Pitt&#x27;s Cove Road", 
         "city": "Dunsford", 
         "country": "Canada EH!", 
         "email": "rockyinukshuks@hotmail.com", 
@@ -10935,7 +10935,7 @@
     }, 
     "1893": {
         "address": "378  6\u00e8m Rue", 
-        "city": "Vald'or", 
+        "city": "Vald&#x27;or", 
         "country": "Canada", 
         "email": "jobidon.louise@csob.qc.ca", 
         "lang": "fr", 
@@ -11044,7 +11044,7 @@
         "zipcode": "60515"
     }, 
     "1901": {
-        "address": "6923 avenue de l'\u00c9p\u00e9e", 
+        "address": "6923 avenue de l&#x27;\u00c9p\u00e9e", 
         "city": "Montreal", 
         "country": "Canada", 
         "email": "ginagarcia1@hotmail.com", 
@@ -11088,7 +11088,7 @@
         "zipcode": "TIJ 4G4"
     }, 
     "1905": {
-        "address": "9 fisher's point", 
+        "address": "9 fisher&#x27;s point", 
         "city": "foster", 
         "country": "canada", 
         "email": "Christa.bennett@hotmail.com", 
@@ -11407,7 +11407,7 @@
         "zipcode": "N8A 3G3"
     }, 
     "1931": {
-        "address": "717 ch Bord-de-l'eau", 
+        "address": "717 ch Bord-de-l&#x27;eau", 
         "city": "Laval", 
         "country": "Canada", 
         "email": "leclairjean@hotmail.com", 
@@ -12144,7 +12144,7 @@
         "zipcode": "L8V 2H5"
     }, 
     "1992": {
-        "address": "675 bord de l'eau", 
+        "address": "675 bord de l&#x27;eau", 
         "city": "laval", 
         "country": "Canada", 
         "email": "bianoit@hotmail.com", 
@@ -12343,7 +12343,7 @@
     }, 
     "2007": {
         "address": "110 chemin william", 
-        "city": "L'Ange Gardien", 
+        "city": "L&#x27;Ange Gardien", 
         "country": "Canada", 
         "email": "caron.neveu@videotron.ca", 
         "lang": "fr", 
@@ -13343,7 +13343,7 @@
         "zipcode": "J3Y 5H3"
     }, 
     "209": {
-        "address": "39 Georgia's Walk", 
+        "address": "39 Georgia&#x27;s Walk", 
         "city": "Victoria Harbour", 
         "country": "Canada", 
         "email": "sue_hansvrp@hotmail.com", 
@@ -14367,7 +14367,7 @@
     }, 
     "2173": {
         "address": "71 Ferryland Street  Wt", 
-        "city": "St John's", 
+        "city": "St John&#x27;s", 
         "country": "CA", 
         "email": "vsfreedom@live.com", 
         "lang": "en", 
@@ -14784,7 +14784,7 @@
         "zipcode": "31406"
     }, 
     "2207": {
-        "address": "664 de l'Entente", 
+        "address": "664 de l&#x27;Entente", 
         "city": "St-Charles-Borrom\u00e9e", 
         "country": "Canada", 
         "email": "cecile.berard@videotron.ca", 
@@ -14894,7 +14894,7 @@
         "zipcode": "H3P 3C5"
     }, 
     "2216": {
-        "address": "620-veteran's ave", 
+        "address": "620-veteran&#x27;s ave", 
         "city": "Keremeos", 
         "country": "Canada", 
         "email": "jfm.kbs@telus.net", 
@@ -15163,7 +15163,7 @@
         "country": "Canada", 
         "email": "ebiboud.bfarch@bellnet.ca", 
         "lang": "fr", 
-        "name": "Boudreau Fortier Huot, soci\u00e9t\u00e9 d'architecture", 
+        "name": "Boudreau Fortier Huot, soci\u00e9t\u00e9 d&#x27;architecture", 
         "stateprov": "Qu\u00e9bec", 
         "time": "4/1/2011 1:55:09 PM", 
         "zipcode": "G1K 3C9"
@@ -15620,7 +15620,7 @@
         "zipcode": "N8H 1T5"
     }, 
     "2276": {
-        "address": "gbessia cite de l'air, commune de Matoto", 
+        "address": "gbessia cite de l&#x27;air, commune de Matoto", 
         "city": "Matoto", 
         "country": "Guinea.", 
         "email": "aumineralresources@yahoo.com", 
@@ -15763,7 +15763,7 @@
         "zipcode": "l5l2l6"
     }, 
     "2288": {
-        "address": "E12629 Weigand's Bay South", 
+        "address": "E12629 Weigand&#x27;s Bay South", 
         "city": "Merrimac", 
         "country": "U.S.A.", 
         "email": "", 
@@ -16093,7 +16093,7 @@
         "zipcode": "27288"
     }, 
     "2314": {
-        "address": "265 de l'Estran", 
+        "address": "265 de l&#x27;Estran", 
         "city": "Terrebonne", 
         "country": "Canada", 
         "email": "jeanlebel@videotron.ca", 
@@ -16681,7 +16681,7 @@
         "country": "CANADA", 
         "email": "terryo1@msn.com", 
         "lang": "en", 
-        "name": "TERRY O'BRIEN", 
+        "name": "TERRY O&#x27;BRIEN", 
         "stateprov": "ONTARIO", 
         "time": "3/29/2012 10:33:55 AM", 
         "zipcode": "N0G 2V0"
@@ -17231,7 +17231,7 @@
         "country": "Canada", 
         "email": "silvio4577@gmail.com", 
         "lang": "en", 
-        "name": "Borsato's Paint $ Decor", 
+        "name": "Borsato&#x27;s Paint $ Decor", 
         "stateprov": "Ontario", 
         "time": "8/4/2012 4:01:00 PM", 
         "zipcode": "K7S1N5"
@@ -17282,7 +17282,7 @@
     }, 
     "2411": {
         "address": "559 lauziere", 
-        "city": "st-leonard-d'aston", 
+        "city": "st-leonard-d&#x27;aston", 
         "country": "canada", 
         "email": "decoration@jmdoucet.com", 
         "lang": "fr", 
@@ -17671,7 +17671,7 @@
         "country": "1", 
         "email": "1", 
         "lang": "en", 
-        "name": "-1'", 
+        "name": "-1&#x27;", 
         "stateprov": "1", 
         "time": "10/9/2012 3:21:54 PM", 
         "zipcode": "1"
@@ -17700,7 +17700,7 @@
     }, 
     "2446": {
         "address": "1", 
-        "city": "-1'", 
+        "city": "-1&#x27;", 
         "country": "1", 
         "email": "1", 
         "lang": "en", 
@@ -17710,7 +17710,7 @@
         "zipcode": "1"
     }, 
     "2447": {
-        "address": "-1'", 
+        "address": "-1&#x27;", 
         "city": "1", 
         "country": "1", 
         "email": "1", 
@@ -17724,7 +17724,7 @@
         "address": "1", 
         "city": "1", 
         "country": "1", 
-        "email": "-1'", 
+        "email": "-1&#x27;", 
         "lang": "en", 
         "name": "1", 
         "stateprov": "1", 
@@ -17734,7 +17734,7 @@
     "2449": {
         "address": "1", 
         "city": "1", 
-        "country": "-1'", 
+        "country": "-1&#x27;", 
         "email": "1", 
         "lang": "en", 
         "name": "1", 
@@ -17762,7 +17762,7 @@
         "name": "1", 
         "stateprov": "1", 
         "time": "10/9/2012 3:21:56 PM", 
-        "zipcode": "-1'"
+        "zipcode": "-1&#x27;"
     }, 
     "2451": {
         "address": "1", 
@@ -17771,7 +17771,7 @@
         "email": "1", 
         "lang": "en", 
         "name": "1", 
-        "stateprov": "-1'", 
+        "stateprov": "-1&#x27;", 
         "time": "10/9/2012 3:21:56 PM", 
         "zipcode": "1"
     }, 
@@ -17952,7 +17952,7 @@
         "zipcode": ""
     }, 
     "2467": {
-        "address": "3803 Prud'homme", 
+        "address": "3803 Prud&#x27;homme", 
         "city": "Montr\u00e9al", 
         "country": "Canada", 
         "email": "hubert.simard@gmail.com", 
@@ -18452,13 +18452,13 @@
         "country": "1", 
         "email": "1", 
         "lang": "en", 
-        "name": "-1'", 
+        "name": "-1&#x27;", 
         "stateprov": "1", 
         "time": "2/16/2013 10:10:56 PM", 
         "zipcode": "1"
     }, 
     "2508": {
-        "address": "-1'", 
+        "address": "-1&#x27;", 
         "city": "1", 
         "country": "1", 
         "email": "1", 
@@ -18472,7 +18472,7 @@
         "address": "1", 
         "city": "1", 
         "country": "1", 
-        "email": "-1'", 
+        "email": "-1&#x27;", 
         "lang": "en", 
         "name": "1", 
         "stateprov": "1", 
@@ -18492,7 +18492,7 @@
     }, 
     "2510": {
         "address": "1", 
-        "city": "-1'", 
+        "city": "-1&#x27;", 
         "country": "1", 
         "email": "1", 
         "lang": "en", 
@@ -18508,7 +18508,7 @@
         "email": "1", 
         "lang": "en", 
         "name": "1", 
-        "stateprov": "-1'", 
+        "stateprov": "-1&#x27;", 
         "time": "2/16/2013 10:10:59 PM", 
         "zipcode": "1"
     }, 
@@ -18521,12 +18521,12 @@
         "name": "1", 
         "stateprov": "1", 
         "time": "2/16/2013 10:11:00 PM", 
-        "zipcode": "-1'"
+        "zipcode": "-1&#x27;"
     }, 
     "2513": {
         "address": "1", 
         "city": "1", 
-        "country": "-1'", 
+        "country": "-1&#x27;", 
         "email": "1", 
         "lang": "en", 
         "name": "1", 
@@ -19064,7 +19064,7 @@
     }, 
     "2558": {
         "address": "8 Dupuis", 
-        "city": "L'Assomption", 
+        "city": "L&#x27;Assomption", 
         "country": "Canada", 
         "email": "naultbuddy@gmail.com", 
         "lang": "fr", 
@@ -19574,7 +19574,7 @@
         "country": "USA", 
         "email": "kim416@wildmail.com", 
         "lang": "en", 
-        "name": "Kim D'Agnillo", 
+        "name": "Kim D&#x27;Agnillo", 
         "stateprov": "R.I.", 
         "time": "3/5/2005 4:13:12 PM", 
         "zipcode": "02908"
@@ -19614,7 +19614,7 @@
     }, 
     "2602": {
         "address": "48 Merrymeeting Rd", 
-        "city": "St John's", 
+        "city": "St John&#x27;s", 
         "country": "Canada", 
         "email": "cunninghamr@live.ca", 
         "lang": "en", 
@@ -21099,7 +21099,7 @@
     }, 
     "32": {
         "address": "m. park lane majeedee magu", 
-        "city": "Mal'e", 
+        "city": "Mal&#x27;e", 
         "country": "Rep of Maldives", 
         "email": "admin@maziya.com", 
         "lang": "en", 
@@ -21385,7 +21385,7 @@
     }, 
     "343": {
         "address": "2325 Federalist Place", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "", 
         "lang": "en", 
@@ -21396,7 +21396,7 @@
     }, 
     "344": {
         "address": "2830 Carters Grove", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "U.S.A.", 
         "email": "sylrad@yahoo.com", 
         "lang": "en", 
@@ -21473,7 +21473,7 @@
     }, 
     "350": {
         "address": "1211 Ashford Place Dr", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "jhuffma@mail.win.org", 
         "lang": "en", 
@@ -21561,7 +21561,7 @@
     }, 
     "358": {
         "address": "19 delegate cir.", 
-        "city": "o'fallon", 
+        "city": "o&#x27;fallon", 
         "country": "usa", 
         "email": "boosteph@yahoo.com", 
         "lang": "en", 
@@ -21572,7 +21572,7 @@
     }, 
     "359": {
         "address": "15 Delegate Circle", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "dldmac@aol.com", 
         "lang": "en", 
@@ -21616,7 +21616,7 @@
     }, 
     "362": {
         "address": "7291 Picasso", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "infamoused@hotmail.com", 
         "lang": "en", 
@@ -22060,7 +22060,7 @@
         "country": "Canada", 
         "email": "laurent_damour@yahoo.ca", 
         "lang": "fr", 
-        "name": "Laurent D'Amour", 
+        "name": "Laurent D&#x27;Amour", 
         "stateprov": "Qu\u00e9bec", 
         "time": "8/14/2005 9:20:19 PM", 
         "zipcode": "J0L 1T0"
@@ -22100,7 +22100,7 @@
     }, 
     "401": {
         "address": "3412 E Terra Ln", 
-        "city": "O'Fallon", 
+        "city": "O&#x27;Fallon", 
         "country": "USA", 
         "email": "pshoney@glasstekglazing.com", 
         "lang": "en", 
@@ -22529,7 +22529,7 @@
     }, 
     "437": {
         "address": "box 403", 
-        "city": "Qu'Appelle", 
+        "city": "Qu&#x27;Appelle", 
         "country": "Canada", 
         "email": "mapine@sasktel.net", 
         "lang": "en", 
@@ -22594,7 +22594,7 @@
         "zipcode": "99205-7295"
     }, 
     "442": {
-        "address": "513, D'Amours", 
+        "address": "513, D&#x27;Amours", 
         "city": "Trois-Pistoles", 
         "country": "Canada", 
         "email": "serviced@globetrotter.net", 
@@ -22858,7 +22858,7 @@
         "zipcode": "65251"
     }, 
     "464": {
-        "address": "10580 L'amoureux", 
+        "address": "10580 L&#x27;amoureux", 
         "city": "montreal nord", 
         "country": "canada", 
         "email": "jlm@bellnet.ca", 
@@ -24542,7 +24542,7 @@
     }, 
     "601": {
         "address": "97, du couvent", 
-        "city": "st-andre d'argenteuil", 
+        "city": "st-andre d&#x27;argenteuil", 
         "country": "canada", 
         "email": "soucypat@hotmail.com", 
         "lang": "fr", 
@@ -24585,7 +24585,7 @@
         "zipcode": "84087"
     }, 
     "605": {
-        "address": "24-1205 Lamb's Court", 
+        "address": "24-1205 Lamb&#x27;s Court", 
         "city": "Burlington", 
         "country": "Canada", 
         "email": "cliffis@canada.com", 
@@ -27050,7 +27050,7 @@
     }, 
     "807": {
         "address": "209, route 132", 
-        "city": "L'isle-Verte ouest", 
+        "city": "L&#x27;isle-Verte ouest", 
         "country": "Canada", 
         "email": "dianet19@hotmail.com", 
         "lang": "fr", 
@@ -27164,7 +27164,7 @@
         "country": "USA", 
         "email": "michelle@underarock.com", 
         "lang": "en", 
-        "name": "Michelle O'Connor", 
+        "name": "Michelle O&#x27;Connor", 
         "stateprov": "NC", 
         "time": "6/30/2006 2:34:41 PM", 
         "zipcode": "27518"
@@ -28303,7 +28303,7 @@
         "zipcode": "72104"
     }, 
     "91": {
-        "address": "de l'h\u00eatri\u00e9re", 
+        "address": "de l&#x27;h\u00eatri\u00e9re", 
         "city": "Saint Augustin", 
         "country": "Canada", 
         "email": "chantal.bonnant@sympatico.ca", 
@@ -28479,7 +28479,7 @@
         "zipcode": "30189"
     }, 
     "924": {
-        "address": "1175, boul. d'Iberville", 
+        "address": "1175, boul. d&#x27;Iberville", 
         "city": "St-Jean-sur-Richelieu", 
         "country": "Canada", 
         "email": "jacques.lamarche@videotron.ca", 
@@ -28810,7 +28810,7 @@
     }, 
     "951": {
         "address": "1406 St-G\u00e9d\u00e9on", 
-        "city": "L'Ancienne-Lorette", 
+        "city": "L&#x27;Ancienne-Lorette", 
         "country": "Canada", 
         "email": "luc-andre@sympatico.ca", 
         "lang": "fr", 
@@ -29007,7 +29007,7 @@
         "zipcode": ""
     }, 
     "968": {
-        "address": "du Comte d'Auve", 
+        "address": "du Comte d&#x27;Auve", 
         "city": "LAUW", 
         "country": "France", 
         "email": "", 

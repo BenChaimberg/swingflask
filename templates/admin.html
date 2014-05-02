@@ -18,16 +18,10 @@
 				background-color:#FFFFFF;
 			}
 		</style>
-		<script>
-			$(document).ready(function(){
-				var data = {{ data | replace("u'","'") | safe }};
-				$("#write").text(data['0']['name']);
-			});
-		</script>
 	</head>
 	<body>
-		<div id="write"></div>
-		<table>
+		<div id="button"><button onlick="writeData()">Display</button></div>
+		<table id="write">
 			<tr style="font-weight:bold;border:1px solid black;">
 				<td>Name</td>
 				<td>E-mail</td>
@@ -39,18 +33,28 @@
 				<td>Date</td>
 				<td>Language</td>
 			</tr>
-		<!--{% for x in range(len-1,0,-1) %}
+			
+			<script>
+				$(document).ready(function(){
+					$("#button").click(function(){
+						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+						$("#write").append("</tr><tr>")
+						for (var key in data['593']){
+							$("#write").append("<td>"+data['593'][key]+"</td>");
+						}
+					});
+				});
+			</script>
 			<tr>
-				<td>{{ data[string_convert(x)]['name'] }}</td>
-				<td>{{ data[string_convert(x)]['email'] }}</td>
-				<td>{{ data[string_convert(x)]['address'] }}</td>
-				<td>{{ data[string_convert(x)]['city'] }}</td>
-				<td>{{ data[string_convert(x)]['stateprov'] }}</td>
-				<td>{{ data[string_convert(x)]['zipcode'] }}</td>
-				<td>{{ data[string_convert(x)]['country'] }}</td>
-				<td>{{ data[string_convert(x)]['time'] }}</td>
-				<td>{{ data[string_convert(x)]['lang'] }}</td>
-		{% endfor %}-->
+				<td> data[string_convert(x)]['name'] }}</td>
+				<td> data[string_convert(x)]['email'] }}</td>
+				<td> data[string_convert(x)]['address'] }}</td>
+				<td> data[string_convert(x)]['city'] }}</td>
+				<td> data[string_convert(x)]['stateprov'] }}</td>
+				<td> data[string_convert(x)]['zipcode'] }}</td>
+				<td> data[string_convert(x)]['country'] }}</td>
+				<td> data[string_convert(x)]['time'] }}</td>
+				<td> data[string_convert(x)]['lang'] }}</td>
 			</tr>
 		</table>
 	</body>
