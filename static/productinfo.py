@@ -11,13 +11,13 @@ info = {
 
 '1418':['250 mL (&frac12; pint)', '6', '1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
 
-'1518':[],
+'1518':['454 g (1 lb)',  '6', '2.5 kg (5.5 lb)', '4'],
 '1527':['710 mL (3/4 quart)', '6'],
 '1555':['236 mL (&frac12; pint)', '12', '473 mL (1 pint)', '12', '946 mL (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
 '1557':['946 mL (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
 '1566':['3.78 litre (1 gallon)', '2', '7.56 litre (2 gallon)', '1'],
 
-'1600':['100 mL','12','200mL','6','500mL','2','5 litre','1','Brown Wax (200 mL)','6','Marble Wax (200 mL)','6'],
+'1600':['100 mL','12','250mL','6','500mL','2','5 litre','1','Brown Wax (100 mL)','12','Brown Wax (250 mL)','6','Marble Wax (250 mL)','6'],
 '1604':[],
 
 '1700':['500 mL (1 pint)', '12', '1 litre (1 quart)', '12', '3.78litre (1 gallon)', '2', '18.9 litre (5 gallon)', '1'],
@@ -53,29 +53,29 @@ info = {
 '2103':['250 mL (8 oz.)', '6'],
 '2104':['250 mL (8 oz.)', '6'],
 
-'2140':[],
-'2142':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
-'2143':[],
-'2146':[],
-'2147':[],
+'2140':['1 litre (1 quart)', '6'],
+'2142':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
+'2143':['1 litre (1 quart)', '12'],
+'2146':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
+'2147':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
 
 '2705':['1 litre (1 quart)', '6'],
 '2706':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
-'2711':[],
-'2752':[],
+'2711':['500 mL (1 pint)', '12'],
+'2752':['1 litre (1 quart)', '4'],
 '2760':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
 
 '3100':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
 '3107':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
 '3133':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '4', '18.9 litre (5 gallon)', '1'],
-'3150':['60 mL (2 oz.)', '24', '250 mL (8 oz.)', '12'],
+'3150':['60 mL (2 oz.)', '24'],
 
 '3200':['125 mL (4 oz.) CARDED', '12', '250 mL (&frac12; pint)', '12', '1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
-'3207':[],
-'3208':[],
-'3211':[],
+'3207':['125 mL (4 oz.)', '12', '500 mL (1 pint)', '12'],
+'3208':['Aerosol (482g)', '6'],
+'3211':['500 mL (1 pint)', '12', '1 litre (1 quart)', '12'],
 '3220':['946 mL (1 quart)', '6', '7.56 litre (2 gallon)', '2'],
-'3230':[],
+'3230':[1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2],
 
 '400':['125 ml (4 oz.)','6','250 mL (8 oz.)','6'],
 
@@ -86,13 +86,16 @@ info = {
 
 '770':['250 mL (&frac12; pint)', '6', '1 litre (1 quart)', '4', '3.78 litre (1 gallon)', '2'],
 
-'8100':[],
-'8172':[],
+'8100':['500 mL (pint)', '4', '946 mL (quart)', '4'],
+'8172':['kit', '8'],
 '8200':['946 mL', '6 '],
 
-'9000':[],
-'9001':[],
-'9008':[],
+'8999':['500 mL (1 pint)', '12', '1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
+'9000':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
+'9001':['500 mL (1 pint)', '6','1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
+'9006':['500 mL (1 pint)', '6','1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2'],
+'9008':['500 mL (1 pint)', '12', '1 litre (1 quart)', '12'],
+'9019':['1 litre (1 quart)', '6', '3.78 litre (1 gallon)', '2']
 }
 
 info2 = {
