@@ -2,7 +2,7 @@ info = {
 '1201':['58 g ', '12 '],
 
 '1300':['2 inch ', '6', '3 inch ', '6'],
-'1301':['medium', '144 (12x12) ', 'large', '144 (12x12)', 'extra large<br>(bulk sales)', '144 (12x12)'],
+'1301':['medium', '144 (12x12) ', 'large', '144 (12x12)', 'extra large', '144 (12x12)'],
 '1302':['Tool with<br>Reusable Pad', '6', 'Replacement<br>Pads (2)', '6'],
 '1303':['250 mL (&frac12; pint)', '12', '1 litre (1 quart)', '12', '4 litre (1 gallon)', '2'],
 '1310':['3 sq yd', '24 '],
