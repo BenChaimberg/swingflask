@@ -72,7 +72,10 @@ text = {
 '8170':'''Klenk\'s Epoxy Prep Kit prepares surfaces for Klenk\'s Epoxy by effectively removingsoap scum, rust, body oil, and grime.''',
 '8172':'''Klenk\'s Fish Eye Eliminator  eliminate the effect of fish eyes.  Fish eyes, nasty little pea-sized craters in a finish film, occur when the wet finish\'s surface tension keeps it from flowing overslippery contaminants on the work. Silicone oil is by far the most common culprit in fish eye formation.Sources of silicone contamination found while bathtub repainting include silicone caulking residue,silicone grout sealer and silicone found in hairspray.<p>Silcone contamination is also very common in furniture refinishing, since many popularfurniture polishes (such as Pledge) contain silicone oil. ''',
 '8200':'''Swiss Formula ACR is an extremely hard and durable two-component epoxy for consumerand professional use. It is specially designed to restore the finish on acrylic and fibreglass tubs,sinks, hot tubs, spas and jacuzzis. Swiss Formula ACR is available in White, as well as special order colours.''',
+'8999':'''Klenk\'s Lacquer Thinner thins lacquer based paints for spraying, and creates a smooth, high gloss finish.  Cleans and flushes spray equipment.''',
 '9000':'''Klenk\'s Odourless Thinner thins oil-based paints and varnishes.  It dissolves oil and grease,and cleans tools and brushes.''',
 '9001':'''Klenk\'s Acetone thins fibreglass resins.  It dissolve adhesives and cleans tools and brushes.''',
-'9008':'''Klenk\'s Toluene thins industrial finishes.  It dissolves adhesives and silicone, and cleans tools and brushes.'''
+'9006':'''Klenk\'s Methyl Hydrate thins shellac.  It prevents gas line freezing and  and cleans tools and brushes.''',
+'9008':'''Klenk\'s Toluene thins industrial finishes.  It dissolves adhesives and silicone, and cleans tools and brushes.''',
+'9019':'''Klenk\'s Mineral Spirits  thins oil-based paints and varnishes.  It dissolves oil and grease,and cleans tools and brushes.'''
 }
