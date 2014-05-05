@@ -91,7 +91,9 @@ title = {
 '8172':'Swing Paints Klenk\'s Fish Eye Eliminator',	
 '8200':'Swing Paints Klenk\'s ACR',
 
-'9000':'Swing Paints Klenk\'s Odourless Thinner',
-'9001':'Swing Paints Klenk\'s Acetone',	
-'9008':'Swing Paints Klenk\'s Toluene'
+'8999':'Swing Paints Klenk\'s Lacquer Thinner',
+'9001':'Swing Paints Klenk\'s Acetone',
+'9006':'Swing Paints Klenk\'s Methyl Hydrate',	
+'9008':'Swing Paints Klenk\'s Toluene',
+'9019':'Swing Paints Klenk\'s Mineral Spirits'
 }
