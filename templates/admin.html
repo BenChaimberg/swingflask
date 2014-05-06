@@ -38,24 +38,20 @@
 				$(document).ready(function(){
 					$("#button").click(function(){
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
-						$("#write").append("</tr><tr>")
-						for (var key in data['593']){
-							$("#write").append("<td>"+data['593'][key]+"</td>");
+						for (var key in data){
+							$("#write").append("<td>"+data[key]['name']+"</td>");
+							$("#write").append("<td>"+data[key]['email']+"</td>");
+							$("#write").append("<td>"+data[key]['address']+"</td>");
+							$("#write").append("<td>"+data[key]['city']+"</td>");
+							$("#write").append("<td>"+data[key]['stateprov']+"</td>");
+							$("#write").append("<td>"+data[key]['zipcode']+"</td>");
+							$("#write").append("<td>"+data[key]['country']+"</td>");
+							$("#write").append("<td>"+data[key]['time']+"</td>");
+							$("#write").append("<td>"+data[key]['lang']+"</td>");
 						}
 					});
 				});
 			</script>
-			<tr>
-				<td> data[string_convert(x)]['name'] }}</td>
-				<td> data[string_convert(x)]['email'] }}</td>
-				<td> data[string_convert(x)]['address'] }}</td>
-				<td> data[string_convert(x)]['city'] }}</td>
-				<td> data[string_convert(x)]['stateprov'] }}</td>
-				<td> data[string_convert(x)]['zipcode'] }}</td>
-				<td> data[string_convert(x)]['country'] }}</td>
-				<td> data[string_convert(x)]['time'] }}</td>
-				<td> data[string_convert(x)]['lang'] }}</td>
-			</tr>
 		</table>
 	</body>
 </html>
