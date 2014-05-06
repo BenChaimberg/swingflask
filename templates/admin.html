@@ -32,22 +32,28 @@
 				<td>Country</td>
 				<td>Date</td>
 				<td>Language</td>
-			</tr>
 			
 			<script>
 				$(document).ready(function(){
 					$("#button").click(function(){
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+						var table = document.getElementById("write");
 						for (var key in data){
-							$("#write").append("<td>"+data[key]['name']+"</td>");
-							$("#write").append("<td>"+data[key]['email']+"</td>");
-							$("#write").append("<td>"+data[key]['address']+"</td>");
-							$("#write").append("<td>"+data[key]['city']+"</td>");
-							$("#write").append("<td>"+data[key]['stateprov']+"</td>");
-							$("#write").append("<td>"+data[key]['zipcode']+"</td>");
-							$("#write").append("<td>"+data[key]['country']+"</td>");
-							$("#write").append("<td>"+data[key]['time']+"</td>");
-							$("#write").append("<td>"+data[key]['lang']+"</td>");
+							console.log("hey");
+							var newRow  = table.insertRow(-1);
+							var tuples = [];
+							for (var key2 in data[key]){
+								tuples.push(key2, data[key][key2]);
+							}
+							tuples.sort();
+							for (var i = 0; i < tuples.length; i++) {
+    							var key3 = tuples[i][0];
+								var value = tuples[i][1];
+								console.log(value);
+								//var newCell = newRow.insertCell(-1);
+								//var newText = document.createTextNode(value);
+								//newCell.appendChild(newText);
+							}
 						}
 					});
 				});
