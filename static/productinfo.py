@@ -75,7 +75,7 @@ info = {
 '3208':['Aerosol (482g)', '6'],
 '3211':['500 mL (1 pint)', '12', '1 litre (1 quart)', '12'],
 '3220':['946 mL (1 quart)', '6', '7.56 litre (2 gallon)', '2'],
-'3230':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2],
+'3230':['1 litre (1 quart)', '12', '3.78 litre (1 gallon)', '2'],
 
 '400':['125 ml (4 oz.)','6','250 mL (8 oz.)','6'],
 
