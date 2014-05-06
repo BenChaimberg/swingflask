@@ -92,6 +92,7 @@ title = {
 '8200':'Swing Paints Klenk\'s ACR',
 
 '8999':'Swing Paints Klenk\'s Lacquer Thinner',
+'9000':'Swing Paints Klenk\'s Odourless Thinner',
 '9001':'Swing Paints Klenk\'s Acetone',
 '9006':'Swing Paints Klenk\'s Methyl Hydrate',	
 '9008':'Swing Paints Klenk\'s Toluene',
