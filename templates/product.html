@@ -2,6 +2,30 @@
 {% block head %}
 {{ super() }}
 <style>
+	#switch {
+		 background:#eee;
+		 padding:24px 5px 5px 5px;
+		 border:1px solid #000000;
+		 position:absolute;
+		 top:0px;
+		 width:97.3%;
+	}
+	#infotext {
+		 position:relative;
+		 right:5px;
+		 top:5px;
+		 width:50%;
+		 text-align:left;
+		 font-weight:bold;
+		 float:right;
+	}
+	#infotable {
+		 position:relative;
+		 left:5px;
+		 top:5px;
+		 width:50%;
+		 padding-bottom:5px;
+	}
 	.buystuff {
 		text-align:center;
 		display:none;
@@ -49,6 +73,11 @@
 			$(".buystuff").hide("fast",function(){
 				$(".buybutt").show("fast",function(){
 					$(".stuff").eq(labelindex).show("fast",function(){
+						if (labelindex == 1){
+							if ($("#infotable").height() > $("#infotext").height()){
+								$(".stuff").css('height', $("#infotable").height());
+							} else { $(".stuff").css('height', $("#infotext").height()); }
+						}
 						var hht = $(this).height();
 						$("#container2").css('height', hht+31);
 						$("#footer").fadeIn(100);
@@ -119,17 +148,17 @@
 		<a class="hidden label" href="#">Buy Now</a>
 		<a class="hidden label" href="#">Demonstrations</a>
 	</div>
-	<div id="switch" style="background:#eee;padding-top:24px;padding-left:5px;padding-right:5px;padding-bottom:5px;border:1px solid #000000;position:absolute;top:0px;width:97.3%;">
+	<div id="switch">
 		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
 		<div class="stuff" style="display:none;">
-			<div style="position:relative;right:5px;top:5px;width:50%;text-align:left;font-weight:bold;float:right;">
+			<div id="infotext">
 				<ul>
 				{% for item in product.info2: %}
 					<li>{{ item | safe }}</li>
 				{% endfor %}
 				</ul>
 			</div>
-			<div id="infotable" style="position:relative;left:5px;top:5px;width:50%;padding-bottom:5px;">
+			<div id="infotable">
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
 						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
