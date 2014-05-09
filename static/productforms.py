@@ -768,8 +768,10 @@ forms = {
 '8100us':'''''',
 '8172can':'''''',
 '8172us':'''''',
-'8200can':'''''',
-'8200us':'''''',
+'8200can':'''<option value=":0.00" selected> ---Select Color--- </option>
+	<option value="820001 Swiss Forula ACR, White (1L):40.00"> White 8200 </option>''',
+'8200us':'''<option value=":0.00" selected> ---Select Color--- </option>
+	<option value="820001 Swiss Forula ACR, White (quart):40.00"> White 8200 </option>''',
 
 '9000can':'''''',
 '9000us':'''''',
