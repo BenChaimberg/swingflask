@@ -38,21 +38,44 @@
 					$("#button").click(function(){
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
 						var table = document.getElementById("write");
-						for (var key in data){
-							console.log("hey");
-							var newRow  = table.insertRow(-1);
-							var tuples = [];
+						for (var key in data){;
+							var values = [];
 							for (var key2 in data[key]){
-								tuples.push(key2, data[key][key2]);
+								switch (key2){
+									case "name":
+										values[0] = data[key][key2];
+										break;
+									case "email":
+										values[1] = data[key][key2];
+										break;
+									case "address":
+										values[2] = data[key][key2];
+										break;
+									case "city":
+										values[3] = data[key][key2];
+										break;
+									case "stateprov":
+										values[4] = data[key][key2];
+										break;
+									case "zipcode":
+										values[5] = data[key][key2];
+										break;
+									case "country":
+										values[6] = data[key][key2];
+										break;
+									case "time":
+										values[7] = data[key][key2];
+										break;
+									case "lang":
+										values[8] = data[key][key2];
+										break;
+								}
 							}
-							tuples.sort();
-							for (var i = 0; i < tuples.length; i++) {
-    							var key3 = tuples[i][0];
-								var value = tuples[i][1];
-								console.log(value);
-								//var newCell = newRow.insertCell(-1);
-								//var newText = document.createTextNode(value);
-								//newCell.appendChild(newText);
+							var newRow  = table.insertRow(-1);
+							for (var value in values) {
+								var newCell = newRow.insertCell(-1);
+								var newText = document.createTextNode(values[value]);
+								newCell.appendChild(newText);
 							}
 						}
 					});
