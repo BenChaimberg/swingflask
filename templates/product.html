@@ -195,7 +195,7 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
-					{% if product.demo %}
+					{% if product.canforms %}
 					<select style="font-size:12px" name="productpr">
 					{{ product.canforms | safe }}
 					</select>
@@ -217,7 +217,7 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
-					{% if product.demo %}
+					{% if product.usforms %}
 					<select style="font-size:12px" name="productpr">
 					{{ product.usforms | safe }}
 					</select>
