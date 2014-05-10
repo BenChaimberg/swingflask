@@ -188,7 +188,9 @@ def brochure():
 		i=0
 		for item in data:
 			i+=1
-		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.strftime("%m/%d/%Y %I:%M:%S %p", gmtime()),'lang':'en'}}
+		if request.query_string == 'french': lang = 'fr'
+		else: lang = 'en'
+		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.strftime("%m/%d/%Y %I:%M:%S %p", gmtime()),'lang':lang}}
 		data.update(writedata)
 		with open('brochurelist', 'w') as file:
 			json.dump(data,file,sort_keys=True,indent=4)
@@ -197,9 +199,9 @@ def brochure():
 		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
 		msg.subject = "%s would like a free brochure!" % form.name.data
 		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (form.name.data,form.email.data,form.address.data,form.city.data,form.stateprov.data,form.zipcode.data,form.country.data)
-		mail.send(msg)
+		#mail.send(msg)
 		return render_template('brochuresuccess.html')
-	return render_template('brochure.html', form=form)
+	return render_template('brochure.html', form=form, lang=request.query_string)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
