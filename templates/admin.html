@@ -26,7 +26,9 @@
 		<script>
 			$(document).ready(function(){
 				$("#form").submit(function(){
-					if ($("#startyear").val() == parseInt($("#startyear").val()) && $("#startmonth").val() == parseInt($("#startmonth").val()) && $("#startday").val() == parseInt($("#startday").val()) && $("#endyear").val() == parseInt($("#endyear").val()) && $("#endmonth").val() == parseInt($("#endmonth").val()) && $("#endday").val() == parseInt($("#endday").val())){
+					var startdate = new Date(parseInt($("#startyear").val()),parseInt($("#startmonth").val()),parseInt($("#startday").val()),0,0,0,0);
+					var enddate = new Date(parseInt($("#endyear").val()),parseInt($("#endmonth").val()),parseInt($("#endday").val()),0,0,0,0);
+					if ((enddate > startdate) && $("#startyear").val() == parseInt($("#startyear").val()) && $("#startmonth").val() == parseInt($("#startmonth").val()) && $("#startday").val() == parseInt($("#startday").val()) && $("#endyear").val() == parseInt($("#endyear").val()) && $("#endmonth").val() == parseInt($("#endmonth").val()) && $("#endday").val() == parseInt($("#endday").val())){
 						$("input").attr('disabled', 'disabled');
 						$("select").attr('disabled', 'disabled');
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
@@ -64,8 +66,8 @@
 										break;
 								}
 							}
-							if (new Date(values[7]) >= new Date(parseInt($("#startyear").val()),parseInt($("#startmonth").val()),parseInt($("#startday").val()),0,0,0,0)
-								&& new Date(values[7]) <= new Date(parseInt($("#endyear").val()),parseInt($("#endmonth").val()),parseInt($("#endday").val()),0,0,0,0)) {
+							if (new Date(values[7]) >= startdate
+								&& new Date(values[7]) <= enddate) {
 								var newRow  = document.getElementById("write").insertRow(-1);
 								for (var value in values) {
 									var newCell = newRow.insertCell(-1);
