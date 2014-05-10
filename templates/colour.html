@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+	<style>
+		#container {
+			width:750px;
+		}
+		div#content td {
+			padding-bottom:10px;
+			font-size:10px;
+			width:12.5%;
+			text-align:center;
+		}
+		div#content td img {
+			width:56px;
+			height:86px;
+		}
+	</style>
+{% endblock %}
+{% block title %}Swing Paints - Stain 'n Varnish Colour Swatches{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/colour_swatches_top.png') }}" alt="Colour Swatches Swing Paints" width=750 height=29>{% endblock %}
+{% block content %}
+	<table width="750px">
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/1.jpg') }}" width="56" height="86"><br />BLACK<br />CHERRY #791</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/2.jpg') }}" width="56" height="86"><br />STEEL<br />BLUE #789</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/3.jpg') }}" width="56" height="86"><br />SATIN<br />BLACK #790</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/4.jpg') }}" width="56" height="86"><br />EMERALD<br />BLUE #788</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/5.jpg') }}" width="56" height="86"><br />BURGUNDY<br />#786</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/6.jpg') }}" width="56" height="86"><br />FOREST<br />GREEN #787</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/7.jpg') }}" width="56" height="86"><br />WHITE<br />BIRCH #779</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/8.jpg') }}" width="56" height="86"><br />MUSTARD<br />#783</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/9.jpg') }}" width="56" height="86"><br />NATURAL<br />#770</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/10.jpg') }}" width="56" height="86"><br />OLDE<br />GREY #785</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/11.jpg') }}" width="56" height="86"><br />SAGE<br />GREEN #784</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/12.jpg') }}" width="56" height="86"><br />SILVER<br />GREY #781</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/13.jpg') }}" width="56" height="86"><br />CORAL<br />SAND #782</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/14.jpg') }}" width="56" height="86"><br />FARM<br />BLUE #780</td>
+		</tr>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/15.jpg') }}" width="56" height="86"><br />TEAK<br />#771</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/16.jpg') }}" width="56" height="86"><br />MAHOGANY<br />#775</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/17.jpg') }}" width="56" height="86"><br />SPECIAL<br />WALNUT #777</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/18.jpg') }}" width="56" height="86"><br />GOLDEN<br />OAK #776</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/19.jpg') }}" width="56" height="86"><br />PECAN<br />#772</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/20.jpg') }}" width="56" height="86"><br />BLACK<br />OAK #778</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/21.jpg') }}" width="56" height="86"><br />PURITAN<br />PINE #773</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/22.jpg') }}" width="56" height="86"><br />DARK<br />OAK #774</td>
+		</tr>
+	</table>
+	<div style="width:75%;text-align:left;margin:0 auto;">
+		The colours shown above are approximate reproductions and will be affected by individual computer screens.
+		Actual results on wood may vary. Test first.
+	</div>
+{% endblock %}

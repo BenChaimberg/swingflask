@@ -161,6 +161,13 @@ def about(): #if URL is at about
 	else: #if URL does not end with ?french
 		return render_template('about.html') #return english about page
 
+@app.route('/colour')
+def colour(): #if URL is at about
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchcolour.html') #render french about page
+	else: #if URL does not end with ?french
+		return render_template('colour.html') #return english about page
+
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
 	form = ReferForm()
