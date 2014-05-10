@@ -192,6 +192,12 @@ def brochure():
 		data.update(writedata)
 		with open('brochurelist', 'w') as file:
 			json.dump(data,file,sort_keys=True,indent=4)
+		msg = Message()
+		msg.recipients = ['echaimberg@swingpaints.com']
+		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
+		msg.subject = "%s would like a free brochure!" % form.name.data
+		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (form.name.data,form.email.data,form.address.data,form.city.data,form.stateprov.data,form.zipcode.data,form.country.data)
+		mail.send(msg)
 		return render_template('brochuresuccess.html')
 	return render_template('brochure.html', form=form)
 
