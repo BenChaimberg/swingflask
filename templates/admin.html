@@ -70,8 +70,9 @@
 								var newRow  = document.getElementById("write").insertRow(-1);
 								for (var value in values) {
 									var newCell = newRow.insertCell(-1);
-									var newText = document.createTextNode(values[value]);
-									newCell.appendChild(newText);
+									var htmlNode = document.createElement('span');
+									htmlNode.innerHTML = values[value]
+									newCell.appendChild(htmlNode);
 								}
 							}
 						}
