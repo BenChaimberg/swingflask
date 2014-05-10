@@ -1,4 +1,5 @@
 import json,time
+from time import gmtime, strftime
 from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
@@ -187,7 +188,7 @@ def brochure():
 		i=0
 		for item in data:
 			i+=1
-		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.asctime(),'lang':'en'}}
+		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.strftime("%m/%d/%Y %I:%M:%S %p", gmtime()),'lang':'en'}}
 		data.update(writedata)
 		with open('brochurelist', 'w') as file:
 			json.dump(data,file,sort_keys=True,indent=4)
