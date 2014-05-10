@@ -10,41 +10,44 @@
 	{% endblock %}
 	</head>
 	<body>
-		<div id="fb-root"></div>
+		<!--<div id="fb-root"></div>
 		<script>
 			(function(d, s, id) {
   				var js, fjs = d.getElementsByTagName(s)[0];
   				if (d.getElementById(id)) return;
   				js = d.createElement(s); js.id = id;
-  				js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1";
+  				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
   				fjs.parentNode.insertBefore(js, fjs);
 			}
 			(document, 'script', 'facebook-jssdk'));
-		</script>
+		</script>-->
 		<div id="header">
 		{% block header %}
-			<a href="/about?french">PROFIL DE L'ENTERPRISE</a> &#x7c;
-			<a href="/locations?french">O&#xd9; ACHETER</a> &#x7c;
-			<a href="/faq?french">FAQ</a> &#x7c;
-			<a href="/contact?french">COMMUNICATIONS</a> &#x7c;
-			<a href="/marketing?french">AIDE DU MARKETING ET DE VENTES</a> &#x7c;
-			<b><a href="/home?french">ACCEUIL</a></b>
-			<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
+			<ul>
+				<li><a href="/about?french">PROFIL DE L'ENTERPRISE</a></li>
+				<li><a href="/locations?french">O&#xd9; ACHETER</a></li>
+				<li><a href="/faq?french">FAQ</a></li>
+				<li><a href="/contact?french">COMMUNICATIONS</a></li>
+				<li><a href="/marketing?french">AIDE DU MARKETING ET DE VENTES</a></li>
+				<li><b><a href="/home?french">ACCEUIL</a></b></li>
+				<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="172" height="37">
+			</ul>
 		{% endblock %}
 		</div>
 		<div id="sidebar">
 		{% block sidebar %}
-			<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
-			<i style="font-size:9;color:#FFFF00">NOUVEAU&nbsp;</i>
-			<a href="/category/nontoxic?french">Produits Non-Toxiques</a><br />&#183;<br />
-			<a href="/category/oils?french">Huiles de Finition</a><br />&#183;<br />
-			<a href="/category/poly?french">Huiles, Vernis &amp; Polyur&#xe9;thanes</a><br />&#183;<br />
-			<a href="/category/removers?french">D&#xe9;capants pour Peintures &amp; Vernis</a><br />&#183;<br />
-			<a href="/category/primer?french">Appr&#xeA;ts pour Peinture &amp; Tapisserie</a><br />&#183;<br />
-			<a href="/category/special?french">Peintures &amp; Rev&#xeA;tements Sp&#xe9;ciaux</a><br />&#183;<br />
-			<a href="/category/waxes?french">Cires, Polis, &amp; Nettoyeurs</a><br />&#183;<br />
-			<a href="/category/stain?french">Teinture &#xE0; Bois Teinture Vernis</a><br />&#183;<br />
-			<a href="/category/accessories?french">Accessoires</a>
+			<ul>
+				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
+				<li><i style="font-size:9px;color:#FFFF00"> NOUVEAU</i><a href="/category/nontoxic?french"> Produits Non-Toxiques</a></li>
+				<li><a href="/category/oils?french"> Huiles de Finition</a></li>
+				<li><a href="/category/poly?french"> Vernis et Polyur&#xe9;thanes</a></li>
+				<li><a href="/category/removers?french"> D&#xe9;capants pour Peintures et Vernis</a></li>
+				<li><a href="/category/primer?french"> Appr&#xeA;ts pour Peinture et Tapisserie</a></li>
+				<li><a href="/category/special?french"> Peintures et Rev&#xeA;tements Sp&#xe9;ciaux</a></li>
+				<li><a href="/category/waxes?french"> Cires, Polis, et Nettoyeurs</a></li>
+				<li><a href="/category/stain?french"> Teinture &#xE0; Bois Teinture Vernis</a></li>
+				<li><a href="/category/accessories?french"> Accessoires</a></li>
+			</ul>
 		{% endblock %}
 		</div>
 		<div id="category">{% block category %}{% endblock %}</div>
@@ -53,13 +56,15 @@
 			{% block content %}{% endblock %}
 			</div>
 			<div id="footer">
-				<a href="/forum.asp" class="noscript">FORUM INTERACTIF</a> |
-				<!--<a href="/coupon" class="noscript">SWING COUPONS</a> |-->
-				<a href="/newsletter?french" class="noscript" target="_BLANK">BULLETIN D'INFORMATIONS</a> |
-				<a href="/refer?french" class="noscript" target="_BLANK">DITES-LE &#xc0; UNE AMIE</a> |
-				<a href="/brochure?french" class="noscript">BROCHURE GRATUITES</a>
+				<ul>
+					<li><a href="/forum.asp" class="noscript">FORUM INTERACTIF</a></li>
+					<!--<li><a href="/coupon" class="noscript">SWING COUPONS</a></li>-->
+					<li><a href="/newsletter?french" class="noscript" target="_BLANK">BULLETIN D'INFORMATIONS</a></li>
+					<li><a href="/refer?french" class="noscript" target="_BLANK">DITES-LE &#xc0; UNE AMIE</a></li>
+					<li><a href="/brochure?french" class="noscript">BROCHURE GRATUITES</a></li>
+				</ul>
 				<div id="facebook">
-					<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
+					<!--<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>-->
 				</div>
 			</div>
 		</div>

@@ -7,7 +7,7 @@ from flask_wtf import Form, validators
 from wtforms.fields import TextField, PasswordField, SelectField
 import wtforms
 from werkzeug.routing import BaseConverter
-from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
+from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -212,7 +212,14 @@ def product(productid): #if URL is at /product/####
 																'title':frenchproducttitle.title[productid], #product.title = string with product name
 																'text':frenchproducttext.text[productid], #product.text = string with product text
 																'dir':frenchproductdir.dir[productid], #product.dir = string with product directions
-																'info':frenchproductinfo.info[productid] #product.info = string with product info (table)
+																'info':frenchproductinfo.info[productid], #product.info = string with product info (table)
+																'info2':frenchproductinfo.info2[productid],
+																'demo':frenchproductdemo.demo[productid],
+																'canforms':frenchproductforms.forms[productid + 'can'],
+																'usforms':frenchproductforms.forms[productid + 'us'],
+																'category':frenchcategoryproducts.products,
+																'categoryimg':frenchcategoryimg.img,
+																'categorytitle':frenchcategorytitle.title
 															})
 		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
 	else: #if URL does not end with ?french

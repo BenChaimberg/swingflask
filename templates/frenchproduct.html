@@ -1,56 +1,233 @@
 {% extends "frenchbase.html" %}
-{% block title %}{{ product.title }}{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='images/paint_varnish_top.png') }}" alt="CATEGORY WHENEVER I DO THIS" width=590 height=29>{% endblock %}
-{% block content %}
-<div id="text">{{ product.text|safe }}</div>
-<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+{% block head %}
+{{ super() }}
+<style>
+	#switch {
+		 background:#eee;
+		 padding:24px 5px 5px 5px;
+		 border:1px solid #000000;
+		 position:absolute;
+		 top:0px;
+		 width:97.3%;
+	}
+	#infotext {
+		 position:relative;
+		 right:5px;
+		 top:5px;
+		 width:50%;
+		 text-align:left;
+		 font-weight:bold;
+		 float:right;
+	}
+	#infotable {
+		 position:relative;
+		 left:5px;
+		 top:5px;
+		 width:50%;
+		 padding-bottom:5px;
+	}
+	.buystuff {
+		text-align:center;
+		display:none;
+		height:100%;
+		width:100%;
+	}
+	.buybutt {
+		height:100%;
+		width:50%;
+	}
+	.stuff a {
+		text-decoration:underline;
+		color: #336633;
+	}
+	.stuff p {
+		margin:0 0 5px;
+	}
+	.shown {
+		border-left:1px solid black;
+		border-right:1px solid black;
+		border-top:1px solid black;
+	}
+	.hidden {
+		border-bottom:1px solid black;
+		background:#FFF;
+		color: #336633;
+	}
+	.hidden:hover{
+		background: #CCFFCC;
+	}
+	.label {
+		margin: 0;
+		width: 24.75%;
+		float: left;
+		text-align: center;
+		padding: 2px 0;
+	}
+</style>
 <script type='text/javascript'>
-	$("#text").css('display','none');
-	$("#picture").load(function(){
-		var txt = $("#image").width();
-		var txt2 = 555 - txt
-		$("#text").css('display','inline');
-		$("#text").css('width', txt2);
+	$(document).ready(function(){
+		$(".label").click(function(){
+			var labelindex = $(this).index();
+			$("#footer").fadeOut(100);
+			$(".stuff").eq(labelindex).siblings().hide("fast");
+			$(".buystuff").hide("fast",function(){
+				$(".buybutt").show("fast",function(){
+					$(".stuff").eq(labelindex).show("fast",function(){
+						if (labelindex == 1){
+							if ($("#infotable").height() > $("#infotext").height()){
+								$(".stuff").css('height', $("#infotable").height());
+							} else { $(".stuff").css('height', $("#infotext").height()); }
+						}
+						var hht = $(this).height();
+						$("#container2").css('height', hht+31);
+						$("#footer").fadeIn(100);
+					});
+				});
+			});
+			$(this).addClass("shown").removeClass("hidden");
+			$(this).siblings().addClass("hidden").removeClass("shown");
+		});
 	});
 </script>
-</div><div id="container2" style="width:580">
-<div id="info">
-	<div style="width:50%;position:absolute;left:0;top:0;text-align:left;font-weight:bold">
-	{% for item in product.info2: %}
-		&#8226;{{ item | safe }}<br />
-	{% endfor %}
-	</div>
-	<div id="infotable" style="position:absolute;right:0;top:0;width:50%"><table style="text-align:center;font-size:10;width:100%">
-		<tr>
-			<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
-				<b>Code de Produit: </b>{{ product.id }}
-			</td>
-		</tr>
-		<tr>
-			<td style="width:58%">Format:</td>
-			<td style="width:42%">Emballage:</td>
-		{% for item in product.info: %}
-			{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
-			<td style="font-weight:normal">{{ item | safe }}</td>
-		{% endfor %}
-		</tr>
-	</table>
-	<div style="text-align:right;padding-right:2">
-		{% if product.id == '400.499': %}
-		<a href="/aqua_color_swatches.htm" class="directions">Colour Swatches</a>
-		{% elif product.id == '770.799': %}
-		<a href="/color_swatches.htm" class="directions">Colour Swatches</a>
-		{% elif product.id == '705' or product.id == '3220' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1800': %}
-		<a href="/right_stripper.htm" class="directions">Choosing the Right Stripper</a>
-		{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1604' or product.id ==  '1803' or product.id ==  '2101' or product.id ==  '1555' or product.id ==  '8172' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
-		<a href="/right_finish.htm" class="directions">Choosing the Right Finish</a>
-		{% endif %}
-	</div></div>
+<script type='text/javascript'>
+	$(document).ready(function(){
+		$(".buybutt").click(function(){
+			$("#footer").fadeOut(100);
+			var clicked = $(this)
+			$(".buybutt").fadeOut("slow",function(){
+				clicked.next().fadeIn("slow");
+				var hht = clicked.next().height();
+				$("#container2").css('height', hht+31);
+				$("#footer").fadeIn(100);
+			});
+		});
+	});
+</script>
+<script type='text/javascript'>
+	$(document).ready(function(){
+		$("#container2").hide("fast");
+		$(window).load(function(){
+			$("#container2").show("fast",function(){
+				var hht = $(".stuff").height();
+				$("#container2").css('height', hht+31);
+			});
+		});
+	});
+</script>
+{% endblock %}
+{% block title %}{{ product.title }}{% endblock %}
+{% block category %}
+
+<img src="{{ url_for('static', filename='images/%s' % product.categoryimg[product_category(product.category,product.id)]) }}" alt="{{ product.categorytitle[product_category(product.category,product.id)] }}" width=590 height=29>
+{% endblock %}
+{% block content %}
+	<div id="text">{{ product.text|safe }}</div>
+	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+	<script type='text/javascript'>
+		$("#text").css('display','none');
+		$("#picture").load(function(){
+			var txt = $("#image").width();
+			var txt2 = 555 - txt
+			$("#text").css('display','inline');
+			$("#text").css('width', txt2);
+		});
+	</script>
+</div>
 <script type='text/javascript'>
 	$(window).load(function(){
-		var hht = $("#infotable").height();
-		$("#info").css('height', hht);
+		var imghgt = $("#image").height();
+		var txthgt = $("#text").height();
+		var hgt = Math.max(imghgt,txthgt);
+		$("#content").css('height', hgt+10);
 	});
 </script>
-</div>
+<div id="container2" style="width:580;position:relative;">
+	<div style="width:100%;height:19px;position:relative;z-index:2;">
+		<a class="shown label" href="#">Directions</a>
+		<a class="hidden label" href="#">Plus d'Information</a>
+		<a class="hidden label" href="#">Acheter</a>
+		<a class="hidden label" href="#">D&#xe9;monstrations</a>
+	</div>
+	<div id="switch">
+		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
+		<div class="stuff" style="display:none;">
+			<div id="infotext">
+				<ul>
+				{% for item in product.info2: %}
+					<li>{{ item | safe }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div id="infotable">
+				<table style="text-align:center;font-size:10;width:100%">
+					<tr>
+						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
+							<b>Code de Produit: </b>{{ product.id }}
+						</td>
+					</tr>
+					<tr>
+						<td style="width:58%">Format:</td>
+						<td style="width:42%">Emballage:</td>
+					{% for item in product.info: %}
+						{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
+						<td style="font-weight:normal">{{ item | safe }}</td>
+					{% endfor %}
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="stuff" style="display:none;">
+			<div class="buybutt" style="float:right;">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
+			</div>
+			<div class="buystuff">
+				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
+					<input type="hidden" value="4388412" name="userid">
+					<input type="hidden" value="0" name="currency">
+					{% if product.canforms %}
+					<select style="font-size:12px" name="productpr">
+					{{ product.canforms | safe }}
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to Canada cart">
+					{% else %}
+					<select style="font-size:12px" name="productpr" disabled>
+						<option value=":0.00"> Not Available for Purchase </option>
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to Canada cart" disabled>
+					{% endif %}
+				</form>
+			</div>
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
+			</div>
+			<div class="buystuff">
+				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
+					<input type="hidden" value="4388412" name="userid">
+					<input type="hidden" value="1" name="currency">
+					{% if product.usforms %}
+					<select style="font-size:12px" name="productpr">
+					{{ product.usforms | safe }}
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to US cart">
+					{% else %}
+					<select style="font-size:12px" name="productpr" disabled>
+						<option value=":0.00"> Not Available for Purchase </option>
+					</select>
+					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="submit" style="font-size:12px" value="Add to US cart" disabled>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+		<div class="stuff" style="display:none;">
+			{% if product.demo %}
+			<iframe width="420" height="315" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
+			{% else %}
+			<p>No Demonstration Available</p>
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}
