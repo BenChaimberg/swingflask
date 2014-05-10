@@ -26,54 +26,105 @@
 		<script>
 			$(document).ready(function(){
 				$("#form").submit(function(){
-					$("input").attr('disabled', 'disabled');
-					$("select").attr('disabled', 'disabled');
-					var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
-					$("#write").children().children().css("display","table-row");
-					for (var key in data){;
-						var values = [];
-						for (var key2 in data[key]){
-							switch (key2){
-								case "name":
-									values[0] = data[key][key2];
-									break;
-								case "email":
-									values[1] = data[key][key2];
-									break;
-								case "address":
-									values[2] = data[key][key2];
-									break;
-								case "city":
-									values[3] = data[key][key2];
-									break;
-								case "stateprov":
-									values[4] = data[key][key2];
-									break;
-								case "zipcode":
-									values[5] = data[key][key2];
-									break;
-								case "country":
-									values[6] = data[key][key2];
-									break;
-								case "time":
-									values[7] = data[key][key2];
-									break;
-								case "lang":
-									values[8] = data[key][key2];
-									break;
+					if ($("#startyear").val() == parseInt($("#startyear").val()) && $("#startmonth").val() == parseInt($("#startmonth").val()) && $("#startday").val() == parseInt($("#startday").val()) && $("#endyear").val() == parseInt($("#endyear").val()) && $("#endmonth").val() == parseInt($("#endmonth").val()) && $("#endday").val() == parseInt($("#endday").val())){
+						$("input").attr('disabled', 'disabled');
+						$("select").attr('disabled', 'disabled');
+						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+						$("#write").children().children().css("display","table-row");
+						for (var key in data){;
+							var values = [];
+							for (var key2 in data[key]){
+								switch (key2){
+									case "name":
+										values[0] = data[key][key2];
+										break;
+									case "email":
+										values[1] = data[key][key2];
+										break;
+									case "address":
+										values[2] = data[key][key2];
+										break;
+									case "city":
+										values[3] = data[key][key2];
+										break;
+									case "stateprov":
+										values[4] = data[key][key2];
+										break;
+									case "zipcode":
+										values[5] = data[key][key2];
+										break;
+									case "country":
+										values[6] = data[key][key2];
+										break;
+									case "time":
+										values[7] = data[key][key2];
+										break;
+									case "lang":
+										values[8] = data[key][key2];
+										break;
+								}
 							}
-						}
-						if (new Date(values[7]) >= new Date(parseInt($("#startyear").val()),parseInt($("#startmonth").val()),parseInt($("#startday").val()),0,0,0,0)
-							&& new Date(values[7]) <= new Date(parseInt($("#endyear").val()),parseInt($("#endmonth").val()),parseInt($("#endday").val()),0,0,0,0)) {
-							var newRow  = document.getElementById("write").insertRow(-1);
-							for (var value in values) {
-								var newCell = newRow.insertCell(-1);
-								var newText = document.createTextNode(values[value]);
-								newCell.appendChild(newText);
+							if (new Date(values[7]) >= new Date(parseInt($("#startyear").val()),parseInt($("#startmonth").val()),parseInt($("#startday").val()),0,0,0,0)
+								&& new Date(values[7]) <= new Date(parseInt($("#endyear").val()),parseInt($("#endmonth").val()),parseInt($("#endday").val()),0,0,0,0)) {
+								var newRow  = document.getElementById("write").insertRow(-1);
+								for (var value in values) {
+									var newCell = newRow.insertCell(-1);
+									var newText = document.createTextNode(values[value]);
+									newCell.appendChild(newText);
+								}
 							}
 						}
 					}
-				return false;
+					return false;
+				});
+			});
+		</script>
+		<script>
+			$(document).ready(function(){
+				for (var i=2005;i<=new Date().getFullYear();i++) {
+					$("#startyear").append("<option>" + i + "</option>");
+				}
+				for (var i=2005;i<=new Date().getFullYear();i++) {
+					$("#endyear").append("<option>" + i + "</option>");
+				}
+				for (var i=1;i<=31;i++) {
+					$("#endday").append("<option>" + i + "</option>");
+				}
+				for (var i=1;i<=31;i++) {
+					$("#startday").append("<option>" + i + "</option>");
+				}
+				$("#endmonth").html($("#startmonth").html());
+			});
+		</script>
+		<script>
+			$(document).ready(function(){
+				$("#startmonth").change(function(){
+					var days = 31;
+					switch ($("#startmonth").val()) {
+						case "1":
+							days = 28;
+							break;
+						case "3":
+							days = 30;
+							break;
+						case "5":
+							days = 30;
+							break;
+						case "8":
+							days = 30;
+							break;
+						case "10":
+							days = 30;
+							break;
+					}
+					$("#endday").html("<option selected>Day</option>");
+					$("#startday").html("<option selected>Day</option>");
+					for (var i=1;i<=days;i++) {
+						$("#endday").append("<option>" + i + "</option>");
+					}
+					for (var i=1;i<=days;i++) {
+						$("#startday").append("<option>" + i + "</option>");
+					}
 				});
 			});
 		</script>
@@ -99,115 +150,18 @@
 				</select>
 				<select id="startday">
 					<option selected>Day</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-					<option>13</option>
-					<option>14</option>
-					<option>15</option>
-					<option>16</option>
-					<option>17</option>
-					<option>18</option>
-					<option>19</option>
-					<option>20</option>
-					<option>21</option>
-					<option>22</option>
-					<option>23</option>
-					<option>24</option>
-					<option>25</option>
-					<option>26</option>
-					<option>27</option>
-					<option>28</option>
-					<option>29</option>
-					<option>30</option>
-					<option>31</option>
 				</select>
 				<select id="startyear">
 					<option selected>Year</option>
-					<option>2005</option>
-					<option>2006</option>
-					<option>2007</option>
-					<option>2008</option>
-					<option>2009</option>
-					<option>2010</option>
-					<option>2011</option>
-					<option>2012</option>
-					<option>2013</option>
-					<option>2014</option>
-					<option>2015</option>
 				</select>
 				End Date:
 				<select id="endmonth">
-					<option selected>Month</option>
-					<option value="0">Jan</option>
-					<option value="1">Feb</option>
-					<option value="2">Mar</option>
-					<option value="3">Apr</option>
-					<option value="4">May</option>
-					<option value="5">June</option>
-					<option value="6">July</option>
-					<option value="7">Aug</option>
-					<option value="8">Sept</option>
-					<option value="9">Oct</option>
-					<option value="10">Nov</option>
-					<option value="11">Dec</option>
 				</select>
 				<select id="endday">
 					<option selected>Day</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-					<option>13</option>
-					<option>14</option>
-					<option>15</option>
-					<option>16</option>
-					<option>17</option>
-					<option>18</option>
-					<option>19</option>
-					<option>20</option>
-					<option>21</option>
-					<option>22</option>
-					<option>23</option>
-					<option>24</option>
-					<option>25</option>
-					<option>26</option>
-					<option>27</option>
-					<option>28</option>
-					<option>29</option>
-					<option>30</option>
-					<option>31</option>
 				</select>
 				<select id="endyear">
 					<option selected>Year</option>
-					<option>2005</option>
-					<option>2006</option>
-					<option>2007</option>
-					<option>2008</option>
-					<option>2009</option>
-					<option>2010</option>
-					<option>2011</option>
-					<option>2012</option>
-					<option>2013</option>
-					<option>2014</option>
-					<option>2015</option>
 				</select>
 				<input id="submit" type="submit" value="Display">
 			</form>
