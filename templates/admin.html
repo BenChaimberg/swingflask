@@ -28,7 +28,7 @@
 				$("#form").submit(function(){
 					var startdate = new Date(parseInt($("#startyear").val()),parseInt($("#startmonth").val()),parseInt($("#startday").val()),0,0,0,0);
 					var enddate = new Date(parseInt($("#endyear").val()),parseInt($("#endmonth").val()),parseInt($("#endday").val()),0,0,0,0);
-					if ((enddate > startdate) && $("#startyear").val() == parseInt($("#startyear").val()) && $("#startmonth").val() == parseInt($("#startmonth").val()) && $("#startday").val() == parseInt($("#startday").val()) && $("#endyear").val() == parseInt($("#endyear").val()) && $("#endmonth").val() == parseInt($("#endmonth").val()) && $("#endday").val() == parseInt($("#endday").val())){
+					if (($("#en").is(':checked') || $("#fr").is(':checked')) && (enddate > startdate) && $("#startyear").val() == parseInt($("#startyear").val()) && $("#startmonth").val() == parseInt($("#startmonth").val()) && $("#startday").val() == parseInt($("#startday").val()) && $("#endyear").val() == parseInt($("#endyear").val()) && $("#endmonth").val() == parseInt($("#endmonth").val()) && $("#endday").val() == parseInt($("#endday").val())){
 						$("input").attr('disabled', 'disabled');
 						$("select").attr('disabled', 'disabled');
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
@@ -66,8 +66,7 @@
 										break;
 								}
 							}
-							if (new Date(values[7]) >= startdate
-								&& new Date(values[7]) <= enddate) {
+							if ((new Date(values[7]) >= startdate && new Date(values[7]) <= enddate) && (($("#en").is(':checked') && values[8]=="en") || ($("#fr").is(':checked') && values[8]=="fr"))) {
 								var newRow  = document.getElementById("write").insertRow(-1);
 								for (var value in values) {
 									var newCell = newRow.insertCell(-1);
@@ -165,6 +164,8 @@
 				<select id="endyear">
 					<option selected>Year</option>
 				</select>
+				<input type="checkbox" id="en">English 
+				<input type="checkbox" id="fr">French 
 				<input id="submit" type="submit" value="Display">
 			</form>
 		</div>
