@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+	<style>
+		#container {
+			width:906px;
+		}
+		table {
+			font-size:9px;
+			width:500px;
+			margin-left:4px;
+		}
+		td {
+			text-align:center;
+		}
+		tr:nth-child(1) {
+			color:#ffffff;
+			background:#999999;
+			font-weight:bold;
+		}
+		td:nth-child(1) {
+			background:#999999;
+			font-weight:bold;
+		}
+		a {
+			color:#ffffff;
+		}
+		a:hover {
+			color:#1D432F;
+			text-decoration:underline;
+		}
+		.check {
+			background-image:url('{{ url_for('static', filename='images/check.jpg') }}');
+			background-repeat:no-repeat;
+			background-position:center center;
+		}
+		.circle {
+			background-image:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
+			background-repeat:no-repeat;
+			background-position:center center;
+		}
+		.x {
+			background-image:url('{{ url_for('static', filename='images/x.jpg') }}');
+			background-repeat:no-repeat;
+			background-position:center center;
+		}
+		.flame {
+			background-image:url('{{ url_for('static', filename='images/flame.jpg') }}');
+			background-repeat:no-repeat;
+			background-position:center center;
+		}
+	</style>
+{% endblock %}
+{% block title %}Swing Paints - Stain 'n Varnish Colour Swatches{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/right_stripper_top.png') }}" alt="Aqua Swatches Swing Paints" width=750 height=29>{% endblock %}
+{% block content %}
+	<table border="1" cellspacing="0">
+		<tr>
+			<td colspan="2">PRODUCT</td>
+			<td>PAINT<br />-<br />OIL</td>
+			<td>PAINT<br />-<br>LATEX</td>
+			<td>PAINT<br />-<br>EPOXY</td>
+			<td>POLY-<br />URETHANE</td>
+			<td>VARNISH</td>
+			<td>LACQUER</td>
+			<td>SHELLAC</td>
+			<td>OPAQUE STAIN</td>
+			<td>DYE STAIN</td>
+			<td>INTERIOR</td>
+			<td>EXTERIOR</td>
+			<td>NON-<br />FLAMMABLE</td>
+			<td>SPEED</td>
+			<td>GRAIN RAISE</td>
+			<td>NEUTRALIZE</td>
+			<td>SAFE FOR ANTIQUES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">SOFT STRIP</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/1820.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="x"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td>SLIGHT</td>
+			<td>NO</td>
+			<td>YES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">FURNITURE STRIPPER</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/1800.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td>NO</td>
+			<td>NO</td>
+			<td>YES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">FURNITURE REFINISHER</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/1801.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="flame"></td>
+			<td class="circle"></td>
+			<td>NO</td>
+			<td>NO</td>
+			<td>YES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">HEAVY BODY P&amp;V REMOVER</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/1806.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td>NO</td>
+			<td>NO</td>
+			<td>YES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">SUPER DEGOOPER</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/3200.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="check"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="check"></td>
+			<td class="x"></td>
+			<td class="flame"></td>
+			<td class="circle"></td>
+			<td>NO</td>
+			<td>NO</td>
+			<td>YES</td>
+		</tr>
+		<tr height="46px">
+			<td><a href="/product/1820">WOOD BLEACH</a></td>
+			<td style="padding:0;"><img src="{{ url_for('static', filename='images/tn/3220.jpg') }}" width="46px" height="46px" border="0"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="x"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td class="circle"></td>
+			<td>YES</td>
+			<td>YES</td>
+			<td>NO</td>
+		</tr>
+	</table>
+{% endblock %}
