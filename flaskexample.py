@@ -62,6 +62,12 @@ class ReferForm(Form):
     friendname = TextField("Your friend's name", [wtforms.validators.Required('Please enter your friend&apos;s name')])
     friendemail = TextField("Your friend's email", [wtforms.validators.Required('Please enter your friend&apos;s email'), wtforms.validators.Email()])
 
+class FrenchReferForm(Form):
+    visitorname = TextField("Votre nom", [wtforms.validators.Required('Veuillez entrer votre nom')])
+    visitoremail = TextField("Votre adresse de courriel", [wtforms.validators.Required('Veuillez entrer votre adresse de courriel'), wtforms.validators.Email()])
+    friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
+    friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
+
 @app.context_processor
 def utility_processor(): #creates template context processor function
 	def product_category(category,id): #creates specific category for product function, takes arguments of all products in all categories and product id
@@ -191,21 +197,38 @@ def rightfinish(): #if URL is at about
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
-	form = ReferForm()
-	if form.validate_on_submit():
-		visitorname = form.visitorname.data
-		visitoremail = form.visitoremail.data
-		friendname = form.friendname.data
-		friendemail = form.friendemail.data
-		msg = Message()
-		msg.recipients = [friendemail]
-		msg.bcc = ['echaimberg@swingpaints.com']
-		msg.sender = (visitorname, visitoremail)
-		msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
-		msg.html = "%s,<br />Please forgive the intrusion but I think I found something that you'd be interested in. I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, and thought of you. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
-		mail.send(msg)
-		return render_template('refersuccess.html')
-	return render_template('refer.html', form=form)
+	if request.query_string == 'french': #if URL ends with ?french
+		form = FrenchReferForm()
+		if form.validate_on_submit():
+			visitorname = form.visitorname.data
+			visitoremail = form.visitoremail.data
+			friendname = form.friendname.data
+			friendemail = form.friendemail.data
+			msg = Message()
+			msg.recipients = [friendemail]
+			msg.bcc = ['echaimberg@swingpaints.com']
+			msg.sender = (visitorname, visitoremail)
+			msg.subject = "Re: Une recommandation d'un ami - Decouvrez Peintures Swing!"
+			msg.html = "%s,<br />S'il vous pla&#xee;t pardonnez l'intrusion, mais je crois que j'ai trouv&#xe9; quelque chose que vous seriez int&#xe9;ress&#xe9;. Je regardais &#xe0; travers les pages du site Web de cette soci&#xe9;t&#xe9; assez cool de finition du bois, Peintures Swing, et la pens&#xe9;e de vous. Donc, c&#x27;est la raison de cette \"presque \" e-mail personnelle. Vous pouvez les trouver <a href='http://swingpaints.herokuapp.com/?french'>ici</a>." % (friendname)
+			mail.send(msg)
+			return render_template('frenchrefersuccess.html')
+		return render_template('frenchrefer.html', form=form)
+	else: #if URL does not end with ?french
+		form = ReferForm()
+		if form.validate_on_submit():
+			visitorname = form.visitorname.data
+			visitoremail = form.visitoremail.data
+			friendname = form.friendname.data
+			friendemail = form.friendemail.data
+			msg = Message()
+			msg.recipients = [friendemail]
+			msg.bcc = ['echaimberg@swingpaints.com']
+			msg.sender = (visitorname, visitoremail)
+			msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
+			msg.html = "%s,<br />Please forgive the intrusion but I think I found something that you'd be interested in. I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, and thought of you. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
+			mail.send(msg)
+			return render_template('refersuccess.html')
+		return render_template('refer.html', form=form)
 
 @app.route('/brochure', methods=('GET', 'POST'))
 def brochure():
