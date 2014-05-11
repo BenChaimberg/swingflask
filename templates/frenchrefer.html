@@ -1,5 +1,27 @@
 {% extends "frenchbase.html" %}
-{% block head %}{{ super() }}<style>p{text-align:center;}label{float:left;}input{float:right;}</style>{% endblock %}
+{% block head %}
+	{{ super() }}
+	<style>
+		p {
+			text-align:center;
+		}
+		label {
+			float:left;
+		}
+		input {
+			float:right;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$("form").keyup(function(){
+				if ($("#visitorname").val() && $("#visitoremail").val() && $("#friendname").val() && $("#friendemail").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+		});
+	</script>
+{% endblock %}
 {% block title %}Peintures Swing - Dite-le &#xe0; une amie{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
 {% block content %}

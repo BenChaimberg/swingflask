@@ -1,5 +1,32 @@
 {% extends "frenchbase.html" %}
-{% block head %}{{ super() }}<style>label{float:left;}input{float:right;}select{float:right;}</style>{% endblock %}
+{% block head %}
+	{{ super() }}
+	<style>
+		label {
+			float:left;
+		}
+		input {
+			float:right;
+		}
+		select {
+			float:right;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$("form").change(function(){
+				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+			$("form").keyup(function(){
+				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+		});
+	</script>
+{% endblock %}
 {% block title %}Peintures Swing - Brochure Gratuites{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/french/free_brochure_top.png') }}" alt="Brochure Gratuites Swing Paints" width=590 height=29>{% endblock %}
 {% block content %}
