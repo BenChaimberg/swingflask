@@ -2,6 +2,27 @@
 {% block head %}
 {{ super() }}
 	<style>
+		#content ul {
+			list-style: none;
+			padding: 0px;
+			margin: 5px 0;
+			width:25%;
+			float:left;
+			position:relative;
+		}
+		#content li {display: block; vertical-align: top;}
+		#content li:nth-child(1):before{
+			margin-right:10px;
+			content:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
+		}
+		#content li:nth-child(2):before{
+			margin-right:10px;
+			content:url('{{ url_for('static', filename='images/check.jpg') }}');
+		}
+		#content li:nth-child(3):before{
+			margin-right:10px;
+			content:url('{{ url_for('static', filename='images/x.jpg') }}');
+		}
 		#container {
 			width:906px;
 		}
@@ -13,41 +34,33 @@
 		td {
 			text-align:center;
 		}
-		tr:nth-child(1) {
+		tr:nth-child(1), td:nth-child(1) {
 			color:#ffffff;
 			background:#999999;
 			font-weight:bold;
 		}
-		td:nth-child(1) {
-			background:#999999;
-			font-weight:bold;
-		}
-		a {
+		table a {
 			color:#ffffff;
 		}
-		a:hover {
+		table a:hover {
 			color:#1D432F;
 			text-decoration:underline;
 		}
-		.check {
-			background-image:url('{{ url_for('static', filename='images/check.jpg') }}');
+		.check, .circle, .x, .flame{
 			background-repeat:no-repeat;
 			background-position:center center;
+		}
+		.check {
+			background-image:url('{{ url_for('static', filename='images/check.jpg') }}');
 		}
 		.circle {
 			background-image:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
-			background-repeat:no-repeat;
-			background-position:center center;
 		}
 		.x {
 			background-image:url('{{ url_for('static', filename='images/x.jpg') }}');
-			background-repeat:no-repeat;
-			background-position:center center;
 		}
 		.flame {
 			background-image:url('{{ url_for('static', filename='images/flame.jpg') }}');
-			background-repeat:no-repeat;
-			background-position:center center;
 		}
 	</style>
 {% endblock %}
@@ -195,4 +208,12 @@
 			<td>NO</td>
 		</tr>
 	</table>
+	<ul>
+		<li>BEST</li>
+		<li>GOOD</li>
+		<li>DO NOT USE</li>
+	</ul> 
+	<div style="float:right;position:relative;width:75%;margin-top:5px;">
+		Got a specific stripping problem and you're still not sure which product is best? Feel free to post your question on the <a style="text-decoration:underline;" href="http://www.swingpaints.com/forum.asp">INTERACTIVE FORUM</a> to receive the most PERSONALIZED response
+	</div>
 {% endblock %}
