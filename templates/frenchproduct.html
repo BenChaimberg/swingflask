@@ -118,11 +118,11 @@
 {% block title %}{{ product.title }}{% endblock %}
 {% block category %}
 
-<img src="{{ url_for('static', filename='images/%s' % product.categoryimg[product_category(product.category,product.id)]) }}" alt="{{ product.categorytitle[product_category(product.category,product.id)] }}" width=590 height=29>
+<img src="{{ url_for('static', filename='images/french/%s' % product.categoryimg[product_category(product.category,product.id)]) }}" alt="{{ product.categorytitle[product_category(product.category,product.id)] }}" width=590 height=29>
 {% endblock %}
 {% block content %}
 	<div id="text">{{ product.text|safe }}</div>
-	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+	<div id="image"><img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
 	<script type='text/javascript'>
 		$("#text").css('display','none');
 		$("#picture").load(function(){
