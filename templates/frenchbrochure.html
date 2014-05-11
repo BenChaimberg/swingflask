@@ -1,0 +1,43 @@
+{% extends "frenchbase.html" %}
+{% block head %}{{ super() }}<style>label{float:left;}input{float:right;}select{float:right;}</style>{% endblock %}
+{% block title %}Peintures Swing - Brochure Gratuites{% endblock %}
+{% block category %}<img src="{{ url_for('static', filename='images/french/free_brochure_top.png') }}" alt="Free Brochure Swing Paints" width=590 height=29>{% endblock %}
+{% block content %}
+<p>Chez les Peintures Swing nous savons qu&#x27;il est tr&#xe8;s facile de faire de la finition de meubles, plus facile que ce que les gens peuvent ne l&#x27;imaginer, il faut juste commencer et y aller une &#xe9;tape &#xe0; la fois. Tout ce que vous avez &#xe0; faire c&#x27;est de vous approvisionner de notre exp&#xe9;rience et de notre savoir faire depuis plusieurs ann&#xe9;es. "Quand on commence bien, la finition est assur&#xe9;e et la satisfaction est garantie".</p>
+<p>Pour vous assurer d&#x27;un bon d&#xe9;part, &#xe9;crivez-nous pour obtenir votre brochure gratuite sur la finition de meubles.</p>
+<p>Soyez assur&#xe9;, que votre adresse couriel restera confidentielle, elle ne sera jamais diffus&#xe9;e &#xe0; aucune autre compagnie.</p>
+<form method="POST" action="/brochure?french">
+{{ form.hidden_tag() }}
+	<div style="width:48%;float:left;">
+	{% for field in form %}
+		<div style="clear:right;">
+		{% if loop.index == 1 %}
+		{% else %}
+			{{ field.label }}:
+			{% if field.type == "SelectField" %}
+				<select id="{{ field.name }}" name="{{ field.name }}" style="width:50%">
+				{% for option in field %}
+					{% if option.data == '_' %}
+						{{ option(disabled=True) }}
+					{% else %}
+						{{ option }}
+					{% endif %}
+				{% endfor %}
+				</select>
+			{% else %}
+				{{ field(style="width:50%") }}
+				{% for error in field.errors %}
+					{{ error | safe }}
+				{% endfor %}
+			{% endif %}
+		{% endif %}
+		</div>
+		{% if loop.index == 5 %}
+	</div>
+	<div style="width:48%;float:right;">
+		{% endif %}
+	{% endfor %}
+		<div style="clear:right;"><input type="submit" value="Submit"></div>
+    </div>
+</form>
+{% endblock %}
