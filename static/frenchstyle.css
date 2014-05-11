@@ -157,6 +157,7 @@ a.directions {
 	position:relative;
 	float:left;
 	width:580px;
+	margin-left:3px;
 }
 #facebook {
 	margin-top:5px;
