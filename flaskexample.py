@@ -182,6 +182,13 @@ def rightstripper(): #if URL is at about
 	else: #if URL does not end with ?french
 		return render_template('rightstripper.html') #return english about page
 
+@app.route('/rightfinish')
+def rightfinish(): #if URL is at about
+	if request.query_string == 'french': #if URL ends with ?french
+		return render_template('frenchrightfinish.html') #render french about page
+	else: #if URL does not end with ?french
+		return render_template('rightfinish.html') #return english about page
+
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
 	form = ReferForm()
