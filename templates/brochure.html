@@ -1,5 +1,32 @@
 {% extends "base.html" %}
-{% block head %}{{ super() }}<style>label{float:left;}input{float:right;}select{float:right;}</style>{% endblock %}
+{% block head %}
+	{{ super() }}
+	<style>
+		label {
+			float:left;
+		}
+		input {
+			float:right;
+		}
+		select {
+			float:right;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$("form").change(function(){
+				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+			$("form").keyup(function(){
+				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+		});
+	</script>
+{% endblock %}
 {% block title %}Swing Paints - Free Brochure{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/free_brochure_top.png') }}" alt="Free Brochure Swing Paints" width=590 height=29>{% endblock %}
 {% block content %}
@@ -37,7 +64,7 @@
 	<div style="width:48%;float:right;">
 		{% endif %}
 	{% endfor %}
-		<div style="clear:right;"><input type="submit" value="Submit"></div>
+		<div style="clear:right;"><input id="submit" type="submit" value="Submit" disabled="disabled"></div>
     </div>
 </form>
 {% endblock %}

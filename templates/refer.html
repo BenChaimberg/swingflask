@@ -1,5 +1,27 @@
 {% extends "base.html" %}
-{% block head %}{{ super() }}<style>p{text-align:center;}label{float:left;}input{float:right;}</style>{% endblock %}
+{% block head %}
+	{{ super() }}
+	<style>
+		p {
+			text-align:center;
+		}
+		label {
+			float:left;
+		}
+		input {
+			float:right;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$("form").keyup(function(){
+				if ($("#visitorname").val() && $("#visitoremail").val() && $("#friendname").val() && $("#friendemail").val()) {
+					$("#submit").prop('disabled',false);
+				} else {$("#submit").prop('disabled',true);}
+			});
+		});
+	</script>
+{% endblock %}
 {% block title %}Swing Paints - Refer a Friend{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
 {% block content %}
@@ -14,12 +36,9 @@
     <div style="clear:right;">
     {{ field.label }}:
     {{ field(size=20) }}
-    {% for error in field.errors %}
-    	{{ error | safe }}
-    {% endfor %}
     </div>
     	{% endif %}
     {% endfor %}
-    <div style="clear:right;"><input type="submit" value="Submit"><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
+    <div style="clear:right;"><input id="submit" type="submit" value="Submit" disabled><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
 </form></div>
 {% endblock %}
