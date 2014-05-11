@@ -15,7 +15,8 @@
 	<script>
 		$(document).ready(function(){
 			$("form").keyup(function(){
-				if ($("#visitorname").val() && $("#visitoremail").val() && $("#friendname").val() && $("#friendemail").val()) {
+    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+				if ($("#visitorname").val() && regex.test($("#visitoremail").val()) && $("#friendname").val() && regex.test($("#friendemail").val())) {
 					$("#submit").prop('disabled',false);
 				} else {$("#submit").prop('disabled',true);}
 			});

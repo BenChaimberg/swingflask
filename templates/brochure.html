@@ -15,12 +15,14 @@
 	<script>
 		$(document).ready(function(){
 			$("form").change(function(){
-				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
 					$("#submit").prop('disabled',false);
 				} else {$("#submit").prop('disabled',true);}
 			});
 			$("form").keyup(function(){
-				if ($("#name").val() && $("#email").val() && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
 					$("#submit").prop('disabled',false);
 				} else {$("#submit").prop('disabled',true);}
 			});
