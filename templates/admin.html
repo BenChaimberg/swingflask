@@ -101,31 +101,51 @@
 		<script>
 			$(document).ready(function(){
 				$("#startmonth").change(function(){
-					var days = 31;
+					var startdays = 31;
 					switch ($("#startmonth").val()) {
 						case "1":
-							days = 28;
+							startdays = 28;
 							break;
 						case "3":
-							days = 30;
+							startdays = 30;
 							break;
 						case "5":
-							days = 30;
+							startdays = 30;
 							break;
 						case "8":
-							days = 30;
+							startdays = 30;
 							break;
 						case "10":
-							days = 30;
+							startdays = 30;
+							break;
+					}
+					$("#startday").html("<option selected>Day</option>");
+					for (var i=1;i<=startdays;i++) {
+						$("#startday").append("<option>" + i + "</option>");
+					}
+				});
+				$("#endmonth").change(function(){
+					var enddays = 31;
+					switch ($("#endmonth").val()) {
+						case "1":
+							enddays = 28;
+							break;
+						case "3":
+							enddays = 30;
+							break;
+						case "5":
+							enddays = 30;
+							break;
+						case "8":
+							enddays = 30;
+							break;
+						case "10":
+							enddays = 30;
 							break;
 					}
 					$("#endday").html("<option selected>Day</option>");
-					$("#startday").html("<option selected>Day</option>");
-					for (var i=1;i<=days;i++) {
+					for (var i=1;i<=enddays;i++) {
 						$("#endday").append("<option>" + i + "</option>");
-					}
-					for (var i=1;i<=days;i++) {
-						$("#startday").append("<option>" + i + "</option>");
 					}
 				});
 			});
