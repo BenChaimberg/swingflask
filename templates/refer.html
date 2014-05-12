@@ -16,12 +16,82 @@
 		$(document).ready(function(){
 			$("form").keyup(function(){
     			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if ($("#visitorname").val() && regex.test($("#visitoremail").val()) && $("#friendname").val() && regex.test($("#friendemail").val())) {
-					$("#submit").prop('disabled',false);
-				} else {$("#submit").prop('disabled',true);}
+				if (regex.test($("#visitoremail").val())) {
+					$("#visitoremailspan").remove();
+					var newHTML = document.createElement("div");
+					newHTML.innerHTML = "<div style='margin:auto auto;width:175px;'>Valid e-mail address</div>";
+					$("body").append(newHTML);
+					var offset = $("#visitoremail").offset();
+					var top = offset.top;
+					var left = offset.left + $("#visitoremail").width() + 10;
+					$(newHTML).offset({top:top,left:left});
+					$(newHTML).attr("id","visitoremailspan");
+					$(newHTML).css("background","#5cb85c");
+					$(newHTML).css("color","white");
+					$(newHTML).css("width","200px");
+					$(newHTML).css("height","20px");
+					$(newHTML).css("display","none");
+					$(newHTML).css("vertical-align","middle");
+					$(newHTML).fadeIn("fast");
+					if ($("#visitorname").val() && $("#friendname").val() && regex.test($("#friendemail").val())) {
+						$("#submit").prop('disabled',false);
+					} else {$("#submit").prop('disabled',true);}
+				}
 			});
 		});
 	</script>
+	<script>
+		$(document).ready(function(){
+			$("#visitoremail").focus(function(){
+				var newHTML = document.createElement("div");
+				newHTML.innerHTML = "<div style='margin:auto auto;width:175px;'>Must be valid e-mail address.</div>";
+				$("body").append(newHTML);
+				var offset = $(this).offset();
+				var top = offset.top;
+				var left = offset.left + $(this).width() + 10;
+				$(newHTML).offset({top:top,left:left});
+				$(newHTML).attr("id","visitoremailspan");
+				$(newHTML).css("background","#d9534f");
+				$(newHTML).css("color","white");
+				$(newHTML).css("width","200px");
+				$(newHTML).css("height","20px");
+				$(newHTML).css("display","none");
+				$(newHTML).css("vertical-align","middle");
+				$(newHTML).fadeIn("fast");
+			});
+			$("#visitoremail").focusout(function(){
+				$("#visitoremailspan").fadeOut("fast",function(){
+					$("#visitoremailspan").remove();
+				});
+			});
+		});
+	</script>
+	<script>
+	/*$(document).ready(function(){
+			$("#visitorname").focus(function(){
+				var newHTML = document.createElement("div");
+				newHTML.innerHTML = "span";
+				var offset = $("#visitorname").offset();
+				console.log(offset.left);
+				var left = offset.left + $("#visitorname").width() + 10;
+				console.log($("#visitorname").width());
+				var top = offset.top - 5;
+				$(newHTML).offset({ left:left , top:top });
+				$(newHTML).css("background","green");
+				$(newHTML).css("width","75px");
+				$(newHTML).css("height","30px");
+				$(newHTML).css("display","none");
+				$("body").append(newHTML);
+				$(newHTML).fadeIn("fast");
+			});
+			$("#visitorname").focusout(function(){
+				$(newHTML).fadeOut("fast");
+				$(newHTML).remove();
+			});
+		});*/
+	</script>
+	
+		
 {% endblock %}
 {% block title %}Swing Paints - Refer a Friend{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
