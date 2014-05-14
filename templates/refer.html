@@ -14,10 +14,18 @@
 	</style>
 	<script>
 		$(document).ready(function(){
+			var newHTML = document.createElement("div");
+			$("body").append(newHTML);
+			$(newHTML).attr("id","hoverspan");
+			$(newHTML).offset({top:0,left:0});
+			var newHTML2 = document.createElement("div");
+			$("body").append(newHTML2);
+			$(newHTML2).attr("id","hoverspan2");
+			$(newHTML2).offset({top:-20,left:0});
 			$("form").keyup(function(){
     			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
 				if (regex.test($("#visitoremail").val())) {
-					$("#visitoremailspan").remove();
+					/*$("#visitoremailspan").remove();
 					var newHTML = document.createElement("div");
 					newHTML.innerHTML = "<div style='margin:auto auto;width:175px;'>Valid e-mail address</div>";
 					$("body").append(newHTML);
@@ -32,66 +40,40 @@
 					$(newHTML).css("height","20px");
 					$(newHTML).css("display","none");
 					$(newHTML).css("vertical-align","middle");
-					$(newHTML).fadeIn("fast");
+					$(newHTML).fadeIn("fast");*/
 					if ($("#visitorname").val() && $("#friendname").val() && regex.test($("#friendemail").val())) {
 						$("#submit").prop('disabled',false);
 					} else {$("#submit").prop('disabled',true);}
 				}
 			});
-		});
-	</script>
-	<script>
-		$(document).ready(function(){
-			$("#visitoremail").focus(function(){
-				var newHTML = document.createElement("div");
-				newHTML.innerHTML = "<div style='margin:auto auto;width:175px;'>Must be valid e-mail address.</div>";
-				$("body").append(newHTML);
-				var offset = $(this).offset();
+			function createSpan(focused,html,backcolor){
+				if ($(focused).attr("id") == "visitoremail") {span = $("#hoverspan")} else {span = $("#hoverspan2")}
+				span.html(html);
+				var offset = $(focused).offset();
 				var top = offset.top;
-				var left = offset.left + $(this).width() + 10;
-				$(newHTML).offset({top:top,left:left});
-				$(newHTML).attr("id","visitoremailspan");
-				$(newHTML).css("background","#d9534f");
-				$(newHTML).css("color","white");
-				$(newHTML).css("width","200px");
-				$(newHTML).css("height","20px");
-				$(newHTML).css("display","none");
-				$(newHTML).css("vertical-align","middle");
-				$(newHTML).fadeIn("fast");
+				var left = offset.left + $(focused).width() + 10;
+				span.offset({top:top,left:left});
+				span.css("background","#ffffff");
+				span.css("color","white");
+				span.css("width","200px");
+				span.css("height","20px");
+				span.css("vertical-align","middle");
+				span.animate({backgroundColor:backcolor}, 100);
+			}
+			$("#visitoremail, #friendemail").focus(function(){
+				if ($(this).attr("id") == "visitoremail") {span = $("#hoverspan")} else {span = $("#hoverspan2")}
+				if (span.offset().left == 0 && span.offset().top == 0) {
+					createSpan(this,"<div style='margin:auto auto;width:175px;'>Must be valid e-mail address.</div>","#d9534f");
+				}
 			});
-			$("#visitoremail").focusout(function(){
-				$("#visitoremailspan").fadeOut("fast",function(){
-					$("#visitoremailspan").remove();
+			$("#visitoremail, #friendemail").blur(function(){
+				if ($(this).attr("id") == "visitoremail") {span = $("#hoverspan")} else {span = $("#hoverspan2")}
+				span.animate({backgroundColor:"#ffffff"}, 100, function(){
+					span.offset({top:0,left:0});
 				});
 			});
 		});
 	</script>
-	<script>
-	/*$(document).ready(function(){
-			$("#visitorname").focus(function(){
-				var newHTML = document.createElement("div");
-				newHTML.innerHTML = "span";
-				var offset = $("#visitorname").offset();
-				console.log(offset.left);
-				var left = offset.left + $("#visitorname").width() + 10;
-				console.log($("#visitorname").width());
-				var top = offset.top - 5;
-				$(newHTML).offset({ left:left , top:top });
-				$(newHTML).css("background","green");
-				$(newHTML).css("width","75px");
-				$(newHTML).css("height","30px");
-				$(newHTML).css("display","none");
-				$("body").append(newHTML);
-				$(newHTML).fadeIn("fast");
-			});
-			$("#visitorname").focusout(function(){
-				$(newHTML).fadeOut("fast");
-				$(newHTML).remove();
-			});
-		});*/
-	</script>
-	
-		
 {% endblock %}
 {% block title %}Swing Paints - Refer a Friend{% endblock %}
 {% block category %}<img src="{{ url_for('static', filename='images/refer_top.png') }}" alt="Refer Swing Paints" width=590 height=29>{% endblock %}
