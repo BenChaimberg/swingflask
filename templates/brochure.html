@@ -14,6 +14,47 @@
 	</style>
 	<script>
 		$(document).ready(function(){
+			var newHTML = document.createElement("div");
+			$("body").append(newHTML);
+			$(newHTML).attr("id","hoverspan");
+			$(newHTML).offset({top:0,left:0});
+			$("#email").keyup(function(){
+				createSpan($(this));
+			});
+			function createSpan(focused){
+				var span = $("#hoverspan");
+    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+				if (regex.test(focused.val())) {
+					var html = "<div style='margin:auto auto;width:175px;'>Valid e-mail address.</div>";
+					var backcolor = "#5cb85c";
+				} else {
+					var html = "<div style='margin:auto auto;width:175px;'>Must be valid e-mail address.</div>";
+					var backcolor = "#d9534f";
+				}
+				span.html(html);
+				var offset = focused.offset();
+				var top = offset.top;
+				var left = offset.left + focused.width() + 10;
+				span.offset({top:top,left:left});
+				span.css("background","#ffffff");
+				span.css("color","white");
+				span.css("width","200px");
+				span.css("height","20px");
+				span.css("vertical-align","middle");
+				span.animate({backgroundColor:backcolor}, 200);
+			}
+			$("#email").focus(function(){
+				var span = $("#hoverspan");
+				if (span.offset().left == 0 && span.offset().top == 0) {
+					createSpan($(this));
+				}
+			});
+			$("#email").blur(function(){
+			var span = $("#hoverspan");
+				span.animate({backgroundColor:"#ffffff"}, 200, function(){
+					span.offset({top:0,left:0});
+				});
+			});
 			$("form").change(function(){
     			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
 				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
