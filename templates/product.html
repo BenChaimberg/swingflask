@@ -21,8 +21,6 @@
 	}
 	#infotable {
 		 position:relative;
-		 left:5px;
-		 top:5px;
 		 width:50%;
 		 padding-bottom:5px;
 	}
@@ -73,24 +71,21 @@
 			$(".buystuff").hide("fast",function(){
 				$(".buybutt").show("fast",function(){
 					$(".stuff").eq(labelindex).show("fast",function(){
-						if (labelindex == 1){
-							if ($("#infotable").height() > $("#infotext").height()){
-								$(".stuff").css('height', $("#infotable").height());
-							} else { $(".stuff").css('height', $("#infotext").height()); }
-						}
-						var hht = $(this).height();
-						$("#container2").css('height', hht+31);
-						$("#footer").fadeIn(100);
+						var hht = 0;
+						$(".stuff").eq(labelindex).children().each(function(){
+							console.log($(this).height());
+							hht = ($(this).height() > hht) ? $(this).height() : hht;
+						});
+						$(".stuff").animate({'height':hht},function(){
+							$("#container2").css('height', hht+31);
+							$("#footer").fadeIn(50);
+						});
 					});
 				});
 			});
 			$(this).addClass("shown").removeClass("hidden");
 			$(this).siblings().addClass("hidden").removeClass("shown");
 		});
-	});
-</script>
-<script type='text/javascript'>
-	$(document).ready(function(){
 		$(".buybutt").click(function(){
 			$("#footer").fadeOut(100);
 			var clicked = $(this)
@@ -98,13 +93,9 @@
 				clicked.next().fadeIn("slow");
 				var hht = clicked.next().height();
 				$("#container2").css('height', hht+31);
-				$("#footer").fadeIn(100);
+				$("#footer").fadeIn(50);
 			});
 		});
-	});
-</script>
-<script type='text/javascript'>
-	$(document).ready(function(){
 		$("#container2").hide("fast");
 		$(window).load(function(){
 			$("#container2").show("fast",function(){
@@ -188,10 +179,10 @@
 			</div>
 		</div>
 		<div class="stuff" style="display:none;">
-			<div class="buybutt" style="float:right;">
+			<div class="buybutt" style="float:right;height:100px;">
 				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
 			</div>
-			<div class="buystuff">
+			<div class="buystuff" style="height:22px;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
@@ -210,10 +201,10 @@
 					{% endif %}
 				</form>
 			</div>
-			<div class="buybutt">
+			<div class="buybutt" style="height:100px;">
 				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
 			</div>
-			<div class="buystuff">
+			<div class="buystuff" style="height:22px;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
