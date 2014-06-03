@@ -117,15 +117,23 @@ def login():
     	if form.username.data == 'administrator' and form.password.data == 'supersecurepassword':
     		user = load_user(form.username.data)
         	login_user(user)
-        	return redirect('/admin')
+        	return redirect('/admin/')
     return render_template("login.html", form=form)
 
-@app.route('/admin')
+@app.route('/admin/')
+def adminroot():
+	return render_template('admin.html')
+
+@app.route('/admin/<page>')
 @fresh_login_required
-def admin():
-	with open('brochurelist', 'r') as file:
-		data = json.load(file)
-	return render_template('admin.html',data=data,len=len(data))
+def adminpage(page):
+	if page == 'brochure':
+		with open('brochurelist', 'r') as file:
+			data = json.load(file)
+		return render_template('adminbrochure.html',data=data,len=len(data))
+	elif page == 'newsletter':
+		return render_template('adminnewsletter.html')
+	else: abort(404)
 
 @app.route("/logout")
 @login_required
