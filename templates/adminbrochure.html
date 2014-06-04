@@ -33,7 +33,7 @@
 						$("select").attr('disabled', 'disabled');
 						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
 						$("#write").children().children().css("display","table-row");
-						for (var key in data){;
+						for (var key in data){
 							var values = [];
 							for (var key2 in data[key]){
 								switch (key2){
