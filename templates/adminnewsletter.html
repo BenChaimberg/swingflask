@@ -6,7 +6,34 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>Newsletter</title>
+		<script>
+			$(document).ready(function(){
+				list = function(){
+					if ($("#write").length){
+						if ($("#write").is(":visible")){
+							$("#write").hide();
+							$("button").html("Show List");
+						} else {
+							$("#write").show();
+							$("button").html("Hide List");
+						}
+					}
+					else {
+						$("button").html("Hide List");
+						var newHTML = document.createElement("div");
+						$(newHTML).attr("id","write");
+						$("body").append(newHTML);
+						$(newHTML).css({height:$(window).innerHeight()-$("body").height()-20,border:"1px solid black",overflow:"auto"});
+						var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+						for (var key in data["array"]) {
+							var htmlNode = document.createElement('p');
+							htmlNode.innerHTML = data["array"][key];
+							newHTML.appendChild(htmlNode);
+						}
+					}
+				}
+			});
+		</script>
 	</head>
-	<body>
-	</body>
+	<body><button onClick=list()>Show List</button></body>
 </html>
