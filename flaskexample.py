@@ -121,6 +121,7 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route('/admin/')
+@fresh_login_required
 def adminroot():
 	return render_template('admin.html')
 
@@ -132,7 +133,9 @@ def adminpage(page):
 			data = json.load(file)
 		return render_template('adminbrochure.html',data=data,len=len(data))
 	elif page == 'newsletter':
-		return render_template('adminnewsletter.html')
+		with open('mailinglist', 'r') as file:
+			data = json.load(file)
+		return render_template('adminnewsletter.html',data=data,len=len(data))
 	else: abort(404)
 
 @app.route("/logout")
