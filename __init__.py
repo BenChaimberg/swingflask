@@ -338,4 +338,4 @@ def category(categoryid):
 		else: abort(404)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
-    app.run(debug=True) #run server with application (debug on, must be turned off for deployment
+    app.run(debug=False,host= '0.0.0.0') #run server with application (debug on, must be turned off for deployment)
