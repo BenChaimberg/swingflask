@@ -39,19 +39,27 @@
 		{% block sidebar %}
 			<ul>
 				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
-				<li><i style="font-size:9px;color:#FFFF00"> NOUVEAU</i><a href="/category/nontoxic?french"> Produits Non-Toxiques</a></li>
+				<li><a href="/category/accessories?french"> Accessoires et Outiles</a></li>
+				<li><a href="/category/epoxies?french"> &#xc9;poxydes et Adh&#xe9;sifs</a></li>
+				<li><a href="/category/glueremovers?french">  D&#xe9;capants pour Adh&#xe9;sif et Colle</a></li>
+				<li><a href="/category/varnishremovers?french"> D&#xe9;capants pour<br />Peintures et Vernis</a></li>
 				<li><a href="/category/oils?french"> Huiles de Finition</a></li>
 				<li><a href="/category/poly?french"> Vernis et Polyur&#xe9;thanes</a></li>
-				<li><a href="/category/removers?french"> D&#xe9;capants pour<br />Peintures et Vernis</a></li>
-				<li><a href="/category/primer?french"> Appr&#xeA;ts pour<br />Peinture et Tapisserie</a></li>
-				<li><a href="/category/special?french"> Peintures et<br />Rev&#xeA;tements Sp&#xe9;ciaux</a></li>
+				<li><a href="/category/primers?french"> Appr&#xeA;ts pour<br />Peinture et Tapisserie</a></li>
+				<li><a href="/category/stains?french"> Teinture &#xE0; Bois Teinture Vernis</a></li>
 				<li><a href="/category/waxes?french"> Cires, Polis, et Nettoyeurs</a></li>
-				<li><a href="/category/stain?french"> Teinture &#xE0; Bois Teinture Vernis</a></li>
-				<li><a href="/category/accessories?french"> Accessoires</a></li>
+				<li><a href="/category/bath?french"> Baignoire Vitrifier &#xc9;poxyde</a></li>
+				<li><a href="/category/solvents?french"> Solvants</a></li>
+				<li><a href="/category/clearance?french"> Soldes</a></li>
 			</ul>
 		{% endblock %}
 		</div>
-		<div id="category">{% block category %}{% endblock %}</div>
+		<div id="category">
+			{% block category %}
+			<div style="background-color:#640032;position:absolute;">{% block categorytext %}{% endblock %}</div>
+			<div style="float:right;border-right:1px solid #CCCCCC;"></div>
+			{% endblock %}
+		</div>
 		<div id="container">
 			<div id="content">
 			{% block content %}{% endblock %}

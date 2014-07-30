@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}{{ super() }}<style>div#content p {margin-top:0px;font-size:10px;}</style>{% endblock %}
 {% block title %}Swing Paints - About{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='images/about_swing_top.png') }}" alt="About Swing Paints" width=590 height=29>{% endblock %}
+{% block categorytext %}About{% endblock %}
 {% block content %}
 <div style="background:url({{ url_for('static', filename='images/about_bk.jpg') }});background-repeat:no-repeat;width:580px;height:282px;"><p>
 Swing Paints Limited is a family-owned business that has been operating in Canada since 1965. The company's manufacturing is concentrated on a site in Montreal adjacent to the Lachine Canal, a historic industrial location. Swing Paints currently distributes throughout Canada, the United States, the United Kingdom, and Ireland.

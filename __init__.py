@@ -7,7 +7,7 @@ from flask_wtf import Form, validators
 from wtforms.fields import TextField, PasswordField, SelectField
 import wtforms
 from werkzeug.routing import BaseConverter
-from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categoryimg, categorytitle, categoryproducts, frenchcategoryimg, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
+from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categorytitle, categoryproducts, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -292,7 +292,6 @@ def product(productid): #if URL is at /product/####
 																'canforms':frenchproductforms.forms[productid + 'can'],
 																'usforms':frenchproductforms.forms[productid + 'us'],
 																'category':frenchcategoryproducts.products,
-																'categoryimg':frenchcategoryimg.img,
 																'categorytitle':frenchcategorytitle.title
 															})
 		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
@@ -309,7 +308,6 @@ def product(productid): #if URL is at /product/####
 															'canforms':productforms.forms[productid + 'can'],
 															'usforms':productforms.forms[productid + 'us'],
 															'category':categoryproducts.products,
-															'categoryimg':categoryimg.img,
 															'categorytitle':categorytitle.title
 														})
 		else: abort(404)
@@ -321,7 +319,6 @@ def category(categoryid):
 			return render_template('frenchcategory.html', category={
 																	'id':categoryid,
 																	'title':frenchcategorytitle.title[categoryid],
-																	'img':frenchcategoryimg.img[categoryid],
 																	'products':frenchcategoryproducts.products[categoryid],
 																	'dictlen':len(frenchcategoryproducts.products[categoryid])
 																})
@@ -331,11 +328,10 @@ def category(categoryid):
 			return render_template('category.html', category={
 																'id':categoryid,
 																'title':categorytitle.title[categoryid],
-																'img':categoryimg.img[categoryid],
 																'products':categoryproducts.products[categoryid],
 																'dictlen':len(categoryproducts.products[categoryid])
 															})
 		else: abort(404)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
-    app.run(debug=False,host= '0.0.0.0') #run server with application (debug on, must be turned off for deployment)
+    app.run(debug=True,host= '0.0.0.0') #run server with application (debug on, must be turned off for deployment)

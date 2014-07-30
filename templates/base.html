@@ -39,19 +39,27 @@
 		{% block sidebar %}
 			<ul>
 				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
-				<li><i style="font-size:9px;color:#FFFF00"> NEW&nbsp;</i><a href="/category/nontoxic"> Non-Toxic Products</a></li>
+				<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
+				<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
+				<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
+				<li><a href="/category/varnishremovers"> Paint &amp; Varnish Removers</a></li>
 				<li><a href="/category/oils"> Finishing Oils</a></li>
 				<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
-				<li><a href="/category/removers"> Paint &amp; Varnish Removers</a></li>
-				<li><a href="/category/primer"> Paint &amp; Wallpaper Primers</a></li>
-				<li><a href="/category/special"> Specialty Paints &amp; Coatings</a></li>
+				<li><a href="/category/primers"> Paint &amp; Wallpaper Primers</a></li>
+				<li><a href="/category/stains"> Wood Stains &amp; Varnish Stains</a></li>
 				<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
-				<li><a href="/category/stain"> Wood Stains &amp; Varnish Stains</a></li>
-				<li><a href="/category/accessories"> Accessories</a></li>
+				<li><a href="/category/bath"> Bathtub Reglazing Epoxy</a></li>
+				<li><a href="/category/solvents"> Solvents</a></li>
+				<li><a href="/category/clearance"> Clearance</a></li>
 			</ul>
 		{% endblock %}
 		</div>
-		<div id="category">{% block category %}{% endblock %}</div>
+		<div id="category">
+			{% block category %}
+			<div style="background-color:#640032;position:absolute;">{% block categorytext %}{% endblock %}</div>
+			<div style="float:right;border-right:1px solid #CCCCCC;"></div>
+			{% endblock %}
+		</div>
 		<div id="container">
 			<div id="content">
 			{% block content %}{% endblock %}

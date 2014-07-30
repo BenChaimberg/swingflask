@@ -151,8 +151,19 @@ a.directions {
 }
 #category {
 	width: 590px;
+	height: 29px;
 	position: relative;
 	margin-left: 160px;
+	margin-bottom: 1px;
+	color:#FFFFFF;
+	text-align:center;
+	font-size:12px;
+}
+#category div{
+	line-height:29px;
+	height:29px;
+	width:50%;
+	border-bottom:1px solid #CCCCCC;
 }
 #content {
 	position:relative;
