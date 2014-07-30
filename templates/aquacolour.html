@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}{{ super() }}<style>#container{width:750px;}</style>{% endblock %}
 {% block title %}Swing Paints - Aqua Colour Swatches{% endblock %}
-{% block category %}<img src="{{ url_for('static', filename='images/aqua_swatches_top.png') }}" alt="Aqua Swatches Swing Paints" width=750 height=29>{% endblock %}
+{% block categorytext %}Aqua Colour Swatches{% endblock %}
 {% block content %}
 	<div style="width:75%;text-align:left;margin:0 auto;">
 		<img src="{{ url_for('static', filename='images/swatches/aqua.jpg') }}" style="width:612px;height:612px;">

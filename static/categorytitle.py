@@ -1,10 +1,14 @@
 title = {
-'nontoxic':'Non-Toxic Products',
-'oils':'Oils, Varnishes &amp; Polyurethanes',
-'removers':'Paint &amp; Varnish Removers',
-'primer':'Paint &amp; Wallpaper Primers',
-'special':'Specialty Paints &amp; Coatings',
-'waxes':'Waxes, Polishes, &amp; Cleaners',
-'stain':'Wood Stains &amp; Varnish Stains',
-'accessories':'Accessories'
+'accessories':'Accessories &amp; Tools',
+'epoxies':'Epoxies &amp; Adhesives',
+'glueremovers':'Adhesive and Glue Removers',
+'varnishremovers':'Paint &amp; Varnish Removers',
+'oils':'Finishing Oils',
+'poly':'Varnishes &amp; Polyurethanes',
+'primers':'Paint &amp; Wallpaper Primers',
+'stains':'Wood Stains &amp; Varnish Stains',
+'waxes':'Waxes, Polishers &amp; Cleaners',
+'bath':'Bathtub Reglazing Epoxy',
+'solvents':'Solvents',
+'clearance':'Clearance'
 }
