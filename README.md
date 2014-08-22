@@ -10,5 +10,5 @@ $ sudo easy_install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
 $ pip install flask Flask-Mail Flask-WTF Flask-Login
-$ python flaskexample.py
+$ python __init__.py
 ```
