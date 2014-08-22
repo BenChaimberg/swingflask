@@ -77,6 +77,11 @@ class FrenchReferForm(Form):
     friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
     friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
 
+def generic_page(page,lang):
+	if lang == 'french':
+		page = 'french'+ page
+	return page + '.html'
+
 @app.context_processor
 def utility_processor(): #creates template context processor function
 	def product_category(category,id): #creates specific category for product function, takes arguments of all products in all categories and product id
@@ -146,74 +151,46 @@ def logout():
 
 @app.route('/')
 @app.route('/home')
-def index(): #if URL is at root or at home
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchmain.html') #render french home page
-	else: #if URL does not end with ?french
-		return render_template('main.html') #return english home page
+@app.route('/index')
+@app.route('/main')
+def main():
+	return render_template(generic_page('main',request.query_string))
 
 @app.route('/locations')
-def locations(): #if URL is at locations
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchlocations.html') #render french locations page
-	else: #if URL does not end with ?french
-		return render_template('locations.html') #return english locations page
+def locations():
+	return render_template(generic_page('locations',request.query_string))
 
 @app.route('/faq')
-def faq(): #if URL is at faq
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchfaq.html') #render french locations page
-	else: #if URL does not end with ?french
-		return render_template('faq.html') #return english locations page
-		
+def faq():
+	return render_template(generic_page('faq',request.query_string))
+
 @app.route('/contact')
-def contact(): #if URL is at contact
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchcontact.html') #render french contact page
-	else: #if URL does not end with ?french
-		return render_template('contact.html') #return english contact page
+def contact():
+	return render_template(generic_page('contact',request.query_string))
 
 @app.route('/marketing')
-def marketing(): #if URL is at marketing
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchmarketing.html') #render french marketing page
-	else: #if URL does not end with ?french
-		return render_template('marketing.html') #return english marketing page
+def marketing():
+	return render_template(generic_page('marketing',request.query_string))
 
 @app.route('/about')
-def about(): #if URL is at about
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchabout.html') #render french about page
-	else: #if URL does not end with ?french
-		return render_template('about.html') #return english about page
+def about():
+	return render_template(generic_page('about',request.query_string))
 
 @app.route('/colour')
-def colour(): #if URL is at about
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchcolour.html') #render french about page
-	else: #if URL does not end with ?french
-		return render_template('colour.html') #return english about page
+def colour():
+	return render_template(generic_page('colour',request.query_string))
 
 @app.route('/aquacolour')
-def aquacolour(): #if URL is at about
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchaquacolour.html') #render french about page
-	else: #if URL does not end with ?french
-		return render_template('aquacolour.html') #return english about page
+def aquacolour():
+	return render_template(generic_page('aquacolour',request.query_string))
 
 @app.route('/rightstripper')
-def rightstripper(): #if URL is at about
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchrightstripper.html') #render french about page
-	else: #if URL does not end with ?french
-		return render_template('rightstripper.html') #return english about page
+def rightstripper():
+	return render_template(generic_page('rightstripper',request.query_string))
 
 @app.route('/rightfinish')
-def rightfinish(): #if URL is at about
-	if request.query_string == 'french': #if URL ends with ?french
-		return render_template('frenchrightfinish.html') #render french about page
-	else: #if URL does not end with ?french
-		return render_template('rightfinish.html') #return english about page
+def rightfinish():
+	return render_template(generic_page('rightfinish',request.query_string))
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
