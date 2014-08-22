@@ -42,7 +42,8 @@
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$(".label").click(function(){
+		$(".label").click(function(event){
+			event.preventDefault();
 			var labelindex = $(this).index();
 			$(".stuff").eq(labelindex).siblings().hide("fast");
 			$(".stuff").eq(labelindex).show("fast");
@@ -62,7 +63,7 @@
 <a class="hidden label" href="#">E. Canada</a>
 <a class="hidden label" href="#">US</a>
 <a class="hidden label" href="#">S. Pacific</a>
-<div style="background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.3%;">
+<div style="background: #eee;right: 0;bottom: 0;padding: 0.5em;border: 1px solid #000000;width: 97.4%;">
 	<div class="stuff"><table width="100%">
 								<tr>
 									<td><p>Canadian Tire</p></td>

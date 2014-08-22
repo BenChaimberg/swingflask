@@ -42,7 +42,8 @@
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$(".label").click(function(){
+		$(".label").click(function(event){
+			event.preventDefault();
 			var labelindex = $(this).index();
 			$(".stuff").eq(labelindex).siblings().hide("fast");
 			$(".stuff").eq(labelindex).show("fast");

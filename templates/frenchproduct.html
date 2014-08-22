@@ -64,7 +64,8 @@
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$(".label").click(function(){
+		$(".label").click(function(event){
+			event.preventDefault();
 			var labelindex = $(this).index();
 			$("#footer").fadeOut(100);
 			$(".stuff").eq(labelindex).siblings().hide("fast");
@@ -86,7 +87,8 @@
 			$(this).addClass("shown").removeClass("hidden");
 			$(this).siblings().addClass("hidden").removeClass("shown");
 		});
-		$(".buybutt").click(function(){
+		$(".buybutt").click(function(event){
+			event.preventDefault();
 			$("#footer").fadeOut(100);
 			var clicked = $(this)
 			$(".buybutt").fadeOut("slow",function(){
