@@ -5,7 +5,7 @@ The company produces various products for do-it-yourself and industrial use in t
  
 The current [web site](http://www.swingpaints.com) was created in 2001 to provide direct internet access to product information, dealer locations, contacts, etc.  Over the years, an interactive forum and online purchasing option were added to the site.
 
-The site is a gateway into our company for current and potential customers.  As such, the site satisfy have the following criteria:
+The site is a gateway into the company for current and potential customers.  As such, the site must satisfy the following criteria:
 - **BILINGUAL**:  Swing Paints is based in Canada.  Therefore, the web site must have all the information accessible in both English and French.  The potential for other languages would be useful.
 - **COMPANY PROFILE**:  A brief overview of the company stressing the fact that it is a family-owned business based in Montreal.
 - **CONTACTS**:  Information on telephone, fax, e-mail, etc.
