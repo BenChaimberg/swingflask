@@ -39,7 +39,7 @@ On the client side, a fluid blend of HTML, CSS, and Javascript + jQuery will pro
 
 Product Page Creation
 ---------------------
-Each product page will be created off of its product ID, generally a four digit number, which is also the URL [http://www.swingpaints.com/product/####](##). In addition to the static elements, the product's category will be found and printed, as well as its image, general description, directions, more information, demonstration, and buying options. This information will be found in Python dictionaries, see more above. Data in dictionaries will be kept in a minimal fashion, so the exterior structure elements will be produced automatically while displaying.
+Each product page will be created off of its product ID, generally a four digit number, which is also the URL [(http://www.swingpaints.com/product/####)](##). In addition to the static elements, the product's category will be found and printed, as well as its image, general description, directions, more information, demonstration, and buying options. This information will be found in Python dictionaries, see more above. Data in dictionaries will be kept in a minimal fashion, so the exterior structure elements will be produced automatically while displaying.
 
 Category Page Creation
 ----------------------
