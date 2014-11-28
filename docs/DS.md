@@ -43,7 +43,7 @@ Each product page will be created off of its product ID, generally a four digit 
 
 Category Page Creation
 ----------------------
-As with the above, each category page will be created from its category ID, a string, which is pulled from the URL [(http://www.swingpaints.com/category/&lt;string&gt;)](). Once again, in addition to the static elements, the category page will pull its correct image, its products and their respective products, and possibly a brief descriptions of the products to be found within.
+As with the above, each category page will be created from its category ID, a string, which is pulled from the URL [(http://www.swingpaints.com/category/&lt;string&gt;)](##). Once again, in addition to the static elements, the category page will pull its correct image, its products and their respective products, and possibly a brief descriptions of the products to be found within.
 
 Software Test Strategy
 ----------------------
