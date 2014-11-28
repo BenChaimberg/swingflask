@@ -2,16 +2,16 @@ Design Specification
 ====================
 The Swing Paints website revamp will create a dynamic website with the criteria listed in the [Functional Specification](https://github.com/Youppi3/flaskexample/blob/master/docs/FS.md#functional-specification). This document will outline the following inner workings of the website with the new Python-based Flask back end:
 * [Server software and overall architecture](#server-software-and-overall-architecture)
-* [Server side programming language](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#server-side-programming-language)
-* [Client side programming language](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#client-side-programming-language)
-* [Data storage requirements and tool choices](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#data-storage-requirements-and-tool-choices)
-* [Server system architecture](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#server-system-architecture)
-* [Client system architecture](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#client-system-architecture)
-* [Product page creation](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#product-page-creation)
-* [Category page creation](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#category-page-creation)
-* [Software test strategy](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#software-test-strategy)
-* [Bug tracking strategy](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#bug-tracking-strategy)
-* [Software deployment instructions](https://github.com/Youppi3/flaskexample/blob/master/docs/DS.md#software-deployment-instructions)
+* [Server side programming language](#server-side-programming-language)
+* [Client side programming language](#client-side-programming-language)
+* [Data storage requirements and tool choices](#data-storage-requirements-and-tool-choices)
+* [Server system architecture](#server-system-architecture)
+* [Client system architecture](#client-system-architecture)
+* [Product page creation](#product-page-creation)
+* [Category page creation](#category-page-creation)
+* [Software test strategy](#software-test-strategy)
+* [Bug tracking strategy](#bug-tracking-strategy)
+* [Software deployment instructions](#software-deployment-instructions)
 
 Server Software and Overall Architecture
 ----------------------------------------
@@ -39,7 +39,7 @@ On the client side, a fluid blend of HTML, CSS, and Javascript + jQuery will pro
 
 Product Page Creation
 ---------------------
-Each product page will be created off of its product ID, generally a four digit number, which is also the URL [http://www.swingpaints.com/product/####](). In addition to the static elements, the product's category will be found and printed, as well as its image, general description, directions, more information, demonstration, and buying options. This information will be found in Python dictionaries, see more above. Data in dictionaries will be kept in a minimal fashion, so the exterior structure elements will be produced automatically while displaying.
+Each product page will be created off of its product ID, generally a four digit number, which is also the URL [http://www.swingpaints.com/product/####](#a). In addition to the static elements, the product's category will be found and printed, as well as its image, general description, directions, more information, demonstration, and buying options. This information will be found in Python dictionaries, see more above. Data in dictionaries will be kept in a minimal fashion, so the exterior structure elements will be produced automatically while displaying.
 
 Category Page Creation
 ----------------------
