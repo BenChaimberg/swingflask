@@ -43,15 +43,15 @@ Each product page will be created off of its product ID, generally a four digit 
 
 Category Page Creation
 ----------------------
-As with the above, each category page will be created from its category ID, a string, which is pulled from the URL (http://www.swingpaints.com/category/<string>). Once again, in addition to the static elements, the category page will pull its correct image, its products and their respective products, and possibly a brief descriptions of the products to be found within.
+As with the above, each category page will be created from its category ID, a string, which is pulled from the URL (http://www.swingpaints.com/category/&lt;string&gt;). Once again, in addition to the static elements, the category page will pull its correct image, its products and their respective products, and possibly a brief descriptions of the products to be found within.
 
 Software Test Strategy
 ----------------------
-A URL will be given to some choice few known for their aptitude in breaking technology with the hopes that if bugs are to be found, they will me attracted to the use of these "tech wrecks." Flask will handle all server-side testing with its built-in capability for such. Obviously, no code will be deployed in an unfinished state or one of undeterminable stability.
+A URL will be given to some choice few known for their aptitude in breaking technology with the hopes that if bugs are to be found, they will be attracted to the use of these "tech wrecks." Flask will handle all server-side testing with its built-in capability for such. Obviously, no code will be deployed in an unfinished state or one of undeterminable stability.
 
 Bug Tracking Strategy
 ---------------------
-All code will be hosted on the Github public repository, with any sensitive date, if existent, purged and added to the .gitignore before upload. Users may submit comments and suggestions through the issues and code through the pull requests. All client data will be carefully considered and inspected before acceptance or rejection.
+All code will be hosted on the Github public repository, with any sensitive data, if existent, purged and added to the .gitignore before upload. Users may submit comments and suggestions through the issues and code through the pull requests. All client data will be carefully considered and inspected before acceptance or rejection.
 
 Software Deployment Instructions
 --------------------------------
