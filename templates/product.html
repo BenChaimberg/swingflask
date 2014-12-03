@@ -2,145 +2,408 @@
 {% block head %}
 {{ super() }}
 <style>
-	#switch {
-		 background:#eee;
-		 padding:24px 5px 5px 5px;
-		 border:1px solid #000000;
-		 position:absolute;
-		 top:0px;
-		 width:97.3%;
+	@media (max-width: 500px) {
+		p {
+			width:100%;
+		}
 	}
-	#infotext {
-		 position:relative;
-		 right:5px;
-		 top:5px;
-		 width:50%;
-		 text-align:left;
-		 font-weight:bold;
-		 float:right;
+	@media (min-width: 500px) and (max-width: 1024px) {
+		p {
+			width:500px;
+			margin-left:auto;
+			margin-right:auto;
+		}
 	}
-	#infotable {
-		 position:relative;
-		 width:50%;
-		 padding-bottom:5px;
-	}
-	.buystuff {
-		text-align:center;
-		display:none;
-		height:100%;
-		width:100%;
-	}
-	.buybutt {
-		height:100%;
-		width:50%;
-	}
-	.stuff a {
-		text-decoration:underline;
-		color: #336633;
-	}
-	.stuff p {
-		margin:0 0 5px;
-	}
-	.shown {
-		border-left:1px solid black;
-		border-right:1px solid black;
-		border-top:1px solid black;
-	}
-	.hidden {
-		border-bottom:1px solid black;
-		background:#FFF;
-		color: #336633;
-	}
-	.hidden:hover{
-		background: #CCFFCC;
-	}
-	.label {
-		margin: 0;
-		width: 24.75%;
-		float: left;
-		text-align: center;
-		padding: 2px 0;
+	@media (max-width: 1024px) {
+		html, body { margin: 0px; padding: 0px; border: 0px; }
+		body,p {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #000000;
+		}
+		a {
+			color:#336633;
+			text-decoration:none;
+		}
+		p { text-align:justify; }
+		#header,#category {
+			display: none;
+		}
+		#container,#content {
+			width:100%;
+			height:100%;
+			margin: 0px;
+		}
+		#sidebar-image {
+			display:none;
+		}
+		#sidebar-before {
+			color:white;
+			font-size:36px;
+			float:right;
+		}
+		#sidebar {
+			overflow:scroll;
+			left:0px;
+			top:0px;
+			right:0px;
+			bottom:0px;
+			margin-left:-100%;
+			position:fixed;
+			z-index:1000;
+			height:100%;
+			width:100%;
+			background-color:grey;
+		}
+		#sidebar ul {
+			list-style:none;
+			padding-left:5px;
+			margin-top:38px;
+		}
+		#sidebar li a {
+			display:block;
+		}
+		#sidebar li a:before {
+			content:"";
+		}
+		#sidebar li {
+			border-top:1px solid black;
+			width:100%;
+			clear:right;
+			height:50px;
+			line-height:50px;
+			font-size:2em;
+			color:#336633;
+		}
+		#footer {
+			border-top:1px solid black;
+			padding-top:10px;
+			font-size:9px;
+			text-align:center;
+		}
+		#footer ul {
+			list-style: none;
+			padding: 0px;
+			margin: 0px;
+		}
+		#footer li {
+			display:inline;
+			text-indent: -1em;
+		}
+		#footer li:before {
+			content: "|";
+			padding-right: 5px;
+		}
+		#footer li:nth-child(1):before { 
+			content: "";
+			padding-right: 0px;
+		}
+		#picture { }
+		#image {
+			margin-top:72px;
+			float:none;
+			clear:right;
+			padding:0;
+			position:relative;
+			text-align:center;
+		}
+		#text {
+			position:relative;
+			padding-left:5px;
+			padding-right:5px;
+		}
+		.label span {
+			padding-left:5px;
+		}
+		.label {
+			border-top:1px solid black;
+			width:100%;
+			clear:right;
+			height:50px;
+			line-height:50px;
+			font-size:2em;
+			color:#336633;
+		}
+		.label:nth-last-of-type(1) {
+			border-bottom:1px solid black;
+		}
+		.label:after {
+			float:right;
+			content:"+";
+			padding-right:5px;
+		}
+		.label.open:after {
+			content:"−";
+		}
+		#infotext {
+			 position:relative;
+			 right:5px;
+			 top:5px;
+			 width:50%;
+			 text-align:left;
+			 font-weight:bold;
+			 float:right;
+		}
+		#infotable {
+			 position:relative;
+			 width:50%;
+			 padding-bottom:5px;
+		}
+		#infotable td {
+			 border:1px solid black;
+		}
+		#mobile-header {
+			z-index:500;
+			top:0px;
+			background-color:#1D432F;
+			width:100%;
+			height:72px;
+			position:fixed;
+			color:white;
+		}
+		#mobile-header a {
+			color:white;
+		}
+		#mobile-header-left {
+			font-size:36px;
+			height:72px;
+			line-height:72px;
+			text-align:left;
+			float:left;
+			height:72px;
+			line-height:72px;
+			width:8%;
+			padding-left:1%;
+		}
+		#mobile-header-center {
+			float:left;
+			width:82%;
+			text-align:center;
+		}
+		#mobile-header-right {
+			float:left;
+			font-size:48px;
+			height:72px;
+			line-height:64px;
+			width:8%;
+			text-align:right;
+		}
+		#product-title {
+			font-weight:bold;
+			font-size:16px;
+			text-align:center;
+		}
+		.buybutt {
+			/*height:100%;*/
+			width:49%;
+			display:inline;
+		}
+		.buybutt:nth-child(1) {
+			float:left;
+		}
+		.buybutt:nth-child(3) {
+			float:right;
+		}
+		.buybutt img {
+			height:100%;
+			width:100%;
+		}
+		.stuff {
+			padding-left:5px;
+			padding-right:5px;
+		}
+		::-webkit-input-placeholder { font-size:14px; }
+		::-moz-placeholder { font-size:14px; }
+		:-ms-input-placeholder { font-size:14px; }
+		input:-moz-placeholder { font-size:14px; }
+		input { font-size:14px; }
+    }
+	@media (min-width: 1024px) {
+		#mobile-header,#product-title,#sidebar-before,#search {
+			display:none;
+		}
+		#infotext {
+			 position:relative;
+			 right:5px;
+			 top:5px;
+			 width:50%;
+			 text-align:left;
+			 font-weight:bold;
+			 float:right;
+		}
+		#infotable {
+			 position:relative;
+			 width:50%;
+			 padding-bottom:5px;
+		}
+		#infotable td {
+			 border:1px solid black;
+		}
+		.buystuff {
+			text-align:center;
+			display:none;
+			height:100%;
+			width:100%;
+		}
+		.buybutt {
+			height:100%;
+			width:50%;
+		}
+		.stuff a {
+			text-decoration:underline;
+			color: #336633;
+		}
+		.stuff p {
+			margin:0 0 5px;
+		}
+		.label {
+			margin: 0;
+			width: 24.75%;
+			float: left;
+			text-align: center;
+			padding: 2px 0;
+		}
+		#container2 {
+			width:580;
+			position:relative;
+			margin-left:3px;
+		}
 	}
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$(".label").click(function(event){
-			event.preventDefault();
-			var labelindex = $(this).index();
-			$("#footer").fadeOut(100);
-			$(".stuff").eq(labelindex).siblings().hide("fast");
-			$(".buystuff").hide("fast",function(){
-				$(".buybutt").show("fast",function(){
-					$(".stuff").eq(labelindex).show("fast",function(){
-						var hht = 0;
-						$(".stuff").eq(labelindex).children().each(function(){
-							console.log($(this).height());
-							hht = ($(this).height() > hht) ? $(this).height() : hht;
-						});
-						$(".stuff").animate({'height':hht},function(){
-							$("#container2").css('height', hht+31);
-							$("#footer").fadeIn(50);
+		if ($(window).width() <= 1024) {
+			$(".label").click(function(){
+				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
+				$(this).next().slideToggle("slow");
+				$(this).siblings().removeClass("open");
+				$(this).toggleClass("open");
+				$("iframe").css({"height":.75*$("iframe").width()});
+				$('html, body').animate({
+	    	    	scrollTop: $(this).offset().top
+	    		}, 1000);
+			});
+			$("#mobile-header-left").click(function(){
+				$("#sidebar").animate({ marginLeft: "0%"} , 500);
+				$("body").css({"overflow":"hidden"});
+			});
+			var sidebarBefore = document.createElement("a");
+			$("#sidebar").children().before(sidebarBefore);
+			$(sidebarBefore).attr("id","sidebar-before");
+			$(sidebarBefore).attr("href","#");
+			$(sidebarBefore).html("&#x25c4;");
+			$(sidebarBefore).css({"height":"50px"});
+			$(sidebarBefore).css({"margin-right":"1%"});
+			$("#sidebar-before").click(function(){
+				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
+				$("body").css({"overflow":"default"});
+			});
+			var search = document.createElement("div");
+			$("#sidebar-before").before(search);
+			$(search).attr("id","search");
+			$(search).html("<input type=\"text\" placeholder=\"Search\" style=\"height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;\"></input>");
+			$(search).css({"color":"white"});
+			$(search).css({"float":"left"});
+			$(search).css({"width":"80%"});
+			$(search).css({"height":"50px"});
+			$(search).css({"line-height":"50px"});
+		}
+		if ($(window).width() >= 1024) {
+			$(".stuff").insertAfter($("#container2").children().last())
+			$(".label").click(function(event){
+				event.preventDefault();
+				$(this).removeClass("label");
+				var labelclass = $(this).attr("class")
+				$(this).addClass("label");
+				labelclass = "." + labelclass
+				$(labelclass).not(".label").toggle("fast");
+				$(this).siblings().not(labelclass).not(".label").hide("fast")
+				//$(this).siblings().not($(this).siblings().hasClass($(this).attr("class"))).not($(this).siblings().hasClass("label")).hide("fast");
+				//$(this).siblings().toggle("fast");
+				//$(this).siblings().not(".label").not().hide("fast");
+			});
+			/*$(".label").click(function(event){
+				event.preventDefault();
+				var labelindex = $(this).index();
+				$("#footer").fadeOut(100);
+				$(".stuff").eq(labelindex).siblings().hide("fast");
+				$(".buystuff").hide("fast",function(){
+					$(".buybutt").show("fast",function(){
+						$(".stuff").eq(labelindex).show("fast",function(){
+							var hht = 0;
+							$(".stuff").eq(labelindex).children().each(function(){
+								console.log($(this).height());
+								hht = ($(this).height() > hht) ? $(this).height() : hht;
+							});
+							$(".stuff").animate({'height':hht},function(){
+								$("#container2").css('height', hht+31);
+								$("#footer").fadeIn(50);
+							});
 						});
 					});
 				});
+				$(this).addClass("shown").removeClass("hidden");
+				$(this).siblings().addClass("hidden").removeClass("shown");
 			});
-			$(this).addClass("shown").removeClass("hidden");
-			$(this).siblings().addClass("hidden").removeClass("shown");
-		});
-		$(".buybutt").click(function(event){
-			event.preventDefault();
-			$("#footer").fadeOut(100);
-			var clicked = $(this)
-			$(".buybutt").fadeOut("slow",function(){
-				clicked.next().fadeIn("slow");
-				var hht = clicked.next().height();
-				$("#container2").css('height', hht+31);
-				$("#footer").fadeIn(50);
+			$(".buybutt").click(function(event){
+				event.preventDefault();
+				$("#footer").fadeOut(100);
+				var clicked = $(this)
+				$(".buybutt").fadeOut("slow",function(){
+					clicked.next().fadeIn("slow");
+					var hht = clicked.next().height();
+					$("#container2").css('height', hht+31);
+					$("#footer").fadeIn(50);
+				});
+			});*/
+			$("#container2").hide("fast");
+			$(window).load(function(){
+				$("#container2").show("fast",function(){
+					var hht = $(".stuff").height();
+					$("#container2").css('height', hht+31);
+				});
 			});
-		});
-		$("#container2").hide("fast");
-		$(window).load(function(){
-			$("#container2").show("fast",function(){
-				var hht = $(".stuff").height();
-				$("#container2").css('height', hht+31);
-			});
-		});
+		}
 	});
 </script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
 {% block categorytext %}{{ product.categorytitle[product_category(product.category,product.id)] | safe }}{% endblock %}
 {% block content %}
-	<div id="text">{{ product.text|safe }}</div>
+	<div id="mobile-header">
+		<div id="mobile-header-left">☰</div>
+		<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+		<div id="mobile-header-right"><a href="/home">⌂</a></div>
+	</div>
 	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+	<div id="text"><p id="product-title">{{ product.title|safe }}</p><p>{{ product.text|safe }}</p></div>
 	<script type='text/javascript'>
-		$("#text").css('display','none');
-		$("#picture").load(function(){
-			var txt = $("#image").width();
-			var txt2 = 555 - txt
-			$("#text").css('display','inline');
-			$("#text").css('width', txt2);
-		});
+		if ($(window).width() >= 1024) {
+			$("#text").css('display','none');
+			$("#picture").load(function(){
+				var txt = $("#image").width();
+				var txt2 = 555 - txt
+				$("#text").css('display','inline');
+				$("#text").css('width', txt2);
+			});
+		}
 	</script>
 </div>
 <script type='text/javascript'>
 	$(window).load(function(){
-		var imghgt = $("#image").height();
-		var txthgt = $("#text").height();
-		var hgt = Math.max(imghgt,txthgt);
-		$("#content").css('height', hgt+10);
+		if ($(window).width() >= 1024) {
+			var imghgt = $("#image").height();
+			var txthgt = $("#text").height();
+			var hgt = Math.max(imghgt,txthgt);
+			$("#content").css('height', hgt+10);
+		}
 	});
 </script>
-<div id="container2" style="width:580;position:relative;margin-left:3px;">
-	<div style="width:100%;height:19px;position:relative;z-index:2;">
-		<a class="shown label" href="#">Directions</a>
-		<a class="hidden label" href="#">More Info</a>
-		<a class="hidden label" href="#">Buy Now</a>
-		<a class="hidden label" href="#">Demonstrations</a>
-	</div>
-	<div id="switch">
-		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
-		<div class="stuff" style="display:none;">
+<div id="container2">
+		<div class="label directions"><span>Directions</span></div>
+		<div class="stuff directions" style="display:none;"><p>{{ product.dir | safe }}</p></div>
+		<div class="label more-info"><span>More Info</span></div>
+		<div class="stuff more-info" style="display:none;">
 			<div id="infotext">
 				<ul>
 				{% for item in product.info2: %}
@@ -177,11 +440,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="stuff" style="display:none;">
-			<div class="buybutt" style="float:right;height:100px;">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
+		<div class="label buy-now"><span>Buy Now</span></div>
+		<div class="stuff buy-now" style="display:none;">
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can.jpg') }}" alt="Buy Canada"></a>
 			</div>
-			<div class="buystuff" style="height:22px;">
+			<div class="buystuff" style="height:22px;display:none;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
@@ -200,10 +464,10 @@
 					{% endif %}
 				</form>
 			</div>
-			<div class="buybutt" style="height:100px;">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US""></a>
 			</div>
-			<div class="buystuff" style="height:22px;">
+			<div class="buystuff" style="height:22px;display:none;">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
@@ -223,12 +487,12 @@
 				</form>
 			</div>
 		</div>
-		<div class="stuff" style="display:none;">
+		<div class="label demonstrations"><span>Demonstrations</span></div>
+		<div class="stuff demonstrations" style="display:none;">
 			{% if product.demo %}
-			<iframe width="420" height="315" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
+			<iframe id="iframe" style="width:100%;height:75%" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
 			{% else %}
 			<p>No Demonstration Available</p>
 			{% endif %}
 		</div>
-	</div>
 {% endblock %}

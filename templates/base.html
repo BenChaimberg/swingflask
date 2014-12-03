@@ -3,10 +3,11 @@
 	<head>
 	{% block head %}
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery.color-2.1.2.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="(min-width:1024px)">
 		<title>{% block title %}{% endblock %}</title>
 	{% endblock %}
 	</head>
@@ -38,7 +39,7 @@
 		<div id="sidebar">
 		{% block sidebar %}
 			<ul>
-				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints Sidebar" width="159" height="69"><br />
+				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" id="sidebar-image" alt="Swing Paints Sidebar" width="159" height="69"><br />
 				<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
 				<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
 				<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
