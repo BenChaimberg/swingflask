@@ -94,7 +94,7 @@
 			content: "|";
 			padding-right: 5px;
 		}
-		#footer li:nth-child(1):before { 
+		#footer li:nth-child(1):before {
 			content: "";
 			padding-right: 0px;
 		}
@@ -123,6 +123,12 @@
 			line-height:50px;
 			font-size:2em;
 			color:#336633;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
 		}
 		.label:nth-last-of-type(1) {
 			border-bottom:1px solid black;
@@ -146,6 +152,7 @@
 		}
 		#infotable {
 			 position:relative;
+			 float:left;
 			 width:50%;
 			 padding-bottom:5px;
 		}
@@ -193,8 +200,14 @@
 			font-size:16px;
 			text-align:center;
 		}
+		.buystuff {
+			text-align:center;
+			display:none;
+			height:100%;
+			width:100%;
+			padding-bottom:10px;
+		}
 		.buybutt {
-			/*height:100%;*/
 			width:49%;
 			display:inline;
 		}
@@ -211,12 +224,21 @@
 		.stuff {
 			padding-left:5px;
 			padding-right:5px;
+			display:none;
 		}
 		::-webkit-input-placeholder { font-size:14px; }
 		::-moz-placeholder { font-size:14px; }
 		:-ms-input-placeholder { font-size:14px; }
 		input:-moz-placeholder { font-size:14px; }
 		input { font-size:14px; }
+		#iframe {
+			width:100%;
+		}
+		.group:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
     }
 	@media (min-width: 1024px) {
 		#mobile-header,#product-title,#sidebar-before,#search {
@@ -229,12 +251,12 @@
 			 width:50%;
 			 text-align:left;
 			 font-weight:bold;
-			 float:right;
+			 float:left;
 		}
 		#infotable {
-			 position:relative;
 			 width:50%;
 			 padding-bottom:5px;
+			 float:left;
 		}
 		#infotable td {
 			 border:1px solid black;
@@ -246,27 +268,81 @@
 			width:100%;
 		}
 		.buybutt {
+			width:49%;
 			height:100%;
-			width:50%;
+			display:inline;
+		}
+		.buybutt:nth-child(1) {
+			float:left;
+		}
+		.buybutt:nth-child(3) {
+			float:right;
+		}
+		.buybutt img {
+			width:100%;
+		}
+		.stuff {
+			display:none;
+			padding-top:25px;
+			border-bottom:1px solid black;
+			border-left:1px solid black;
+			border-right:1px solid black;
 		}
 		.stuff a {
 			text-decoration:underline;
-			color: #336633;
+			color:#336633;
 		}
 		.stuff p {
-			margin:0 0 5px;
+			margin:5px;
+		}
+		.label:hover {
+			cursor:pointer;
+			background-color:#CCFFCC;
+		}
+		.label:nth-last-of-type(5) {
+			border-right:1px solid black;
 		}
 		.label {
 			margin: 0;
-			width: 24.75%;
+			width: 24.77%;
 			float: left;
 			text-align: center;
 			padding: 2px 0;
+			border-top:1px solid black;
+			border-left:1px solid black;
+			border-bottom:1px solid black;
+			background-color:#eee;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.directions.label:hover {
+			background-color:#FFFFFF;
+		}
+		.directions.label {
+			border-bottom:0px solid black;
+			background-color:white;
+		}
+		.directions.stuff {
+			display:block;
 		}
 		#container2 {
-			width:580;
+			width:580px;
 			position:relative;
 			margin-left:3px;
+		}
+		#iframe {
+			width:420px;
+			height:315px;
+			margin:5px;
+		}
+		.group:after {
+			content: "";
+			display: table;
+			clear: both;
 		}
 	}
 </style>
@@ -274,14 +350,17 @@
 	$(document).ready(function(){
 		if ($(window).width() <= 1024) {
 			$(".label").click(function(){
+				$("iframe").css({"height":.75*$(window).width()-10});
 				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
-				$(this).next().slideToggle("slow");
+				$(this).next().slideToggle("slow",function(){
+					$('html, body').animate({scrollTop:$(this).prev().offset().top-72},1000,function(){	
+						$(".buystuff").hide("fast",function(){
+							$(".buybutt").show("fast");
+						});
+					});
+	    		});
 				$(this).siblings().removeClass("open");
 				$(this).toggleClass("open");
-				$("iframe").css({"height":.75*$("iframe").width()});
-				$('html, body').animate({
-	    	    	scrollTop: $(this).offset().top
-	    		}, 1000);
 			});
 			$("#mobile-header-left").click(function(){
 				$("#sidebar").animate({ marginLeft: "0%"} , 500);
@@ -307,6 +386,13 @@
 			$(search).css({"width":"80%"});
 			$(search).css({"height":"50px"});
 			$(search).css({"line-height":"50px"});
+			$(".buybutt").click(function(event){
+				event.preventDefault();
+				var clicked = $(this)
+				$(".buybutt").fadeOut("slow",function(){
+					clicked.next().fadeIn("slow");
+				});
+			});
 		}
 		if ($(window).width() >= 1024) {
 			$(".stuff").insertAfter($("#container2").children().last())
@@ -316,52 +402,40 @@
 				var labelclass = $(this).attr("class")
 				$(this).addClass("label");
 				labelclass = "." + labelclass
-				$(labelclass).not(".label").toggle("fast");
-				$(this).siblings().not(labelclass).not(".label").hide("fast")
-				//$(this).siblings().not($(this).siblings().hasClass($(this).attr("class"))).not($(this).siblings().hasClass("label")).hide("fast");
-				//$(this).siblings().toggle("fast");
-				//$(this).siblings().not(".label").not().hide("fast");
-			});
-			/*$(".label").click(function(event){
-				event.preventDefault();
-				var labelindex = $(this).index();
-				$("#footer").fadeOut(100);
-				$(".stuff").eq(labelindex).siblings().hide("fast");
+				if ($(labelclass).not(".label").css("display") == "none") {
+					$(this).prev().css({"border-right":"1px solid black"});
+					$(this).next().not(".stuff").css({"border-left":"1px solid black"});
+					$(this).css({"border-left":"0px solid black"});
+					$(this).css({"border-right":"0px solid black"});
+					$(this).css({"border-bottom":"0px solid black"});
+					$(this).hover(function(){$(this).css({"background-color":"#FFFFFF"})},function(){$(this).css({"background-color":"#FFFFFF"})});
+					$(labelclass).not(".label").css({"display":"block"})
+				}
+				$(this).css({"background-color":"#FFFFFF"})
+				$(this).siblings().not(labelclass).not(".label").css({"display":"none"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"border-bottom":"1px solid black"});
+				$(".label:nth-last-of-type(1)").css({"border-right":"1px solid black"});
+				$(".label:nth-of-type(1)").css({"border-left":"1px solid black"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"background-color":"#eee"});
+				$(this).siblings().not(labelclass).not(".stuff").hover(function(){$(this).css({"background-color":"#CCFFCC"})},function(){$(this).css({"background-color":"#eee"})});
 				$(".buystuff").hide("fast",function(){
 					$(".buybutt").show("fast",function(){
-						$(".stuff").eq(labelindex).show("fast",function(){
-							var hht = 0;
-							$(".stuff").eq(labelindex).children().each(function(){
-								console.log($(this).height());
-								hht = ($(this).height() > hht) ? $(this).height() : hht;
-							});
-							$(".stuff").animate({'height':hht},function(){
-								$("#container2").css('height', hht+31);
-								$("#footer").fadeIn(50);
-							});
-						});
+						var buyhght = $(".buybutt a img").height();
+						$(".buy-now.stuff").css({"height":buyhght+10});
+						$(".buy-now.stuff").css({"line-height":buyhght+10+"px"});
 					});
 				});
-				$(this).addClass("shown").removeClass("hidden");
-				$(this).siblings().addClass("hidden").removeClass("shown");
 			});
 			$(".buybutt").click(function(event){
 				event.preventDefault();
-				$("#footer").fadeOut(100);
 				var clicked = $(this)
 				$(".buybutt").fadeOut("slow",function(){
 					clicked.next().fadeIn("slow");
-					var hht = clicked.next().height();
-					$("#container2").css('height', hht+31);
-					$("#footer").fadeIn(50);
 				});
-			});*/
+			});
 			$("#container2").hide("fast");
 			$(window).load(function(){
-				$("#container2").show("fast",function(){
-					var hht = $(".stuff").height();
-					$("#container2").css('height', hht+31);
-				});
+				$("#container2").show("fast");
 			});
 		}
 	});
@@ -399,18 +473,11 @@
 		}
 	});
 </script>
-<div id="container2">
+<div id="container2" class="group">
 		<div class="label directions"><span>Directions</span></div>
-		<div class="stuff directions" style="display:none;"><p>{{ product.dir | safe }}</p></div>
+		<div class="stuff directions"><p>{{ product.dir | safe }}</p></div>
 		<div class="label more-info"><span>More Info</span></div>
-		<div class="stuff more-info" style="display:none;">
-			<div id="infotext">
-				<ul>
-				{% for item in product.info2: %}
-					<li>{{ item | safe }}</li>
-				{% endfor %}
-				</ul>
-			</div>
+		<div class="stuff more-info group">
 			<div id="infotable">
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
@@ -439,13 +506,20 @@
 					{% endif %}
 				</div>
 			</div>
+			<div id="infotext">
+				<ul>
+				{% for item in product.info2: %}
+					<li>{{ item | safe }}</li>
+				{% endfor %}
+				</ul>
+			</div>
 		</div>
 		<div class="label buy-now"><span>Buy Now</span></div>
-		<div class="stuff buy-now" style="display:none;">
+		<div class="stuff buy-now">
 			<div class="buybutt">
 				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can.jpg') }}" alt="Buy Canada"></a>
 			</div>
-			<div class="buystuff" style="height:22px;display:none;">
+			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
@@ -467,7 +541,7 @@
 			<div class="buybutt">
 				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US""></a>
 			</div>
-			<div class="buystuff" style="height:22px;display:none;">
+			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
@@ -488,9 +562,9 @@
 			</div>
 		</div>
 		<div class="label demonstrations"><span>Demonstrations</span></div>
-		<div class="stuff demonstrations" style="display:none;">
+		<div class="stuff demonstrations">
 			{% if product.demo %}
-			<iframe id="iframe" style="width:100%;height:75%" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
+			<iframe id="iframe" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
 			{% else %}
 			<p>No Demonstration Available</p>
 			{% endif %}
