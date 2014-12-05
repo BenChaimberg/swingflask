@@ -53,7 +53,7 @@
 			z-index:1000;
 			height:100%;
 			width:100%;
-			background-color:#336633;
+			background:rgba(29,67,47,.9);
 		}
 		#sidebar ul {
 			list-style:none;
@@ -74,7 +74,7 @@
 			height:50px;
 			line-height:50px;
 			font-size:2em;
-			color:#white;
+			color:white;
 		}
 		#footer {
 			border-top:1px solid black;
@@ -366,6 +366,11 @@
 			$("#mobile-header-left").click(function(){
 				$("#sidebar").animate({ marginLeft: "0%"} , 500);
 				$("body").css({"overflow":"hidden"});
+				$("body").css({"position":"fixed"});
+				$("body").css({"width":$(window).width()});
+			});
+			$("#mobile-header-center").click(function(){
+				$('html, body').animate({scrollTop:0});
 			});
 			var sidebarBefore = document.createElement("a");
 			$("#sidebar").children().before(sidebarBefore);
@@ -377,6 +382,7 @@
 			$("#sidebar-before").click(function(){
 				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
 				$("body").css({"overflow":"default"});
+				$("body").css({"position":"default"});
 			});
 			var search = document.createElement("div");
 			$("#sidebar-before").before(search);
