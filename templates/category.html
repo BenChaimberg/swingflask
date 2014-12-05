@@ -144,8 +144,15 @@
 			display: table;
 			clear: both;
 		}
+		#category-title {
+			margin-top:77px;
+			padding-bottom:5px;
+			font-weight:bold;
+			text-align:center;
+			font-size:14px;
+			border-bottom:1px solid black;
+		}
 		#category-table-mobile {
-			margin-top:72px;
 			width:100%;
 		}
 		#category-table-mobile td {
@@ -228,6 +235,7 @@
 	<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
 	<div id="mobile-header-right"><a href="/home">⌂</a></div>
 </div>
+<div id="category-title">{{ category.title | safe }}</div>
 <table id="category-table-mobile">
 {% for x in category.products: %}
 <tr><td>
