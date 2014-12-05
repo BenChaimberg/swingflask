@@ -1,9 +1,244 @@
 {% extends "base.html" %}
-{% block head %}{{ super() }}<style>div#content td {font-size:10px;width:112px;text-align:center;vertical-align:top;}</style>{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+	@media (max-width: 500px) {
+		p {
+			width:100%;
+		}
+	}
+	@media (min-width: 500px) and (max-width: 1024px) {
+		p {
+			width:500px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+	@media (max-width: 1024px) {
+		html, body { margin: 0px; padding: 0px; border: 0px; }
+		body,p {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #000000;
+		}
+		a {
+			color:#336633;
+			text-decoration:none;
+		}
+		p { text-align:justify; }
+		#header,#category {
+			display: none;
+		}
+		#container,#content {
+			width:100%;
+			height:100%;
+			margin: 0px;
+		}
+		#sidebar-image {
+			display:none;
+		}
+		#sidebar-before {
+			color:white;
+			font-size:36px;
+			float:right;
+		}
+		#sidebar {
+			overflow:scroll;
+			left:0px;
+			top:0px;
+			right:0px;
+			bottom:0px;
+			margin-left:-100%;
+			position:fixed;
+			z-index:1000;
+			height:100%;
+			width:100%;
+			background:rgba(29,67,47,.9);
+		}
+		#sidebar ul {
+			list-style:none;
+			padding-left:5px;
+			margin-top:38px;
+		}
+		#sidebar li a {
+			display:block;
+			color:white;
+		}
+		#sidebar li a:before {
+			content:"";
+		}
+		#sidebar li {
+			border-top:1px solid white;
+			width:100%;
+			clear:right;
+			height:50px;
+			line-height:50px;
+			font-size:2em;
+			color:white;
+		}
+		#footer {
+			padding-top:10px;
+			font-size:9px;
+			text-align:center;
+		}
+		#footer ul {
+			list-style: none;
+			padding: 0px;
+			margin: 0px;
+		}
+		#footer li {
+			display:inline;
+			text-indent: -1em;
+		}
+		#footer li:before {
+			content: "|";
+			padding-right: 5px;
+		}
+		#footer li:nth-child(1):before {
+			content: "";
+			padding-right: 0px;
+		}
+		#mobile-header {
+			z-index:500;
+			top:0px;
+			background-color:#1D432F;
+			width:100%;
+			height:72px;
+			position:fixed;
+			color:white;
+		}
+		#mobile-header a {
+			color:white;
+		}
+		#mobile-header-left {
+			font-size:36px;
+			height:72px;
+			line-height:72px;
+			text-align:left;
+			float:left;
+			height:72px;
+			line-height:72px;
+			width:8%;
+			padding-left:1%;
+		}
+		#mobile-header-center {
+			float:left;
+			width:82%;
+			text-align:center;
+		}
+		#mobile-header-right {
+			float:left;
+			font-size:48px;
+			height:72px;
+			line-height:64px;
+			width:8%;
+			text-align:right;
+		}
+		::-webkit-input-placeholder { font-size:14px; }
+		::-moz-placeholder { font-size:14px; }
+		:-ms-input-placeholder { font-size:14px; }
+		input:-moz-placeholder { font-size:14px; }
+		input { font-size:14px; }
+		.group:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		#category-table-mobile {
+			margin-top:72px;
+			width:100%;
+		}
+		#category-table-mobile td {
+			border-bottom:1px solid black;
+			font-size:12px;
+			text-align:center;
+		}
+		#category-table-mobile td a {
+			width:100%;
+			height:100%;
+			display:block;
+			color:black;
+		}
+		#category-table-mobile td a img {
+			height:75%;
+		}
+		#category-table-desktop {
+			display:none;
+		}
+    }
+	@media (min-width: 1024px) {
+		#mobile-header,#product-title,#sidebar-before,#search,#category-table-mobile {
+			display:none;
+		}
+		#category-table-desktop td {
+			font-size:10px;
+			width:112px;
+			text-align:center;
+			vertical-align:top;
+		}
+		.group:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	}
+</style>
+<script type='text/javascript'>
+	$(document).ready(function(){
+		if ($(window).width() <= 1024) {
+			$("#mobile-header-left").click(function(){
+				$("#sidebar").animate({ marginLeft: "0%"} , 500);
+				$("body").css({"overflow":"hidden"});
+				$("body").css({"position":"fixed"});
+				$("body").css({"width":$(window).width()});
+			});
+			$("#mobile-header-center").click(function(){
+				$('html, body').animate({scrollTop:0});
+			});
+			var sidebarBefore = document.createElement("a");
+			$("#sidebar").children().before(sidebarBefore);
+			$(sidebarBefore).attr("id","sidebar-before");
+			$(sidebarBefore).attr("href","#");
+			$(sidebarBefore).html("&#x25c4;");
+			$(sidebarBefore).css({"height":"50px"});
+			$(sidebarBefore).css({"margin-right":"1%"});
+			$("#sidebar-before").click(function(){
+				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
+				$("body").css({"overflow":"default"});
+				$("body").css({"position":"default"});
+			});
+			var search = document.createElement("div");
+			$("#sidebar-before").before(search);
+			$(search).attr("id","search");
+			$(search).html("<input type=\"text\" placeholder=\"Search\" style=\"height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;\"></input>");
+			$(search).css({"color":"white"});
+			$(search).css({"float":"left"});
+			$(search).css({"width":"80%"});
+			$(search).css({"height":"50px"});
+			$(search).css({"line-height":"50px"});
+		}
+	});
+</script>
+{% endblock %}
 {% block title %}{{ category.title | safe }}{% endblock %}
 {% block categorytext %}{{ category.title | safe }}{% endblock %}
 {% block content %}
-<table><tr>
+<div id="mobile-header">
+	<div id="mobile-header-left">☰</div>
+	<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+	<div id="mobile-header-right"><a href="/home">⌂</a></div>
+</div>
+<table id="category-table-mobile">
+{% for x in category.products: %}
+<tr><td>
+	<a href="../product/{{ x }}">
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x ) }}" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
+		<div>{{ category.products[x] | replace("<br />"," ") | safe }}</div>
+	</a>
+</td></tr>
+{% endfor %}
+</tr></table>
+<table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
 	<a href="../product/{{ x }}">
