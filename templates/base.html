@@ -7,8 +7,44 @@
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery.color-2.1.2.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="(min-width:1024px)">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
+		<script type='text/javascript'>
+	$(document).ready(function(){
+		if ($(window).width() <= 1024) {
+			$("#mobile-header-left").click(function(){
+				$("#sidebar").animate({ marginLeft: "0%"} , 500);
+				$("body").css({"overflow":"hidden"});
+				$("body").css({"position":"fixed"});
+				$("body").css({"width":$(window).width()});
+			});
+			$("#mobile-header-center").click(function(){
+				$('html, body').animate({scrollTop:0});
+			});
+			var sidebarBefore = document.createElement("a");
+			$("#sidebar").children().before(sidebarBefore);
+			$(sidebarBefore).attr("id","sidebar-before");
+			$(sidebarBefore).attr("href","#");
+			$(sidebarBefore).html("&#x25c4;");
+			$(sidebarBefore).css({"height":"50px"});
+			$(sidebarBefore).css({"margin-right":"1%"});
+			$("#sidebar-before").click(function(){
+				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
+				$("body").css({"overflow":"default"});
+				$("body").css({"position":"default"});
+			});
+			var search = document.createElement("div");
+			$("#sidebar-before").before(search);
+			$(search).attr("id","search");
+			$(search).html("<input type=\"text\" placeholder=\"Search\" style=\"height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;\"></input>");
+			$(search).css({"color":"white"});
+			$(search).css({"float":"left"});
+			$(search).css({"width":"80%"});
+			$(search).css({"height":"50px"});
+			$(search).css({"line-height":"50px"});
+		}
+	});
+</script>
 	{% endblock %}
 	</head>
 	<body>
@@ -63,6 +99,11 @@
 		</div>
 		<div id="container">
 			<div id="content">
+				<div id="mobile-header">
+					<div id="mobile-header-left">☰</div>
+					<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+					<div id="mobile-header-right"><a href="/home">⌂</a></div>
+				</div>
 			{% block content %}{% endblock %}
 			</div>
 			<div id="footer">
