@@ -70,6 +70,9 @@ a.directions {
 	clear: both;
 }
 @media (min-width: 1024px) {
+	#mobile-header,#product-title,#sidebar-before,#search {
+			display:none;
+		}
 	#sidebar ul {
 		list-style: none;
 		padding: 0px;
