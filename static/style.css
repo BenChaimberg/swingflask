@@ -19,7 +19,6 @@ p { text-align:justify; }
     padding:0 10px;
 }
 #text {
-    float: right;
     position: relative;
     text-align: justify;
 }
@@ -70,7 +69,7 @@ a.directions {
 	clear: both;
 }
 @media (min-width: 1024px) {
-	#mobile-header,#product-title,#sidebar-before,#search {
+	#mobile-header,#product-title,#sidebar-before,#search,#category-table-mobile,#category-title {
 			display:none;
 		}
 	#sidebar ul {
@@ -182,6 +181,9 @@ a.directions {
 	    font-family: Verdana, Arial, Helvetica, sans-serif;
 	    font-size:9px;
 	}
+	#text {
+		float: right;
+    }
 }
 @media (max-width: 1024px) {
 	html, body { margin: 0px; padding: 0px; border: 0px; }
@@ -308,4 +310,26 @@ a.directions {
 	:-ms-input-placeholder { font-size:14px; }
 	input:-moz-placeholder { font-size:14px; }
 	input { font-size:14px; }
+	#content>:nth-child(2):not(#main-img) {
+		margin-top:77px;
+	}
+	#content>:not(:nth-child(1)):not(.margined){margin-left:5px;margin-right:5px;}
+	#header{display:block;font-size:9px;text-align:center;border-top:1px solid grey;padding-top:5px;}
+	#header img{display:none;}
+	#header ul{list-style:none;margin:0;padding:0;}
+	#header li{display:inline;text-indent:-1em;}
+	#header li:nth-child(1):before{content:"";padding-right:0px;}
+	#header li:before{content:"|";padding-right:5px;}
+}
+@media (min-width: 500px) and (max-width: 1024px) {
+	#content p,#content ul,#container2 p,#container2 ul {
+		width:500px !important;
+		margin-left:auto !important;
+		margin-right:auto !important;
+	}
+}
+@media (max-width: 500px) {
+	#content p,#content ul,#container2 p,#container2 ul {
+		max-width:100%;
+	}
 }

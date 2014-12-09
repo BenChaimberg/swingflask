@@ -2,18 +2,6 @@
 {% block head %}
 {{ super() }}
 <style>
-	@media (max-width: 500px) {
-		p {
-			width:100%;
-		}
-	}
-	@media (min-width: 500px) and (max-width: 1024px) {
-		p {
-			width:500px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-	}
 	@media (max-width: 1024px) {
 		html, body { margin: 0px; padding: 0px; border: 0px; }
 		body,p {
@@ -26,9 +14,6 @@
 			text-decoration:none;
 		}
 		p { text-align:justify; }
-		#header,#category {
-			display: none;
-		}
 		#container,#content {
 			width:100%;
 			height:100%;
@@ -128,9 +113,6 @@
 		}
     }
 	@media (min-width: 1024px) {
-		#mobile-header,#product-title,#sidebar-before,#search {
-			display:none;
-		}
 		#infotext {
 			 position:relative;
 			 right:5px;
@@ -236,11 +218,16 @@
 <script type='text/javascript'>
 	$(document).ready(function(){
 		if ($(window).width() <= 1024) {
+			$(window).resize(function(){
+				$("iframe").css({"height":.75*$(window).width()-10});
+				$("iframe").css({"width":$(window).width()-10});
+			});
 			$(".label").click(function(){
 				$("iframe").css({"height":.75*$(window).width()-10});
+				$("iframe").css({"width":$(window).width()-10});
 				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
 				$(this).next().slideToggle("slow",function(){
-					$('html, body').animate({scrollTop:$(this).prev().offset().top-72},1000,function(){	
+					$('html, body').animate({scrollTop:$(this).prev().offset().top-72},500,function(){
 						$(".buystuff").hide("fast",function(){
 							$(".buybutt").show("fast");
 						});
@@ -251,6 +238,7 @@
 			});
 			$(".buybutt").click(function(event){
 				event.preventDefault();
+				$('html, body').stop();
 				var clicked = $(this)
 				$(".buybutt").fadeOut("slow",function(){
 					clicked.next().fadeIn("slow");
