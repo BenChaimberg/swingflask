@@ -12,6 +12,7 @@
 		<script type='text/javascript'>
 	$(document).ready(function(){
 		if ($(window).width() <= 1024) {
+			$("#header").insertAfter("#footer");
 			$("#mobile-header-left").click(function(){
 				$("#sidebar").animate({ marginLeft: "0%"} , 500);
 				$("body").css({"overflow":"hidden"});

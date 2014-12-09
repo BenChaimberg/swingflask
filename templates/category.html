@@ -16,7 +16,6 @@
 	}
 	@media (max-width: 1024px) {
 		#category-title {
-			margin-top:77px;
 			padding-bottom:5px;
 			font-weight:bold;
 			text-align:center;
@@ -45,9 +44,6 @@
 		}
     }
 	@media (min-width: 1024px) {
-		#mobile-header,#product-title,#sidebar-before,#search,#category-table-mobile {
-			display:none;
-		}
 		#category-table-desktop td {
 			font-size:10px;
 			width:112px;
@@ -66,7 +62,7 @@
 {% block categorytext %}{{ category.title | safe }}{% endblock %}
 {% block content %}
 <div id="category-title">{{ category.title | safe }}</div>
-<table id="category-table-mobile">
+<table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
 	<a href="../product/{{ x }}">
