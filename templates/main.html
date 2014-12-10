@@ -1,4 +1,22 @@
 {% extends "base.html" %}
-{% block head %}{{ super() }}<style>div#category{display:none;}#main-img{width:100%;margin-top:72px;}</style>{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+	div#category {
+		display:none;
+	}
+	@media (max-width: 1024px) {
+		#main-img {
+			width:100%;
+			margin-top:72px;
+		}
+	}
+	@media (min-width: 1024px) {
+		#main-img {
+			width:590px;
+		}
+	}
+</style>
+{% endblock %}
 {% block title %}Swing Paints - Home{% endblock %}
 {% block content %}<img src="{{ url_for('static', filename='images/mainbg.jpg') }}" id="main-img" class="margined" alt="Swing Paints Main">{% endblock %}
