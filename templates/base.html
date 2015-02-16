@@ -9,114 +9,127 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
-		<script type='text/javascript'>
-	$(document).ready(function(){
-		if ($(window).width() <= 1024) {
-			$("#header").insertAfter("#footer");
-			$("#mobile-header-left").click(function(){
-				$("#sidebar").animate({ marginLeft: "0%"} , 500);
-				$("body").css({"overflow":"hidden"});
-				$("body").css({"position":"fixed"});
-				$("body").css({"width":$(window).width()});
+		<script>
+			$(window).load(function(){
+				$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
+				var ctx = $("#canvas").get(0).getContext('2d');
+				ctx.scale(2, 2);
+				ctx.strokeStyle = "grey";
+				ctx.fillStyle = "black";
+				times = 5;
+				startx = 10;
+				starty = 18;
+				for (i=1;i<=times;i++){
+					ctx.beginPath();
+					ctx.moveTo(startx, starty*i-2);
+					ctx.lineTo(startx+30, starty*i+1);
+					ctx.stroke();
+					
+					ctx.beginPath();
+					ctx.moveTo(startx, starty*i+2);
+					ctx.lineTo(startx+30, starty*i+5);
+					ctx.stroke();
+					
+					ctx.beginPath();
+					ctx.arc(startx,starty*i,4,0,2*Math.PI);
+					ctx.fill();
+					
+					ctx.beginPath();
+					ctx.arc(startx+30,starty*i+3,4,0,2*Math.PI);
+					ctx.fill();
+				}
 			});
-			$("#mobile-header-center").click(function(){
-				$('html, body').animate({scrollTop:0});
-			});
-			var sidebarBefore = document.createElement("a");
-			$("#sidebar").children().before(sidebarBefore);
-			$(sidebarBefore).attr("id","sidebar-before");
-			$(sidebarBefore).attr("href","#");
-			$(sidebarBefore).html("&#x25c4;");
-			$(sidebarBefore).css({"height":"50px"});
-			$(sidebarBefore).css({"margin-right":"1%"});
-			$("#sidebar-before").click(function(){
-				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
-				$("body").css({"overflow":"default"});
-				$("body").css({"position":"default"});
-			});
-			var search = document.createElement("div");
-			$("#sidebar-before").before(search);
-			$(search).attr("id","search");
-			$(search).html("<input type=\"text\" placeholder=\"Search\" style=\"height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;\"></input>");
-			$(search).css({"color":"white"});
-			$(search).css({"float":"left"});
-			$(search).css({"width":"80%"});
-			$(search).css({"height":"50px"});
-			$(search).css({"line-height":"50px"});
-		}
-	});
-</script>
+		</script>
 	{% endblock %}
 	</head>
 	<body>
-		<!--<div id="fb-root"></div>
-		<script>
-			(function(d, s, id) {
-  				var js, fjs = d.getElementsByTagName(s)[0];
-  				if (d.getElementById(id)) return;
-  				js = d.createElement(s); js.id = id;
-  				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  				fjs.parentNode.insertBefore(js, fjs);
-			}
-			(document, 'script', 'facebook-jssdk'));
-		</script>-->
-		<div id="header">
-		{% block header %}
-			<ul>
-				<li><a href="/about">ABOUT SWING PAINTS</a></li>
-				<li><a href="/locations">WHERE TO BUY</a></li>
-				<li><a href="/faq">FAQ</a></li>
-				<li><a href="/contact">CONTACTS</a></li>
-				<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
-				<li><b><a href="/home">HOME</a></b></li>
-				<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="187" height="37">
-			</ul>
-		{% endblock %}
-		</div>
-		<div id="sidebar">
-		{% block sidebar %}
-			<ul>
-				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" id="sidebar-image" alt="Swing Paints Sidebar" width="159" height="69"><br />
-				<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
-				<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
-				<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
-				<li><a href="/category/varnishremovers"> Paint &amp; Varnish Removers</a></li>
-				<li><a href="/category/oils"> Finishing Oils</a></li>
-				<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
-				<li><a href="/category/primers"> Paint &amp; Wallpaper Primers</a></li>
-				<li><a href="/category/stains"> Wood Stains &amp; Varnish Stains</a></li>
-				<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
-				<li><a href="/category/bath"> Bathtub Reglazing Epoxy</a></li>
-				<li><a href="/category/solvents"> Solvents</a></li>
-				<li><a href="/category/clearance"> Clearance</a></li>
-			</ul>
-		{% endblock %}
-		</div>
-		<div id="category">
-			{% block category %}
-			<div style="background-color:#640032;position:absolute;">{% block categorytext %}{% endblock %}</div>
-			<div style="float:right;border-right:1px solid #CCCCCC;"></div>
-			{% endblock %}
-		</div>
-		<div id="container">
-			<div id="content">
-				<div id="mobile-header">
-					<div id="mobile-header-left">☰</div>
-					<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
-					<div id="mobile-header-right"><a href="/home">⌂</a></div>
+		<canvas id="canvas" style="position:absolute;z-index:2;" width="90" height="208"></canvas>
+		<div id="center">
+			<div id="header" class="group">
+				<div id="logo">
+					<img src="https://cloud.githubusercontent.com/assets/3698184/6205832/d1a484fc-b549-11e4-8833-d6f98fd6a508.png">
+					<div id="logotext">finishing the easy way since 1965</div>
 				</div>
-			{% block content %}{% endblock %}
+				<div id="links">
+					<ul>
+						<li><b><a href="/home">HOME</a></b></li>
+						<li><a href="/about">ABOUT SWING PAINTS</a></li></li>
+						<li><a href="/locations">WHERE TO BUY</a></li>
+						<li><a href="/faq">FAQ</a></li>
+						<li><a href="/contact">CONTACTS</a></li>
+						<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
+					</ul>
+				</div>
 			</div>
-			<div id="footer">
-				<ul>
-					<li><a href="/forum.asp" class="noscript">INTERACTIVE FORUM</a></li>
-					<!--<li><a href="/coupon" class="noscript">SWING COUPONS</a></li>-->
-					<li><a href="/newsletter" class="noscript" target="_BLANK">NEWSLETTER</a></li>
-					<li><a href="/refer" class="noscript" target="_BLANK">REFER A FRIEND</a></li>
-					<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
-				</ul>
-				<div id="facebook">
-					<!--<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>-->
+			<div id="main" class="group">
+				<div id="mainleft">
+					<div id="search">
+						<form>
+							<input type="text" id="searchinput" placeholder="Search" style="height:2%;width:75%;border-radius:5px;border:none;padding-left:10px;"></input>
+						</form>
+					</div>
+					<div id="sidebar">
+						<h1>Categories</h1>
+						<ul>
+							<li><a href="/category/nontoxic"> Non-Toxic Products</a></li>
+							<li><a href="/category/oils"> Finishing Oils</a></li>
+							<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
+							<li><a href="/category/removers"> Paint &amp; Varnish Removers</a></li>
+							<li><a href="/category/primer"> Paint &amp; Wallpaper Primers</a></li>
+							<li><a href="/category/special"> Specialty Paints &amp; Coatings</a></li>
+							<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
+							<li><a href="/category/stain"> Wood Stains &amp; Varnish Stains</a></li>
+							<li><a href="/category/accessories"> Accessories</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="content">
+				{% block content %}
+					<div id="feature">
+						<h1>Featured Project</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae feugiat eros. Mauris sollicitudin blandit nulla, sed convallis neque lobortis quis. Vestibulum maximus at lorem at posuere. Maecenas suscipit eros nec dapibus aliquam. Praesent sollicitudin libero quis metus bibendum, ac porta dolor vulputate. Donec mollis dui in pretium maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum scelerisque ligula scelerisque, finibus nibh sit amet, maximus felis. Phasellus suscipit varius lectus, eget porttitor enim scelerisque at. Fusce viverra vel libero non luctus. In dui sem, euismod auctor feugiat nec, imperdiet a leo. In egestas eget mi non posuere. Morbi non dictum nunc. Ut eget elit quam. Phasellus quis ligula eros. Aenean vestibulum ac nisi a consectetur.</p>
+						<a href="" class="more">More</a>
+					</div>
+					<div class="threecontent group" style="margin-top:10px">
+						<div id="new" class="group">
+							<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
+							<h2>New & Noteworthy</h2>
+							<p>Your guide to what's new, what's hot & what's interesting.</p>
+							<a href="" class="more">More</a>
+						</div>
+						<div id="gallery">
+							<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
+							<h2>Project Gallery</h2>
+							<p>Check out some of our customers' great projects</p>
+							<a href="" class="more">More</a>
+						</div>
+						<div id="forum">
+							<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
+							<h2>Interactive Forum</h2>
+							<p>Your ultimate resource for questions & answers about refinishing.</p>
+							<a href="" class="more">More</a>
+						</div>
+					</div>
+					<div class="twocontent group">
+						<div id="mission" class="group">
+							<h1>Our Mission</h1>
+							<p>Swing Paints Ltd. has been manufacturing paint specialty and wood refinishing products for the last 50 years. We are a family-owned and operated business. As a result, we take a very hands-on approach to every aspect of our business - from the raw materials to the labels on the cans themselves. Our goal is to produce the highest quality products at the most competitieve prices.</p>
+							<a href="" class="more">More</a>
+						</div>
+						<div id="brand">
+							<h1>Our Brands</h1>
+							<p>
+								<a href="">Circa 1850</a><br />
+								<a href="">Klenk's</a><br />
+								<a href="">Antiquax</a><br />
+								<a href="">Terra Nova</a><br />
+								<a href="">Gaudreault Antiques</a><br />
+								<a href="">Super DeGooper</a><br />
+							</p>
+							<a href="" class="more">More</a>
+						</div>
+					</div>
+				{% endblock %}
 				</div>
 			</div>
 		</div>
