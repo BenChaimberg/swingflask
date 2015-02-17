@@ -192,6 +192,18 @@ def rightstripper():
 def rightfinish():
 	return render_template(generic_page('rightfinish',request.query_string))
 
+@app.route('/forum')
+def forum():
+	with open('forummessages', 'r') as file:
+		data = json.load(file)
+	return render_template('forum.html',data=data,len=len(data))
+
+@app.route('/forum/<message>')
+def message(message):
+	with open('forummessages', 'r') as file:
+		data = json.load(file)
+	return render_template('message.html',data=data,len=len(data),id=message)
+
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
 	if request.query_string == 'french': #if URL ends with ?french
@@ -311,4 +323,4 @@ def category(categoryid):
 		else: abort(404)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
-    app.run(debug=False,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)
+    app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)

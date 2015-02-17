@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<title>Forum</title>
+		<style>
+			table {width:100%;}
+			tr:nth-child(even) {
+				background-color:#CCCCCC;
+			}
+			tr:nth-child(odd) {
+				background-color:#F6F6F6;
+			}
+			tr:nth-child(1) {
+				font-weight:bold;
+				border:1px solid black;
+				display:none;
+			}
+			tr:nth-child(1) td {
+				border-bottom:1px solid black;
+				background-color:#FFFFFF;
+			}
+		</style>
+		<script>
+			$(document).ready(function(){
+				var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+				$("#write").children().children().css("display","table-row");
+				for (var key in data){
+					var values = [];
+					for (var key2 in data[key]){
+						switch (key2){
+							case "author":
+								values[0] = data[key][key2];
+								break;
+							case "email":
+								values[0] = "<a href=\"mailto:" + data[key][key2] + "\">" + values[0] + "</a>";
+								break;
+							case "subject":
+								values[1] = '<a href="/forum/' + key + '">' + data[key][key2] + "</a>";
+								break;
+							case "replies":
+								values[2] = 0;
+								for (var key3 in data[key][key2]){
+									values[2] += 1;
+								}
+								break;
+							case "time":
+								values[3] = data[key][key2];
+								break;
+							default:
+								break;
+						}
+					}
+					var newRow  = document.getElementById("write").insertRow(1);
+					for (var value in values) {
+						var newCell = newRow.insertCell(-1);
+						var htmlNode = document.createElement('span');
+						htmlNode.innerHTML = values[value]
+						newCell.appendChild(htmlNode);
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<table id="write">
+			<tr>
+				<td>Author</td>
+				<td>Subject</td>
+				<td>Replies</td>
+				<td>Date</td>
+			</tr>
+		</table>
+	</body>
+</html>

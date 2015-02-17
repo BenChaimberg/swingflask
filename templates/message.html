@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<title></title>
+		<style>
+			table {width:100%;}
+			tr:nth-child(1) {
+				background-color:#666666;
+				color:white;
+			}
+			tr:nth-child(1) td {
+				font-weight:bold;
+			}
+			td:nth-child(1) {
+				width:15%;
+			}
+			tr {
+				vertical-align:top;
+				background-color:#D3D3D3;
+			}
+			tr td :nth-child(1) {
+				font-weight:bold;
+			}
+		</style>
+		<script>
+			$(document).ready(function(){
+				var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+				$("title").html("Swing Paints Forum - " + data[{{ id }}]["subject"]);
+				var newRow  = document.getElementById("write").insertRow(-1);
+				var newCell = newRow.insertCell(-1);
+				var htmlNode = document.createElement('span');
+				htmlNode.innerHTML = data[{{ id }}]["author"] + "<br />";
+				newCell.appendChild(htmlNode);
+				var htmlNode2 = document.createElement('span');
+				htmlNode2.innerHTML = data[{{ id }}]["time"];
+				newCell.appendChild(htmlNode2);
+				var newCell2 = newRow.insertCell(-1);
+				var htmlNode3 = document.createElement('span');
+				$(newCell2).attr("id",data[{{ id }}]["time"]);
+				htmlNode3.innerHTML = "<a href=\"#" + data[{{ id }}]["time"] + "\">" + data[{{ id }}]["subject"] + "</a>:<br />";
+				newCell2.appendChild(htmlNode3);
+				var htmlNode4 = document.createElement('span');
+				htmlNode4.innerHTML = data[{{ id }}]["text"];
+				newCell2.appendChild(htmlNode4);
+			});
+		</script>
+	</head>
+	<body>
+		<table id="write">
+			<tr>
+				<td>From</td>
+				<td>Message</td>
+			</tr>
+		</table>
+	</body>
+</html>
