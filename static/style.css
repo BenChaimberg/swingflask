@@ -73,7 +73,7 @@ body {
 }
 #content {
 	float: left;
-	width: 65%;
+	min-width: 65%;
 	padding: 0 15px 10px 35px;
 }
 #mission {
