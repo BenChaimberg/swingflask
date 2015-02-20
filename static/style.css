@@ -2,8 +2,11 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #000000;
-	background-image: url("https://cloud.githubusercontent.com/assets/3698184/6205829/c084a2ba-b549-11e4-855d-da468751dec2.png");
-	background-size: auto 100%;
+	background: -webkit-linear-gradient(green, white, white);
+	background: -o-linear-gradient(green, white);
+	background: -moz-linear-gradient(green, white);
+	background: linear-gradient(#336633, white);
+	background-repeat: no-repeat;
 }
 .group:after {
 	content: "";
@@ -52,7 +55,8 @@ body {
 }
 #sidebar ul {
 	list-style: none;
-	padding-left: 15px;
+	padding-left: 0;
+	padding-right: 15px;
 }
 #sidebar li:before {
 	content: '\25b6';
