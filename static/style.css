@@ -34,6 +34,32 @@ body {
 	list-style: none;
 	padding: 0;
 }
+@media (max-width: 1200px) {
+	#center {
+		width: 1025px;
+	}
+	#links a {
+		color: blue;
+		font-size: 10px;
+	}
+	#mainright {
+		float: left;
+		width: 71%;
+	}
+}
+@media (min-width: 1200px) {
+	#center {
+		width: 1175px;
+	}
+	#links a {
+		color: red;
+		font-size: inherit;
+	}
+	#mainright {
+		float: left;
+		width: 75%;
+	}
+}
 #links li {
 	display: inline;
 	background-color: grey;
@@ -42,7 +68,6 @@ body {
 }
 #links a {
 	text-decoration: none;
-	color: white;
 }
 #sidebar, #content {
 	margin: 15px;
@@ -73,10 +98,6 @@ body {
 }
 #mainleft {
 	float: left;
-}
-#mainright {
-	float: left;
-	width: 75%;
 }
 #content {
 	padding: 5px 15px 10px 35px;

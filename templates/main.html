@@ -1,28 +1,9 @@
 {% extends "base.html" %}
-{% block head %}
-{{ super() }}
-<style>
-	div#category {
-		display:none;
-	}
-	@media (max-width: 1024px) {
-		#main-img {
-			width:100%;
-			margin-top:72px;
-		}
-	}
-	@media (min-width: 1024px) {
-		#main-img {
-			width:590px;
-		}
-	}
-</style>
-{% endblock %}
 {% block title %}Swing Paints - Home{% endblock %}
 {% block content %}
 	<div id="feature">
 		<h1>Featured</h1>
-		<p><div class="fb-post" data-href="{{ feed | safe }}" data-width="750"></div></p>
+		<p><div class="fb-post" data-href="{{ feed | safe }}" data-width="500"></div></p>
 		<a href="" class="more">More</a>
 	</div>
 	<div class="threecontent group" style="margin-top:10px">
