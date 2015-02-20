@@ -5,9 +5,9 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #000000;
-	background: -webkit-linear-gradient(green, white, white);
-	background: -o-linear-gradient(green, white);
-	background: -moz-linear-gradient(green, white);
+	background: -webkit-linear-gradient(#336633, white);
+	background: -o-linear-gradient(#336633, white);
+	background: -moz-linear-gradient(#336633, white);
 	background: linear-gradient(#336633, white);
 	background-repeat: no-repeat;
 }
