@@ -2,7 +2,7 @@
 {% block head %}
 {{ super() }}
 <style>
-	@media (max-width: 500px) {
+	/*@media (max-width: 500px) {
 		p {
 			width:100%;
 		}
@@ -43,26 +43,20 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {
+	@media (min-width: 1024px) {*/
 		#category-table-desktop td {
 			font-size:10px;
 			width:112px;
 			text-align:center;
 			vertical-align:top;
 		}
-		.group:after {
-			content: "";
-			display: table;
-			clear: both;
-		}
-	}
+	//}
 </style>
 {% endblock %}
 {% block title %}{{ category.title | safe }}{% endblock %}
 {% block categorytext %}{{ category.title | safe }}{% endblock %}
 {% block content %}
-<div id="category-title">{{ category.title | safe }}</div>
-<table id="category-table-mobile" class="margined">
+<!--<table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
 	<a href="../product/{{ x }}">
@@ -71,11 +65,11 @@
 	</a>
 </td></tr>
 {% endfor %}
-</tr></table>
+</tr></table>-->
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x }}">
+	<a href="../product/{{ x }}" style="text-decoration:none;">
 		<img src="{{ url_for('static', filename='images/tn/%s.jpg' % x ) }}" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
 	</a><br />{{ category.products[x] | safe }}
 </td>
