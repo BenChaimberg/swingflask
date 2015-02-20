@@ -14,8 +14,7 @@ body {
 	clear: both;
 }
 #center {
-	min-width: 1175px;
-	width: 80%;
+	width: 1175px;
 	height: 100%;
 	margin: 0 auto;
 }
