@@ -150,6 +150,10 @@ def logout():
     logout_user()
     return redirect('/home')
 
+@app.route('/test')
+def test():
+	return render_template('refersuccess.html')
+
 @app.route('/')
 @app.route('/home')
 @app.route('/index')
