@@ -10,11 +10,22 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
 		<script>
-			$(window).resize(function(){
+			var resizings = function(){
 				$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
+				$(document).find('div.fb-post').each(function() {
+					$(this).attr('data-width', $(this).parent().width());
+				});
+				if (FB) {
+					FB.XFBML.parse();
+				}
+			}
+			$(window).resize(function(){
+				resizings();
+			});
+			$(window).load(function(){
+				resizings();
 			});
 			$(document).ready(function(){
-				$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
 				var ctx = $("#canvas").get(0).getContext('2d');
 				ctx.scale(2, 2);
 				ctx.strokeStyle = "grey";
@@ -41,6 +52,7 @@
 					ctx.arc(startx+30,starty*i+3,4,0,2*Math.PI);
 					ctx.fill();
 				}
+				resizings();
 			});
 		</script>
 	{% endblock %}
