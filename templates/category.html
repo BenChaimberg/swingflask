@@ -45,10 +45,13 @@
     }
 	@media (min-width: 1024px) {*/
 		#category-table-desktop td {
-			font-size:10px;
-			width:112px;
+			font-size:12px;
+			width:33%;
 			text-align:center;
 			vertical-align:top;
+		}
+		#category-table-desktop {
+			width:100%;
 		}
 	//}
 </style>
@@ -69,11 +72,11 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x }}" style="text-decoration:none;">
-		<img src="{{ url_for('static', filename='images/tn/%s.jpg' % x ) }}" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
-	</a><br />{{ category.products[x] | safe }}
+	<a href="../product/{{ x }}" style="text-decoration:none;"><div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;">
+	</div></a>
+	<span>{{ category.products[x] | safe }}</span>
 </td>
-{% if loop.index is divisibleby(5) %}</tr><tr>{% endif %}
+{% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}
 {% if category.dictlen is not divisibleby(5) %}
 {% for i in range(0,5-(category.dictlen % 5)) %}

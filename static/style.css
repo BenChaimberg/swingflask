@@ -122,7 +122,7 @@ body {
 	position:relative;
 	margin-top:10px;
 	clear:both;
-	text-align:right;
+	text-align:center;
 	color: #336633;
     text-decoration: none;
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -130,8 +130,27 @@ body {
 }
 #footer ul {
 	list-style: none;
+	padding: 0;
 }
 #footer li {
 	display:inline;
-	text-indent: -1em;
+}
+#footer li:before {
+	content: '|';
+	color: black;
+}
+#footer li:nth-of-type(1):before {
+	content: '';
+}
+#footer li:nth-of-type(1) a {
+	padding: 0;
+}
+#footer a {
+	color: black;
+	font-size: 10px;
+	text-decoration: none;
+	padding-left: 5px;
+}
+#footer a:hover {
+	text-decoration: underline;
 }
