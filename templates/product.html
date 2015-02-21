@@ -2,7 +2,7 @@
 {% block head %}
 {{ super() }}
 <style>
-	@media (max-width: 1024px) {
+	/*@media (max-width: 1024px) {
 		html, body { margin: 0px; padding: 0px; border: 0px; }
 		body,p {
 			font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -112,7 +112,7 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {
+	@media (min-width: 1024px) {*/
 		#infotext {
 			 position:relative;
 			 right:5px;
@@ -173,7 +173,7 @@
 		}
 		.label {
 			margin: 0;
-			width: 24.77%;
+			width: 24.78%;
 			float: left;
 			text-align: center;
 			padding: 2px 0;
@@ -198,26 +198,22 @@
 		.directions.stuff {
 			display:block;
 		}
-		#container2 {
-			width:580px;
-			position:relative;
-			margin-left:3px;
+		#tabs {
+			margin-top:15px;
 		}
 		#iframe {
 			width:420px;
 			height:315px;
 			margin:5px;
 		}
-		.group:after {
-			content: "";
-			display: table;
-			clear: both;
+		#image {
+			float: left;
 		}
-	}
+	/*}*/
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		if ($(window).width() <= 1024) {
+		/*if ($(window).width() <= 1024) {
 			$(window).resize(function(){
 				$("iframe").css({"height":.75*$(window).width()-10});
 				$("iframe").css({"width":$(window).width()-10});
@@ -245,8 +241,8 @@
 				});
 			});
 		}
-		if ($(window).width() >= 1024) {
-			$(".stuff").insertAfter($("#container2").children().last())
+		if ($(window).width() >= 1024) {*/
+			$(".stuff").insertAfter($("#tabs").children().last())
 			$(".label").click(function(event){
 				event.preventDefault();
 				$(this).removeClass("label");
@@ -284,42 +280,18 @@
 					clicked.next().fadeIn("slow");
 				});
 			});
-			$("#container2").hide("fast");
-			$(window).load(function(){
-				$("#container2").show("fast");
-			});
-		}
+		//}
 	});
 </script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
 {% block categorytext %}{{ product.categorytitle[product_category(product.category,product.id)] | safe }}{% endblock %}
 {% block content %}
-	<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
-	<div id="text"><p id="product-title">{{ product.title|safe }}</p><p>{{ product.text|safe }}</p></div>
-	<script type='text/javascript'>
-		if ($(window).width() >= 1024) {
-			$("#text").css('display','none');
-			$("#picture").load(function(){
-				var txt = $("#image").width();
-				var txt2 = 555 - txt
-				$("#text").css('display','inline');
-				$("#text").css('width', txt2);
-			});
-		}
-	</script>
-</div>
-<script type='text/javascript'>
-	$(window).load(function(){
-		if ($(window).width() >= 1024) {
-			var imghgt = $("#image").height();
-			var txthgt = $("#text").height();
-			var hgt = Math.max(imghgt,txthgt);
-			$("#content").css('height', hgt+10);
-		}
-	});
-</script>
-<div id="container2" class="group">
+	<div class="group">
+		<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+		<div id="text"><b id="product-title">{{ product.title|safe }}</b><p>{{ product.text|safe }}</p></div>
+	</div>
+	<div id="tabs" class="group">
 		<div class="label directions"><span>Directions</span></div>
 		<div class="stuff directions"><p>{{ product.dir | safe }}</p></div>
 		<div class="label more-info"><span>More Info</span></div>
@@ -415,4 +387,5 @@
 			<p>No Demonstration Available</p>
 			{% endif %}
 		</div>
+	</div>
 {% endblock %}
