@@ -1,52 +1,33 @@
 {% extends "base.html" %}
-{% block head %}
-{{ super() }}
-<style>
-	div#category {
-		display:none;
-	}
-	@media (max-width: 1024px) {
-		#main-img {
-			width:100%;
-			margin-top:72px;
-		}
-	}
-	@media (min-width: 1024px) {
-		#main-img {
-			width:590px;
-		}
-	}
-</style>
-{% endblock %}
 {% block title %}Swing Paints - Home{% endblock %}
 {% block content %}
 	<div id="feature">
 		<h1>Featured</h1>
-		<p><div class="fb-post" data-href="{{ feed | safe }}" data-width="750"></div></p>
+		<p><div class="fb-post" data-href="{{ feed | safe }}" data-width="500"></div></p>
 		<a href="" class="more">More</a>
 	</div>
 	<div class="threecontent group" style="margin-top:10px">
-		<div id="new" class="group">
-			<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
-			<h2>New & Noteworthy</h2>
+		<div id="new">
+			<div style="width:100%;height:75px;background-color:black;color:white;">imgfiller</div>
+			<h3>New & Noteworthy</h2>
 			<p>Your guide to what's new, what's hot & what's interesting.</p>
 			<a href="" class="more">More</a>
 		</div>
 		<div id="gallery">
-			<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
-			<h2>Project Gallery</h2>
+			<div style="width:100%;height:75px;background-color:black;color:white;">imgfiller</div>
+			<h3>Project Gallery</h2>
 			<p>Check out some of our customers' great projects</p>
 			<a href="" class="more">More</a>
 		</div>
 		<div id="forum">
-			<div style="width:200px;height:75px;background-color:black;color:white;">imgfiller</div>
-			<h2>Interactive Forum</h2>
+			<div style="width:100%;height:75px;background-color:black;color:white;">imgfiller</div>
+			<h3>Interactive Forum</h2>
 			<p>Your ultimate resource for questions & answers about refinishing.</p>
 			<a href="" class="more">More</a>
 		</div>
 	</div>
 	<div class="twocontent group">
-		<div id="mission" class="group">
+		<div id="mission">
 			<h1>Our Mission</h1>
 			<p>Swing Paints Ltd. has been manufacturing paint specialty and wood refinishing products for the last 50 years. We are a family-owned and operated business. As a result, we take a very hands-on approach to every aspect of our business - from the raw materials to the labels on the cans themselves. Our goal is to produce the highest quality products at the most competitieve prices.</p>
 			<a href="" class="more">More</a>

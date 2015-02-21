@@ -5,44 +5,12 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='canvas.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='mobile.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery.color-2.1.2.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
-		<script>
-			$(window).resize(function(){
-				$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
-			});
-			$(document).ready(function(){
-				$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
-				var ctx = $("#canvas").get(0).getContext('2d');
-				ctx.scale(2, 2);
-				ctx.strokeStyle = "grey";
-				ctx.fillStyle = "black";
-				times = 6;
-				startx = 10;
-				starty = 18;
-				for (i=1;i<=times;i++){
-					ctx.beginPath();
-					ctx.moveTo(startx, starty*i-2);
-					ctx.lineTo(startx+30, starty*i+1);
-					ctx.stroke();
-					
-					ctx.beginPath();
-					ctx.moveTo(startx, starty*i+2);
-					ctx.lineTo(startx+30, starty*i+5);
-					ctx.stroke();
-					
-					ctx.beginPath();
-					ctx.arc(startx,starty*i,4,0,2*Math.PI);
-					ctx.fill();
-					
-					ctx.beginPath();
-					ctx.arc(startx+30,starty*i+3,4,0,2*Math.PI);
-					ctx.fill();
-				}
-			});
-		</script>
 	{% endblock %}
 	</head>
 	<body>
@@ -65,15 +33,17 @@
 						<img src="{{ url_for('static', filename='images/top_logo.png') }}">
 						<div id="logotext">finishing the easy way since 1965</div>
 					</div>
-					<div id="search">
+					<div id="desktop-search">
 						<form>
-							<input type="text" id="searchinput" placeholder="Search" style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;"></input>
+							<input type="text" id="desktop-input" placeholder="Search" style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;"></input>
 							<input type="submit" text="Go"></input>
 						</form>
 					</div>
 					<div id="sidebar">
 					{% block sidebar %}
-						<h1>Categories</h1>
+						<h1 id="category-heading">Categories</h1>
+						<div id="mobile-search"><input type="text" placeholder="Search" style="height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;"></input></div>
+						<a id="sidebar-before" href="#">&#x25c4;</a>
 							<ul>
 								<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
 								<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
@@ -102,22 +72,31 @@
 							<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
 						</ul>
 					</div>
-					<div id="content">
+					<div id="content" class="group">
+						<div id="mobile-header">
+							<div id="mobile-header-left">☰</div>
+							<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+							<div id="mobile-header-right"><a href="/home">⌂</a></div>
+						</div>
+						<h1 id="main-heading">{% block categorytext %}{% endblock %}</h1>
 					{% block content %}{% endblock %}
+					</div>
+					<div id="footer">
+						<ul>
+							<li><a href="/forum" class="noscript">INTERACTIVE FORUM</a></li>
+							<li><a href="/newsletter" class="noscript">NEWSLETTER</a></li>
+							<li><a href="/refer" class="noscript">REFER A FRIEND</a></li>
+							<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
+						</ul>
+						<div id="facebook">
+							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
+						</div>
+						<div id="end">
+							&copy;2015 Swing Paints Ltd. Last modified: February 20, 2015
+						</div>
 					</div>
 				</div>
 			</div>
-			<!--<div id="footer">
-				<ul>
-					<li><a href="/forum" class="noscript">INTERACTIVE FORUM</a></li>
-					<li><a href="/newsletter" class="noscript" target="_BLANK">NEWSLETTER</a></li>
-					<li><a href="/refer" class="noscript" target="_BLANK">REFER A FRIEND</a></li>
-					<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
-				</ul>
-				<div id="facebook">
-					<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
-				</div>
-			</div>-->
 		</div>
 	</body>
 </html>

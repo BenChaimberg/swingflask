@@ -25,6 +25,9 @@
 		#category-table-mobile {
 			width:100%;
 		}
+		#category-table-mobile tr:last-of-type td {
+			border-bottom:none;
+		}
 		#category-table-mobile td {
 			border-bottom:1px solid black;
 			font-size:12px;
@@ -44,16 +47,17 @@
 		}
     }
 	@media (min-width: 1024px) {
+		#category-table-mobile {
+			display:none;
+		}
 		#category-table-desktop td {
-			font-size:10px;
-			width:112px;
+			font-size:12px;
+			width:33%;
 			text-align:center;
 			vertical-align:top;
 		}
-		.group:after {
-			content: "";
-			display: table;
-			clear: both;
+		#category-table-desktop {
+			width:100%;
 		}
 	}
 </style>
@@ -61,7 +65,6 @@
 {% block title %}{{ category.title | safe }}{% endblock %}
 {% block categorytext %}{{ category.title | safe }}{% endblock %}
 {% block content %}
-<div id="category-title">{{ category.title | safe }}</div>
 <table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
@@ -75,11 +78,11 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x }}">
-		<img src="{{ url_for('static', filename='images/tn/%s.jpg' % x ) }}" width="102" height="102" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
-	</a><br />{{ category.products[x] | safe }}
+	<a href="../product/{{ x }}" style="text-decoration:none;"><div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;">
+	</div></a>
+	<span>{{ category.products[x] | safe }}</span>
 </td>
-{% if loop.index is divisibleby(5) %}</tr><tr>{% endif %}
+{% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}
 {% if category.dictlen is not divisibleby(5) %}
 {% for i in range(0,5-(category.dictlen % 5)) %}
