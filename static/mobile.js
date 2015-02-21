@@ -15,5 +15,13 @@ $(document).ready(function(){
 			$("body").css({"overflow":"default"});
 			$("body").css({"position":"default"});
 		});
+		$(window).resize(function(){
+			$(document).find('div.fb-post').each(function() {
+				$(this).attr('data-width', $(this).parent().width());
+			});
+			if (FB) {
+				FB.XFBML.parse();
+			}
+		});
 	}
 });
