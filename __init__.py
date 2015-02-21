@@ -7,6 +7,7 @@ from flask_wtf import Form, validators
 from wtforms.fields import TextField, PasswordField, SelectField
 import wtforms
 from werkzeug.routing import BaseConverter
+import feedparser
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categorytitle, categoryproducts, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
@@ -154,7 +155,8 @@ def logout():
 @app.route('/index')
 @app.route('/main')
 def main():
-	return render_template(generic_page('main',request.query_string))
+	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
+	return render_template(generic_page('main',request.query_string), feed=d['entries'][1]['link'])
 
 @app.route('/locations')
 def locations():

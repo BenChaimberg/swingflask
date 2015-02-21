@@ -5,51 +5,16 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='canvas.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='mobile.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery.color-2.1.2.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
-		<script type='text/javascript'>
-	$(document).ready(function(){
-		if ($(window).width() <= 1024) {
-			$("#header").insertAfter("#footer");
-			$("#mobile-header-left").click(function(){
-				$("#sidebar").animate({ marginLeft: "0%"} , 500);
-				$("body").css({"overflow":"hidden"});
-				$("body").css({"position":"fixed"});
-				$("body").css({"width":$(window).width()});
-			});
-			$("#mobile-header-center").click(function(){
-				$('html, body').animate({scrollTop:0});
-			});
-			var sidebarBefore = document.createElement("a");
-			$("#sidebar").children().before(sidebarBefore);
-			$(sidebarBefore).attr("id","sidebar-before");
-			$(sidebarBefore).attr("href","#");
-			$(sidebarBefore).html("&#x25c4;");
-			$(sidebarBefore).css({"height":"50px"});
-			$(sidebarBefore).css({"margin-right":"1%"});
-			$("#sidebar-before").click(function(){
-				$("#sidebar").animate({ marginLeft: "-100%"} , 500);
-				$("body").css({"overflow":"default"});
-				$("body").css({"position":"default"});
-			});
-			var search = document.createElement("div");
-			$("#sidebar-before").before(search);
-			$(search).attr("id","search");
-			$(search).html("<input type=\"text\" placeholder=\"Search\" style=\"height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;\"></input>");
-			$(search).css({"color":"white"});
-			$(search).css({"float":"left"});
-			$(search).css({"width":"80%"});
-			$(search).css({"height":"50px"});
-			$(search).css({"line-height":"50px"});
-		}
-	});
-</script>
 	{% endblock %}
 	</head>
 	<body>
-		<!--<div id="fb-root"></div>
+		<div id="fb-root"></div>
 		<script>
 			(function(d, s, id) {
   				var js, fjs = d.getElementsByTagName(s)[0];
@@ -59,64 +24,77 @@
   				fjs.parentNode.insertBefore(js, fjs);
 			}
 			(document, 'script', 'facebook-jssdk'));
-		</script>-->
-		<div id="header">
-		{% block header %}
-			<ul>
-				<li><a href="/about">ABOUT SWING PAINTS</a></li>
-				<li><a href="/locations">WHERE TO BUY</a></li>
-				<li><a href="/faq">FAQ</a></li>
-				<li><a href="/contact">CONTACTS</a></li>
-				<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
-				<li><b><a href="/home">HOME</a></b></li>
-				<img src="{{ url_for('static', filename='images/headerswing.png') }}" alt="Swing Paints Header" width="187" height="37">
-			</ul>
-		{% endblock %}
-		</div>
-		<div id="sidebar">
-		{% block sidebar %}
-			<ul>
-				<img src="{{ url_for('static', filename='images/categoryswing.png') }}" id="sidebar-image" alt="Swing Paints Sidebar" width="159" height="69"><br />
-				<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
-				<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
-				<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
-				<li><a href="/category/varnishremovers"> Paint &amp; Varnish Removers</a></li>
-				<li><a href="/category/oils"> Finishing Oils</a></li>
-				<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
-				<li><a href="/category/primers"> Paint &amp; Wallpaper Primers</a></li>
-				<li><a href="/category/stains"> Wood Stains &amp; Varnish Stains</a></li>
-				<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
-				<li><a href="/category/bath"> Bathtub Reglazing Epoxy</a></li>
-				<li><a href="/category/solvents"> Solvents</a></li>
-				<li><a href="/category/clearance"> Clearance</a></li>
-			</ul>
-		{% endblock %}
-		</div>
-		<div id="category">
-			{% block category %}
-			<div style="background-color:#640032;position:absolute;">{% block categorytext %}{% endblock %}</div>
-			<div style="float:right;border-right:1px solid #CCCCCC;"></div>
-			{% endblock %}
-		</div>
-		<div id="container">
-			<div id="content">
-				<div id="mobile-header">
-					<div id="mobile-header-left">☰</div>
-					<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
-					<div id="mobile-header-right"><a href="/home">⌂</a></div>
+		</script>
+		<canvas id="canvas" style="position:absolute;z-index:2;" width="90" height="500"></canvas>
+		<div id="center">
+			<div id="main" class="group">
+				<div id="mainleft" class="group">
+					<div id="logo">
+						<img src="{{ url_for('static', filename='images/top_logo.png') }}">
+						<div id="logotext">finishing the easy way since 1965</div>
+					</div>
+					<div id="desktop-search">
+						<form>
+							<input type="text" id="desktop-input" placeholder="Search" style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;"></input>
+							<input type="submit" text="Go"></input>
+						</form>
+					</div>
+					<div id="sidebar">
+					{% block sidebar %}
+						<h1 id="category-heading">Categories</h1>
+						<div id="mobile-search"><input type="text" placeholder="Search" style="height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;"></input></div>
+						<a id="sidebar-before" href="#">&#x25c4;</a>
+							<ul>
+								<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
+								<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
+								<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
+								<li><a href="/category/varnishremovers"> Paint &amp; Varnish Removers</a></li>
+								<li><a href="/category/oils"> Finishing Oils</a></li>
+								<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
+								<li><a href="/category/primers"> Paint &amp; Wallpaper Primers</a></li>
+								<li><a href="/category/stains"> Wood Stains &amp; Varnish Stains</a></li>
+								<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
+								<li><a href="/category/bath"> Bathtub Reglazing Epoxy</a></li>
+								<li><a href="/category/solvents"> Solvents</a></li>
+								<li><a href="/category/clearance"> Clearance</a></li>
+							</ul>
+					{% endblock %}
+					</div>
 				</div>
-			{% block content %}{% endblock %}
-			</div>
-			<div id="footer">
-				<ul>
-					<li><a href="/forum.asp" class="noscript">INTERACTIVE FORUM</a></li>
-					<!--<li><a href="/coupon" class="noscript">SWING COUPONS</a></li>-->
-					<li><a href="/newsletter" class="noscript" target="_BLANK">NEWSLETTER</a></li>
-					<li><a href="/refer" class="noscript" target="_BLANK">REFER A FRIEND</a></li>
-					<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
-				</ul>
-				<div id="facebook">
-					<!--<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>-->
+				<div id="mainright" class="group">
+					<div id="links">
+						<ul>
+							<li><b><a href="/home">HOME</a></b></li>
+							<li><a href="/about">ABOUT SWING PAINTS</a></li></li>
+							<li><a href="/locations">WHERE TO BUY</a></li>
+							<li><a href="/faq">FAQ</a></li>
+							<li><a href="/contact">CONTACTS</a></li>
+							<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
+						</ul>
+					</div>
+					<div id="content" class="group">
+						<div id="mobile-header">
+							<div id="mobile-header-left">☰</div>
+							<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+							<div id="mobile-header-right"><a href="/home">⌂</a></div>
+						</div>
+						<h1 id="main-heading">{% block categorytext %}{% endblock %}</h1>
+					{% block content %}{% endblock %}
+					</div>
+					<div id="footer">
+						<ul>
+							<li><a href="/forum" class="noscript">INTERACTIVE FORUM</a></li>
+							<li><a href="/newsletter" class="noscript">NEWSLETTER</a></li>
+							<li><a href="/refer" class="noscript">REFER A FRIEND</a></li>
+							<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
+						</ul>
+						<div id="facebook">
+							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
+						</div>
+						<div id="end">
+							&copy;2015 Swing Paints Ltd. Last modified: February 20, 2015
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
