@@ -2,7 +2,7 @@
 {% block head %}
 {{ super() }}
 <style>
-	/*@media (max-width: 500px) {
+	@media (max-width: 500px) {
 		p {
 			width:100%;
 		}
@@ -25,6 +25,9 @@
 		#category-table-mobile {
 			width:100%;
 		}
+		#category-table-mobile tr:last-of-type td {
+			border-bottom:none;
+		}
 		#category-table-mobile td {
 			border-bottom:1px solid black;
 			font-size:12px;
@@ -43,7 +46,10 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {*/
+	@media (min-width: 1024px) {
+		#category-table-mobile {
+			display:none;
+		}
 		#category-table-desktop td {
 			font-size:12px;
 			width:33%;
@@ -53,13 +59,13 @@
 		#category-table-desktop {
 			width:100%;
 		}
-	/*}*/
+	}
 </style>
 {% endblock %}
 {% block title %}{{ category.title | safe }}{% endblock %}
 {% block categorytext %}{{ category.title | safe }}{% endblock %}
 {% block content %}
-<!--<table id="category-table-mobile" class="margined">
+<table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
 	<a href="../product/{{ x }}">
@@ -68,7 +74,7 @@
 	</a>
 </td></tr>
 {% endfor %}
-</tr></table>-->
+</tr></table>
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>

@@ -19,7 +19,6 @@
 			height:100%;
 			margin: 0px;
 		}
-		#picture { }
 		#image {
 			margin-top:72px;
 			float:none;
@@ -224,7 +223,7 @@
 				$("iframe").css({"width":$(window).width()-10});
 				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
 				$(this).next().slideToggle("slow",function(){
-					$('html, body').animate({scrollTop:$(this).prev().offset().top-72},500,function(){
+					$('html, body').animate({scrollTop:$(this).prev().offset().top-71},500,function(){
 						$(".buystuff").hide("fast",function(){
 							$(".buybutt").show("fast");
 						});
