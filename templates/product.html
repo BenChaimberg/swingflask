@@ -2,7 +2,7 @@
 {% block head %}
 {{ super() }}
 <style>
-	/*@media (max-width: 1024px) {
+	@media (max-width: 1024px) {
 		html, body { margin: 0px; padding: 0px; border: 0px; }
 		body,p {
 			font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -112,7 +112,7 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {*/
+	@media (min-width: 1024px) {
 		#infotext {
 			 position:relative;
 			 right:5px;
@@ -202,18 +202,19 @@
 			margin-top:15px;
 		}
 		#iframe {
-			width:420px;
-			height:315px;
+			width:575px;
+			height:430px;
 			margin:5px;
 		}
 		#image {
 			float: left;
+			margin-right: 10px;
 		}
-	/*}*/
+	}
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		/*if ($(window).width() <= 1024) {
+		if ($(window).width() <= 1024) {
 			$(window).resize(function(){
 				$("iframe").css({"height":.75*$(window).width()-10});
 				$("iframe").css({"width":$(window).width()-10});
@@ -241,7 +242,7 @@
 				});
 			});
 		}
-		if ($(window).width() >= 1024) {*/
+		if ($(window).width() >= 1024) {
 			$(".stuff").insertAfter($("#tabs").children().last())
 			$(".label").click(function(event){
 				event.preventDefault();
@@ -280,7 +281,7 @@
 					clicked.next().fadeIn("slow");
 				});
 			});
-		//}
+		}
 	});
 </script>
 {% endblock %}

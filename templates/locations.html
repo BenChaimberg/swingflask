@@ -18,6 +18,26 @@
 		color:#336633;
 		text-decoration:underline;
 	}
+	.stuff a:hover{
+		color:#336633;
+		text-decoration:underline;
+	}
+	.shown:link{
+		color:#000000;
+		text-decoration:none;
+	}
+	.shown:visited{
+		color:#000000;
+		text-decoration:none;
+	}
+	.shown:active{
+		color:#000000;
+		text-decoration:none;
+	}
+	.shown:hover{
+		color:#000000;
+		text-decoration:none;
+	}
 	.shown {
 		border-left:1px solid black;
 		border-right:1px solid black;
@@ -32,7 +52,7 @@
 	}
 	.label {
 		margin: 0;
-		width: 14.2%;
+		width: 14.21%;
 		float: left;
 		text-align: center;
 		padding: 2px 0;
@@ -42,7 +62,7 @@
 	$(document).ready(function(){
 		$(".label").click(function(event){
 			event.preventDefault();
-			var labelindex = $(this).index();
+			var labelindex = $(this).index() - 1;
 			$(".stuff").eq(labelindex).siblings().hide("fast");
 			$(".stuff").eq(labelindex).show("fast");
 			$(this).addClass("shown").removeClass("hidden");
