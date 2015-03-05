@@ -9,6 +9,6 @@ $ cd flaskexample
 $ sudo easy_install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
-$ pip install flask Flask-Mail Flask-WTF Flask-Login
+$ pip install flask Flask-Mail Flask-WTF Flask-Login feedparser
 $ python __init__.py
 ```
