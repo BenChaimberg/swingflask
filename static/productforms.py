@@ -386,9 +386,9 @@ forms = {
 	<option value="310701 Wallpaper Prep-Coat, 1L:11.00"> 1L - 11.00 </option>
 	<option value="310704 Wallpaper Prep-Coat, 3.78L:26.00"> 3.78L - 26.00 </option>''',
 '''3107us''':'''<option value=":0.00" selected> ---Select Size--- </option>
-	<option value="310701 Wallpaper Prep-Coat, quart:11.00"> quart - 11.00 </option>
-	<option value="310704 Wallpaper Prep-Coat, gallon:30.00"> gallon - 30.00 </option>
-	<option value="310704 Wallpaper Prep-Coat, 4 gallons:100.00"> 4 gallons - 100.00 </option>''',
+	<option value="310701 Wallpaper Prep-Coat, quart:15.00"> quart - 15.00 </option>
+	<option value="310704 Wallpaper Prep-Coat, gallon:35.00"> gallon - 35.00 </option>
+	<option value="310704 Wallpaper Prep-Coat, 4 gallons:115.00"> 4 gallons - 115.00 </option>''',
 
 '''3133can''':'''<option value=":0.00" selected> ---Select Size--- </option>
 	<option value="313301 Prime-It Plus, 1L:19.00"> 1L - 19.00 </option>
