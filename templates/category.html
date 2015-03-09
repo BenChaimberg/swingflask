@@ -78,7 +78,7 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x }}" style="text-decoration:none;"><div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;">
+	<a href="../product/{{ x }}" style="text-decoration:none;"><div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div><div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;">
 	</div></a>
 	<span>{{ category.products[x] | safe }}</span>
 </td>

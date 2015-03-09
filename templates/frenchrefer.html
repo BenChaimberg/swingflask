@@ -30,8 +30,8 @@
 <p>Il suffit de nous fournir les informations requises ci-dessous et votre amie recevra un courriel accompagn&#xe9; du lien qui la dirigera directement sur le site Web des Peintures Swing.</p>
 <p>Soyez assur&#xe9;, que votre adresse couriel restera confidentielle, elle ne sera jamais diffus&#xe9;e &#xe0; aucune autre compagnie.</p>
 <div style="width:50%;margin:0 auto;"><form method="POST" action="/refer?french">
-    {{ form.hidden_tag() }}
-    {% for field in form %}
+    {{ refer_form.hidden_tag() }}
+    {% for field in refer_form %}
     	{% if loop.index == 1 %}
 		{% else %}
     <div style="clear:right;">

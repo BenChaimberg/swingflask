@@ -73,9 +73,9 @@
 <p>To ensure you get the best possible start, please send away for our FREE BROCHURE on Refinishing.</p>
 <p>Don't worry, we will NEVER share your e-mail address with any other company</p>
 <form method="POST" action="/brochure">
-{{ form.hidden_tag() }}
+{{ brochure_form.hidden_tag() }}
 	<div style="width:48%;float:left;">
-	{% for field in form %}
+	{% for field in brochure_form %}
 		<div style="clear:right;">
 		{% if loop.index == 1 %}
 		{% else %}

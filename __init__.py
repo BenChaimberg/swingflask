@@ -8,6 +8,7 @@ from wtforms.fields import TextField, PasswordField, SelectField
 import wtforms
 from werkzeug.routing import BaseConverter
 import feedparser
+from static import search_texts
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categorytitle, categoryproducts, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
@@ -44,6 +45,9 @@ def load_user(userid):
 def unauthorized():
 	abort(401)
 
+class SearchForm(Form):
+    search = TextField("", [wtforms.validators.Required('Please enter a search query')])
+
 class LoginForm(Form):
     username = TextField("Username:", [wtforms.validators.Required('Please enter your username')])
     password = PasswordField("Password:", [wtforms.validators.Required('Please enter your password')])
@@ -78,10 +82,16 @@ class FrenchReferForm(Form):
     friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
     friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
 
-def generic_page(page,lang):
+def generic_page(page,lang,**kwargs):
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',things=search_texts.searching(search_item),form=form)
 	if lang == 'french':
 		page = 'french'+ page
-	return page + '.html'
+	page += '.html'
+	return render_template(page,form=form,**kwargs)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
@@ -150,55 +160,64 @@ def logout():
     logout_user()
     return redirect('/home')
 
-@app.route('/')
-@app.route('/home')
-@app.route('/index')
-@app.route('/main')
+@app.route('/', methods=('GET', 'POST'))
+@app.route('/home', methods=('GET', 'POST'))
+@app.route('/index', methods=('GET', 'POST'))
+@app.route('/main', methods=('GET', 'POST'))
 def main():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
-	return render_template(generic_page('main',request.query_string), feed=d['entries'][1]['link'])
+	return generic_page('main',request.query_string, feed=d['entries'][1]['link'])
 
-@app.route('/locations')
+@app.route('/search', methods=('GET', 'POST'))
+def search():
+	return generic_page('search',request.query_string)
+
+@app.route('/locations', methods=('GET', 'POST'))
 def locations():
-	return render_template(generic_page('locations',request.query_string))
+	return generic_page('locations',request.query_string)
 
-@app.route('/faq')
+@app.route('/faq', methods=('GET', 'POST'))
 def faq():
-	return render_template(generic_page('faq',request.query_string))
+	return generic_page('faq',request.query_string)
 
 @app.route('/contact')
 def contact():
-	return render_template(generic_page('contact',request.query_string))
+	return generic_page('contact',request.query_string)
 
 @app.route('/marketing')
 def marketing():
-	return render_template(generic_page('marketing',request.query_string))
+	return generic_page('marketing',request.query_string)
 
 @app.route('/about')
 def about():
-	return render_template(generic_page('about',request.query_string))
+	return generic_page('about',request.query_string)
 
 @app.route('/colour')
 def colour():
-	return render_template(generic_page('colour',request.query_string))
+	return generic_page('colour',request.query_string)
 
 @app.route('/aquacolour')
 def aquacolour():
-	return render_template(generic_page('aquacolour',request.query_string))
+	return generic_page('aquacolour',request.query_string)
 
 @app.route('/rightstripper')
 def rightstripper():
-	return render_template(generic_page('rightstripper',request.query_string))
+	return generic_page('rightstripper',request.query_string)
 
 @app.route('/rightfinish')
 def rightfinish():
-	return render_template(generic_page('rightfinish',request.query_string))
+	return generic_page('rightfinish',request.query_string)
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		for search_site in producttext.text:
+			found_index = search_site.find(search_item)
 	if request.query_string == 'french': #if URL ends with ?french
-		form = FrenchReferForm()
-		if form.validate_on_submit():
+		refer_form = FrenchReferForm()
+		if refer_form.validate_on_submit():
 			visitorname = form.visitorname.data
 			visitoremail = form.visitoremail.data
 			friendname = form.friendname.data
@@ -210,11 +229,11 @@ def refer():
 			msg.subject = "Re: Une recommandation d'un ami - Decouvrez Peintures Swing!"
 			msg.html = "%s,<br />S'il vous pla&#xee;t pardonnez l'intrusion, mais je crois que j'ai trouv&#xe9; quelque chose que vous seriez int&#xe9;ress&#xe9;. Je regardais &#xe0; travers les pages du site Web de cette soci&#xe9;t&#xe9; assez cool de finition du bois, Peintures Swing, et la pens&#xe9;e de vous. Donc, c&#x27;est la raison de cette \"presque \" e-mail personnelle. Vous pouvez les trouver <a href='http://swingpaints.herokuapp.com/?french'>ici</a>." % (friendname)
 			mail.send(msg)
-			return render_template('frenchrefersuccess.html')
-		return render_template('frenchrefer.html', form=form)
+			return render_template('frenchrefersuccess.html',form=form)
+		return render_template('frenchrefer.html', refer_form=refer_form,form=form)
 	else: #if URL does not end with ?french
-		form = ReferForm()
-		if form.validate_on_submit():
+		refer_form = ReferForm()
+		if refer_form.validate_on_submit():
 			visitorname = form.visitorname.data
 			visitoremail = form.visitoremail.data
 			friendname = form.friendname.data
@@ -226,13 +245,18 @@ def refer():
 			msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
 			msg.html = "%s,<br />Please forgive the intrusion but I think I found something that you'd be interested in. I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, and thought of you. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
 			mail.send(msg)
-			return render_template('refersuccess.html')
-		return render_template('refer.html', form=form)
+			return render_template('refersuccess.html',form=form)
+		return render_template('refer.html', refer_form=refer_form,form=form)
 
 @app.route('/brochure', methods=('GET', 'POST'))
 def brochure():
-	form = BrochureForm()
-	frenchform = FrenchBrochureForm()
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		for search_site in producttext.text:
+			found_index = search_site.find(search_item)
+	brochure_form = BrochureForm()
+	brochure_frenchform = FrenchBrochureForm()
 	if form.validate_on_submit():
 		with open('brochurelist', 'r') as file:
 			data = json.load(file)
@@ -251,13 +275,18 @@ def brochure():
 		msg.subject = "%s would like a free brochure!" % form.name.data
 		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (form.name.data,form.email.data,form.address.data,form.city.data,form.stateprov.data,form.zipcode.data,form.country.data)
 		mail.send(msg)
-		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html')
-		else: return render_template('brochuresuccess.html')
-	if request.query_string == 'french': return render_template('frenchbrochure.html', form=frenchform)
-	else: return render_template('brochure.html', form=form)
+		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html',form=form)
+		else: return render_template('brochuresuccess.html',form=form)
+	if request.query_string == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform,form=form)
+	else: return render_template('brochure.html', brochure_form=brochure_form,form=form)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		for search_site in producttext.text:
+			found_index = search_site.find(search_item)
 	if request.query_string == 'french': #if URL ends with ?french
 		if frenchproducttitle.title.get(productid): #if product exists in list of product titles (should contain all products)
 			return render_template('frenchproduct.html', product={ #renders french product page with the following parameters
@@ -272,7 +301,7 @@ def product(productid): #if URL is at /product/####
 																'usforms':frenchproductforms.forms[productid + 'us'],
 																'category':frenchcategoryproducts.products,
 																'categorytitle':frenchcategorytitle.title
-															})
+															},form=form)
 		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
 	else: #if URL does not end with ?french
 		if producttitle.title.get(productid):
@@ -288,11 +317,16 @@ def product(productid): #if URL is at /product/####
 															'usforms':productforms.forms[productid + 'us'],
 															'category':categoryproducts.products,
 															'categorytitle':categorytitle.title
-														})
+														},form=form)
 		else: abort(404)
 
 @app.route('/category/<categoryid>')
 def category(categoryid):
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		for search_site in producttext.text:
+			found_index = search_site.find(search_item)
 	if request.query_string == 'french':
 		if frenchcategorytitle.title.get(categoryid):
 			return render_template('frenchcategory.html', category={
@@ -300,7 +334,7 @@ def category(categoryid):
 																	'title':frenchcategorytitle.title[categoryid],
 																	'products':frenchcategoryproducts.products[categoryid],
 																	'dictlen':len(frenchcategoryproducts.products[categoryid])
-																})
+																},form=form)
 		else: abort(404)
 	else:
 		if categorytitle.title.get(categoryid):
@@ -309,8 +343,8 @@ def category(categoryid):
 																'title':categorytitle.title[categoryid],
 																'products':categoryproducts.products[categoryid],
 																'dictlen':len(categoryproducts.products[categoryid])
-															})
+															},form=form)
 		else: abort(404)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
-    app.run(debug=False,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)
+    app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)

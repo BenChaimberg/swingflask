@@ -76,8 +76,8 @@
 <p>Please enter the information requested below and your friend will receive an email containing a link which leads directly to the Swing Paints Website.</p>
 <p>Don&apos;t worry, we will NEVER share your e-mail address with any other company.</p>
 <div style="width:50%;margin:0 auto;"><form method="POST" action="/refer">
-    {{ form.hidden_tag() }}
-    {% for field in form %}
+    {{ refer_form.hidden_tag() }}
+    {% for field in refer_form %}
     	{% if loop.index == 1 %}
 		{% else %}
     <div style="clear:right;">
