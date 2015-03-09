@@ -1,5 +1,5 @@
 @media (max-width: 1024px) {
-	html, body { margin: 0px; padding: 0px; border: 0px; overflow-x: hidden; }
+	html, body { margin: 0px; padding: 0px; border: 0px; overflow-x: hidden; height: 100% }
 	body,p {
 		font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px;

@@ -2,5 +2,7 @@
 {% block title %}Swing Paints - Search{% endblock %}
 {% block categorytext %}Search Results{% endblock %}
 {% block content %}
-{{ things }}
+<div>
+{{ things | safe }}
+</div>
 {% endblock %}

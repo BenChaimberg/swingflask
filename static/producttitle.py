@@ -69,7 +69,8 @@ title = {
 '3100':'Swing Paints Circa 1850 Prime-It',
 '3107':'Swing Paints Circa 1850 Wallpaper Prep-Coat',		
 '3133':'Swing Paints Circa 1850 Prime-It Plus',
-'3150':'Swing Paints Circa 1850 Wallpaper Hang-Rite',	
+'3150':'Swing Paints Circa 1850 Wallpaper Hang-Rite',
+'3160':'Swing Paints Circa 1850 Rust Treatment',
 
 '3200':'Swing Paints Circa 1850 Super DeGooper',
 '3207':'Swing Paints Klenk\'s Contact Cement Cleaner',
@@ -88,6 +89,7 @@ title = {
 '770':'Swing Paints Circa 1850 Stain\'n Varnish',
 
 '8100':'Swing Paints Klenk\'s Epoxy',
+'8170':'Swing Paints Klenk\'s Epoxy Prep Kit',
 '8172':'Swing Paints Klenk\'s Fish Eye Eliminator',	
 '8200':'Swing Paints Klenk\'s ACR',
 

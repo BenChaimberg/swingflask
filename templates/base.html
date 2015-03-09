@@ -59,7 +59,13 @@
 					<div id="sidebar">
 					{% block sidebar %}
 						<h1 id="category-heading">Categories</h1>
-						<div id="mobile-search"><input type="text" placeholder="Search" style="height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;"></input></div>
+						<div id="mobile-search">
+							<form method="POST" action="/search">
+							{{ form.hidden_tag() }}
+								{{ form.search(style="height:75%;margin-left:5px;width:50%;border-radius:10px;border:none;padding-left:10px;") }}
+								<input id="submit" type="submit" value="Search"></input>
+							</form>
+						</div>
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 							<ul>
 								<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
