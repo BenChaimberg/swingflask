@@ -192,17 +192,27 @@ def rightstripper():
 def rightfinish():
 	return render_template(generic_page('rightfinish',request.query_string))
 
+def forum_text_delete(data):
+	for message in data:
+		for key in data[message]:
+			if key == "text":
+				data[message][key]=""
+			if key == "replies":
+				forum_text_delete(data[message][key])
+	return data
+
 @app.route('/forum')
 def forum():
 	with open('forummessages', 'r') as file:
 		data = json.load(file)
+	forum_text_delete(data)
 	return render_template('forum.html',data=data,len=len(data))
 
 @app.route('/forum/<message>')
 def message(message):
 	with open('forummessages', 'r') as file:
 		data = json.load(file)
-	return render_template('message.html',data=data,len=len(data),id=message)
+	return render_template('message.html',data=data[message])
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():

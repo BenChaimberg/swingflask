@@ -8,13 +8,6 @@
 		<title></title>
 		<style>
 			table {width:100%;}
-			tr:nth-child(1) {
-				background-color:#666666;
-				color:white;
-			}
-			tr:nth-child(1) td {
-				font-weight:bold;
-			}
 			td:nth-child(1) {
 				width:15%;
 			}
@@ -22,38 +15,57 @@
 				vertical-align:top;
 				background-color:#D3D3D3;
 			}
-			tr td :nth-child(1) {
+			td span:nth-child(1) {
 				font-weight:bold;
 			}
 		</style>
 		<script>
 			$(document).ready(function(){
-				var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
-				$("title").html("Swing Paints Forum - " + data[{{ id }}]["subject"]);
-				var newRow  = document.getElementById("write").insertRow(-1);
-				var newCell = newRow.insertCell(-1);
-				var htmlNode = document.createElement('span');
-				htmlNode.innerHTML = data[{{ id }}]["author"] + "<br />";
-				newCell.appendChild(htmlNode);
-				var htmlNode2 = document.createElement('span');
-				htmlNode2.innerHTML = data[{{ id }}]["time"];
-				newCell.appendChild(htmlNode2);
-				var newCell2 = newRow.insertCell(-1);
-				var htmlNode3 = document.createElement('span');
-				$(newCell2).attr("id",data[{{ id }}]["time"]);
-				htmlNode3.innerHTML = "<a href=\"#" + data[{{ id }}]["time"] + "\">" + data[{{ id }}]["subject"] + "</a>:<br />";
-				newCell2.appendChild(htmlNode3);
-				var htmlNode4 = document.createElement('span');
-				htmlNode4.innerHTML = data[{{ id }}]["text"];
-				newCell2.appendChild(htmlNode4);
+				var data_total = {{ data | replace("u'","'") | replace('u"','"') | safe }};
+				console.log(data_total);
+				$("title").html("Swing Paints Forum - " + data_total["subject"]);
+				function display(data,tableID) {
+					var newRow  = document.getElementById(tableID).insertRow(-1);
+					var newCell = newRow.insertCell(-1);
+					var htmlNode = document.createElement('span');
+					htmlNode.innerHTML = data["author"] + "<br />";
+					newCell.appendChild(htmlNode);
+					var htmlNode2 = document.createElement('span');
+					htmlNode2.innerHTML = data["time"];
+					newCell.appendChild(htmlNode2);
+					var newCell2 = newRow.insertCell(-1);
+					var htmlNode3 = document.createElement('span');
+					$(newCell2).attr("id",data["time"]);
+					htmlNode3.innerHTML = "<a href=\"#" + data["time"] + "\">" + data["subject"] + "</a>:<br />";
+					newCell2.appendChild(htmlNode3);
+					var htmlNode4 = document.createElement('span');
+					htmlNode4.innerHTML = data["text"];
+					newCell2.appendChild(htmlNode4);
+					if (data["replies"]) {
+						var newRow2  = document.getElementById(tableID).insertRow(-1);
+						var newCell3 = newRow2.insertCell(-1);
+						$(newRow2).css("background-color","white");
+						$(newTable).css("margin-left","10px");
+						$(newCell3).attr("colspan",2);
+						var newTable = document.createElement('table');
+						$(newTable).css("margin-left","10px");
+						var newTableID = Math.random()
+						$(newTable).attr("id",newTableID);
+						newCell3.appendChild(newTable);
+						for (reply in data["replies"]) {
+							display(data["replies"][reply],newTableID);
+						}
+					}
+				}
+				display(data_total,"write");
 			});
 		</script>
 	</head>
 	<body>
 		<table id="write">
-			<tr>
-				<td>From</td>
-				<td>Message</td>
+			<tr style="background-color:#666666;color:white;">
+				<td style="font-weight:bold;">From</td>
+				<td style="font-weight:bold;">Message</td>
 			</tr>
 		</table>
 	</body>
