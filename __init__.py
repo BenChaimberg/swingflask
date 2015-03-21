@@ -103,6 +103,15 @@ class Messages(db.Model):
     message = db.Column(db.Text(),nullable=True)
     last_rdate = db.Column(db.DateTime(),nullable=True)
 
+    def __init__(self, subject, name, email, notifyemail, mdate, message, last_rdate):
+        self.subject = subject
+        self.name = name
+        self.email = email
+        self.notifyemail = notifyemail
+        self.mdate = mdate
+        self.message = message
+        self.last_rdate = last_rdate
+
 class Replies(db.Model):
     IDreply = db.Column(db.Integer(), primary_key=True, nullable=False)
     IDmessage = db.Column(db.Integer(), nullable=True)
@@ -242,7 +251,7 @@ def rightfinish():
 def forum_redirect():
 	return redirect("/forum/1")
 
-@app.route('/forum/<page>')
+@app.route('/forum/<page>', methods=('GET', 'POST'))
 def forum(page):
 	try:
 		int(page)
@@ -250,12 +259,10 @@ def forum(page):
 		abort(404)
 	form = MessageForm()
 	if form.validate_on_submit():
-		new_message = Messages(message_id,form.subject.data,form.name.data,form.email.data,form.notifyemail.data,form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-		db.session.add(new_reply)
+		new_message = Messages(form.subject.data,form.name.data,form.email.data,form.notifyemail.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()),form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		db.session.add(new_message)
 		db.session.commit()
-		message = Messages.query.filter_by(IDmessage=message_id).first()
-		replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
-		return render_template('message.html',message=message,replies=replies,form=form)
+		return redirect('/message/'+str(new_message.IDmessage))
 	messages = Messages.query.with_entities(Messages.IDmessage,Messages.name,Messages.email,Messages.last_rdate,Messages.subject).order_by(Messages.last_rdate.desc()).paginate(int(page),50)
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()

@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
-		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-		<title>Forum - Page </title>
+{% extends 'base.html' %}
+{% block head %}
+{{ super() }}
+		<title>Swing Paints Forum</title>
 		<style>
 			table {width:100%;}
 			tr:nth-child(even) {
@@ -64,8 +60,8 @@
 				}
 			});
 		</script>
-	</head>
-	<body>
+{% endblock %}
+{% block content %}
 		<table id="write">
 			<tr>
 				<td>Subject</td>
@@ -80,15 +76,15 @@
 				<td>{{ message.replies }}</td>
 				<td>{{ message.last_rdate }}</td>
 				{% if current_user.is_authenticated() %}
-				<td></td>
+				<td>Delete</td>
 				{% endif %}
 			</tr>
 			{% endfor %}
 		</table>
 		<div id="pages"></div>
-		<form method="POST" action="/forum">
+		<form method="POST">
 		{{ form.hidden_tag() }}
-			<div style="float:left;"><ul>
+			<div style="float:left;width:100%;"><ul>
 			{% for field in form %}
 				{% for error in field.errors %}
 					<li>{{ error | safe }}</li>
@@ -109,5 +105,4 @@
 				<div><input id="submit" type="submit" value="Submit"></div>
 		    </div>
 		</form>
-	</body>
-</html>
+{% endblock %}
