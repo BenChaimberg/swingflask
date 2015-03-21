@@ -10,15 +10,6 @@
 					"email": "JohnSmith@gmail.com", 
 					"subject": "blah blah",
 					"text":"Lorem ipsum dolor sit amet, consectetur",
-					"replies": {
-						"0" : {
-							"author": "Ann Smith", 
-							"email": "JohnSmith@gmail.com", 
-							"subject": "blah blah",
-							"text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit lacus eu iaculis elementum. Aliquam vitae congue tortor, ut lacinia diam. Fusce ultricies tortor quis blandit pellentesque. Pellentesque ut libero leo. Fusce blandit scelerisque condimentum. Vestibulum fermentum egestas enim, et tincidunt dolor laoreet non. Praesent sagittis dignissim purus ut hendrerit. Ut non tristique nunc, nec suscipit purus. Nam justo arcu, lobortis ut ipsum non, sodales tincidunt massa. Morbi lacinia cursus libero vel ultrices.",	
-							"time": "2/21/2005 10:33:29 AM"	
-						}
-					},
 					"time": "2/21/2005 10:33:29 AM"	
 				},
 				"1" : {

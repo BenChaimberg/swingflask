@@ -5,7 +5,7 @@
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-		<title>Forum</title>
+		<title>Forum - Page </title>
 		<style>
 			table {width:100%;}
 			tr:nth-child(even) {
@@ -17,50 +17,50 @@
 			tr:nth-child(1) {
 				font-weight:bold;
 				border:1px solid black;
-				display:none;
 			}
 			tr:nth-child(1) td {
 				border-bottom:1px solid black;
 				background-color:#FFFFFF;
 			}
+			ul#notifyemail {
+				list-style:none;
+				display:inline;
+				padding:0;
+			}
+			label {
+				float:left;
+			}
+			input,textarea {
+				float:right;
+				width:75%;
+			}
+			textarea {
+				height:100px;
+			}
+			#notifyemail label,.recaptcha_input_area input {
+				float:none;
+			}
+			#submit {
+				width:auto;
+			}
+			#notifyemail input {
+				float:none;
+				width:auto;
+			}
+			#notifyemail li {
+				display:inline;
+				padding-right:10px;
+			}
+			form div div {
+				width:33%;clear:right;
+			}
 		</style>
 		<script>
 			$(document).ready(function(){
-				var data = {{ data | replace("u'","'") | replace('u"','"') | safe }};
-				$("#write").children().children().css("display","table-row");
-				for (var key in data){
-					var values = [];
-					for (var key2 in data[key]){
-						switch (key2){
-							case "author":
-								values[0] = data[key][key2];
-								break;
-							case "email":
-								values[0] = "<a href=\"mailto:" + data[key][key2] + "\">" + values[0] + "</a>";
-								break;
-							case "subject":
-								values[1] = '<a href="/forum/' + key + '">' + data[key][key2] + "</a>";
-								break;
-							case "replies":
-								values[2] = 0;
-								for (var key3 in data[key][key2]){
-									values[2] += 1;
-								}
-								break;
-							case "time":
-								values[3] = data[key][key2];
-								break;
-							default:
-								break;
-						}
-					}
-					var newRow  = document.getElementById("write").insertRow(1);
-					for (var value in values) {
-						var newCell = newRow.insertCell(-1);
-						var htmlNode = document.createElement('span');
-						htmlNode.innerHTML = values[value]
-						newCell.appendChild(htmlNode);
-					}
+				var total = {{ total }} / 50 + 1;
+				for (i=1;i<=total;i++){
+					console.log(i);
+					$('#pages').html($('#pages').html()+'<a href="/forum/'+i+'">'+i+'</a>&nbsp;|&nbsp;');
 				}
 			});
 		</script>
@@ -68,11 +68,46 @@
 	<body>
 		<table id="write">
 			<tr>
-				<td>Author</td>
 				<td>Subject</td>
+				<td>Author</td>
 				<td>Replies</td>
-				<td>Date</td>
+				<td>Last Post</td>
 			</tr>
+			{% for message in messages %}
+			<tr>
+				<td><a href="/message/{{ message.IDmessage }}">{{ message.subject }}</a></td>
+				<td>{{ message.name }}</td>
+				<td>{{ message.replies }}</td>
+				<td>{{ message.last_rdate }}</td>
+				{% if current_user.is_authenticated() %}
+				<td></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
 		</table>
+		<div id="pages"></div>
+		<form method="POST" action="/forum">
+		{{ form.hidden_tag() }}
+			<div style="float:left;"><ul>
+			{% for field in form %}
+				{% for error in field.errors %}
+					<li>{{ error | safe }}</li>
+				{% endfor %}
+			{% endfor %}
+			{% for field in form %}
+				</ul><div>
+				{% if loop.index == 1 %}
+				{% else %}
+					{% if field.type == 'RecaptchaField' %}
+					{% else %}
+						{{ field.label }}:
+					{% endif %}
+					{{ field }}
+				{% endif %}
+				</div>
+			{% endfor %}
+				<div><input id="submit" type="submit" value="Submit"></div>
+		    </div>
+		</form>
 	</body>
 </html>

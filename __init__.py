@@ -3,13 +3,19 @@ from time import gmtime, strftime
 from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
-from flask_wtf import Form, validators
-from wtforms.fields import TextField, PasswordField, SelectField
+from flask_wtf import Form, validators, RecaptchaField
+from wtforms.fields import TextField, PasswordField, SelectField, RadioField, TextAreaField
 import wtforms
 from werkzeug.routing import BaseConverter
+import pymysql
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import update
 from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categorytitle, categoryproducts, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
 #import logging
 #from logging.handlers import RotatingFileHandler
+
+RECAPTCHA_PUBLIC_KEY = '6LfnzAMTAAAAAD9RAodwUlTy8ju-gB_kb7_reass'
+RECAPTCHA_PRIVATE_KEY = '6LfnzAMTAAAAAHvSepf1FyNClFx78uoVK7FBAfW2'
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
@@ -30,6 +36,8 @@ app.secret_key = 'blahblahblah' #change later to random
 app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
+db = SQLAlchemy(app)
 
 class User(UserMixin):
     def __init__(self, id):
@@ -76,6 +84,43 @@ class FrenchReferForm(Form):
     visitoremail = TextField("Votre adresse de courriel", [wtforms.validators.Required('Veuillez entrer votre adresse de courriel'), wtforms.validators.Email()])
     friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
     friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
+
+class MessageForm(Form):
+    name = TextField("Name", [wtforms.validators.Required('Please enter your name')])
+    email = TextField("E-mail", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
+    subject = TextField("Subject", [wtforms.validators.Required('Please enter a subject')])
+    message = TextAreaField("Message", [wtforms.validators.Required('Please enter your message')])
+    notifyemail = RadioField('Do you want notification of a response to your message?', choices=[('True','Yes'),('False','No')])
+    recaptcha = RecaptchaField()
+
+class Messages(db.Model):
+    IDmessage = db.Column(db.Integer(), primary_key=True, nullable=False)
+    subject = db.Column(db.String(250),nullable=True)
+    name = db.Column(db.String(250),nullable=True)
+    email = db.Column(db.String(250),nullable=True)
+    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
+    mdate = db.Column(db.DateTime(),nullable=True)
+    message = db.Column(db.Text(),nullable=True)
+    last_rdate = db.Column(db.DateTime(),nullable=True)
+
+class Replies(db.Model):
+    IDreply = db.Column(db.Integer(), primary_key=True, nullable=False)
+    IDmessage = db.Column(db.Integer(), nullable=True)
+    subject = db.Column(db.String(250),nullable=True)
+    name = db.Column(db.String(250),nullable=True)
+    email = db.Column(db.String(250),nullable=True)
+    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
+    message = db.Column(db.Text(),nullable=True)
+    rdate = db.Column(db.DateTime(),nullable=True)
+
+    def __init__(self, IDmessage, subject, name, email, notifyemail, message, rdate):
+        self.IDmessage = IDmessage
+        self.subject = subject
+        self.name = name
+        self.email = email
+        self.notifyemail = notifyemail
+        self.message = message
+        self.rdate = rdate
 
 def generic_page(page,lang):
 	if lang == 'french':
@@ -192,27 +237,54 @@ def rightstripper():
 def rightfinish():
 	return render_template(generic_page('rightfinish',request.query_string))
 
-def forum_text_delete(data):
-	for message in data:
-		for key in data[message]:
-			if key == "text":
-				data[message][key]=""
-			if key == "replies":
-				forum_text_delete(data[message][key])
-	return data
-
 @app.route('/forum')
-def forum():
-	with open('forummessages', 'r') as file:
-		data = json.load(file)
-	forum_text_delete(data)
-	return render_template('forum.html',data=data,len=len(data))
+@app.route('/forum/')
+def forum_redirect():
+	return redirect("/forum/1")
 
-@app.route('/forum/<message>')
-def message(message):
-	with open('forummessages', 'r') as file:
-		data = json.load(file)
-	return render_template('message.html',data=data[message])
+@app.route('/forum/<page>')
+def forum(page):
+	try:
+		int(page)
+	except:
+		abort(404)
+	form = MessageForm()
+	if form.validate_on_submit():
+		new_message = Messages(message_id,form.subject.data,form.name.data,form.email.data,form.notifyemail.data,form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		db.session.add(new_reply)
+		db.session.commit()
+		message = Messages.query.filter_by(IDmessage=message_id).first()
+		replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
+		return render_template('message.html',message=message,replies=replies,form=form)
+	messages = Messages.query.with_entities(Messages.IDmessage,Messages.name,Messages.email,Messages.last_rdate,Messages.subject).order_by(Messages.last_rdate.desc()).paginate(int(page),50)
+	for message in messages.items:
+		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
+	return render_template('forum.html',messages=messages.items,total=messages.total,form=form)
+
+@app.route('/message/<message_id>', methods=('GET', 'POST'))
+def message(message_id):
+	form = MessageForm()
+	if form.validate_on_submit():
+		last_reply = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.desc()).first()
+		new_reply = Replies(message_id,form.subject.data,form.name.data,form.email.data,form.notifyemail.data,form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		db.session.add(new_reply)
+		db.session.commit()
+		db.session.query(Messages).filter_by(IDmessage=message_id).update({'last_rdate':time.strftime("%Y-%m-%d %H:%M:%S", gmtime())})
+		db.session.commit()
+		msg = Message()
+		if last_reply.notifyemail == 'True':
+			msg.recipients = [last_reply.email]
+		msg.bcc = ['mchaimberg@swingpaints.com']
+		msg.sender = ('Swing Paints', 'info@swingpaints.com')
+		msg.subject = 'Swing Paints Forum Reply'
+		msg.html = 'Hello %s,<br />%s has posted a reply to your message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (last_reply.name,new_reply.name,new_reply.IDmessage,new_reply.rdate)
+#		mail.send(msg)
+		message = Messages.query.filter_by(IDmessage=message_id).first()
+		replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
+		return render_template('message.html',message=message,replies=replies,form=form)
+	message = Messages.query.filter_by(IDmessage=message_id).first()
+	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
+	return render_template('message.html',message=message,replies=replies,form=form)
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():

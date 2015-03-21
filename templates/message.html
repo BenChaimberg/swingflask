@@ -18,47 +18,123 @@
 			td span:nth-child(1) {
 				font-weight:bold;
 			}
+			ul#notifyemail {
+				list-style:none;
+				display:inline;
+				padding:0;
+			}
+			label {
+				float:left;
+			}
+			input,textarea {
+				float:right;
+				width:75%;
+			}
+			textarea {
+				height:100px;
+			}
+			#notifyemail label,.recaptcha_input_area input {
+				float:none;
+			}
+			#submit {
+				width:auto;
+			}
+			#notifyemail input {
+				float:none;
+				width:auto;
+			}
+			#notifyemail li {
+				display:inline;
+				padding-right:10px;
+			}
+			form div div {
+				width:33%;clear:right;
+			}
 		</style>
 		<script>
 			$(document).ready(function(){
-				var data_total = {{ data | replace("u'","'") | replace('u"','"') | safe }};
-				console.log(data_total);
-				$("title").html("Swing Paints Forum - " + data_total["subject"]);
-				function display(data,tableID) {
-					var newRow  = document.getElementById(tableID).insertRow(-1);
+				$("title").html('Swing Paints Forum - {{ message.subject }}');
+				$("#subject").val('Re: {{ message.subject }}');
+				function display(name,email,time,subject,text) {
+					var newRow  = document.getElementById("write").insertRow(-1);
 					var newCell = newRow.insertCell(-1);
 					var htmlNode = document.createElement('span');
-					htmlNode.innerHTML = data["author"] + "<br />";
+					htmlNode.innerHTML = '<a href="mailto:'+email+'">'+name+'</a><br />';
 					newCell.appendChild(htmlNode);
 					var htmlNode2 = document.createElement('span');
-					htmlNode2.innerHTML = data["time"];
+					htmlNode2.innerHTML = time;
 					newCell.appendChild(htmlNode2);
 					var newCell2 = newRow.insertCell(-1);
 					var htmlNode3 = document.createElement('span');
-					$(newCell2).attr("id",data["time"]);
-					htmlNode3.innerHTML = "<a href=\"#" + data["time"] + "\">" + data["subject"] + "</a>:<br />";
+					$(newCell2).attr("id",time);
+					htmlNode3.innerHTML = '<a href="#'+time+'">'+subject+'</a>:<br />';
 					newCell2.appendChild(htmlNode3);
 					var htmlNode4 = document.createElement('span');
-					htmlNode4.innerHTML = data["text"];
+					htmlNode4.innerHTML = text;
 					newCell2.appendChild(htmlNode4);
-					if (data["replies"]) {
-						var newRow2  = document.getElementById(tableID).insertRow(-1);
-						var newCell3 = newRow2.insertCell(-1);
-						$(newRow2).css("background-color","white");
-						$(newTable).css("margin-left","10px");
-						$(newCell3).attr("colspan",2);
-						var newTable = document.createElement('table');
-						$(newTable).css("margin-left","10px");
-						var newTableID = Math.random()
-						$(newTable).attr("id",newTableID);
-						newCell3.appendChild(newTable);
-						for (reply in data["replies"]) {
-							display(data["replies"][reply],newTableID);
-						}
-					}
 				}
-				display(data_total,"write");
+				display('{{ message.name }}','{{ message.email }}','{{ message.mdate }}','{{ message.subject }}','{{ message.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
+				{% for reply in replies %}
+					display('{{ reply.name }}','{{ reply.email }}','{{ reply.rdate }}','{{ reply.subject }}','{{ reply.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
+				{% endfor %}
 			});
+		</script>
+		<script>/*
+			$(document).ready(function(){
+				var newHTML = document.createElement("div");
+				$("body").append(newHTML);
+				$(newHTML).attr("id","hoverspan");
+				$(newHTML).offset({top:0,left:0});
+				$("#email").keyup(function(){
+					createSpan($(this));
+				});
+				function createSpan(focused){
+					var span = $("#hoverspan");
+    				var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+					if (regex.test(focused.val())) {
+						var html = "<div style='margin:auto auto;width:175px;'>Valid e-mail address.</div>";
+						var backcolor = "#5cb85c";
+					} else {
+						var html = "<div style='margin:auto auto;width:175px;'>Must be valid e-mail address.</div>";
+						var backcolor = "#d9534f";
+					}
+					span.html(html);
+					var offset = focused.offset();
+					var top = offset.top;
+					var left = offset.left + focused.width() + 10;
+					span.offset({top:top,left:left});
+					span.css("background","#ffffff");
+					span.css("color","white");
+					span.css("width","200px");
+					span.css("height","20px");
+					span.css("vertical-align","middle");
+					span.animate({backgroundColor:backcolor}, 200);
+				}
+				$("#email").focus(function(){
+					var span = $("#hoverspan");
+					if (span.offset().left == 0 && span.offset().top == 0) {
+						createSpan($(this));
+					}
+				});
+				$("#email").blur(function(){
+				var span = $("#hoverspan");
+					span.animate({backgroundColor:"#ffffff"}, 200, function(){
+						span.offset({top:0,left:0});
+					});
+				});
+				$("form").change(function(){
+    				var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+					if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+						$("#submit").prop('disabled',false);
+					} else {$("#submit").prop('disabled',true);}
+				});
+				$("form").keyup(function(){
+    				var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
+					if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
+						$("#submit").prop('disabled',false);
+					} else {$("#submit").prop('disabled',true);}
+				});
+			});*/
 		</script>
 	</head>
 	<body>
@@ -68,5 +144,28 @@
 				<td style="font-weight:bold;">Message</td>
 			</tr>
 		</table>
+		<form method="POST" action="/message/{{ message.IDmessage }}">
+		{{ form.hidden_tag() }}
+			<div style="float:left;"><ul>
+			{% for field in form %}
+				{% for error in field.errors %}
+					<li>{{ error | safe }}</li>
+				{% endfor %}
+			{% endfor %}
+			{% for field in form %}
+				</ul><div>
+				{% if loop.index == 1 %}
+				{% else %}
+					{% if field.type == 'RecaptchaField' %}
+					{% else %}
+						{{ field.label }}:
+					{% endif %}
+					{{ field }}
+				{% endif %}
+				</div>
+			{% endfor %}
+				<div><input id="submit" type="submit" value="Submit"></div>
+		    </div>
+		</form>
 	</body>
 </html>
