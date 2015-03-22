@@ -11,6 +11,22 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<title>{% block title %}{% endblock %}</title>
+		<script>
+			$(document).ready(function(){
+				$("#desktop-search").find("form").change(function(){
+					console.log("change");
+					if ($("#search").val()) {
+						$("#submit").prop('disabled',false);
+					} else {$("#submit").prop('disabled',true);}
+				});
+				$("#desktop-search").find("form").keyup(function(){
+					console.log("keyup");
+					if ($("#search").val()) {
+						$("#submit").prop('disabled',false);
+					} else {$("#submit").prop('disabled',true);}
+				});
+			});
+		</script>
 	{% endblock %}
 	</head>
 	<body>
@@ -34,14 +50,22 @@
 						<div id="logotext">finishing the easy way since 1965</div>
 					</div>
 					<div id="desktop-search">
-						<form>
-							<input type="text" id="desktop-input" placeholder="Search" style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;"></input>
-							<input type="submit" value="Go"></input>
+						<form method="POST" action="/search">
+						{{ form.hidden_tag() }}
+							{{ form.search(style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;") }}
+							<input id="submit" disabled type="submit" value="Search"></input>
 						</form>
 					</div>
 					<div id="sidebar">
 					{% block sidebar %}
-						<div id="mobile-search"><input type="text" placeholder="Search" style="height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;"></input></div>
+						<h1 id="category-heading">Categories</h1>
+						<div id="mobile-search">
+							<form method="POST" action="/search">
+							{{ form.hidden_tag() }}
+								{{ form.search(style="height:75%;margin-left:5px;width:50%;border-radius:10px;border:none;padding-left:10px;") }}
+								<input id="submit" type="submit" value="Search"></input>
+							</form>
+						</div>
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Products</h1>
 						<ul>
