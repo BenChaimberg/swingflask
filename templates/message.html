@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
-		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'base.html' %}
+{% block head %}
+{{ super() }}
 		<title></title>
 		<style>
 			table {width:100%;}
@@ -23,10 +19,10 @@
 				display:inline;
 				padding:0;
 			}
-			label {
+			#content label {
 				float:left;
 			}
-			input,textarea {
+			#content input:not(#submit):not(#notifyemail-0):not(#notifyemail-1),textarea {
 				float:right;
 				width:75%;
 			}
@@ -48,11 +44,29 @@
 				padding-right:10px;
 			}
 			form div div {
-				width:33%;clear:right;
+				clear:right;
+			}
+			#forum-side a {
+				color:white;
+			}
+			ul#forum-side {
+				list-style:none;
+				padding:0;
+				margin:0 auto;
+			}
+			#forum-side li {
+				margin:0 auto;
 			}
 		</style>
 		<script>
 			$(document).ready(function(){
+				$("#forum-side").offset({left:$("#content").offset().left+650,top:$("#top").offset().top});
+				$("#top").click(function(){
+					$('html, body').animate({scrollTop:0});
+				});
+				$("#bottom").click(function(){
+					$('html, body').animate({scrollTop:$('body').height()});
+				});
 				$("title").html('Swing Paints Forum - {{ message.subject }}');
 				$("#subject").val('Re: {{ message.subject }}');
 				function display(name,email,time,subject,text) {
@@ -67,15 +81,15 @@
 					var newCell2 = newRow.insertCell(-1);
 					var htmlNode3 = document.createElement('span');
 					$(newCell2).attr("id",time);
-					htmlNode3.innerHTML = '<a href="#'+time+'">'+subject+'</a>:<br />';
+					htmlNode3.innerHTML = '<a href="#'+time+'">'+subject+'</a><br />';
 					newCell2.appendChild(htmlNode3);
 					var htmlNode4 = document.createElement('span');
 					htmlNode4.innerHTML = text;
 					newCell2.appendChild(htmlNode4);
 				}
-				display('{{ message.name }}','{{ message.email }}','{{ message.mdate }}','{{ message.subject }}','{{ message.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
+				display('{{ message.name }}','{{ message.email }}','{{ message.date | safe }}','{{ message.subject }}','{{ message.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
 				{% for reply in replies %}
-					display('{{ reply.name }}','{{ reply.email }}','{{ reply.rdate }}','{{ reply.subject }}','{{ reply.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
+					display('{{ reply.name }}','{{ reply.email }}','{{ reply.date | safe }}','{{ reply.subject }}','{{ reply.message | replace("\r","") | replace("\n","<br />") | replace("\'","\\\'") | safe }}');
 				{% endfor %}
 			});
 		</script>
@@ -136,8 +150,9 @@
 				});
 			});*/
 		</script>
-	</head>
-	<body>
+{% endblock %}
+{% block categorytext %}Forum Message{% endblock %}
+{% block content %}
 		<table id="write">
 			<tr style="background-color:#666666;color:white;">
 				<td style="font-weight:bold;">From</td>
@@ -158,7 +173,7 @@
 				{% else %}
 					{% if field.type == 'RecaptchaField' %}
 					{% else %}
-						{{ field.label }}:
+						{{ field.label }}
 					{% endif %}
 					{{ field }}
 				{% endif %}
@@ -167,5 +182,9 @@
 				<div><input id="submit" type="submit" value="Submit"></div>
 		    </div>
 		</form>
-	</body>
-</html>
+		<ul id="forum-side" style="position:fixed;color:white;top:150px;">
+			<li><a id="top" href="#">[ top &#8593; ]</a></li>
+			<li><a id="forum-back" href="/forum/1">[ forum &#8592; ]</a></li>
+			<li><a id="bottom" href="#">[ bottom &#8595; ]</a></li>
+		</ul>
+{% endblock %}

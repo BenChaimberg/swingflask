@@ -16,9 +16,9 @@ $(document).ready(function(){
 	ctx.scale(2, 2);
 	ctx.strokeStyle = "grey";
 	ctx.fillStyle = "black";
-	times = 6;
+	times = 10;
 	startx = 10;
-	starty = 18;
+	starty = 19;
 	for (i=1;i<=times;i++){
 		ctx.beginPath();
 		ctx.moveTo(startx, starty*i-2);

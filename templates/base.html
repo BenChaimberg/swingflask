@@ -25,7 +25,7 @@
 			}
 			(document, 'script', 'facebook-jssdk'));
 		</script>
-		<canvas id="canvas" style="position:absolute;z-index:2;" width="90" height="500"></canvas>
+		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="500"></canvas>
 		<div id="center">
 			<div id="main" class="group">
 				<div id="mainleft" class="group">
@@ -36,28 +36,38 @@
 					<div id="desktop-search">
 						<form>
 							<input type="text" id="desktop-input" placeholder="Search" style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;"></input>
-							<input type="submit" text="Go"></input>
+							<input type="submit" value="Go"></input>
 						</form>
 					</div>
 					<div id="sidebar">
 					{% block sidebar %}
-						<h1 id="category-heading">Categories</h1>
 						<div id="mobile-search"><input type="text" placeholder="Search" style="height:75%;margin-left:5px;width:100%;border-radius:10px;border:none;padding-left:10px;"></input></div>
 						<a id="sidebar-before" href="#">&#x25c4;</a>
-							<ul>
-								<li><a href="/category/accessories"> Accessories &amp; Tools</a></li>
-								<li><a href="/category/epoxies"> Epoxies &amp; Adhesives</a></li>
-								<li><a href="/category/glueremovers"> Adhesive &amp; Glue Removers</a></li>
-								<li><a href="/category/varnishremovers"> Paint &amp; Varnish Removers</a></li>
-								<li><a href="/category/oils"> Finishing Oils</a></li>
-								<li><a href="/category/poly"> Varnishes &amp; Polyurethanes</a></li>
-								<li><a href="/category/primers"> Paint &amp; Wallpaper Primers</a></li>
-								<li><a href="/category/stains"> Wood Stains &amp; Varnish Stains</a></li>
-								<li><a href="/category/waxes"> Waxes, Polishers &amp; Cleaners</a></li>
-								<li><a href="/category/bath"> Bathtub Reglazing Epoxy</a></li>
-								<li><a href="/category/solvents"> Solvents</a></li>
-								<li><a href="/category/clearance"> Clearance</a></li>
-							</ul>
+						<h1 id="category-heading">Products</h1>
+						<ul>
+							<li><a href="/category/accessories">Accessories &amp; Tools</a></li>
+							<li><a href="/category/epoxies">Epoxies &amp; Adhesives</a></li>
+							<li><a href="/category/glueremovers">Adhesive &amp; Glue Removers</a></li>
+							<li><a href="/category/varnishremovers">Paint &amp; Varnish Removers</a></li>
+							<li><a href="/category/oils">Finishing Oils</a></li>
+							<li><a href="/category/poly">Varnishes &amp; Polyurethanes</a></li>
+							<li><a href="/category/primers">Paint &amp; Wallpaper Primers</a></li>
+							<li><a href="/category/stains">Wood Stains &amp; Varnish Stains</a></li>
+							<li><a href="/category/waxes">Waxes, Polishers &amp; Cleaners</a></li>
+							<li><a href="/category/bath">Bathtub Reglazing Epoxy</a></li>
+							<li><a href="/category/solvents">Solvents</a></li>
+							<li><a href="/category/clearance">Clearance</a></li>
+						</ul>
+						<h1 id="category-heading">Brands</h1>
+						<ul>
+							<li><a href="/category/circa">Circa 1850</a></li>
+							<li><a href="/category/klenks">Klenk's</a></li>
+							<li><a href="/category/antiquax">Antiquax</a></li>
+							<li><a href="/category/terranova">Terra Nova</a></li>
+							<li><a href="/category/gaudreault">Gaudreault Antiques</a></li>
+							<li><a href="/category/super">Super DeGooper</a></li>
+
+						</ul>
 					{% endblock %}
 					</div>
 				</div>
@@ -91,8 +101,8 @@
 						<div id="facebook">
 							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
 						</div>
-						<div id="end">
-							&copy;2015 Swing Paints Ltd. Last modified: February 20, 2015
+						<div id="end" style="padding-top:10px;">
+							&copy;2015 Swing Paints Ltd. Last modified: March 21, 2015
 						</div>
 					</div>
 				</div>

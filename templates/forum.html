@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}Swing Paints Forum{% endblock %}
 {% block head %}
 {{ super() }}
-		<title>Swing Paints Forum</title>
 		<style>
 			table {width:100%;}
 			tr:nth-child(even) {
@@ -23,10 +23,10 @@
 				display:inline;
 				padding:0;
 			}
-			label {
+			#content label {
 				float:left;
 			}
-			input,textarea {
+			#content input:not(#submit):not(#notifyemail-0):not(#notifyemail-1),textarea {
 				float:right;
 				width:75%;
 			}
@@ -48,7 +48,7 @@
 				padding-right:10px;
 			}
 			form div div {
-				width:33%;clear:right;
+				clear:right;
 			}
 		</style>
 		<script>
@@ -61,6 +61,7 @@
 			});
 		</script>
 {% endblock %}
+{% block categorytext %}Forum{% endblock %}
 {% block content %}
 		<table id="write">
 			<tr>
@@ -74,7 +75,7 @@
 				<td><a href="/message/{{ message.IDmessage }}">{{ message.subject }}</a></td>
 				<td>{{ message.name }}</td>
 				<td>{{ message.replies }}</td>
-				<td>{{ message.last_rdate }}</td>
+				<td>{{ message.date }}</td>
 				{% if current_user.is_authenticated() %}
 				<td>Delete</td>
 				{% endif %}

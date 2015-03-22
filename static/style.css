@@ -145,11 +145,20 @@
 		font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px;
 		color: #000000;
-		background: -webkit-linear-gradient(#336633, white);
+		/*background: -webkit-linear-gradient(#336633, white);
 		background: -o-linear-gradient(#336633, white);
 		background: -moz-linear-gradient(#336633, white);
-		background: linear-gradient(#336633, white);
+		background: linear-gradient(#336633, white);*/
+		background-image: url('images/wood.jpg');
 		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	a {
+		color:#336633;
+		text-decoration:none;
+	}
+	a:hover {
+		text-decoration:underline;
 	}
 	#mobile-header, #sidebar-before, #mobile-search {
 		display: none;
@@ -197,7 +206,6 @@
 	#sidebar, #content {
 		margin: 15px;
 		background-color: white;
-		opacity: .9;
 		box-shadow: 0 0 0 5px hsl(0, 0%, 80%);
 		border-radius: 25px;
 	}
@@ -207,7 +215,7 @@
 		padding-right: 15px;
 	}
 	#sidebar li:before {
-		content: '\25b6';
+		content: '\25b6\a0';
 		color: grey;
 	}
 	#sidebar a {
@@ -222,20 +230,18 @@
 		text-align: center;
 	}
 	#mainleft {
-		float: left;
+		position: fixed;
+		width: 290px;
 	}
 	#mainright {
-		float: left;
+		margin-left:290px;
 		width: 65%;
 	}
 	#content {
-		min-height: 350px;
+		min-height: 515px;
 		padding: 5px 15px 10px 35px;
 	}
 	#mission {
-		float: left;
-		width: 70%;
-		margin-right:20px
 	}
 	#brand {
 		float: left;
@@ -253,7 +259,7 @@
 		margin-top:10px;
 		clear:both;
 		text-align:center;
-		color: #336633;
+		color: #FFFFFF;
 	    text-decoration: none;
 	    font-family: Verdana, Arial, Helvetica, sans-serif;
 	    font-size:9px;
@@ -267,7 +273,7 @@
 	}
 	#footer li:before {
 		content: '|';
-		color: black;
+		color: white;
 	}
 	#footer li:nth-of-type(1):before {
 		content: '';
@@ -276,7 +282,7 @@
 		padding: 0;
 	}
 	#footer a {
-		color: black;
+		color: white;
 		font-size: 10px;
 		text-decoration: none;
 		padding-left: 5px;

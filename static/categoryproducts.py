@@ -155,6 +155,12 @@ solventsproducts['9000']=''
 solventsproducts['9001']=''
 solventsproducts['9008']=''
 clearanceproducts = OrderedDict()
+terranovaproducts = OrderedDict()
+terranovaproducts['2100']='Terra Nova<br />NaturOil'
+terranovaproducts['2101']='Terra Nova<br />Cream Polish'
+terranovaproducts['2102']='Terra Nova<br />Metal Restorer'
+terranovaproducts['2103']='Terra Nova<br />Liquid Pumice Stone'
+terranovaproducts['2104']='Terra Nova<br />Furniture Cleaner'
 
 products = {
 'accessories':accessoriesproducts,
@@ -169,5 +175,5 @@ products = {
 'bath':bathproducts,
 'solvents':solventsproducts,
 'clearance':clearanceproducts,
-'':''
+'terranova':terranovaproducts
 }

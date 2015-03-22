@@ -10,5 +10,6 @@ title = {
 'waxes':'Waxes, Polishers &amp; Cleaners',
 'bath':'Bathtub Reglazing Epoxy',
 'solvents':'Solvents',
-'clearance':'Clearance'
+'clearance':'Clearance',
+'terranova':'TerraNova'
 }

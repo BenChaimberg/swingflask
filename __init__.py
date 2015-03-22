@@ -268,6 +268,7 @@ def forum(page):
 	messages = Messages.query.with_entities(Messages.IDmessage,Messages.name,Messages.email,Messages.last_rdate,Messages.subject).order_by(Messages.last_rdate.desc()).paginate(int(page),50)
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
+		message.date = time.strftime('%H:%M %m/%d/%Y',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
 	return render_template('forum.html',messages=messages.items,total=messages.total,form=form)
 
 @app.route('/message/<message_id>', methods=('GET', 'POST'))
@@ -289,10 +290,17 @@ def message(message_id):
 		msg.html = 'Hello %s,<br />%s has posted a reply to your message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (last_reply.name,new_reply.name,new_reply.IDmessage,new_reply.rdate)
 #		mail.send(msg)
 		message = Messages.query.filter_by(IDmessage=message_id).first()
+		message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
 		replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
+		for reply in replies.items:
+			replies.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(replies.rdate),'%Y-%m-%d %H:%M:%S'))
 		return render_template('message.html',message=message,replies=replies,form=form)
 	message = Messages.query.filter_by(IDmessage=message_id).first()
+	print message.mdate,message.last_rdate
+	message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.mdate),'%Y-%m-%d %H:%M:%S'))
 	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
+	for reply in replies:
+		reply.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(reply.rdate),'%Y-%m-%d %H:%M:%S'))
 	return render_template('message.html',message=message,replies=replies,form=form)
 
 @app.route('/refer', methods=('GET', 'POST'))
