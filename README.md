@@ -10,5 +10,5 @@ $ sudo pip install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
 (venv) $ pip install -r requirements.txt
-(venv) $ python __init__.py
+(venv) $ python app.py
 ```

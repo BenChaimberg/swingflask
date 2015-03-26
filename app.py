@@ -4,8 +4,8 @@ from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
 from flask_wtf import Form, validators, RecaptchaField
-from wtforms.fields import TextField, PasswordField, SelectField, RadioField, TextAreaField
 import wtforms
+from wtforms import TextField, PasswordField, SelectField, RadioField, TextAreaField
 from werkzeug.routing import BaseConverter
 import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -34,7 +34,7 @@ MAIL_PASSWORD = 'webmaster'
 app = Flask(__name__) #created app as instance of Flask
 app.config.from_object(__name__)
 mail = Mail(app)
-app.secret_key = 'blahblahblah' #change later to random
+app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
 app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -218,7 +218,7 @@ def logout():
 @app.route('/home', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
 @app.route('/main', methods=('GET', 'POST'))
-def main():
+def home():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
 	return generic_page('main',request.query_string, feed=d['entries'][1]['link'])
 
@@ -262,18 +262,11 @@ def rightstripper():
 def rightfinish():
 	return generic_page('rightfinish',request.query_string)
 
-@app.route('/forum')
-@app.route('/forum/')
-def forum_redirect():
-	return redirect("/forum/1")
-
-@app.route('/forum/<page>', methods=('GET', 'POST'))
-def forum(page):
-	try:
-		int(page)
-	except:
-		abort(404)
-	form = MessageForm()
+@app.route('/forum/', methods=('GET', 'POST'))
+@app.route('/forum/<int:page>', methods=('GET', 'POST'))
+def forum(page=1):
+	message_form = MessageForm()
+	form = SearchForm()
 	if form.validate_on_submit():
 		new_message = Messages(form.subject.data,form.name.data,form.email.data,form.notifyemail.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()),form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 		db.session.add(new_message)
@@ -283,11 +276,12 @@ def forum(page):
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
 		message.date = time.strftime('%H:%M %m/%d/%Y',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('forum.html',messages=messages.items,total=messages.total,form=form)
+	return render_template('forum.html',messages=messages.items,total=messages.total,message_form=message_form,form=form)
 
-@app.route('/message/<message_id>', methods=('GET', 'POST'))
+@app.route('/message/<int:message_id>', methods=('GET', 'POST'))
 def message(message_id):
-	form = MessageForm()
+	message_form = MessageForm()
+	form = SearchForm()
 	if form.validate_on_submit():
 		last_reply = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.desc()).first()
 		new_reply = Replies(message_id,form.subject.data,form.name.data,form.email.data,form.notifyemail.data,form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
@@ -303,19 +297,13 @@ def message(message_id):
 		msg.subject = 'Swing Paints Forum Reply'
 		msg.html = 'Hello %s,<br />%s has posted a reply to your message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (last_reply.name,new_reply.name,new_reply.IDmessage,new_reply.rdate)
 #		mail.send(msg)
-		message = Messages.query.filter_by(IDmessage=message_id).first()
-		message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
-		replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
-		for reply in replies.items:
-			replies.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(replies.rdate),'%Y-%m-%d %H:%M:%S'))
-		return render_template('message.html',message=message,replies=replies,form=form)
-	message = Messages.query.filter_by(IDmessage=message_id).first()
+	message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
 	print message.mdate,message.last_rdate
 	message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.mdate),'%Y-%m-%d %H:%M:%S'))
 	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
 	for reply in replies:
 		reply.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(reply.rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('message.html',message=message,replies=replies,form=form)
+	return render_template('message.html',message=message,replies=replies,message_form=message_form,form=form)
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
@@ -388,6 +376,55 @@ def brochure():
 		else: return render_template('brochuresuccess.html',form=form)
 	if request.query_string == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform,form=form)
 	else: return render_template('brochure.html', brochure_form=brochure_form,form=form)
+	
+class Infotable(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    size = db.Column(db.Text(convert_unicode=True),nullable=False)
+    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
+
+    def __init__(self, productid, size, quantity):
+        self.productid = productid
+        self.size = size
+        self.quantity = quantity
+
+class Infolist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
+
+    def __init__(self, productid, infolist):
+        self.productid = productid
+        self.infolist = infolist
+
+class Categories(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    category = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, category, name):
+        self.category = category
+        self.name = name
+
+class Products(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(250),nullable=False)
+    demo = db.Column(db.String(250),nullable=True)
+    text = db.Column(db.Text(),nullable=False)
+    directions = db.Column(db.Text(),nullable=True)
+    forms_us = db.Column(db.Text(),nullable=True)
+    forms_can = db.Column(db.Text(),nullable=True)
+    category = db.Column(db.Text(),nullable=False)
+
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+        self.id = id
+        self.title = title
+        self.demo = demo
+        self.text = text
+        self.directions = directions
+        self.forms_us = forms_us
+        self.forms_can = forms_can
+        self.category = category
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
@@ -414,22 +451,14 @@ def product(productid): #if URL is at /product/####
 		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
 	else: #if URL does not end with ?french
 		if producttitle.title.get(productid):
-			return render_template('product.html',product={
-															'id':productid,
-															'title':producttitle.title[productid],
-															'text':producttext.text[productid],
-															'dir':productdir.dir[productid],
-															'info':productinfo.info[productid],
-															'info2':productinfo.info2[productid],
-															'demo':productdemo.demo[productid],
-															'canforms':productforms.forms[productid + 'can'],
-															'usforms':productforms.forms[productid + 'us'],
-															'category':categoryproducts.products,
-															'categorytitle':categorytitle.title
-														},form=form)
+			product = Products.query.filter_by(id=productid).first()
+			product.infolist = Infolist.query.filter_by(productid=productid).all()
+			product.infotable = Infotable.query.filter_by(productid=productid).all()
+			category=Categories.query.filter_by(category=product.category).first().name
+			return render_template('product.html',product=product,category=category,form=form)
 		else: abort(404)
 
-@app.route('/category/<categoryid>')
+@app.route('/category/<string:categoryid>')
 def category(categoryid):
 	form = SearchForm()
 	if form.validate_on_submit():
@@ -447,12 +476,10 @@ def category(categoryid):
 		else: abort(404)
 	else:
 		if categorytitle.title.get(categoryid):
-			return render_template('category.html', category={
-																'id':categoryid,
-																'title':categorytitle.title[categoryid],
-																'products':categoryproducts.products[categoryid],
-																'dictlen':len(categoryproducts.products[categoryid])
-															},form=form)
+			category = Categories.query.filter_by(category=categoryid).first()
+			category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).all()
+			category.dictlen = len(category.products)
+			return render_template('category.html', category=category,form=form)
 		else: abort(404)
 
 if __name__ == '__main__': #only run if executed directly from interpreter

@@ -50,7 +50,7 @@
 						<div id="logotext">finishing the easy way since 1965</div>
 					</div>
 					<div id="desktop-search">
-						<form method="POST" action="/search">
+						<form method="POST" action="{{ url_for('.search') }}">
 						{{ form.hidden_tag() }}
 							{{ form.search(style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;") }}
 							<input id="submit" disabled type="submit" value="Search"></input>
@@ -58,9 +58,8 @@
 					</div>
 					<div id="sidebar">
 					{% block sidebar %}
-						<h1 id="category-heading">Categories</h1>
 						<div id="mobile-search">
-							<form method="POST" action="/search">
+							<form method="POST" action="{{ url_for('.search') }}">
 							{{ form.hidden_tag() }}
 								{{ form.search(style="height:75%;margin-left:5px;width:50%;border-radius:10px;border:none;padding-left:10px;") }}
 								<input id="submit" type="submit" value="Search"></input>
@@ -69,18 +68,18 @@
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Products</h1>
 						<ul>
-							<li><a href="/category/accessories">Accessories &amp; Tools</a></li>
-							<li><a href="/category/epoxies">Epoxies &amp; Adhesives</a></li>
-							<li><a href="/category/glueremovers">Adhesive &amp; Glue Removers</a></li>
-							<li><a href="/category/varnishremovers">Paint &amp; Varnish Removers</a></li>
-							<li><a href="/category/oils">Finishing Oils</a></li>
-							<li><a href="/category/poly">Varnishes &amp; Polyurethanes</a></li>
-							<li><a href="/category/primers">Paint &amp; Wallpaper Primers</a></li>
-							<li><a href="/category/stains">Wood Stains &amp; Varnish Stains</a></li>
-							<li><a href="/category/waxes">Waxes, Polishers &amp; Cleaners</a></li>
-							<li><a href="/category/bath">Bathtub Reglazing Epoxy</a></li>
-							<li><a href="/category/solvents">Solvents</a></li>
-							<li><a href="/category/clearance">Clearance</a></li>
+							<li><a href="{{ url_for('.category',categoryid='accessories') }}">Accessories &amp; Tools</a></li>
+							<li><a href="{{ url_for('.category',categoryid='epoxies') }}">Epoxies &amp; Adhesives</a></li>
+							<li><a href="{{ url_for('.category',categoryid='glueremovers') }}">Adhesive &amp; Glue Removers</a></li>
+							<li><a href="{{ url_for('.category',categoryid='varnishremovers') }}">Paint &amp; Varnish Removers</a></li>
+							<li><a href="{{ url_for('.category',categoryid='oils') }}">Finishing Oils</a></li>
+							<li><a href="{{ url_for('.category',categoryid='poly') }}">Varnishes &amp; Polyurethanes</a></li>
+							<li><a href="{{ url_for('.category',categoryid='primers') }}">Paint &amp; Wallpaper Primers</a></li>
+							<li><a href="{{ url_for('.category',categoryid='stains') }}">Wood Stains &amp; Varnish Stains</a></li>
+							<li><a href="{{ url_for('.category',categoryid='waxes') }}">Waxes, Polishers &amp; Cleaners</a></li>
+							<li><a href="{{ url_for('.category',categoryid='bath') }}">Bathtub Reglazing Epoxy</a></li>
+							<li><a href="{{ url_for('.category',categoryid='solvents') }}">Solvents</a></li>
+							<li><a href="{{ url_for('.category',categoryid='clearance') }}">Clearance</a></li>
 						</ul>
 						<h1 id="category-heading">Brands</h1>
 						<ul>
@@ -98,29 +97,28 @@
 				<div id="mainright" class="group">
 					<div id="links">
 						<ul>
-							<li><b><a href="/home">HOME</a></b></li>
-							<li><a href="/about">ABOUT SWING PAINTS</a></li></li>
-							<li><a href="/locations">WHERE TO BUY</a></li>
-							<li><a href="/faq">FAQ</a></li>
-							<li><a href="/contact">CONTACTS</a></li>
-							<li><a href="/marketing">MARKETING AND SALES ASSISTANCE</a></li>
+							<li><b><a href="{{ url_for('.home') }}">HOME</a></b></li>
+							<li><a href="{{ url_for('.about') }}">ABOUT SWING PAINTS</a></li></li>
+							<li><a href="{{ url_for('.locations') }}">WHERE TO BUY</a></li>
+							<li><a href="{{ url_for('.faq') }}">FAQ</a></li>
+							<li><a href="{{ url_for('.contact') }}">CONTACTS</a></li>
+							<li><a href="{{ url_for('.marketing') }}">MARKETING AND SALES ASSISTANCE</a></li>
 						</ul>
 					</div>
 					<div id="content" class="group">
 						<div id="mobile-header">
 							<div id="mobile-header-left">☰</div>
 							<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
-							<div id="mobile-header-right"><a href="/home">⌂</a></div>
+							<div id="mobile-header-right"><a href="{{ url_for('.home') }}">⌂</a></div>
 						</div>
 						<h1 id="main-heading">{% block categorytext %}{% endblock %}</h1>
 					{% block content %}{% endblock %}
 					</div>
 					<div id="footer">
 						<ul>
-							<li><a href="/forum" class="noscript">INTERACTIVE FORUM</a></li>
-							<li><a href="/newsletter" class="noscript">NEWSLETTER</a></li>
-							<li><a href="/refer" class="noscript">REFER A FRIEND</a></li>
-							<li><a href="/brochure" class="noscript">FREE BROCHURE</a></li>
+							<li><a href="{{ url_for('.forum') }}" class="noscript">INTERACTIVE FORUM</a></li>
+							<li><a href="{{ url_for('.refer') }}" class="noscript">REFER A FRIEND</a></li>
+							<li><a href="{{ url_for('.brochure') }}" class="noscript">FREE BROCHURE</a></li>
 						</ul>
 						<div id="facebook">
 							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>

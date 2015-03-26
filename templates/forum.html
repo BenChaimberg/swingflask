@@ -84,14 +84,14 @@
 		</table>
 		<div id="pages"></div>
 		<form method="POST">
-		{{ form.hidden_tag() }}
+		{{ message_form.hidden_tag() }}
 			<div style="float:left;width:100%;"><ul>
-			{% for field in form %}
+			{% for field in message_form %}
 				{% for error in field.errors %}
 					<li>{{ error | safe }}</li>
 				{% endfor %}
 			{% endfor %}
-			{% for field in form %}
+			{% for field in message_form %}
 				</ul><div>
 				{% if loop.index == 1 %}
 				{% else %}

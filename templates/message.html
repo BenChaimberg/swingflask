@@ -152,7 +152,7 @@
 		</script>
 {% endblock %}
 {% block categorytext %}Forum Message{% endblock %}
-{% block content %}
+{% block content %}{{ "<h1>Title</h1>" }}
 		<table id="write">
 			<tr style="background-color:#666666;color:white;">
 				<td style="font-weight:bold;">From</td>
@@ -160,14 +160,14 @@
 			</tr>
 		</table>
 		<form method="POST" action="/message/{{ message.IDmessage }}">
-		{{ form.hidden_tag() }}
+		{{ message_form.hidden_tag() }}
 			<div style="float:left;"><ul>
-			{% for field in form %}
+			{% for field in message_form %}
 				{% for error in field.errors %}
 					<li>{{ error | safe }}</li>
 				{% endfor %}
 			{% endfor %}
-			{% for field in form %}
+			{% for field in message_form %}
 				</ul><div>
 				{% if loop.index == 1 %}
 				{% else %}

@@ -62,15 +62,15 @@
 	}
 </style>
 {% endblock %}
-{% block title %}{{ category.title | safe }}{% endblock %}
-{% block categorytext %}{{ category.title | safe }}{% endblock %}
+{% block title %}{{ category.name | safe }}{% endblock %}
+{% block categorytext %}{{ category.name | safe }}{% endblock %}
 {% block content %}
 <table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
-	<a href="../product/{{ x }}">
-		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x ) }}" alt='{{ category.products[x] | replace("<br />"," ") }}' title='{{ category.products[x] | replace("<br />"," ") }}'>
-		<div>{{ category.products[x] | replace("<br />"," ") | safe }}</div>
+	<a href="../product/{{ x.id }}">
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
+		<div>{{ category.products[x] | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
 	</a>
 </td></tr>
 {% endfor %}
@@ -78,9 +78,11 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x }}" style="text-decoration:none;"><div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div><div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;">
-	</div></a>
-	<span>{{ category.products[x] | safe }}</span>
+	<a href="../product/{{ x.id }}" style="text-decoration:none;">
+		<div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div>
+		<div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;"></div>
+		</a>
+	<span>{{ x.title | replace("Swing Paints","") | safe }}</span>
 </td>
 {% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}

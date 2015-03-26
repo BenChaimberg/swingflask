@@ -285,15 +285,15 @@
 </script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block categorytext %}{{ product.categorytitle[product_category(product.category,product.id)] | safe }}{% endblock %}
+{% block categorytext %}{{ category | safe }}{% endblock %}
 {% block content %}
 	<div class="group">
 		<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
-		<div id="text"><b id="product-title">{{ product.title|safe }}</b><p>{{ product.text|safe }}</p></div>
+		<div id="text"><b id="product-title">{{ product.title | safe }}</b><p>{{ product.text | safe }}</p></div>
 	</div>
 	<div id="tabs" class="group">
 		<div class="label directions"><span>Directions</span></div>
-		<div class="stuff directions"><p>{{ product.dir | safe }}</p></div>
+		<div class="stuff directions"><p>{{ product.directions | safe }}</p></div>
 		<div class="label more-info"><span>More Info</span></div>
 		<div class="stuff more-info group">
 			<div id="infotable">
@@ -306,11 +306,13 @@
 					<tr>
 						<td style="width:58%">Size:</td>
 						<td style="width:42%">Case Pack:</td>
-					{% for item in product.info: %}
-						{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
-						<td style="font-weight:normal">{{ item | safe }}</td>
-					{% endfor %}
 					</tr>
+					{% for item in product.infotable: %}
+					<tr>
+						<td style="font-weight:normal">{{ item.size | safe }}</td>
+						<td style="font-weight:normal">{{ item.quantity | safe }}</td>
+					</tr>
+					{% endfor %}
 				</table>
 				<div style="text-align:left;">
 					{% if product.id == '400.499': %}
@@ -326,8 +328,8 @@
 			</div>
 			<div id="infotext">
 				<ul>
-				{% for item in product.info2: %}
-					<li>{{ item | safe }}</li>
+				{% for item in product.infolist: %}
+					<li>{{ item.infolist | safe }}</li>
 				{% endfor %}
 				</ul>
 			</div>
@@ -341,9 +343,9 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
-					{% if product.canforms %}
+					{% if product.forms_can %}
 					<select style="font-size:12px" name="productpr">
-					{{ product.canforms | safe }}
+					{{ product.forms_can | safe }}
 					</select>
 					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart">
@@ -363,9 +365,9 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
-					{% if product.usforms %}
+					{% if product.forms_us %}
 					<select style="font-size:12px" name="productpr">
-					{{ product.usforms | safe }}
+					{{ product.forms_us | safe }}
 					</select>
 					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart">
