@@ -70,7 +70,7 @@
 <tr><td>
 	<a href="../product/{{ x.id }}">
 		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
-		<div>{{ category.products[x] | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
+		<div>{{ x.title | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
 	</a>
 </td></tr>
 {% endfor %}
