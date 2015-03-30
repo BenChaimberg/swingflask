@@ -54,14 +54,14 @@
 			$("form").change(function(){
     			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
 				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
-					$("#submit").prop('disabled',false);
-				} else {$("#submit").prop('disabled',true);}
+					$("#content-submit").prop('disabled',false);
+				} else {$("#content-submit").prop('disabled',true);}
 			});
 			$("form").keyup(function(){
     			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
 				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
-					$("#submit").prop('disabled',false);
-				} else {$("#submit").prop('disabled',true);}
+					$("#content-submit").prop('disabled',false);
+				} else {$("#content-submit").prop('disabled',true);}
 			});
 		});
 	</script>
@@ -103,7 +103,7 @@
 	<div style="width:48%;float:right;">
 		{% endif %}
 	{% endfor %}
-		<div style="clear:right;"><input id="submit" type="submit" value="Submit" disabled="disabled"></div>
+		<div style="clear:right;"><input id="content-submit" type="submit" value="Submit" disabled="disabled"></div>
     </div>
 </form>
 {% endblock %}

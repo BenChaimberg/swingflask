@@ -1,5 +1,5 @@
 {% extends "frenchbase.html" %}
-{% block head %}{{ super() }}<style>div#content b {color:#1D432F;}div#content p {margin-top:0px;font-size:10px;}</style>{% endblock %}
+{% block head %}{{ super() }}<style>div#content b {color:#1D432F;}</style>{% endblock %}
 {% block title %}Peintures Swing - Marketing{% endblock %}
 {% block categorytext %}Aide du Marketing et de Ventes{% endblock %}
 {% block content %}
@@ -48,5 +48,5 @@ l'EXTÉRIEUR de notre produit apparie la qualité du produit contenu
 les instructions et l'information sur nos produits pour les rendre 
 extrêmement "consommateur-amicaux." <br />
 <br />
-Pour plus d'information, contacter le département approprié <a href="contact">ICI</a>.</p>
+Pour plus d'information, contacter le département approprié <a href="{{ url_for('contact',lang='french') }}">ICI</a>.</p>
 {% endblock %}

@@ -26,6 +26,12 @@
 					} else {$("#submit").prop('disabled',true);}
 				});
 			});
+			$(document).ready(function(){
+				$(document).find('div.fb-post').each(function() {
+					$(this).attr('data-width', $(this).parent().width());
+				});
+				canvassing(10);
+			});
 		</script>
 	{% endblock %}
 	</head>

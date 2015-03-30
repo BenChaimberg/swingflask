@@ -2,219 +2,389 @@
 {% block head %}
 {{ super() }}
 <style>
-	#switch {
-		 background:#eee;
-		 padding:24px 5px 5px 5px;
-		 border:1px solid #000000;
-		 position:absolute;
-		 top:0px;
-		 width:97.3%;
-	}
-	#infotext {
-		 position:relative;
-		 right:5px;
-		 top:5px;
-		 width:50%;
-		 text-align:left;
-		 font-weight:bold;
-		 float:right;
-	}
-	#infotable {
-		 position:relative;
-		 width:50%;
-		 padding-bottom:5px;
-	}
-	.buystuff {
-		text-align:center;
-		display:none;
-		height:100%;
-		width:100%;
-	}
-	.buybutt {
-		height:100%;
-		width:50%;
-	}
-	.stuff a {
-		text-decoration:underline;
-		color: #336633;
-	}
-	.stuff p {
-		margin:0 0 5px;
-	}
-	.shown {
-		border-left:1px solid black;
-		border-right:1px solid black;
-		border-top:1px solid black;
-	}
-	.hidden {
-		border-bottom:1px solid black;
-		background:#FFF;
-		color: #336633;
-	}
-	.hidden:hover{
-		background: #CCFFCC;
-	}
-	.label {
-		margin: 0;
-		width: 24.75%;
-		float: left;
-		text-align: center;
-		padding: 2px 0;
+	@media (max-width: 1024px) {
+		html, body { margin: 0px; padding: 0px; border: 0px; }
+		body,p {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #000000;
+		}
+		a {
+			color:#336633;
+			text-decoration:none;
+		}
+		p { text-align:justify; }
+		#container,#content {
+			width:100%;
+			height:100%;
+			margin: 0px;
+		}
+		#image {
+			margin-top:72px;
+			float:none;
+			clear:right;
+			padding:0;
+			position:relative;
+			text-align:center;
+		}
+		#text {
+			position:relative;
+			padding-left:5px;
+			padding-right:5px;
+		}
+		.label span {
+			padding-left:5px;
+		}
+		.label {
+			border-top:1px solid black;
+			width:100%;
+			clear:right;
+			height:50px;
+			line-height:50px;
+			font-size:2em;
+			color:#336633;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.label:nth-last-of-type(1) {
+			border-bottom:1px solid black;
+		}
+		.label:after {
+			float:right;
+			content:"+";
+			padding-right:5px;
+		}
+		.label.open:after {
+			content:"−";
+		}
+		#infotext {
+			 position:relative;
+			 right:5px;
+			 top:5px;
+			 width:50%;
+			 text-align:left;
+			 font-weight:bold;
+			 float:right;
+		}
+		#infotable {
+			 position:relative;
+			 float:left;
+			 width:50%;
+			 padding-bottom:5px;
+		}
+		#infotable td {
+			 border:1px solid black;
+		}
+		#product-title {
+			font-weight:bold;
+			font-size:16px;
+			text-align:center;
+		}
+		.buystuff {
+			text-align:center;
+			display:none;
+			height:100%;
+			width:100%;
+			padding-bottom:10px;
+		}
+		.buybutt {
+			width:49%;
+			display:inline;
+		}
+		.buybutt:nth-child(1) {
+			float:left;
+		}
+		.buybutt:nth-child(3) {
+			float:right;
+		}
+		.buybutt img {
+			height:100%;
+			width:100%;
+		}
+		.stuff {
+			padding-left:5px;
+			padding-right:5px;
+			display:none;
+		}
+    }
+	@media (min-width: 1024px) {
+		#infotext {
+			 position:relative;
+			 right:5px;
+			 top:5px;
+			 width:50%;
+			 text-align:left;
+			 font-weight:bold;
+			 float:left;
+		}
+		#infotable {
+			 width:50%;
+			 padding-bottom:5px;
+			 float:left;
+		}
+		#infotable td {
+			 border:1px solid black;
+		}
+		.buystuff {
+			text-align:center;
+			display:none;
+			height:100%;
+			width:100%;
+		}
+		.buybutt {
+			width:49%;
+			height:100%;
+			display:inline;
+		}
+		.buybutt:nth-child(1) {
+			float:left;
+		}
+		.buybutt:nth-child(3) {
+			float:right;
+		}
+		.buybutt img {
+			width:100%;
+		}
+		.stuff {
+			display:none;
+			padding-top:25px;
+			border-bottom:1px solid black;
+			border-left:1px solid black;
+			border-right:1px solid black;
+		}
+		.stuff a {
+			text-decoration:underline;
+			color:#336633;
+		}
+		.stuff p {
+			margin:5px;
+		}
+		.label:hover {
+			cursor:pointer;
+			background-color:#CCFFCC;
+		}
+		.label:nth-last-of-type(5) {
+			border-right:1px solid black;
+		}
+		.label {
+			margin: 0;
+			width: 24.78%;
+			float: left;
+			text-align: center;
+			padding: 2px 0;
+			border-top:1px solid black;
+			border-left:1px solid black;
+			border-bottom:1px solid black;
+			background-color:#eee;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.directions.label:hover {
+			background-color:#FFFFFF;
+		}
+		.directions.label {
+			border-bottom:0px solid black;
+			background-color:white;
+		}
+		.directions.stuff {
+			display:block;
+		}
+		#tabs {
+			margin-top:15px;
+		}
+		#iframe {
+			width:575px;
+			height:430px;
+			margin:5px;
+		}
+		#image {
+			float: left;
+			margin-right: 10px;
+		}
 	}
 </style>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$(".label").click(function(event){
-			event.preventDefault();
-			var labelindex = $(this).index();
-			$("#footer").fadeOut(100);
-			$(".stuff").eq(labelindex).siblings().hide("fast");
-			$(".buystuff").hide("fast",function(){
-				$(".buybutt").show("fast",function(){
-					$(".stuff").eq(labelindex).show("fast",function(){
-						var hht = 0;
-						$(".stuff").eq(labelindex).children().each(function(){
-							console.log($(this).height());
-							hht = ($(this).height() > hht) ? $(this).height() : hht;
+		if ($(window).width() <= 1024) {
+			$(window).resize(function(){
+				$("iframe").css({"height":.75*$(window).width()-10});
+				$("iframe").css({"width":$(window).width()-10});
+			});
+			$(".label").click(function(){
+				$("iframe").css({"height":.75*$(window).width()-10});
+				$("iframe").css({"width":$(window).width()-10});
+				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
+				$(this).next().slideToggle("slow",function(){
+					$('html, body').animate({scrollTop:$(this).prev().offset().top-71},500,function(){
+						$(".buystuff").hide("fast",function(){
+							$(".buybutt").show("fast");
 						});
-						$(".stuff").animate({'height':hht},function(){
-							$("#container2").css('height', hht+31);
-							$("#footer").fadeIn(50);
-						});
+					});
+	    		});
+				$(this).siblings().removeClass("open");
+				$(this).toggleClass("open");
+			});
+			$(".buybutt").click(function(event){
+				event.preventDefault();
+				$('html, body').stop();
+				var clicked = $(this)
+				$(".buybutt").fadeOut("slow",function(){
+					clicked.next().fadeIn("slow");
+				});
+			});
+		}
+		if ($(window).width() >= 1024) {
+			$(".stuff").insertAfter($("#tabs").children().last())
+			$(".label").click(function(event){
+				event.preventDefault();
+				$(this).removeClass("label");
+				var labelclass = $(this).attr("class")
+				$(this).addClass("label");
+				labelclass = "." + labelclass
+				if ($(labelclass).not(".label").css("display") == "none") {
+					$(this).prev().css({"border-right":"1px solid black"});
+					$(this).next().not(".stuff").css({"border-left":"1px solid black"});
+					$(this).css({"border-left":"0px solid black"});
+					$(this).css({"border-right":"0px solid black"});
+					$(this).css({"border-bottom":"0px solid black"});
+					$(this).hover(function(){$(this).css({"background-color":"#FFFFFF"})},function(){$(this).css({"background-color":"#FFFFFF"})});
+					$(labelclass).not(".label").css({"display":"block"})
+				}
+				$(this).css({"background-color":"#FFFFFF"})
+				$(this).siblings().not(labelclass).not(".label").css({"display":"none"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"border-bottom":"1px solid black"});
+				$(".label:nth-last-of-type(1)").css({"border-right":"1px solid black"});
+				$(".label:nth-of-type(1)").css({"border-left":"1px solid black"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"background-color":"#eee"});
+				$(this).siblings().not(labelclass).not(".stuff").hover(function(){$(this).css({"background-color":"#CCFFCC"})},function(){$(this).css({"background-color":"#eee"})});
+				$(".buystuff").hide("fast",function(){
+					$(".buybutt").show("fast",function(){
+						var buyhght = $(".buybutt a img").height();
+						$(".buy-now.stuff").css({"height":buyhght+10});
+						$(".buy-now.stuff").css({"line-height":buyhght+10+"px"});
 					});
 				});
 			});
-			$(this).addClass("shown").removeClass("hidden");
-			$(this).siblings().addClass("hidden").removeClass("shown");
-		});
-		$(".buybutt").click(function(event){
-			event.preventDefault();
-			$("#footer").fadeOut(100);
-			var clicked = $(this)
-			$(".buybutt").fadeOut("slow",function(){
-				clicked.next().fadeIn("slow");
-				var hht = clicked.next().height();
-				$("#container2").css('height', hht+31);
-				$("#footer").fadeIn(50);
+			$(".buybutt").click(function(event){
+				event.preventDefault();
+				var clicked = $(this)
+				$(".buybutt").fadeOut("slow",function(){
+					clicked.next().fadeIn("slow");
+				});
 			});
-		});
-		$("#container2").hide("fast");
-		$(window).load(function(){
-			$("#container2").show("fast",function(){
-				var hht = $(".stuff").height();
-				$("#container2").css('height', hht+31);
-			});
-		});
+		}
 	});
 </script>
 {% endblock %}
 {% block title %}{{ product.title }}{% endblock %}
-{% block categorytext %}{{ product.categorytitle[product_category(product.category,product.id)] | safe }}{% endblock %}
+{% block categorytext %}{{ category | safe }}{% endblock %}
 {% block content %}
-	<div id="text">{{ product.text|safe }}</div>
-	<div id="image"><img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
-	<script type='text/javascript'>
-		$("#text").css('display','none');
-		$("#picture").load(function(){
-			var txt = $("#image").width();
-			var txt2 = 555 - txt
-			$("#text").css('display','inline');
-			$("#text").css('width', txt2);
-		});
-	</script>
-</div>
-<script type='text/javascript'>
-	$(window).load(function(){
-		var imghgt = $("#image").height();
-		var txthgt = $("#text").height();
-		var hgt = Math.max(imghgt,txthgt);
-		$("#content").css('height', hgt+10);
-	});
-</script>
-<div id="container2" style="width:580;position:relative;margin-left:3px;">
-	<div style="width:100%;height:19px;position:relative;z-index:2;">
-		<a class="shown label" href="#">Directions</a>
-		<a class="hidden label" href="#">Plus d'Information</a>
-		<a class="hidden label" href="#">Acheter</a>
-		<a class="hidden label" href="#">D&#xe9;monstrations</a>
+	<div class="group">
+		<div id="image"><img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title | safe }}"></div>
+		<div id="text"><b id="product-title">{{ product.title | safe }}</b><p>{{ product.text | safe }}</p></div>
 	</div>
-	<div id="switch">
-		<div class="stuff"><p>{{ product.dir | safe }}</p></div>
-		<div class="stuff" style="display:none;">
-			<div id="infotext">
-				<ul>
-				{% for item in product.info2: %}
-					<li>{{ item | safe }}</li>
-				{% endfor %}
-				</ul>
-			</div>
+	<div id="tabs" class="group">
+		<div class="label directions"><span>Directions</span></div>
+		<div class="stuff directions"><p>{{ product.directions | safe }}</p></div>
+		<div class="label more-info"><span>More Info</span></div>
+		<div class="stuff more-info group">
 			<div id="infotable">
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
 						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
-							<b>Code de Produit: </b>{{ product.id }}
+							<b>Product Code: </b>{{ product.id }}
 						</td>
 					</tr>
 					<tr>
-						<td style="width:58%">Format:</td>
-						<td style="width:42%">Emballage:</td>
-					{% for item in product.info: %}
-						{% if loop.index is not divisibleby(2) %}</tr><tr>{% endif %}
-						<td style="font-weight:normal">{{ item | safe }}</td>
-					{% endfor %}
+						<td style="width:58%">Size:</td>
+						<td style="width:42%">Case Pack:</td>
 					</tr>
+					{% for item in product.infotable: %}
+					<tr>
+						<td style="font-weight:normal">{{ item.size | safe }}</td>
+						<td style="font-weight:normal">{{ item.quantity | safe }}</td>
+					</tr>
+					{% endfor %}
 				</table>
+				<div style="text-align:left;">
+					{% if product.id == '400.499': %}
+					<a href="{{ url_for('aquacolor', lang='french') }}" class="directions"target="_blank">Colour Swatches</a>
+					{% elif product.id == '770.799': %}
+					<a href="{{ url_for('colour', lang='french') }}" class="directions"target="_blank">Colour Swatches</a>
+					{% elif product.id == '3220' or product.id == '3200' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1801': %}
+					<a href="{{ url_for('rightstripper', lang='french') }}" class="directions"target="_blank">Choosing the Right Stripper</a>
+					{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1807' or product.id ==  '1802' or product.id ==  '1604' or product.id ==  '1819' or product.id ==  '1818' or product.id ==  '1817' or product.id ==  '1805' or product.id ==  '1815' or product.id ==  '1803' or product.id ==  '2100' or product.id ==  '1555' or product.id ==  '8100' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
+					<a href="{{ url_for('rightfinish', lang='french') }}" class="directions"target="_blank">Choosing the Right Finish</a>
+					{% endif %}
+				</div>
+			</div>
+			<div id="infotext">
+				<ul>
+				{% for item in product.infolist: %}
+					<li>{{ item.infolist | safe }}</li>
+				{% endfor %}
+				</ul>
 			</div>
 		</div>
-		<div class="stuff" style="display:none;">
-			<div class="buybutt" style="float:right;height:100px;">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can_grey.png') }}" alt="Buy Canada" style="width:100%;"></a>
+		<div class="label buy-now"><span>Buy Now</span></div>
+		<div class="stuff buy-now">
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can.jpg') }}" alt="Buy Canada"></a>
 			</div>
-			<div class="buystuff" style="height:22px;">
+			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
-					{% if product.canforms %}
+					{% if product.forms_can %}
 					<select style="font-size:12px" name="productpr">
-					{{ product.canforms | safe }}
+					{{ product.forms_can | safe }}
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart" disabled>
 					{% endif %}
 				</form>
 			</div>
-			<div class="buybutt" style="height:100px;">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us_grey.png') }}" alt="Buy US" style="width:100%;"></a>
+			<div class="buybutt">
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US""></a>
 			</div>
-			<div class="buystuff" style="height:22px;">
+			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
-					{% if product.usforms %}
+					{% if product.forms_us %}
 					<select style="font-size:12px" name="productpr">
-					{{ product.usforms | safe }}
+					{{ product.forms_us | safe }}
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart" disabled>
 					{% endif %}
 				</form>
 			</div>
 		</div>
-		<div class="stuff" style="display:none;">
+		<div class="label demonstrations"><span>Demonstrations</span></div>
+		<div class="stuff demonstrations">
 			{% if product.demo %}
-			<iframe width="420" height="315" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
+			<iframe id="iframe" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
 			{% else %}
 			<p>No Demonstration Available</p>
 			{% endif %}

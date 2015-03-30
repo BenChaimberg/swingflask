@@ -11,8 +11,7 @@ import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import update
 import feedparser
-from static import search_texts
-from static import producttitle, producttext, productdir, productinfo, productdemo, productforms, frenchproducttitle, frenchproducttext, frenchproductdir, frenchproductinfo, frenchproductdemo, frenchproductforms, categorytitle, categoryproducts, frenchcategorytitle, frenchcategoryproducts #import data in .py dictionary form
+#from static import search_texts
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -52,6 +51,104 @@ def load_user(userid):
 @login_manager.unauthorized_handler
 def unauthorized():
 	abort(401)
+
+class Frenchinfotable(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    size = db.Column(db.Text(convert_unicode=True),nullable=False)
+    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
+
+    def __init__(self, productid, size, quantity):
+        self.productid = productid
+        self.size = size
+        self.quantity = quantity
+
+class Frenchinfolist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
+
+    def __init__(self, productid, infolist):
+        self.productid = productid
+        self.infolist = infolist
+
+class Frenchcategories(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    category = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, category, name):
+        self.category = category
+        self.name = name
+
+class Frenchproducts(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(250),nullable=False)
+    demo = db.Column(db.String(250),nullable=True)
+    text = db.Column(db.Text(),nullable=False)
+    directions = db.Column(db.Text(),nullable=True)
+    forms_us = db.Column(db.Text(),nullable=True)
+    forms_can = db.Column(db.Text(),nullable=True)
+    category = db.Column(db.Text(),nullable=False)
+
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+        self.id = id
+        self.title = title
+        self.demo = demo
+        self.text = text
+        self.directions = directions
+        self.forms_us = forms_us
+        self.forms_can = forms_can
+        self.category = category
+
+class Infotable(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    size = db.Column(db.Text(convert_unicode=True),nullable=False)
+    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
+
+    def __init__(self, productid, size, quantity):
+        self.productid = productid
+        self.size = size
+        self.quantity = quantity
+
+class Infolist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
+
+    def __init__(self, productid, infolist):
+        self.productid = productid
+        self.infolist = infolist
+
+class Categories(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    category = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, category, name):
+        self.category = category
+        self.name = name
+
+class Products(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(250),nullable=False)
+    demo = db.Column(db.String(250),nullable=True)
+    text = db.Column(db.Text(),nullable=False)
+    directions = db.Column(db.Text(),nullable=True)
+    forms_us = db.Column(db.Text(),nullable=True)
+    forms_can = db.Column(db.Text(),nullable=True)
+    category = db.Column(db.Text(),nullable=False)
+
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+        self.id = id
+        self.title = title
+        self.demo = demo
+        self.text = text
+        self.directions = directions
+        self.forms_us = forms_us
+        self.forms_can = forms_can
+        self.category = category
 
 class SearchForm(Form):
     search = TextField("", [wtforms.validators.Required('Please enter a search query')])
@@ -136,13 +233,13 @@ class Replies(db.Model):
         self.message = message
         self.rdate = rdate
 
-def generic_page(page,lang,**kwargs):
+def generic_page(page,request,**kwargs):
 	form = SearchForm()
 	if form.validate_on_submit():
 		search_item = form.search.data
 		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',things=search_texts.searching(search_item),form=form)
-	if lang == 'french':
+		else: return render_template('search.html',things=searching(search_item),form=form)
+	if request.args.get('lang') == 'french':
 		page = 'french'+ page
 	page += '.html'
 	return render_template(page,form=form,**kwargs)
@@ -220,47 +317,47 @@ def logout():
 @app.route('/main', methods=('GET', 'POST'))
 def home():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
-	return generic_page('main',request.query_string, feed=d['entries'][1]['link'])
+	return generic_page('main',request, feed=d['entries'][1]['link'])
 
 @app.route('/search', methods=('GET', 'POST'))
 def search():
-	return generic_page('search',request.query_string)
+	return generic_page('search',request)
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
-	return generic_page('locations',request.query_string)
+	return generic_page('locations',request)
 
 @app.route('/faq', methods=('GET', 'POST'))
 def faq():
-	return generic_page('faq',request.query_string)
+	return generic_page('faq',request)
 
 @app.route('/contact')
 def contact():
-	return generic_page('contact',request.query_string)
+	return generic_page('contact',request)
 
 @app.route('/marketing')
 def marketing():
-	return generic_page('marketing',request.query_string)
+	return generic_page('marketing',request)
 
 @app.route('/about')
 def about():
-	return generic_page('about',request.query_string)
+	return generic_page('about',request)
 
 @app.route('/colour')
 def colour():
-	return generic_page('colour',request.query_string)
+	return generic_page('colour',request)
 
 @app.route('/aquacolour')
 def aquacolour():
-	return generic_page('aquacolour',request.query_string)
+	return generic_page('aquacolour',request)
 
 @app.route('/rightstripper')
 def rightstripper():
-	return generic_page('rightstripper',request.query_string)
+	return generic_page('rightstripper',request)
 
 @app.route('/rightfinish')
 def rightfinish():
-	return generic_page('rightfinish',request.query_string)
+	return generic_page('rightfinish',request)
 
 @app.route('/forum/', methods=('GET', 'POST'))
 @app.route('/forum/<int:page>', methods=('GET', 'POST'))
@@ -312,7 +409,7 @@ def refer():
 		search_item = form.search.data
 		for search_site in producttext.text:
 			found_index = search_site.find(search_item)
-	if request.query_string == 'french': #if URL ends with ?french
+	if request.args.get('lang') == 'french': #if URL ends with ?french
 		refer_form = FrenchReferForm()
 		if refer_form.validate_on_submit():
 			visitorname = form.visitorname.data
@@ -374,57 +471,8 @@ def brochure():
 		mail.send(msg)
 		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html',form=form)
 		else: return render_template('brochuresuccess.html',form=form)
-	if request.query_string == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform,form=form)
+	if request.args.get('lang') == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform,form=form)
 	else: return render_template('brochure.html', brochure_form=brochure_form,form=form)
-	
-class Infotable(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    size = db.Column(db.Text(convert_unicode=True),nullable=False)
-    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
-
-    def __init__(self, productid, size, quantity):
-        self.productid = productid
-        self.size = size
-        self.quantity = quantity
-
-class Infolist(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
-
-    def __init__(self, productid, infolist):
-        self.productid = productid
-        self.infolist = infolist
-
-class Categories(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    category = db.Column(db.Text(), nullable=False)
-    name = db.Column(db.Text(), nullable=False)
-
-    def __init__(self, category, name):
-        self.category = category
-        self.name = name
-
-class Products(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    title = db.Column(db.String(250),nullable=False)
-    demo = db.Column(db.String(250),nullable=True)
-    text = db.Column(db.Text(),nullable=False)
-    directions = db.Column(db.Text(),nullable=True)
-    forms_us = db.Column(db.Text(),nullable=True)
-    forms_can = db.Column(db.Text(),nullable=True)
-    category = db.Column(db.Text(),nullable=False)
-
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
-        self.id = id
-        self.title = title
-        self.demo = demo
-        self.text = text
-        self.directions = directions
-        self.forms_us = forms_us
-        self.forms_can = forms_can
-        self.category = category
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
@@ -433,30 +481,18 @@ def product(productid): #if URL is at /product/####
 		search_item = form.search.data
 		for search_site in producttext.text:
 			found_index = search_site.find(search_item)
-	if request.query_string == 'french': #if URL ends with ?french
-		if frenchproducttitle.title.get(productid): #if product exists in list of product titles (should contain all products)
-			return render_template('frenchproduct.html', product={ #renders french product page with the following parameters
-																'id':productid, #product.id = productid
-																'title':frenchproducttitle.title[productid], #product.title = string with product name
-																'text':frenchproducttext.text[productid], #product.text = string with product text
-																'dir':frenchproductdir.dir[productid], #product.dir = string with product directions
-																'info':frenchproductinfo.info[productid], #product.info = string with product info (table)
-																'info2':frenchproductinfo.info2[productid],
-																'demo':frenchproductdemo.demo[productid],
-																'canforms':frenchproductforms.forms[productid + 'can'],
-																'usforms':frenchproductforms.forms[productid + 'us'],
-																'category':frenchcategoryproducts.products,
-																'categorytitle':frenchcategorytitle.title
-															},form=form)
-		else: abort(404) #if product does not exist in list of product titles, go to 404 (top)
+	if request.args.get('lang') == 'french': #if URL ends with ?french
+		product = Frenchproducts.query.filter_by(id=productid).first_or_404()
+		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
+		product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
+		category=Frenchcategories.query.filter_by(category=product.category).first().name
+		return render_template('frenchproduct.html',product=product,category=category,form=form)
 	else: #if URL does not end with ?french
-		if producttitle.title.get(productid):
-			product = Products.query.filter_by(id=productid).first()
-			product.infolist = Infolist.query.filter_by(productid=productid).all()
-			product.infotable = Infotable.query.filter_by(productid=productid).all()
-			category=Categories.query.filter_by(category=product.category).first().name
-			return render_template('product.html',product=product,category=category,form=form)
-		else: abort(404)
+		product = Products.query.filter_by(id=productid).first_or_404()
+		product.infolist = Infolist.query.filter_by(productid=productid).all()
+		product.infotable = Infotable.query.filter_by(productid=productid).all()
+		category=Categories.query.filter_by(category=product.category).first().name
+		return render_template('product.html',product=product,category=category,form=form)
 
 @app.route('/category/<string:categoryid>')
 def category(categoryid):
@@ -465,22 +501,16 @@ def category(categoryid):
 		search_item = form.search.data
 		for search_site in producttext.text:
 			found_index = search_site.find(search_item)
-	if request.query_string == 'french':
-		if frenchcategorytitle.title.get(categoryid):
-			return render_template('frenchcategory.html', category={
-																	'id':categoryid,
-																	'title':frenchcategorytitle.title[categoryid],
-																	'products':frenchcategoryproducts.products[categoryid],
-																	'dictlen':len(frenchcategoryproducts.products[categoryid])
-																},form=form)
-		else: abort(404)
+	if request.args.get('lang') == 'french': #if URL ends with ?french
+		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
+		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).all()
+		category.dictlen = len(category.products)
+		return render_template('frenchcategory.html', category=category,form=form)
 	else:
-		if categorytitle.title.get(categoryid):
-			category = Categories.query.filter_by(category=categoryid).first()
-			category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).all()
-			category.dictlen = len(category.products)
-			return render_template('category.html', category=category,form=form)
-		else: abort(404)
+		category = Categories.query.filter_by(category=categoryid).first_or_404()
+		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).all()
+		category.dictlen = len(category.products)
+		return render_template('category.html', category=category,form=form)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
     app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)

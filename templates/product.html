@@ -288,7 +288,7 @@
 {% block categorytext %}{{ category | safe }}{% endblock %}
 {% block content %}
 	<div class="group">
-		<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title }}"></div>
+		<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title | safe }}"></div>
 		<div id="text"><b id="product-title">{{ product.title | safe }}</b><p>{{ product.text | safe }}</p></div>
 	</div>
 	<div id="tabs" class="group">
@@ -347,13 +347,13 @@
 					<select style="font-size:12px" name="productpr">
 					{{ product.forms_can | safe }}
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart" disabled>
 					{% endif %}
 				</form>
@@ -369,13 +369,13 @@
 					<select style="font-size:12px" name="productpr">
 					{{ product.forms_us | safe }}
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="http://swingpaints.herokuapp.com/product/{{ product.id }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart" disabled>
 					{% endif %}
 				</form>

@@ -2,9 +2,8 @@
 {% block head %}
 {{ super() }}
 <style>
-	div#content a {text-decoration:underline;color:#1D432F;}
-	div#content,div#content p{font-size:11px;}
-	div#content li{margin:10px 0}
+	#content li a{text-decoration:underline;color:#1D432F;}
+	#content li{padding:5px 0}
 </style>
 <script type='text/javascript'>
 $(document).ready(function(){
@@ -13,6 +12,9 @@ $(document).ready(function(){
 		$(this).siblings().children().not("a").slideUp("slow");
 		$(this).children().not("a").slideToggle("slow");
 	});
+	if ($(window).width() <= 1024) {
+		$("#header").insertAfter("#footer");
+	}
 });
 </script>{% endblock %}
 {% block title %}Peintures Swing - FAQ{% endblock %}

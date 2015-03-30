@@ -1,4 +1,37 @@
-import producttext,producttitle
+from flask import Flask
+import pymysql
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import update
+
+app = Flask(__name__) #created app as instance of Flask
+app.config.from_object(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com?charset=latin1'
+db = SQLAlchemy(app)
+
+class Products(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(250),nullable=False)
+    demo = db.Column(db.String(250),nullable=True)
+    text = db.Column(db.Text(),nullable=False)
+    directions = db.Column(db.Text(),nullable=True)
+    forms_us = db.Column(db.Text(),nullable=True)
+    forms_can = db.Column(db.Text(),nullable=True)
+    category = db.Column(db.Text(),nullable=False)
+
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+        self.id = id
+        self.title = title
+        self.demo = demo
+        self.text = text
+        self.directions = directions
+        self.forms_us = forms_us
+        self.forms_can = forms_can
+        self.category = category
+
+def get_sql(search_string):
+	texts = Products.query.filter(Products.id==1800).order_by(None).all()
+	for text in texts:
+		print text.text
 
 class SearchError(Exception):
 	def __init__(self):
@@ -104,4 +137,6 @@ def searching(search_string):
 	except SearchError:
 		html = 'There were no pages that matched your search.'
 	return html
-	
+
+get_sql(str(raw_input('Search term: ')))
+#searching(str(raw_input()))

@@ -7,16 +7,12 @@ $(window).resize(function(){
 $(window).load(function(){
 	resizings();
 });
-$(document).ready(function(){
-	$(document).find('div.fb-post').each(function() {
-		$(this).attr('data-width', $(this).parent().width());
-	});
+var canvassing = function(times){
 	resizings();
 	var ctx = $("#canvas").get(0).getContext('2d');
 	ctx.scale(2, 2);
 	ctx.strokeStyle = "grey";
 	ctx.fillStyle = "black";
-	times = 10;
 	startx = 10;
 	starty = 19;
 	for (i=1;i<=times;i++){
@@ -38,4 +34,4 @@ $(document).ready(function(){
 		ctx.arc(startx+30,starty*i+3,4,0,2*Math.PI);
 		ctx.fill();
 	}
-});
+}
