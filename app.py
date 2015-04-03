@@ -317,7 +317,7 @@ def logout():
 @app.route('/main', methods=('GET', 'POST'))
 def home():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
-	return generic_page('main',request, feed=d['entries'][1]['link'])
+	return generic_page('main',request, feed=d['entries'][0]['link'])
 
 @app.route('/search', methods=('GET', 'POST'))
 def search():
