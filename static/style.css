@@ -1,6 +1,7 @@
 html {overflow-y:scroll;}
 @media (max-width: 1024px) {
-	html, body { margin: 0px; padding: 0px; border: 0px; overflow-x: hidden; height: 100% }
+	body {height:100%;}
+	html, body { margin: 0px; padding: 0px; border: 0px; overflow-x: hidden; }
 	body,p {
 		font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px;
@@ -27,17 +28,17 @@ html {overflow-y:scroll;}
 		float:right;
 	}
 	#sidebar {
-		overflow:scroll;
+		overflow-y:scroll;
 		left:0px;
 		top:0px;
 		right:0px;
 		bottom:0px;
 		margin-left:-100%;
 		position:fixed;
-		z-index:1000;
+		z-index:3;
 		height:100%;
 		width:100%;
-		background:rgba(29,67,47,.9);
+ 		background:rgba(29,67,47,.9);
 	}
 	#sidebar ul {
 		list-style:none;
@@ -82,7 +83,7 @@ html {overflow-y:scroll;}
 		padding-right: 0px;
 	}
 	#mobile-header {
-		z-index:500;
+		z-index:2;
 		top:0px;
 		background-color:#1D432F;
 		width:100%;
