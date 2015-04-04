@@ -38,6 +38,7 @@ app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 7200
 db = SQLAlchemy(app)
 
 class User(UserMixin):
