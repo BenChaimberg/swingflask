@@ -1,12 +1,49 @@
 from flask import Flask
 import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import update
+from sqlalchemy import update, or_
 
 app = Flask(__name__) #created app as instance of Flask
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com?charset=latin1'
 db = SQLAlchemy(app)
+class Messages(db.Model):
+    IDmessage = db.Column(db.Integer(), primary_key=True, nullable=False)
+    subject = db.Column(db.String(250),nullable=True)
+    name = db.Column(db.String(250),nullable=True)
+    email = db.Column(db.String(250),nullable=True)
+    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
+    mdate = db.Column(db.DateTime(),nullable=True)
+    message = db.Column(db.Text(),nullable=True)
+    last_rdate = db.Column(db.DateTime(),nullable=True)
+
+    def __init__(self, subject, name, email, notifyemail, mdate, message, last_rdate):
+        self.subject = subject
+        self.name = name
+        self.email = email
+        self.notifyemail = notifyemail
+        self.mdate = mdate
+        self.message = message
+        self.last_rdate = last_rdate
+
+class Replies(db.Model):
+    IDreply = db.Column(db.Integer(), primary_key=True, nullable=False)
+    IDmessage = db.Column(db.Integer(), nullable=True)
+    subject = db.Column(db.String(250),nullable=True)
+    name = db.Column(db.String(250),nullable=True)
+    email = db.Column(db.String(250),nullable=True)
+    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
+    message = db.Column(db.Text(),nullable=True)
+    rdate = db.Column(db.DateTime(),nullable=True)
+
+    def __init__(self, IDmessage, subject, name, email, notifyemail, message, rdate):
+        self.IDmessage = IDmessage
+        self.subject = subject
+        self.name = name
+        self.email = email
+        self.notifyemail = notifyemail
+        self.message = message
+        self.rdate = rdate
 
 class Products(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
@@ -42,13 +79,12 @@ def searching(search_string):
 		search_string = search_string.lower()
 		search_items = []
 		found_index = -1
-		product_text = {}
 		html_index = 0
-		for item in producttext.text:
-			non_html = producttext.text[item]
-			while not non_html.find('<') == -1:
-				non_html = non_html[:non_html.find('<')] + ' ' + non_html[non_html.find('>')+1:]
-			product_text[item] = non_html
+		html = ''
+		found_titles = []
+		found_sites = []
+		products = []
+#		messages = []
 		while True:
 			try_index = found_index+1
 			found_index = search_string.find(' ',try_index)
@@ -58,17 +94,25 @@ def searching(search_string):
 			else:
 				search_items.append(search_string)
 				break
-		found_titles = []
-		found_sites = []
-		html = ''
-		for search_site in producttitle.title:
+		for search_item in search_items:
+			products += Products.query.filter(or_(Products.text.like('%'+search_item+'%'),Products.title.like('%'+search_item+'%'),Products.directions.like('%'+search_item+'%'))).all()
+#			messages += Messages.query.filter(Messages.message.like('%'+search_item+'%')).all()
+#			messages += Replies.query.filter(Replies.message.like('%'+search_item+'%')).all()
+#		for message in messages:
+#			message.text = message.message
+#			html += message.text + '<br><br>'
+		for product in products:
+			while not product.text.find('<') == -1:
+				product.text = product.text[:product.text.find('<')] + ' ' + product.text[product.text.find('>')+1:]
+			while not product.directions.find('<') == -1:
+				product.directions = product.directions[:product.directions.find('<')] + ' ' + product.directions[product.directions.find('>')+1:]
 			found_index = -1
-			found_site = [search_site,[]]
+			found_site = [product,[]]
 			found_titles.append(found_site)
 			for search_item in search_items:
 				while True:
 					try_index = found_index+1
-					found_index = producttitle.title[search_site].lower().find(search_item,try_index)
+					found_index = product.title.lower().find(search_item,try_index)
 					if not found_index < 0:
 						found_titles[-1][1].append(found_index)
 					else:
@@ -87,25 +131,43 @@ def searching(search_string):
 				if sorted_titles.index(sorted) == len(sorted_titles) - 1:
 					sorted_titles.append(titled)
 					break
-		for search_site in producttext.text:
-			found_index = -1
-			found_site = [search_site,[]]
+		for product in products:
+			found_site = [product,[]]
 			found_sites.append(found_site)
 			for search_item in search_items:
+				found_index = -1
 				while True:
 					try_index = found_index+1
-					found_index = product_text[search_site].lower().find(search_item,try_index)
+					found_index = product.text.lower().find(search_item,try_index)
 					if not found_index < 0:
-						space_index = len(product_text[search_site])-found_index
+						space_index = len(product.text)-found_index
 						space_index2 = found_index
 						for i in range(0,3):
-							space_index = product_text[search_site][::-1].find(' ',space_index+1)
+							space_index = product.text[::-1].find(' ',space_index+1)
 						if space_index < 0:
-							space_index = len(product_text[search_site])
+							space_index = len(product.text)
 						for i in range(0,4):
-							if product_text[search_site].find(' ',space_index2+1) > 0:
-								space_index2 = product_text[search_site].find(' ',space_index2+1)
-						found_sites[-1][1].append(product_text[search_site][len(product_text[search_site])-space_index:found_index]+'<b>'+product_text[search_site][found_index:found_index+len(search_item)]+'</b>'+product_text[search_site][found_index+len(search_item):space_index2])
+							if product.text.find(' ',space_index2+1) > 0:
+								space_index2 = product.text.find(' ',space_index2+1)
+						found_sites[-1][1].append(product.text[len(product.text)-space_index:found_index]+'<b>'+product.text[found_index:found_index+len(search_item)]+'</b>'+product.text[found_index+len(search_item):space_index2])
+					else:
+						break
+				found_index = -1
+				while True:
+					try_index = found_index+1
+					found_index = product.directions.lower().find(search_item,try_index)
+					if not found_index < 0:
+						space_index = len(product.directions)-found_index
+						space_index2 = found_index
+						for i in range(0,3):
+							space_index = product.directions[::-1].find(' ',space_index+1)
+							if space_index < 0:
+								space_index = len(product.directions)
+								break
+						for i in range(0,4):
+							if product.directions.find(' ',space_index2+1) > 0:
+								space_index2 = product.directions.find(' ',space_index2+1)
+						found_sites[-1][1].append(product.directions[len(product.directions)-space_index:found_index]+'<b>'+product.directions[found_index:found_index+len(search_item)]+'</b>'+product.directions[found_index+len(search_item):space_index2])
 					else:
 						break
 			found_sites[-1][1].sort()
@@ -129,7 +191,7 @@ def searching(search_string):
 					break
 		html += '<ul>'
 		for final in found_sorted:
-			html += '<li><h2><a href="/product/' + final[0] + '">' + producttitle.title[final[0]] + '</a></h2>'
+			html += '<li><h2><a href="/product/' + str(final[0].id) + '">' + final[0].title + '</a></h2>'
 			for text in final[1]:
 				html += text + '&hellip;'
 			html += '</li>'
@@ -138,5 +200,5 @@ def searching(search_string):
 		html = 'There were no pages that matched your search.'
 	return html
 
-get_sql(str(raw_input('Search term: ')))
-#searching(str(raw_input()))
+#get_sql(str(raw_input('Search term: ')))
+#searching(str(raw_input('Search term: ')))

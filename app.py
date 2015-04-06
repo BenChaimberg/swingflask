@@ -11,7 +11,8 @@ import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import update
 import feedparser
-#from static import search_texts
+from static import search_texts
+from static.search_texts import searching
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -39,6 +40,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 7200
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 100
 db = SQLAlchemy(app)
 
 class User(UserMixin):
@@ -239,7 +241,7 @@ def generic_page(page,request,**kwargs):
 	if form.validate_on_submit():
 		search_item = form.search.data
 		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',things=searching(search_item),form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french':
 		page = 'french'+ page
 	page += '.html'
@@ -280,13 +282,18 @@ def error(uid):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-    	if form.username.data == 'administrator' and form.password.data == 'supersecurepassword':
-    		user = load_user(form.username.data)
-        	login_user(user)
-        	return redirect('/admin/')
-    return render_template("login.html", form=form)
+	login_form = LoginForm()
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
+	if login_form.validate_on_submit():
+		if login_form.username.data == 'administrator' and login_form.password.data == 'supersecurepassword':
+			user = load_user(login_form.username.data)
+			login_user(user)
+			return redirect('/admin/')
+	return render_template("login.html", form=form,login_form=login_form)
 
 @app.route('/admin/')
 @fresh_login_required
@@ -315,14 +322,29 @@ def logout():
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
+@app.route('/start', methods=('GET', 'POST'))
+def start():
+	return generic_page('start',request)
+
 @app.route('/main', methods=('GET', 'POST'))
 def home():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
 	return generic_page('main',request, feed=d['entries'][0]['link'])
 
-@app.route('/search', methods=('GET', 'POST'))
-def search():
-	return generic_page('search',request)
+@app.route('/search/<search_string>', methods=('GET', 'POST'))
+def search(search_string):
+	while True:
+		plus = search_string.find('+')
+		if plus > 0:
+			search_string = search_string[:plus]+' '+search_string[plus+1:]
+		else: break
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
+	return render_template('search.html',searchitems=searching(search_string),form=form)
+
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
@@ -381,8 +403,12 @@ def message(message_id):
 	message_form = MessageForm()
 	form = SearchForm()
 	if form.validate_on_submit():
+		search_item = form.search.data
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
+	if message_form.validate_on_submit():
 		last_reply = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.desc()).first()
-		new_reply = Replies(message_id,form.subject.data,form.name.data,form.email.data,form.notifyemail.data,form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		new_reply = Replies(message_id,message_form.subject.data,message_form.name.data,message_form.email.data,message_form.notifyemail.data,message_form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 		db.session.add(new_reply)
 		db.session.commit()
 		db.session.query(Messages).filter_by(IDmessage=message_id).update({'last_rdate':time.strftime("%Y-%m-%d %H:%M:%S", gmtime())})
@@ -408,15 +434,15 @@ def refer():
 	form = SearchForm()
 	if form.validate_on_submit():
 		search_item = form.search.data
-		for search_site in producttext.text:
-			found_index = search_site.find(search_item)
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		refer_form = FrenchReferForm()
 		if refer_form.validate_on_submit():
-			visitorname = form.visitorname.data
-			visitoremail = form.visitoremail.data
-			friendname = form.friendname.data
-			friendemail = form.friendemail.data
+			visitorname = refer_form.visitorname.data
+			visitoremail = refer_form.visitoremail.data
+			friendname = refer_form.friendname.data
+			friendemail = refer_form.friendemail.data
 			msg = Message()
 			msg.recipients = [friendemail]
 			msg.bcc = ['echaimberg@swingpaints.com']
@@ -429,10 +455,10 @@ def refer():
 	else: #if URL does not end with ?french
 		refer_form = ReferForm()
 		if refer_form.validate_on_submit():
-			visitorname = form.visitorname.data
-			visitoremail = form.visitoremail.data
-			friendname = form.friendname.data
-			friendemail = form.friendemail.data
+			visitorname = refer_form.visitorname.data
+			visitoremail = refer_form.visitoremail.data
+			friendname = refer_form.friendname.data
+			friendemail = refer_form.friendemail.data
 			msg = Message()
 			msg.recipients = [friendemail]
 			msg.bcc = ['echaimberg@swingpaints.com']
@@ -448,11 +474,11 @@ def brochure():
 	form = SearchForm()
 	if form.validate_on_submit():
 		search_item = form.search.data
-		for search_site in producttext.text:
-			found_index = search_site.find(search_item)
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	brochure_form = BrochureForm()
 	brochure_frenchform = FrenchBrochureForm()
-	if form.validate_on_submit():
+	if brochure_form.validate_on_submit():
 		with open('brochurelist', 'r') as file:
 			data = json.load(file)
 		i=0
@@ -480,8 +506,8 @@ def product(productid): #if URL is at /product/####
 	form = SearchForm()
 	if form.validate_on_submit():
 		search_item = form.search.data
-		for search_site in producttext.text:
-			found_index = search_site.find(search_item)
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		product = Frenchproducts.query.filter_by(id=productid).first_or_404()
 		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
@@ -500,8 +526,8 @@ def category(categoryid):
 	form = SearchForm()
 	if form.validate_on_submit():
 		search_item = form.search.data
-		for search_site in producttext.text:
-			found_index = search_site.find(search_item)
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).all()
