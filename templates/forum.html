@@ -3,7 +3,6 @@
 {% block head %}
 {{ super() }}
 		<style>
-			table {width:100%;}
 			tr:nth-child(even) {
 				background-color:#CCCCCC;
 			}
@@ -50,13 +49,35 @@
 			form div div {
 				clear:right;
 			}
+			@media (max-width: 1024px) {
+				#recaptcha_table td:nth-of-type(3) {
+					display: none;
+				}
+			}
+			#pages ul {
+				list-style: none;
+				padding: 0;
+			}
+			#pages li {
+				display: inline;
+			}
+			#pages li:before {
+				content: '|';
+				color: #336633;
+			}
+			#pages li:nth-of-type(1):before {
+				content: '';
+			}
+			#pages a {
+				padding: 0 5px;
+			}
 		</style>
 		<script>
 			$(document).ready(function(){
-				var total = {{ total }} / 50 + 1;
+				var total = 30//{{ total }} / 50 + 1;
 				for (i=1;i<=total;i++){
 					console.log(i);
-					$('#pages').html($('#pages').html()+'<a href="/forum/'+i+'">'+i+'</a>&nbsp;|&nbsp;');
+					$('#pages').html($('#pages').html()+'<li><a href="/forum/'+i+'">'+i+'</a></li>');
 				}
 			});
 		</script>
@@ -82,7 +103,7 @@
 			</tr>
 			{% endfor %}
 		</table>
-		<div id="pages"></div>
+		<div id="pages"><ul></ul></div>
 		<form method="POST">
 		{{ message_form.hidden_tag() }}
 			<div style="float:left;width:100%;"><ul>
