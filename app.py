@@ -535,7 +535,7 @@ def category(categoryid):
 		return render_template('frenchcategory.html', category=category,form=form)
 	else:
 		category = Categories.query.filter_by(category=categoryid).first_or_404()
-		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).all()
+		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
 		return render_template('category.html', category=category,form=form)
 
