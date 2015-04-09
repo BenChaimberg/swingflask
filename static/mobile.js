@@ -2,6 +2,8 @@ $(document).ready(function(){
 	if ($(window).width() <= 1024) {
 		$("#links").insertBefore("#footer");
 		$("#div-search").insertBefore("#sidebar-before");
+		$("#category-list").prepend("<li>"+$("#category-heading").html()+"</li>");
+		$("#brand-list").prepend("<li>"+$("#brand-heading").html()+"</li>");
 		$("#mobile-header-left").click(function(){
  			var currentPosition = $(document).scrollTop();
 			$("#sidebar").animate({ marginLeft: "0%"} , 500);

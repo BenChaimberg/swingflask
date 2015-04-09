@@ -12,7 +12,7 @@ html {overflow-y: scroll;}
 		text-decoration: none;
 	}
 	p {text-align: justify;}
-	#logo, #canvas, #main-heading, #category-heading, #facebook, #end, #forum-side {
+	#logo, #canvas, #main-heading, #category-heading, #brand-heading, #facebook, #end, #forum-side {
 		display: none;
 	}
 	#content {
@@ -68,6 +68,9 @@ html {overflow-y: scroll;}
 		line-height: 50px;
 		font-size: 2em;
 		color: white;
+	}
+	#sidebar li:nth-of-type(1) {
+		font-weight:bold;
 	}
 	#footer {
 		font-size: 9px;

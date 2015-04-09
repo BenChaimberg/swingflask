@@ -58,7 +58,7 @@
 					{% block sidebar %}
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Products</h1>
-						<ul>
+						<ul id="category-list">
 							<li><a href="{{ url_for('.category',categoryid='accessories') }}">Accessories &amp; Tools</a></li>
 							<li><a href="{{ url_for('.category',categoryid='epoxies') }}">Epoxies &amp; Adhesives</a></li>
 							<li><a href="{{ url_for('.category',categoryid='glueremovers') }}">Adhesive &amp; Glue Removers</a></li>
@@ -72,8 +72,8 @@
 							<li><a href="{{ url_for('.category',categoryid='solvents') }}">Solvents</a></li>
 							<li><a href="{{ url_for('.category',categoryid='clearance') }}">Clearance</a></li>
 						</ul>
-						<h1 id="category-heading">Brands</h1>
-						<ul>
+						<h1 id="brand-heading">Brands</h1>
+						<ul id="brand-list">
 							<li><a href="{{ url_for('.brand',brandid='circa') }}">Circa 1850</a></li>
 							<li><a href="{{ url_for('.brand',brandid='klenks') }}">Klenk's</a></li>
 							<li><a href="{{ url_for('.brand',brandid='antiquax') }}">Antiquax</a></li>
