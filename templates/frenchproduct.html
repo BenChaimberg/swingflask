@@ -293,7 +293,13 @@
 	</div>
 	<div id="tabs" class="group">
 		<div class="label directions"><span>Directions</span></div>
-		<div class="stuff directions"><p>{{ product.directions | safe }}</p></div>
+		<div class="stuff directions">
+			{% if product.directions %}
+			<p>{{ product.directions | safe }}</p>
+			{% else %}
+			<p>No Directions Available</p>
+			{% endif %}
+		</div>
 		<div class="label more-info"><span>More Info</span></div>
 		<div class="stuff more-info group">
 			<div id="infotable">
