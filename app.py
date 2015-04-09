@@ -39,8 +39,8 @@ app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 7200
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 100
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 499
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
 db = SQLAlchemy(app)
 
 class User(UserMixin):
@@ -54,6 +54,66 @@ def load_user(userid):
 @login_manager.unauthorized_handler
 def unauthorized():
 	abort(401)
+
+class Infotable(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    size = db.Column(db.Text(convert_unicode=True),nullable=False)
+    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
+
+    def __init__(self, productid, size, quantity):
+        self.productid = productid
+        self.size = size
+        self.quantity = quantity
+
+class Infolist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    productid = db.Column(db.Integer(), nullable=False)
+    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
+
+    def __init__(self, productid, infolist):
+        self.productid = productid
+        self.infolist = infolist
+
+class Categories(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    category = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, category, name):
+        self.category = category
+        self.name = name
+
+class Brands(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    brand = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, brand, name):
+        self.brand = brand
+        self.name = name
+
+class Products(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(250),nullable=False)
+    demo = db.Column(db.String(250),nullable=True)
+    text = db.Column(db.Text(),nullable=False)
+    directions = db.Column(db.Text(),nullable=True)
+    forms_us = db.Column(db.Text(),nullable=True)
+    forms_can = db.Column(db.Text(),nullable=True)
+    category = db.Column(db.Text(),nullable=False)
+    brand = db.Column(db.Text(),nullable=True)
+
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
+        self.id = id
+        self.title = title
+        self.demo = demo
+        self.text = text
+        self.directions = directions
+        self.forms_us = forms_us
+        self.forms_can = forms_can
+        self.category = category
+        self.brand = brand
 
 class Frenchinfotable(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
@@ -93,8 +153,9 @@ class Frenchproducts(db.Model):
     forms_us = db.Column(db.Text(),nullable=True)
     forms_can = db.Column(db.Text(),nullable=True)
     category = db.Column(db.Text(),nullable=False)
+    brand = db.Column(db.Text(),nullable=False)
 
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
         self.id = id
         self.title = title
         self.demo = demo
@@ -103,55 +164,7 @@ class Frenchproducts(db.Model):
         self.forms_us = forms_us
         self.forms_can = forms_can
         self.category = category
-
-class Infotable(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    size = db.Column(db.Text(convert_unicode=True),nullable=False)
-    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
-
-    def __init__(self, productid, size, quantity):
-        self.productid = productid
-        self.size = size
-        self.quantity = quantity
-
-class Infolist(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
-
-    def __init__(self, productid, infolist):
-        self.productid = productid
-        self.infolist = infolist
-
-class Categories(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    category = db.Column(db.Text(), nullable=False)
-    name = db.Column(db.Text(), nullable=False)
-
-    def __init__(self, category, name):
-        self.category = category
-        self.name = name
-
-class Products(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    title = db.Column(db.String(250),nullable=False)
-    demo = db.Column(db.String(250),nullable=True)
-    text = db.Column(db.Text(),nullable=False)
-    directions = db.Column(db.Text(),nullable=True)
-    forms_us = db.Column(db.Text(),nullable=True)
-    forms_can = db.Column(db.Text(),nullable=True)
-    category = db.Column(db.Text(),nullable=False)
-
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
-        self.id = id
-        self.title = title
-        self.demo = demo
-        self.text = text
-        self.directions = directions
-        self.forms_us = forms_us
-        self.forms_can = forms_can
-        self.category = category
+        self.brand = brand
 
 class SearchForm(Form):
     search = TextField("", [wtforms.validators.Required('Please enter a search query')])
@@ -343,8 +356,8 @@ def search(search_string):
 		search_item = form.search.data
 		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
 		else: return render_template('search.html',searchitems=searching(search_item),form=form)
-	return render_template('search.html',searchitems=searching(search_string),form=form)
-
+	if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+	else: return render_template('search.html',searchitems=searching(search_item),form=form)
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
@@ -396,7 +409,7 @@ def forum(page=1):
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
 		message.date = time.strftime('%H:%M %m/%d/%Y',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('forum.html',messages=messages.items,total=messages.total,message_form=message_form,form=form)
+	return render_template('forum.html',messages=messages,message_form=message_form,form=form)
 
 @app.route('/message/<int:message_id>', methods=('GET', 'POST'))
 def message(message_id):
@@ -478,7 +491,7 @@ def brochure():
 		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	brochure_form = BrochureForm()
 	brochure_frenchform = FrenchBrochureForm()
-	if brochure_form.validate_on_submit():
+	if brochure_form.validate_on_submit() or brochure_frenchform.validate_on_submit():
 		with open('brochurelist', 'r') as file:
 			data = json.load(file)
 		i=0
@@ -530,7 +543,7 @@ def category(categoryid):
 		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
-		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).all()
+		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
 		return render_template('frenchcategory.html', category=category,form=form)
 	else:
@@ -538,6 +551,24 @@ def category(categoryid):
 		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
 		return render_template('category.html', category=category,form=form)
+
+@app.route('/brand/<string:brandid>')
+def brand(brandid):
+	form = SearchForm()
+	if form.validate_on_submit():
+		search_item = form.search.data
+		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
+		else: return render_template('search.html',searchitems=searching(search_item),form=form)
+	if request.args.get('lang') == 'french': #if URL ends with ?french
+		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
+		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
+		brand.dictlen = len(brand.products)
+		return render_template('frenchcategory.html', category=brand,form=form)
+	else:
+		brand = Brands.query.filter_by(brand=brandid).first_or_404()
+		brand.products = Products.query.with_entities(Products.id,Products.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
+		brand.dictlen = len(brand.products)
+		return render_template('category.html', category=brand,form=form)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
     app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)

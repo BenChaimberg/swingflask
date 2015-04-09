@@ -38,6 +38,15 @@ class Categories(db.Model):
         self.category = category
         self.name = name
 
+class Brands(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    brand = db.Column(db.Text(), nullable=False)
+    name = db.Column(db.Text(), nullable=False)
+
+    def __init__(self, brand, name):
+        self.brand = brand
+        self.name = name
+
 class Products(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     title = db.Column(db.String(250),nullable=False)
@@ -47,8 +56,9 @@ class Products(db.Model):
     forms_us = db.Column(db.Text(),nullable=True)
     forms_can = db.Column(db.Text(),nullable=True)
     category = db.Column(db.Text(),nullable=False)
+    brand = db.Column(db.Text(),nullable=True)
 
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
         self.id = id
         self.title = title
         self.demo = demo
@@ -57,6 +67,7 @@ class Products(db.Model):
         self.forms_us = forms_us
         self.forms_can = forms_can
         self.category = category
+        self.brand = brand
 
 class Frenchinfotable(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
@@ -96,8 +107,9 @@ class Frenchproducts(db.Model):
     forms_us = db.Column(db.Text(),nullable=True)
     forms_can = db.Column(db.Text(),nullable=True)
     category = db.Column(db.Text(),nullable=False)
+    brand = db.Column(db.Text(),nullable=False)
 
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category):
+    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
         self.id = id
         self.title = title
         self.demo = demo
@@ -106,11 +118,14 @@ class Frenchproducts(db.Model):
         self.forms_us = forms_us
         self.forms_can = forms_can
         self.category = category
+        self.brand = brand
 
 def get_sql():
-	infothings = Infotable.query.filter_by(productid=1555).order_by(Infotable.id.asc()).all()
-	for infothing in infothings:
-		print infothing.size,infothing.quantity
+	brandid='circa'
+	brand = Brands.query.filter_by(brand=brandid).first_or_404()
+	brand.products = Products.query.with_entities(Products.id,Products.title).filter_by(brand=brandid).order_by(Products.id.asc()).all()
+	for product in brand.products:
+		print product.id
 
 def add_products_sql():
 	for product in frenchproducttitle.title:
@@ -152,6 +167,6 @@ def add_category_sql():
 	db.session.commit()
 
 db.create_all()
-add_products_sql()
-add_category_sql()
-#get_sql()
+#add_products_sql()
+#add_category_sql()
+get_sql()
