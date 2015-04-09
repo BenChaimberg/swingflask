@@ -12,62 +12,6 @@
 			float:right;
 		}
 	</style>
-	<script>
-		$(document).ready(function(){
-			var newHTML = document.createElement("div");
-			$("body").append(newHTML);
-			$(newHTML).attr("id","hoverspan");
-			$(newHTML).offset({top:0,left:0});
-			var newHTML2 = document.createElement("div");
-			$("body").append(newHTML2);
-			$(newHTML2).attr("id","hoverspan2");
-			$(newHTML2).offset({top:-20,left:0});
-			$("#visitoremail,#friendemail,#visitorname,#friendname").keyup(function(){
-				if ($(this).attr("id") == "visitoremail" || $(this).attr("id") == "friendemail") {
-					createSpan($(this));
-				}
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if (regex.test($("#visitoremail").val())) {
-					if ($("#visitorname").val() && $("#friendname").val() && regex.test($("#friendemail").val())) {
-						$("#submit").prop('disabled',false);
-					} else {$("#submit").prop('disabled',true);}
-				}
-			});
-			function createSpan(focused){
-				if (focused.attr("id") == "visitoremail") {var span = $("#hoverspan")} else {var span = $("#hoverspan2")}
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if (regex.test(focused.val())) {
-					var html = "<div style='margin:auto auto;width:175px;'>Valid e-mail address.</div>";
-					var backcolor = "#5cb85c";
-				} else {
-					var html = "<div style='margin:auto auto;width:200px;'>Must be valid e-mail address.</div>";
-					var backcolor = "#d9534f";
-				}
-				span.html(html);
-				var offset = focused.offset();
-				var top = offset.top;
-				var left = offset.left + focused.width() + 10;
-				span.offset({top:top,left:left});
-				span.css("color","white");
-				span.css("width","225px");
-				span.css("height","20px");
-				span.css("vertical-align","middle");
-				span.animate({backgroundColor:backcolor}, 100);
-			}
-			$("#visitoremail, #friendemail").focus(function(){
-				if ($(this).attr("id") == "visitoremail") {var span = $("#hoverspan")} else {var span = $("#hoverspan2")}
-				if (span.offset().left == 0 && span.offset().top == 0) {
-					createSpan($(this));
-				}
-			});
-			$("#visitoremail, #friendemail").blur(function(){
-				if ($(this).attr("id") == "visitoremail") {var span = $("#hoverspan")} else {var span = $("#hoverspan2")}
-				span.css("background","hsv(0,0,100)");
-				span.html("");
-				span.offset({top:0,left:0});
-			});
-		});
-	</script>
 {% endblock %}
 {% block title %}Swing Paints - Refer a Friend{% endblock %}
 {% block categorytext %}Refer{% endblock %}
@@ -75,17 +19,24 @@
 <p>Know anyone who would enjoy visiting our Website?</p>
 <p>Please enter the information requested below and your friend will receive an email containing a link which leads directly to the Swing Paints Website.</p>
 <p>Don&apos;t worry, we will NEVER share your e-mail address with any other company.</p>
-<div style="width:50%;margin:0 auto;"><form method="POST" action="/refer">
+<div style="width:50%;margin:0 auto;"><form method="POST" action="{{ url_for('.refer') }}">
     {{ refer_form.hidden_tag() }}
+    <ul>
+    {% for field in refer_form %}
+		{% for error in field.errors %}
+			<li>{{ error | safe }}</li>
+		{% endfor %}
+	{% endfor %}
+	</ul>
     {% for field in refer_form %}
     	{% if loop.index == 1 %}
 		{% else %}
-    <div style="clear:right;">
-    {{ field.label }}:
-    {{ field(size=20) }}
-    </div>
+		<div style="clear:right;">
+			{{ field.label }}:
+			{{ field(size=20) }}
+		</div>
     	{% endif %}
     {% endfor %}
-    <div style="clear:right;"><input id="submit" type="submit" value="Submit" disabled><button href="#" onclick="window.close();return false;" style="float:left;">Close Window</button></div>
+    <div style="clear:right;"><input id="submit" type="submit" value="Submit"></div>
 </form></div>
 {% endblock %}

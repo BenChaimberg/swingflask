@@ -12,16 +12,6 @@
 			float:right;
 		}
 	</style>
-	<script>
-		$(document).ready(function(){
-			$("form").keyup(function(){
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if ($("#visitorname").val() && regex.test($("#visitoremail").val()) && $("#friendname").val() && regex.test($("#friendemail").val())) {
-					$("#submit").prop('disabled',false);
-				} else {$("#submit").prop('disabled',true);}
-			});
-		});
-	</script>
 {% endblock %}
 {% block title %}Peintures Swing - Dite-le &#xe0; une amie{% endblock %}
 {% block categorytext %}R&#xe9;f&#xe9;rer{% endblock %}
@@ -29,20 +19,24 @@
 <p>Connaissez-vous quelqu&#x27;un qui aimerait visiter notre site Web?</p>
 <p>Il suffit de nous fournir les informations requises ci-dessous et votre amie recevra un courriel accompagn&#xe9; du lien qui la dirigera directement sur le site Web des Peintures Swing.</p>
 <p>Soyez assur&#xe9;, que votre adresse couriel restera confidentielle, elle ne sera jamais diffus&#xe9;e &#xe0; aucune autre compagnie.</p>
-<div style="width:50%;margin:0 auto;"><form method="POST" action="/refer?french">
+<div style="width:50%;margin:0 auto;"><form method="POST" action="{{ url_for('.refer', lang='french') }}">
     {{ refer_form.hidden_tag() }}
+    <ul>
+    {% for field in refer_form %}
+    	{% for error in field.errors %}
+    		<li>{{ error | safe }}</li>
+    	{% endfor %}
+	{% endfor %}
+	</ul>
     {% for field in refer_form %}
     	{% if loop.index == 1 %}
 		{% else %}
-    <div style="clear:right;">
-    {{ field.label }}:
-    {{ field(size=20) }}
-    {% for error in field.errors %}
-    	{{ error | safe }}
-    {% endfor %}
-    </div>
+    	<div style="clear:right;">
+			{{ field.label }}:
+			{{ field(size=20) }}
+		</div>
     	{% endif %}
     {% endfor %}
-    <div style="clear:right;"><input type="submit" value="Soumettez"><button href="#" onclick="window.close();return false;" style="float:left;">Fermez</button></div>
+    <div style="clear:right;"><input id="submit" type="submit" value="Submit">Close Window</div>
 </form></div>
 {% endblock %}

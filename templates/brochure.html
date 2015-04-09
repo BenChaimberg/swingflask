@@ -9,62 +9,6 @@
 			float:right;
 		}
 	</style>
-	<script>
-		$(document).ready(function(){
-			var newHTML = document.createElement("div");
-			$("body").append(newHTML);
-			$(newHTML).attr("id","hoverspan");
-			$(newHTML).offset({top:0,left:0});
-			$("#email").keyup(function(){
-				createSpan($(this));
-			});
-			function createSpan(focused){
-				var span = $("#hoverspan");
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if (regex.test(focused.val())) {
-					var html = "<div style='margin:auto auto;width:175px;'>Valid e-mail address.</div>";
-					var backcolor = "#5cb85c";
-				} else {
-					var html = "<div style='margin:auto auto;width:200px;'>Must be valid e-mail address.</div>";
-					var backcolor = "#d9534f";
-				}
-				span.html(html);
-				var offset = focused.offset();
-				var top = offset.top;
-				var left = offset.left + focused.width() + 10;
-				span.offset({top:top,left:left});
-				span.css("color","white");
-				span.css("width","225px");
-				span.css("height","20px");
-				span.css("vertical-align","middle");
-				span.animate({backgroundColor:backcolor}, 100);
-			}
-			$("#email").focus(function(){
-				var span = $("#hoverspan");
-				if (span.offset().left == 0 && span.offset().top == 0) {
-					createSpan($(this));
-				}
-			});
-			$("#email").blur(function(){
-			var span = $("#hoverspan");
-				span.css("background","hsv(0,0,100)");
-				span.html("");
-				span.offset({top:0,left:0});
-			});
-			$("form").change(function(){
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
-					$("#content-submit").prop('disabled',false);
-				} else {$("#content-submit").prop('disabled',true);}
-			});
-			$("form").keyup(function(){
-    			var regex = /[a-zA-Z0-9]+\u0040[a-zA-Z0-9]+\u002E[a-zA-Z0-9]+/; 
-				if ($("#name").val() && regex.test($("#email").val()) && $("#address").val() && $("#city").val() && $("#stateprov").val() && $("#zipcode").val() && $("#country").val()) {
-					$("#content-submit").prop('disabled',false);
-				} else {$("#content-submit").prop('disabled',true);}
-			});
-		});
-	</script>
 {% endblock %}
 {% block title %}Swing Paints - Free Brochure{% endblock %}
 {% block categorytext %}Free Brochure{% endblock %}
@@ -72,8 +16,15 @@
 <p>At Swing Paints, we know that refinishing is much easier than most people imagine, you just have to go about it one step at a time. But take a tip from us, a tip based on years of experience and know-how: a good start means a good finish.</p>
 <p>To ensure you get the best possible start, please send away for our FREE BROCHURE on Refinishing.</p>
 <p>Don't worry, we will NEVER share your e-mail address with any other company</p>
-<form method="POST" action="/brochure">
+<form method="POST" action="{{ url_for('.brochure') }}">
 {{ brochure_form.hidden_tag() }}
+	<ul>
+    {% for field in brochure_form %}
+		{% for error in field.errors %}
+			<li>{{ error | safe }}</li>
+		{% endfor %}
+	{% endfor %}
+	</ul>
 	<div style="width:48%;float:left;">
 	{% for field in brochure_form %}
 		<div style="clear:right;">
@@ -92,9 +43,6 @@
 				</select>
 			{% else %}
 				{{ field(style="width:50%") }}
-				{% for error in field.errors %}
-					{{ error | safe }}
-				{% endfor %}
 			{% endif %}
 		{% endif %}
 		</div>
@@ -103,7 +51,7 @@
 	<div style="width:48%;float:right;">
 		{% endif %}
 	{% endfor %}
-		<div style="clear:right;"><input id="content-submit" type="submit" value="Submit" disabled="disabled"></div>
+		<div style="clear:right;"><input id="content-submit" type="submit" value="Submit"></div>
     </div>
 </form>
 {% endblock %}
