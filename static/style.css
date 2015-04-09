@@ -12,13 +12,21 @@ html {overflow-y: scroll;}
 		text-decoration: none;
 	}
 	p {text-align: justify;}
-	#logo, #canvas, #main-heading, #desktop-search, #category-heading, #facebook, #end, #forum-side {
+	#logo, #canvas, #main-heading, #category-heading, #facebook, #end, #forum-side {
 		display: none;
 	}
 	#content {
 		width: 100%;
 		height: 100%;
 		margin: 0px;
+	}
+	#search {
+		height: 75%;
+		margin-left: 5px;
+		width: 65%;
+		border-radius: 10px;
+		border: none;
+		padding-left: 10px;
 	}
 	#sidebar-before {
 		height: 50px;
@@ -140,7 +148,7 @@ html {overflow-y: scroll;}
 		width: 8%;
 		text-align: right;
 	}
-	#mobile-search {
+	#div-search {
 		color: white;
 		float: left;
 		width: 85%;
@@ -176,7 +184,7 @@ html {overflow-y: scroll;}
 	a:hover {
 		text-decoration: underline;
 	}
-	#mobile-header, #sidebar-before, #mobile-search {
+	#mobile-header, #sidebar-before {
 		display: none;
 	}
 	#center {
@@ -241,9 +249,16 @@ html {overflow-y: scroll;}
 	#sidebar {
 		padding: 5px 35px 5px 15px;
 	}
-	#desktop-search {
+	#div-search {
 		margin-top: 25px;
 		text-align: center;
+	}
+	#search {
+		height: 2%;
+		width: 50%;
+		border-radius: 5px;
+		border: none;
+		padding-left: 10px;
 	}
 	#mainleft {
 		position: fixed;
@@ -256,8 +271,6 @@ html {overflow-y: scroll;}
 	#content {
 		min-height: 515px;
 		padding: 5px 15px 10px 35px;
-	}
-	#mission {
 	}
 	#brand {
 		float: left;
@@ -303,6 +316,9 @@ html {overflow-y: scroll;}
 	#footer a:hover, #links a:hover, .more:hover, #sidebar a:hover {
 		text-decoration: underline;
 	}
+}
+#mission {
+	margin-bottom: 10px;
 }
 #links li:nth-of-type(1) a { font-weight: bold; }
 #image img {
