@@ -7,43 +7,6 @@ app = Flask(__name__) #created app as instance of Flask
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com?charset=latin1'
 db = SQLAlchemy(app)
-class Messages(db.Model):
-    IDmessage = db.Column(db.Integer(), primary_key=True, nullable=False)
-    subject = db.Column(db.String(250),nullable=True)
-    name = db.Column(db.String(250),nullable=True)
-    email = db.Column(db.String(250),nullable=True)
-    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
-    mdate = db.Column(db.DateTime(),nullable=True)
-    message = db.Column(db.Text(),nullable=True)
-    last_rdate = db.Column(db.DateTime(),nullable=True)
-
-    def __init__(self, subject, name, email, notifyemail, mdate, message, last_rdate):
-        self.subject = subject
-        self.name = name
-        self.email = email
-        self.notifyemail = notifyemail
-        self.mdate = mdate
-        self.message = message
-        self.last_rdate = last_rdate
-
-class Replies(db.Model):
-    IDreply = db.Column(db.Integer(), primary_key=True, nullable=False)
-    IDmessage = db.Column(db.Integer(), nullable=True)
-    subject = db.Column(db.String(250),nullable=True)
-    name = db.Column(db.String(250),nullable=True)
-    email = db.Column(db.String(250),nullable=True)
-    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
-    message = db.Column(db.Text(),nullable=True)
-    rdate = db.Column(db.DateTime(),nullable=True)
-
-    def __init__(self, IDmessage, subject, name, email, notifyemail, message, rdate):
-        self.IDmessage = IDmessage
-        self.subject = subject
-        self.name = name
-        self.email = email
-        self.notifyemail = notifyemail
-        self.message = message
-        self.rdate = rdate
 
 class Products(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
@@ -65,11 +28,6 @@ class Products(db.Model):
         self.forms_can = forms_can
         self.category = category
 
-def get_sql(search_string):
-	texts = Products.query.filter(Products.id==1800).order_by(None).all()
-	for text in texts:
-		print text.text
-
 class SearchError(Exception):
 	def __init__(self):
 		pass
@@ -84,7 +42,6 @@ def searching(search_string):
 		found_titles = []
 		found_sites = []
 		products = []
-#		messages = []
 		while True:
 			try_index = found_index+1
 			found_index = search_string.find(' ',try_index)
@@ -96,11 +53,6 @@ def searching(search_string):
 				break
 		for search_item in search_items:
 			products += Products.query.filter(or_(Products.text.like('%'+search_item+'%'),Products.title.like('%'+search_item+'%'),Products.directions.like('%'+search_item+'%'))).all()
-#			messages += Messages.query.filter(Messages.message.like('%'+search_item+'%')).all()
-#			messages += Replies.query.filter(Replies.message.like('%'+search_item+'%')).all()
-#		for message in messages:
-#			message.text = message.message
-#			html += message.text + '<br><br>'
 		for product in products:
 			while not product.text.find('<') == -1:
 				product.text = product.text[:product.text.find('<')] + ' ' + product.text[product.text.find('>')+1:]
@@ -199,6 +151,3 @@ def searching(search_string):
 	except SearchError:
 		html = 'There were no pages that matched your search.'
 	return html
-
-#get_sql(str(raw_input('Search term: ')))
-#searching(str(raw_input('Search term: ')))
