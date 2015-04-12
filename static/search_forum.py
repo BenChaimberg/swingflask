@@ -2,6 +2,10 @@ from flask import Flask
 import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import update, or_
+import inspect
+
+def line_no():
+    return inspect.currentframe().f_back.f_lineno
 
 app = Flask(__name__) #created app as instance of Flask
 app.config.from_object(__name__)
@@ -50,7 +54,7 @@ class SearchError(Exception):
 	def __init__(self):
 		pass
 
-def searching(search_string):
+def forum_search(search_string):
 	try:
 		search_string = search_string.lower()
 		search_items = []
@@ -60,6 +64,7 @@ def searching(search_string):
 		found_titles = []
 		found_sites = []
 		messages = []
+		replies = []
 		while True:
 			try_index = found_index+1
 			found_index = search_string.find(' ',try_index)
@@ -70,43 +75,18 @@ def searching(search_string):
 				search_items.append(search_string)
 				break
 		for search_item in search_items:
-			replies = Replies.query.filter(Replies.message.like('%'+search_item+'%')).all()
-			for reply in replies:
+			for reply in Replies.query.filter(Replies.message.like('%'+search_item+'%')).all():
 				if not Messages.query.filter(Messages.IDmessage == reply.IDmessage).first() in messages:
-					messages += Messages.query.filter(Messages.IDmessage == reply.IDmessage).all()
+					message = Messages.query.filter(Messages.IDmessage == reply.IDmessage).first()
+					messages.append(message)
 			messages_temp = Messages.query.filter(Messages.message.like('%'+search_item+'%')).all()
 			for message in messages_temp:
 				if not message in messages:
-					messages += message
+					messages.append(message)
 			for message in messages:
-				replies = Replies.query.filter(Replies.message.like('%'+search_item+'%')).filter(Replies.IDmessage == message.IDmessage).all()
-				for reply in replies:
-					message.message += reply.message
-			found_index = -1
-			found_site = [message,[]]
-			found_titles.append(found_site)
-			for search_item in search_items:
-				while True:
-					try_index = found_index+1
-					found_index = message.subject.lower().find(search_item,try_index)
-					if not found_index < 0:
-						found_titles[-1][1].append(found_index)
-					else:
-						break
-			found_titles[-1][1].sort()
-			if found_titles[-1][1] == []:
-				found_titles.pop()
-		if not found_titles == []:
-			sorted_titles = [found_titles.pop()]
-			for titled in found_titles:
-				for sorted in sorted_titles:
-					if len(sorted[1]) < len(titled[1]):
-						sorted_titles.insert(sorted_titles.index(sorted),titled)
-						break
-					if sorted_titles.index(sorted) == len(sorted_titles) - 1:
-						sorted_titles.append(titled)
-						break
-		else: sorted_title = [[0,0]]
+				replies_temp = Replies.query.filter(Replies.message.like('%'+search_item+'%')).filter(Replies.IDmessage == message.IDmessage).all()
+				for reply in replies_temp:
+ 					replies.append(reply)
 		for message in messages:
 			found_site = [message,[]]
 			found_sites.append(found_site)
@@ -114,7 +94,7 @@ def searching(search_string):
 				found_index = -1
 				while True:
 					try_index = found_index+1
-					found_index = message.message.lower().find(search_item,try_index)
+					found_index = message.message.lower().find(search_string,try_index)
 					if not found_index < 0:
 						space_index = len(message.message)-found_index
 						space_index2 = found_index
@@ -123,26 +103,41 @@ def searching(search_string):
 						if space_index < 0:
 							space_index = len(message.message)
 						for i in range(0,4):
-							if product.text.find(' ',space_index2+1) > 0:
-								space_index2 = product.text.find(' ',space_index2+1)
+							if message.message.find(' ',space_index2+1) > 0:
+								space_index2 = message.message.find(' ',space_index2+1)
 						found_sites[-1][1].append(message.message[len(message.message)-space_index:found_index]+'<b>'+message.message[found_index:found_index+len(search_item)]+'</b>'+message.message[found_index+len(search_item):space_index2])
 					else:
+						for reply in replies:
+							if not reply.IDmessage == message.IDmessage:
+								continue
+							found_index = -1
+							while True:
+								try_index = found_index+1
+								found_index = reply.message.lower().find(search_string,try_index)
+								if not found_index < 0:
+									space_index = len(reply.message)-found_index
+									space_index2 = found_index
+									for i in range(0,3):
+										space_index = reply.message[::-1].find(' ',space_index+1)
+									if space_index < 0:
+										space_index = len(reply.message)
+									for i in range(0,4):
+										if reply.message.find(' ',space_index2+1) > 0:
+											space_index2 = reply.message.find(' ',space_index2+1)
+									found_sites[-1][1].append(reply.message[len(reply.message)-space_index:found_index]+'<b>'+reply.message[found_index:found_index+len(search_item)]+'</b>'+reply.message[found_index+len(search_item):space_index2])
+								else:
+									break
 						break
 				found_index = -1
 			found_sites[-1][1].sort()
 			if found_sites[-1][1] == []:
 				found_sites.pop()
-		found_sorted = [found_sites.pop()]
+		if not found_sites == []:
+			found_sorted = [found_sites.pop()]
+		else: raise SearchError
 		for found_site in found_sites:
 			for sorted in found_sorted:
-				site_title_len = 0
-				sort_title_len = 0
-				for sorted_title in sorted_titles:
-					if found_site[0] == sorted_title[0]:
-						site_title_len = len(sorted_title[1])
-					if sorted[0] == sorted_title[0]:
-						sort_title_len = len(sorted_title[1])
-				if (len(sorted[1]) < len(found_site[1]) and sort_title_len <= site_title_len) or sort_title_len < site_title_len:
+				if len(sorted[1]) < len(found_site[1]):
 					found_sorted.insert(found_sorted.index(sorted),found_site)
 					break
 				if found_sorted.index(sorted) == len(found_sorted) - 1:
@@ -150,7 +145,7 @@ def searching(search_string):
 					break
 		html += '<ul>'
 		for final in found_sorted:
-			html += '<li><h2><a href="/product/' + str(final[0].id) + '">' + final[0].title + '</a></h2>'
+			html += '<li><h2><a href="/message/' + str(final[0].IDmessage) + '">' + final[0].subject + '</a></h2>'
 			for text in final[1]:
 				html += text + '&hellip;'
 			html += '</li>'
@@ -158,5 +153,3 @@ def searching(search_string):
 	except SearchError:
 		html = 'There were no pages that matched your search.'
 	return html
-
-print searching(str(raw_input('Search term: ')))

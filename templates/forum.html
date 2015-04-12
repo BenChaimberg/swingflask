@@ -71,6 +71,9 @@
 			#pages a {
 				padding: 0 5px;
 			}
+			#search-form {
+				text-align: center;
+			}
 		</style>
 		<script>
 			$(document).ready(function(){
@@ -81,11 +84,22 @@
 						$('#pages').html($('#pages').html()+'<option>'+i+'</option>');
 					}
 				}
+				$("#search-form").keyup(function(){
+					if ($("#forum_search").val()) {
+						$(this).prop('action',"{{ url_for('.forumsearch',search_string='') }}"+$("#forum_search").val().replace(/ /g,'+'));
+					}
+				});
 			});
 		</script>
 {% endblock %}
 {% block categorytext %}Forum{% endblock %}
 {% block content %}
+		<form id="search-form" method="POST">
+			<div style="float:left;width:100%;">
+				<input id="forum_search" type="text" style="float:none;width:30%;">
+				<input id="submit" type="submit" value="Search Forum">
+		    </div>
+		</form>
 		<table id="write">
 			<tr>
 				<td>Subject</td>
@@ -120,8 +134,9 @@
 					<li>{{ error | safe }}</li>
 				{% endfor %}
 			{% endfor %}
+				</ul>
 			{% for field in message_form %}
-				</ul><div>
+				<div>
 				{% if loop.index == 1 %}
 				{% else %}
 					{% if field.type == 'RecaptchaField' %}

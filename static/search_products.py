@@ -32,7 +32,7 @@ class SearchError(Exception):
 	def __init__(self):
 		pass
 
-def searching(search_string):
+def products_search(search_string):
 	try:
 		search_string = search_string.lower()
 		search_items = []
@@ -58,31 +58,6 @@ def searching(search_string):
 				product.text = product.text[:product.text.find('<')] + ' ' + product.text[product.text.find('>')+1:]
 			while not product.directions.find('<') == -1:
 				product.directions = product.directions[:product.directions.find('<')] + ' ' + product.directions[product.directions.find('>')+1:]
-			found_index = -1
-			found_site = [product,[]]
-			found_titles.append(found_site)
-			for search_item in search_items:
-				while True:
-					try_index = found_index+1
-					found_index = product.title.lower().find(search_item,try_index)
-					if not found_index < 0:
-						found_titles[-1][1].append(found_index)
-					else:
-						break
-			found_titles[-1][1].sort()
-			if found_titles[-1][1] == []:
-				found_titles.pop()
-		if not found_titles == []:
-			sorted_titles = [found_titles.pop()]
-		else: raise SearchError
-		for titled in found_titles:
-			for sorted in sorted_titles:
-				if len(sorted[1]) < len(titled[1]):
-					sorted_titles.insert(sorted_titles.index(sorted),titled)
-					break
-				if sorted_titles.index(sorted) == len(sorted_titles) - 1:
-					sorted_titles.append(titled)
-					break
 		for product in products:
 			found_site = [product,[]]
 			found_sites.append(found_site)
@@ -125,17 +100,12 @@ def searching(search_string):
 			found_sites[-1][1].sort()
 			if found_sites[-1][1] == []:
 				found_sites.pop()
-		found_sorted = [found_sites.pop()]
+		if not found_sites == []:
+			found_sorted = [found_sites.pop()]
+		else: raise SearchError
 		for found_site in found_sites:
 			for sorted in found_sorted:
-				site_title_len = 0
-				sort_title_len = 0
-				for sorted_title in sorted_titles:
-					if found_site[0] == sorted_title[0]:
-						site_title_len = len(sorted_title[1])
-					if sorted[0] == sorted_title[0]:
-						sort_title_len = len(sorted_title[1])
-				if (len(sorted[1]) < len(found_site[1]) and sort_title_len <= site_title_len) or sort_title_len < site_title_len:
+				if len(sorted[1]) < len(found_site[1]):
 					found_sorted.insert(found_sorted.index(sorted),found_site)
 					break
 				if found_sorted.index(sorted) == len(found_sorted) - 1:

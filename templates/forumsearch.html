@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Swing Paints - Forum Search{% endblock %}
+{% block categorytext %}Forum Search Results{% endblock %}
+{% block head %}
+{{ super() }}
+		<script>
+			$(document).ready(function(){
+				$("#search-form").keyup(function(){
+					if ($("#forum_search").val()) {
+						$(this).prop('action',"{{ url_for('.forumsearch',search_string='') }}"+$("#forum_search").val().replace(/ /g,'+'));
+					}
+				});
+			});
+		</script>
+{% endblock %}
+{% block content %}
+<div style="text-align:center;width:100%;">
+	<form id="search-form" method="POST">
+		<input id="forum_search" type="text" style="float:none;width:30%;">
+		<input id="submit" type="submit" value="Search Forum">
+    </form>
+</div>
+<div>
+{{ searchitems | safe }}
+</div>
+<div style="text-align:center;"><a id="forum-back" href="/forum/1">[ forum &#8592; ]</a></div>
+{% endblock %}

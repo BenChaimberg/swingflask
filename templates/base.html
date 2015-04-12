@@ -48,9 +48,8 @@
 						<div id="logotext">finishing the easy way since 1965</div>
 					</div>
 					<div id="div-search">
-						<form method="POST" action="{{ url_for('.search',search_string='') }}">
-						{{ form.hidden_tag() }}
-							{{ form.search }}
+						<form method="POST">
+							<input id="search" type="text"></input>
 							<input id="submit" type="submit" value="Search"></input>
 						</form>
 					</div>

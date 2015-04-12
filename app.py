@@ -3,16 +3,12 @@ from time import gmtime, strftime
 from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
-from flask_wtf import Form, validators, RecaptchaField
-import wtforms
-from wtforms import TextField, PasswordField, SelectField, RadioField, TextAreaField
 from werkzeug.routing import BaseConverter
-import pymysql
-from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import update
 import feedparser
-from static import search_texts
-from static.search_texts import searching
+from static.search_products import products_search
+from static.search_forum import forum_search
+from forms import *
+from sql_classes import *
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -39,9 +35,8 @@ app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 499
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 28799
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 14
 
 class User(UserMixin):
     def __init__(self, id):
@@ -55,210 +50,11 @@ def load_user(userid):
 def unauthorized():
 	abort(401)
 
-class Infotable(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    size = db.Column(db.Text(convert_unicode=True),nullable=False)
-    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
-
-    def __init__(self, productid, size, quantity):
-        self.productid = productid
-        self.size = size
-        self.quantity = quantity
-
-class Infolist(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
-
-    def __init__(self, productid, infolist):
-        self.productid = productid
-        self.infolist = infolist
-
-class Categories(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    category = db.Column(db.Text(), nullable=False)
-    name = db.Column(db.Text(), nullable=False)
-
-    def __init__(self, category, name):
-        self.category = category
-        self.name = name
-
-class Brands(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    brand = db.Column(db.Text(), nullable=False)
-    name = db.Column(db.Text(), nullable=False)
-
-    def __init__(self, brand, name):
-        self.brand = brand
-        self.name = name
-
-class Products(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    title = db.Column(db.String(250),nullable=False)
-    demo = db.Column(db.String(250),nullable=True)
-    text = db.Column(db.Text(),nullable=False)
-    directions = db.Column(db.Text(),nullable=True)
-    forms_us = db.Column(db.Text(),nullable=True)
-    forms_can = db.Column(db.Text(),nullable=True)
-    category = db.Column(db.Text(),nullable=False)
-    brand = db.Column(db.Text(),nullable=True)
-
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
-        self.id = id
-        self.title = title
-        self.demo = demo
-        self.text = text
-        self.directions = directions
-        self.forms_us = forms_us
-        self.forms_can = forms_can
-        self.category = category
-        self.brand = brand
-
-class Frenchinfotable(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    size = db.Column(db.Text(convert_unicode=True),nullable=False)
-    quantity = db.Column(db.Text(convert_unicode=True),nullable=False)
-
-    def __init__(self, productid, size, quantity):
-        self.productid = productid
-        self.size = size
-        self.quantity = quantity
-
-class Frenchinfolist(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    productid = db.Column(db.Integer(), nullable=False)
-    infolist = db.Column(db.Text(convert_unicode=True),nullable=True)
-
-    def __init__(self, productid, infolist):
-        self.productid = productid
-        self.infolist = infolist
-
-class Frenchcategories(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    category = db.Column(db.Text(), nullable=False)
-    name = db.Column(db.Text(), nullable=False)
-
-    def __init__(self, category, name):
-        self.category = category
-        self.name = name
-
-class Frenchproducts(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    title = db.Column(db.String(250),nullable=False)
-    demo = db.Column(db.String(250),nullable=True)
-    text = db.Column(db.Text(),nullable=False)
-    directions = db.Column(db.Text(),nullable=True)
-    forms_us = db.Column(db.Text(),nullable=True)
-    forms_can = db.Column(db.Text(),nullable=True)
-    category = db.Column(db.Text(),nullable=False)
-    brand = db.Column(db.Text(),nullable=False)
-
-    def __init__(self, id, title, demo, text, directions, forms_us, forms_can, category, brand):
-        self.id = id
-        self.title = title
-        self.demo = demo
-        self.text = text
-        self.directions = directions
-        self.forms_us = forms_us
-        self.forms_can = forms_can
-        self.category = category
-        self.brand = brand
-
-class SearchForm(Form):
-    search = TextField("", [wtforms.validators.Required('Please enter a search query')])
-
-class LoginForm(Form):
-    username = TextField("Username:", [wtforms.validators.Required('Please enter your username')])
-    password = PasswordField("Password:", [wtforms.validators.Required('Please enter your password')])
-
-class BrochureForm(Form):
-    name = TextField("Name", [wtforms.validators.Required('Please enter your name')])
-    email = TextField("E-mail", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
-    address = TextField("Address", [wtforms.validators.Required('Please enter your address')])
-    city = TextField("City", [wtforms.validators.Required('Please enter your city')])
-    stateprov = SelectField("State/Prov", [wtforms.validators.Required('Please enter your state or province')], choices=[('',''),('Alberta','Alberta'),('British Columbia','British Columbia'),('Manitoba','Manitoba'),('New Brunswick','New Brunswick'),('Newfoundland and Labrador','Newfoundland and Labrador'),('Northwest Territories','Northwest Territories'),('Nova Scotia','Nova Scotia'),('Nunavut','Nunavut'),('Ontario','Ontario'),('Prince Edward Island','Prince Edward Island'),('Quebec','Quebec'),('Saskatchewan','Saskatchewan'),('Yukon Territory','Yukon Territory'),('_',''),('Alabama','Alabama'),('Alaska','Alaska'),('Arizona','Arizona'),('Arkansas','Arkansas'),('California','California'),('Colorado','Colorado'),('Connecticut','Connecticut'),('Delaware','Delaware'),('Florida','Florida'),('Georgia','Georgia'),('Hawaii','Hawaii'),('Idaho','Idaho'),('Illinois','Illinois'),('Indiana','Indiana'),('Iowa','Iowa'),('Kansas','Kansas'),('Kentucky','Kentucky'),('Louisiana','Louisiana'),('Maine','Maine'),('Maryland','Maryland'),('Massachusetts','Massachusetts'),('Michigan','Michigan'),('Minnesota','Minnesota'),('Mississippi','Mississippi'),('Missouri','Missouri'),('Montana','Montana'),('Nebraska','Nebraska'),('Nevada','Nevada'),('New Hampshire','New Hampshire'),('New Jersey','New Jersey'),('New Mexico','New Mexico'),('New York','New York'),('North Carolina','North Carolina'),('North Dakota','North Dakota'),('Ohio','Ohio'),('Oklahoma','Oklahoma'),('Oregon','Oregon'),('Pennsylvania','Pennsylvania'),('Rhode Island','Rhode Island'),('South Carolina','South Carolina'),('South Dakota','South Dakota'),('Tennessee','Tennessee'),('Texas','Texas'),('Utah','Utah'),('Vermont','Vermont'),('Virginia','Virginia'),('Washington','Washington'),('West Virginia','West Virginia'),('Wisconsin','Wisconsin'),('Wyoming','Wyoming')])
-    zipcode = TextField("Zip/Postal Code", [wtforms.validators.Required('Please enter your zip or postal code')])
-    country = SelectField("Country", [wtforms.validators.Required('Please enter your country')], choices=[('',''),('Afghanistan','Afghanistan'),('Aland Islands','Aland Islands'),('Albania','Albania'),('Algeria','Algeria'),('American Samoa','American Samoa'),('Andorra','Andorra'),('Angola','Angola'),('Anguilla','Anguilla'),('Antarctica','Antarctica'),('Antigua And Barbuda','Antigua And Barbuda'),('Argentina','Argentina'),('Armenia','Armenia'),('Aruba','Aruba'),('Australia','Australia'),('Austria','Austria'),('Azerbaijan','Azerbaijan'),('Bahamas','Bahamas'),('Bahrain','Bahrain'),('Bangladesh','Bangladesh'),('Barbados','Barbados'),('Belarus','Belarus'),('Belgium','Belgium'),('Belize','Belize'),('Benin','Benin'),('Bermuda','Bermuda'),('Bhutan','Bhutan'),('Bolivia','Bolivia'),('Bosnia And Herzegovina','Bosnia And Herzegovina'),('Botswana','Botswana'),('Bouvet Island','Bouvet Island'),('Brazil','Brazil'),('British Indian Ocean Territory','British Indian Ocean Territory'),('Brunei Darussalam','Brunei Darussalam'),('Bulgaria','Bulgaria'),('Burkina Faso','Burkina Faso'),('Burundi','Burundi'),('Cambodia','Cambodia'),('Cameroon','Cameroon'),('Canada','Canada'),('Cape Verde','Cape Verde'),('Cayman Islands','Cayman Islands'),('Central African Republic','Central African Republic'),('Chad','Chad'),('Chile','Chile'),('China','China'),('Christmas Island','Christmas Island'),('Cocos (Keeling) Islands','Cocos (Keeling) Islands'),('Colombia','Colombia'),('Comoros','Comoros'),('Congo','Congo'),('Congo, The Democratic Republic Of The','Congo, The Democratic Republic Of The'),('Cook Islands','Cook Islands'),('Costa Rica','Costa Rica'),('Cote D\'ivoire','Cote D\'ivoire'),('Croatia','Croatia'),('Cuba','Cuba'),('Cyprus','Cyprus'),('Czech Republic','Czech Republic'),('Denmark','Denmark'),('Djibouti','Djibouti'),('Dominica','Dominica'),('Dominican Republic','Dominican Republic'),('Ecuador','Ecuador'),('Egypt','Egypt'),('El Salvador','El Salvador'),('Equatorial Guinea','Equatorial Guinea'),('Eritrea','Eritrea'),('Estonia','Estonia'),('Ethiopia','Ethiopia'),('Falkland Islands (Malvinas)','Falkland Islands (Malvinas)'),('Faroe Islands','Faroe Islands'),('Fiji','Fiji'),('Finland','Finland'),('France','France'),('French Guiana','French Guiana'),('French Polynesia','French Polynesia'),('French Southern Territories','French Southern Territories'),('Gabon','Gabon'),('Gambia','Gambia'),('Georgia','Georgia'),('Germany','Germany'),('Ghana','Ghana'),('Gibraltar','Gibraltar'),('Greece','Greece'),('Greenland','Greenland'),('Grenada','Grenada'),('Guadeloupe','Guadeloupe'),('Guam','Guam'),('Guatemala','Guatemala'),('Guernsey','Guernsey'),('Guinea','Guinea'),('Guinea-bissau','Guinea-bissau'),('Guyana','Guyana'),('Haiti','Haiti'),('Heard Island And Mcdonald Islands','Heard Island And Mcdonald Islands'),('Holy See (Vatican City State)','Holy See (Vatican City State)'),('Honduras','Honduras'),('Hong Kong','Hong Kong'),('Hungary','Hungary'),('Iceland','Iceland'),('India','India'),('Indonesia','Indonesia'),('Iran, Islamic Republic Of','Iran, Islamic Republic Of'),('Iraq','Iraq'),('Ireland','Ireland'),('Isle Of Man','Isle Of Man'),('Israel','Israel'),('Italy','Italy'),('Jamaica','Jamaica'),('Japan','Japan'),('Jersey','Jersey'),('Jordan','Jordan'),('Kazakhstan','Kazakhstan'),('Kenya','Kenya'),('Kiribati','Kiribati'),('Korea, Democratic People\'s Republic Of','Korea, Democratic People\'s Republic Of'),('Korea, Republic Of','Korea, Republic Of'),('Kuwait','Kuwait'),('Kyrgyzstan','Kyrgyzstan'),('Lao People\'s Democratic Republic','Lao People\'s Democratic Republic'),('Latvia','Latvia'),('Lebanon','Lebanon'),('Lesotho','Lesotho'),('Liberia','Liberia'),('Libyan Arab Jamahiriya','Libyan Arab Jamahiriya'),('Liechtenstein','Liechtenstein'),('Lithuania','Lithuania'),('Luxembourg','Luxembourg'),('Macao','Macao'),('Macedonia, The Former Yugoslav Republic Of','Macedonia, The Former Yugoslav Republic Of'),('Madagascar','Madagascar'),('Malawi','Malawi'),('Malaysia','Malaysia'),('Maldives','Maldives'),('Mali','Mali'),('Malta','Malta'),('Marshall Islands','Marshall Islands'),('Martinique','Martinique'),('Mauritania','Mauritania'),('Mauritius','Mauritius'),('Mayotte','Mayotte'),('Mexico','Mexico'),('Micronesia, Federated States Of','Micronesia, Federated States Of'),('Moldova, Republic Of','Moldova, Republic Of'),('Monaco','Monaco'),('Mongolia','Mongolia'),('Montenegro','Montenegro'),('Montserrat','Montserrat'),('Morocco','Morocco'),('Mozambique','Mozambique'),('Myanmar','Myanmar'),('Namibia','Namibia'),('Nauru','Nauru'),('Nepal','Nepal'),('Netherlands','Netherlands'),('Netherlands Antilles','Netherlands Antilles'),('New Caledonia','New Caledonia'),('New Zealand','New Zealand'),('Nicaragua','Nicaragua'),('Niger','Niger'),('Nigeria','Nigeria'),('Niue','Niue'),('Norfolk Island','Norfolk Island'),('Northern Mariana Islands','Northern Mariana Islands'),('Norway','Norway'),('Oman','Oman'),('Pakistan','Pakistan'),('Palau','Palau'),('Palestinian Territory, Occupied','Palestinian Territory, Occupied'),('Panama','Panama'),('Papua New Guinea','Papua New Guinea'),('Paraguay','Paraguay'),('Peru','Peru'),('Philippines','Philippines'),('Pitcairn','Pitcairn'),('Poland','Poland'),('Portugal','Portugal'),('Puerto Rico','Puerto Rico'),('Qatar','Qatar'),('Reunion','Reunion'),('Romania','Romania'),('Russian Federation','Russian Federation'),('Rwanda','Rwanda'),('Saint Helena','Saint Helena'),('Saint Kitts And Nevis','Saint Kitts And Nevis'),('Saint Lucia','Saint Lucia'),('Saint Pierre And Miquelon','Saint Pierre And Miquelon'),('Saint Vincent And The Grenadines','Saint Vincent And The Grenadines'),('Samoa','Samoa'),('San Marino','San Marino'),('Sao Tome And Principe','Sao Tome And Principe'),('Saudi Arabia','Saudi Arabia'),('Senegal','Senegal'),('Serbia','Serbia'),('Seychelles','Seychelles'),('Sierra Leone','Sierra Leone'),('Singapore','Singapore'),('Slovakia','Slovakia'),('Slovenia','Slovenia'),('Solomon Islands','Solomon Islands'),('Somalia','Somalia'),('South Africa','South Africa'),('South Georgia And The South Sandwich Islands','South Georgia And The South Sandwich Islands'),('Spain','Spain'),('Sri Lanka','Sri Lanka'),('Sudan','Sudan'),('Suriname','Suriname'),('Svalbard And Jan Mayen','Svalbard And Jan Mayen'),('Swaziland','Swaziland'),('Sweden','Sweden'),('Switzerland','Switzerland'),('Syrian Arab Republic','Syrian Arab Republic'),('Taiwan, Province Of China','Taiwan, Province Of China'),('Tajikistan','Tajikistan'),('Tanzania, United Republic Of','Tanzania, United Republic Of'),('Thailand','Thailand'),('Timor-leste','Timor-leste'),('Togo','Togo'),('Tokelau','Tokelau'),('Tonga','Tonga'),('Trinidad And Tobago','Trinidad And Tobago'),('Tunisia','Tunisia'),('Turkey','Turkey'),('Turkmenistan','Turkmenistan'),('Turks And Caicos Islands','Turks And Caicos Islands'),('Tuvalu','Tuvalu'),('Uganda','Uganda'),('Ukraine','Ukraine'),('United Arab Emirates','United Arab Emirates'),('United Kingdom','United Kingdom'),('United States','United States'),('United States Minor Outlying Islands','United States Minor Outlying Islands'),('Uruguay','Uruguay'),('Uzbekistan','Uzbekistan'),('Vanuatu','Vanuatu'),('Venezuela','Venezuela'),('Viet Nam','Viet Nam'),('Virgin Islands, British','Virgin Islands, British'),('Virgin Islands, U.S.','Virgin Islands, U.S.'),('Wallis And Futuna','Wallis And Futuna'),('Western Sahara','Western Sahara'),('Yemen','Yemen'),('Zambia','Zambia'),('Zimbabwe','Zimbabwe')])
-
-class FrenchBrochureForm(Form):
-    name = TextField("Nom", [wtforms.validators.Required('Veuillez entrer votre nom')])
-    email = TextField("Couriel", [wtforms.validators.Required('Veuillez entrer votre couriel'), wtforms.validators.Email()])
-    address = TextField("Adresse", [wtforms.validators.Required('Veuillez entrer votre adresse')])
-    city = TextField("Ville", [wtforms.validators.Required('Veuillez entrer votre ville')])
-    stateprov = SelectField("&#xc9;tat/Province", [wtforms.validators.Required('Veuillez entrer votre &#xe9;tat ou province')], choices=[('',''),('Alberta','Alberta'),('British Columbia','British Columbia'),('Manitoba','Manitoba'),('New Brunswick','New Brunswick'),('Newfoundland and Labrador','Newfoundland and Labrador'),('Northwest Territories','Northwest Territories'),('Nova Scotia','Nova Scotia'),('Nunavut','Nunavut'),('Ontario','Ontario'),('Prince Edward Island','Prince Edward Island'),('Quebec','Quebec'),('Saskatchewan','Saskatchewan'),('Yukon Territory','Yukon Territory'),('_',''),('Alabama','Alabama'),('Alaska','Alaska'),('Arizona','Arizona'),('Arkansas','Arkansas'),('California','California'),('Colorado','Colorado'),('Connecticut','Connecticut'),('Delaware','Delaware'),('Florida','Florida'),('Georgia','Georgia'),('Hawaii','Hawaii'),('Idaho','Idaho'),('Illinois','Illinois'),('Indiana','Indiana'),('Iowa','Iowa'),('Kansas','Kansas'),('Kentucky','Kentucky'),('Louisiana','Louisiana'),('Maine','Maine'),('Maryland','Maryland'),('Massachusetts','Massachusetts'),('Michigan','Michigan'),('Minnesota','Minnesota'),('Mississippi','Mississippi'),('Missouri','Missouri'),('Montana','Montana'),('Nebraska','Nebraska'),('Nevada','Nevada'),('New Hampshire','New Hampshire'),('New Jersey','New Jersey'),('New Mexico','New Mexico'),('New York','New York'),('North Carolina','North Carolina'),('North Dakota','North Dakota'),('Ohio','Ohio'),('Oklahoma','Oklahoma'),('Oregon','Oregon'),('Pennsylvania','Pennsylvania'),('Rhode Island','Rhode Island'),('South Carolina','South Carolina'),('South Dakota','South Dakota'),('Tennessee','Tennessee'),('Texas','Texas'),('Utah','Utah'),('Vermont','Vermont'),('Virginia','Virginia'),('Washington','Washington'),('West Virginia','West Virginia'),('Wisconsin','Wisconsin'),('Wyoming','Wyoming')])
-    zipcode = TextField("Zip/Code Postal", [wtforms.validators.Required('Veuillez entrer votre code postal')])
-    country = SelectField("Pays", [wtforms.validators.Required('Veuillez entrer votre pays')], choices=[('',''),('Afghanistan','Afghanistan'),('Aland Islands','Aland Islands'),('Albania','Albania'),('Algeria','Algeria'),('American Samoa','American Samoa'),('Andorra','Andorra'),('Angola','Angola'),('Anguilla','Anguilla'),('Antarctica','Antarctica'),('Antigua And Barbuda','Antigua And Barbuda'),('Argentina','Argentina'),('Armenia','Armenia'),('Aruba','Aruba'),('Australia','Australia'),('Austria','Austria'),('Azerbaijan','Azerbaijan'),('Bahamas','Bahamas'),('Bahrain','Bahrain'),('Bangladesh','Bangladesh'),('Barbados','Barbados'),('Belarus','Belarus'),('Belgium','Belgium'),('Belize','Belize'),('Benin','Benin'),('Bermuda','Bermuda'),('Bhutan','Bhutan'),('Bolivia','Bolivia'),('Bosnia And Herzegovina','Bosnia And Herzegovina'),('Botswana','Botswana'),('Bouvet Island','Bouvet Island'),('Brazil','Brazil'),('British Indian Ocean Territory','British Indian Ocean Territory'),('Brunei Darussalam','Brunei Darussalam'),('Bulgaria','Bulgaria'),('Burkina Faso','Burkina Faso'),('Burundi','Burundi'),('Cambodia','Cambodia'),('Cameroon','Cameroon'),('Canada','Canada'),('Cape Verde','Cape Verde'),('Cayman Islands','Cayman Islands'),('Central African Republic','Central African Republic'),('Chad','Chad'),('Chile','Chile'),('China','China'),('Christmas Island','Christmas Island'),('Cocos (Keeling) Islands','Cocos (Keeling) Islands'),('Colombia','Colombia'),('Comoros','Comoros'),('Congo','Congo'),('Congo, The Democratic Republic Of The','Congo, The Democratic Republic Of The'),('Cook Islands','Cook Islands'),('Costa Rica','Costa Rica'),('Cote D\'ivoire','Cote D\'ivoire'),('Croatia','Croatia'),('Cuba','Cuba'),('Cyprus','Cyprus'),('Czech Republic','Czech Republic'),('Denmark','Denmark'),('Djibouti','Djibouti'),('Dominica','Dominica'),('Dominican Republic','Dominican Republic'),('Ecuador','Ecuador'),('Egypt','Egypt'),('El Salvador','El Salvador'),('Equatorial Guinea','Equatorial Guinea'),('Eritrea','Eritrea'),('Estonia','Estonia'),('Ethiopia','Ethiopia'),('Falkland Islands (Malvinas)','Falkland Islands (Malvinas)'),('Faroe Islands','Faroe Islands'),('Fiji','Fiji'),('Finland','Finland'),('France','France'),('French Guiana','French Guiana'),('French Polynesia','French Polynesia'),('French Southern Territories','French Southern Territories'),('Gabon','Gabon'),('Gambia','Gambia'),('Georgia','Georgia'),('Germany','Germany'),('Ghana','Ghana'),('Gibraltar','Gibraltar'),('Greece','Greece'),('Greenland','Greenland'),('Grenada','Grenada'),('Guadeloupe','Guadeloupe'),('Guam','Guam'),('Guatemala','Guatemala'),('Guernsey','Guernsey'),('Guinea','Guinea'),('Guinea-bissau','Guinea-bissau'),('Guyana','Guyana'),('Haiti','Haiti'),('Heard Island And Mcdonald Islands','Heard Island And Mcdonald Islands'),('Holy See (Vatican City State)','Holy See (Vatican City State)'),('Honduras','Honduras'),('Hong Kong','Hong Kong'),('Hungary','Hungary'),('Iceland','Iceland'),('India','India'),('Indonesia','Indonesia'),('Iran, Islamic Republic Of','Iran, Islamic Republic Of'),('Iraq','Iraq'),('Ireland','Ireland'),('Isle Of Man','Isle Of Man'),('Israel','Israel'),('Italy','Italy'),('Jamaica','Jamaica'),('Japan','Japan'),('Jersey','Jersey'),('Jordan','Jordan'),('Kazakhstan','Kazakhstan'),('Kenya','Kenya'),('Kiribati','Kiribati'),('Korea, Democratic People\'s Republic Of','Korea, Democratic People\'s Republic Of'),('Korea, Republic Of','Korea, Republic Of'),('Kuwait','Kuwait'),('Kyrgyzstan','Kyrgyzstan'),('Lao People\'s Democratic Republic','Lao People\'s Democratic Republic'),('Latvia','Latvia'),('Lebanon','Lebanon'),('Lesotho','Lesotho'),('Liberia','Liberia'),('Libyan Arab Jamahiriya','Libyan Arab Jamahiriya'),('Liechtenstein','Liechtenstein'),('Lithuania','Lithuania'),('Luxembourg','Luxembourg'),('Macao','Macao'),('Macedonia, The Former Yugoslav Republic Of','Macedonia, The Former Yugoslav Republic Of'),('Madagascar','Madagascar'),('Malawi','Malawi'),('Malaysia','Malaysia'),('Maldives','Maldives'),('Mali','Mali'),('Malta','Malta'),('Marshall Islands','Marshall Islands'),('Martinique','Martinique'),('Mauritania','Mauritania'),('Mauritius','Mauritius'),('Mayotte','Mayotte'),('Mexico','Mexico'),('Micronesia, Federated States Of','Micronesia, Federated States Of'),('Moldova, Republic Of','Moldova, Republic Of'),('Monaco','Monaco'),('Mongolia','Mongolia'),('Montenegro','Montenegro'),('Montserrat','Montserrat'),('Morocco','Morocco'),('Mozambique','Mozambique'),('Myanmar','Myanmar'),('Namibia','Namibia'),('Nauru','Nauru'),('Nepal','Nepal'),('Netherlands','Netherlands'),('Netherlands Antilles','Netherlands Antilles'),('New Caledonia','New Caledonia'),('New Zealand','New Zealand'),('Nicaragua','Nicaragua'),('Niger','Niger'),('Nigeria','Nigeria'),('Niue','Niue'),('Norfolk Island','Norfolk Island'),('Northern Mariana Islands','Northern Mariana Islands'),('Norway','Norway'),('Oman','Oman'),('Pakistan','Pakistan'),('Palau','Palau'),('Palestinian Territory, Occupied','Palestinian Territory, Occupied'),('Panama','Panama'),('Papua New Guinea','Papua New Guinea'),('Paraguay','Paraguay'),('Peru','Peru'),('Philippines','Philippines'),('Pitcairn','Pitcairn'),('Poland','Poland'),('Portugal','Portugal'),('Puerto Rico','Puerto Rico'),('Qatar','Qatar'),('Reunion','Reunion'),('Romania','Romania'),('Russian Federation','Russian Federation'),('Rwanda','Rwanda'),('Saint Helena','Saint Helena'),('Saint Kitts And Nevis','Saint Kitts And Nevis'),('Saint Lucia','Saint Lucia'),('Saint Pierre And Miquelon','Saint Pierre And Miquelon'),('Saint Vincent And The Grenadines','Saint Vincent And The Grenadines'),('Samoa','Samoa'),('San Marino','San Marino'),('Sao Tome And Principe','Sao Tome And Principe'),('Saudi Arabia','Saudi Arabia'),('Senegal','Senegal'),('Serbia','Serbia'),('Seychelles','Seychelles'),('Sierra Leone','Sierra Leone'),('Singapore','Singapore'),('Slovakia','Slovakia'),('Slovenia','Slovenia'),('Solomon Islands','Solomon Islands'),('Somalia','Somalia'),('South Africa','South Africa'),('South Georgia And The South Sandwich Islands','South Georgia And The South Sandwich Islands'),('Spain','Spain'),('Sri Lanka','Sri Lanka'),('Sudan','Sudan'),('Suriname','Suriname'),('Svalbard And Jan Mayen','Svalbard And Jan Mayen'),('Swaziland','Swaziland'),('Sweden','Sweden'),('Switzerland','Switzerland'),('Syrian Arab Republic','Syrian Arab Republic'),('Taiwan, Province Of China','Taiwan, Province Of China'),('Tajikistan','Tajikistan'),('Tanzania, United Republic Of','Tanzania, United Republic Of'),('Thailand','Thailand'),('Timor-leste','Timor-leste'),('Togo','Togo'),('Tokelau','Tokelau'),('Tonga','Tonga'),('Trinidad And Tobago','Trinidad And Tobago'),('Tunisia','Tunisia'),('Turkey','Turkey'),('Turkmenistan','Turkmenistan'),('Turks And Caicos Islands','Turks And Caicos Islands'),('Tuvalu','Tuvalu'),('Uganda','Uganda'),('Ukraine','Ukraine'),('United Arab Emirates','United Arab Emirates'),('United Kingdom','United Kingdom'),('United States','United States'),('United States Minor Outlying Islands','United States Minor Outlying Islands'),('Uruguay','Uruguay'),('Uzbekistan','Uzbekistan'),('Vanuatu','Vanuatu'),('Venezuela','Venezuela'),('Viet Nam','Viet Nam'),('Virgin Islands, British','Virgin Islands, British'),('Virgin Islands, U.S.','Virgin Islands, U.S.'),('Wallis And Futuna','Wallis And Futuna'),('Western Sahara','Western Sahara'),('Yemen','Yemen'),('Zambia','Zambia'),('Zimbabwe','Zimbabwe')])
-
-class ReferForm(Form):
-    visitorname = TextField("Your name", [wtforms.validators.Required('Please enter your name')])
-    visitoremail = TextField("Your email", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
-    friendname = TextField("Your friend's name", [wtforms.validators.Required('Please enter your friend&apos;s name')])
-    friendemail = TextField("Your friend's email", [wtforms.validators.Required('Please enter your friend&apos;s email'), wtforms.validators.Email()])
-
-class FrenchReferForm(Form):
-    visitorname = TextField("Votre nom", [wtforms.validators.Required('Veuillez entrer votre nom')])
-    visitoremail = TextField("Votre adresse de courriel", [wtforms.validators.Required('Veuillez entrer votre adresse de courriel'), wtforms.validators.Email()])
-    friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
-    friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
-
-class MessageForm(Form):
-    name = TextField("Name", [wtforms.validators.Required('Please enter your name')])
-    email = TextField("E-mail", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
-    subject = TextField("Subject", [wtforms.validators.Required('Please enter a subject')])
-    message = TextAreaField("Message", [wtforms.validators.Required('Please enter your message')])
-    notifyemail = RadioField('Do you want notification of a response to your message?', choices=[('True','Yes'),('False','No')])
-    recaptcha = RecaptchaField()
-
-class Messages(db.Model):
-    IDmessage = db.Column(db.Integer(), primary_key=True, nullable=False)
-    subject = db.Column(db.String(250),nullable=True)
-    name = db.Column(db.String(250),nullable=True)
-    email = db.Column(db.String(250),nullable=True)
-    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
-    mdate = db.Column(db.DateTime(),nullable=True)
-    message = db.Column(db.Text(),nullable=True)
-    last_rdate = db.Column(db.DateTime(),nullable=True)
-
-    def __init__(self, subject, name, email, notifyemail, mdate, message, last_rdate):
-        self.subject = subject
-        self.name = name
-        self.email = email
-        self.notifyemail = notifyemail
-        self.mdate = mdate
-        self.message = message
-        self.last_rdate = last_rdate
-
-class Replies(db.Model):
-    IDreply = db.Column(db.Integer(), primary_key=True, nullable=False)
-    IDmessage = db.Column(db.Integer(), nullable=True)
-    subject = db.Column(db.String(250),nullable=True)
-    name = db.Column(db.String(250),nullable=True)
-    email = db.Column(db.String(250),nullable=True)
-    notifyemail = db.Column(db.Enum('True','False'),nullable=True)
-    message = db.Column(db.Text(),nullable=True)
-    rdate = db.Column(db.DateTime(),nullable=True)
-
-    def __init__(self, IDmessage, subject, name, email, notifyemail, message, rdate):
-        self.IDmessage = IDmessage
-        self.subject = subject
-        self.name = name
-        self.email = email
-        self.notifyemail = notifyemail
-        self.message = message
-        self.rdate = rdate
-
 def generic_page(page,request,**kwargs):
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french':
 		page = 'french'+ page
 	page += '.html'
-	return render_template(page,form=form,**kwargs)
+	return render_template(page,**kwargs)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
@@ -296,17 +92,12 @@ def error(uid):
 @app.route('/login', methods=["GET", "POST"])
 def login():
 	login_form = LoginForm()
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if login_form.validate_on_submit():
 		if login_form.username.data == 'administrator' and login_form.password.data == 'supersecurepassword':
 			user = load_user(login_form.username.data)
 			login_user(user)
 			return redirect('/admin/')
-	return render_template("login.html", form=form,login_form=login_form)
+	return render_template("login.html",login_form=login_form)
 
 @app.route('/admin/')
 @fresh_login_required
@@ -342,7 +133,17 @@ def start():
 @app.route('/main', methods=('GET', 'POST'))
 def home():
 	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
-	return generic_page('main',request, feed=d['entries'][0]['link'])
+	return generic_page('main',request,feed=d['entries'][0]['link'])
+
+@app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
+def forumsearch(search_string):
+	while True:
+		plus = search_string.find('+')
+		if plus > 0:
+			search_string = search_string[:plus]+' '+search_string[plus+1:]
+		else: break
+	if request.query_string == 'french': return render_template('forumsearch.html')
+	else: return render_template('forumsearch.html',searchitems=forum_search(search_string))
 
 @app.route('/search/<search_string>', methods=('GET', 'POST'))
 def search(search_string):
@@ -351,13 +152,7 @@ def search(search_string):
 		if plus > 0:
 			search_string = search_string[:plus]+' '+search_string[plus+1:]
 		else: break
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
-	if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-	else: return render_template('search.html',searchitems=searching(search_item),form=form)
+	return render_template('search.html',searchitems=products_search(search_string))
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
@@ -399,8 +194,7 @@ def rightfinish():
 @app.route('/forum/<int:page>', methods=('GET', 'POST'))
 def forum(page=1):
 	message_form = MessageForm()
-	form = SearchForm()
-	if form.validate_on_submit():
+	if message_form.validate_on_submit():
 		new_message = Messages(form.subject.data,form.name.data,form.email.data,form.notifyemail.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()),form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 		db.session.add(new_message)
 		db.session.commit()
@@ -409,16 +203,11 @@ def forum(page=1):
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
 		message.date = time.strftime('%H:%M %m/%d/%Y',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('forum.html',messages=messages,message_form=message_form,form=form)
+	return render_template('forum.html',messages=messages,message_form=message_form)
 
 @app.route('/message/<int:message_id>', methods=('GET', 'POST'))
 def message(message_id):
 	message_form = MessageForm()
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if message_form.validate_on_submit():
 		last_reply = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.desc()).first()
 		new_reply = Replies(message_id,message_form.subject.data,message_form.name.data,message_form.email.data,message_form.notifyemail.data,message_form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
@@ -433,22 +222,17 @@ def message(message_id):
 		msg.sender = ('Swing Paints', 'info@swingpaints.com')
 		msg.subject = 'Swing Paints Forum Reply'
 		msg.html = 'Hello %s,<br />%s has posted a reply to your message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (last_reply.name,new_reply.name,new_reply.IDmessage,new_reply.rdate)
-#		mail.send(msg)
+		mail.send(msg)
 	message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
 	print message.mdate,message.last_rdate
 	message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.mdate),'%Y-%m-%d %H:%M:%S'))
 	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
 	for reply in replies:
 		reply.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(reply.rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('message.html',message=message,replies=replies,message_form=message_form,form=form)
+	return render_template('message.html',message=message,replies=replies,message_form=message_form)
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		refer_form = FrenchReferForm()
 		if refer_form.validate_on_submit():
@@ -463,8 +247,8 @@ def refer():
 			msg.subject = "Re: Une recommandation d'un ami - Decouvrez Peintures Swing!"
 			msg.html = "%s,<br />S'il vous pla&#xee;t pardonnez l'intrusion, mais je crois que j'ai trouv&#xe9; quelque chose que vous seriez int&#xe9;ress&#xe9;. Je regardais &#xe0; travers les pages du site Web de cette soci&#xe9;t&#xe9; assez cool de finition du bois, Peintures Swing, et la pens&#xe9;e de vous. Donc, c&#x27;est la raison de cette \"presque \" e-mail personnelle. Vous pouvez les trouver <a href='http://swingpaints.herokuapp.com/?french'>ici</a>." % (friendname)
 			mail.send(msg)
-			return render_template('frenchrefersuccess.html',form=form)
-		return render_template('frenchrefer.html', refer_form=refer_form,form=form)
+			return render_template('frenchrefersuccess.html')
+		return render_template('frenchrefer.html', refer_form=refer_form)
 	else: #if URL does not end with ?french
 		refer_form = ReferForm()
 		if refer_form.validate_on_submit():
@@ -479,16 +263,11 @@ def refer():
 			msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
 			msg.html = "%s,<br />Please forgive the intrusion but I think I found something that you'd be interested in. I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, and thought of you. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
 			mail.send(msg)
-			return render_template('refersuccess.html',form=form)
-		return render_template('refer.html', refer_form=refer_form,form=form)
+			return render_template('refersuccess.html')
+		return render_template('refer.html', refer_form=refer_form)
 
 @app.route('/brochure', methods=('GET', 'POST'))
 def brochure():
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	brochure_form = BrochureForm()
 	brochure_frenchform = FrenchBrochureForm()
 	if brochure_form.validate_on_submit() or brochure_frenchform.validate_on_submit():
@@ -509,66 +288,51 @@ def brochure():
 		msg.subject = "%s would like a free brochure!" % form.name.data
 		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (form.name.data,form.email.data,form.address.data,form.city.data,form.stateprov.data,form.zipcode.data,form.country.data)
 		mail.send(msg)
-		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html',form=form)
-		else: return render_template('brochuresuccess.html',form=form)
-	if request.args.get('lang') == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform,form=form)
-	else: return render_template('brochure.html', brochure_form=brochure_form,form=form)
+		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html')
+		else: return render_template('brochuresuccess.html')
+	if request.args.get('lang') == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform)
+	else: return render_template('brochure.html', brochure_form=brochure_form)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		product = Frenchproducts.query.filter_by(id=productid).first_or_404()
 		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
 		product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
 		category=Frenchcategories.query.filter_by(category=product.category).first().name
-		return render_template('frenchproduct.html',product=product,category=category,form=form)
+		return render_template('frenchproduct.html',product=product,category=category)
 	else: #if URL does not end with ?french
 		product = Products.query.filter_by(id=productid).first_or_404()
 		product.infolist = Infolist.query.filter_by(productid=productid).all()
 		product.infotable = Infotable.query.filter_by(productid=productid).all()
 		category=Categories.query.filter_by(category=product.category).first().name
-		return render_template('product.html',product=product,category=category,form=form)
+		return render_template('product.html',product=product,category=category)
 
 @app.route('/category/<string:categoryid>')
 def category(categoryid):
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
-		return render_template('frenchcategory.html', category=category,form=form)
+		return render_template('frenchcategory.html', category=category)
 	else:
 		category = Categories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
-		return render_template('category.html', category=category,form=form)
+		return render_template('category.html', category=category)
 
 @app.route('/brand/<string:brandid>')
 def brand(brandid):
-	form = SearchForm()
-	if form.validate_on_submit():
-		search_item = form.search.data
-		if request.query_string == 'french': return render_template('frenchsearch.html',form=form)
-		else: return render_template('search.html',searchitems=searching(search_item),form=form)
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
 		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
 		brand.dictlen = len(brand.products)
-		return render_template('frenchcategory.html', category=brand,form=form)
+		return render_template('frenchcategory.html', category=brand)
 	else:
 		brand = Brands.query.filter_by(brand=brandid).first_or_404()
 		brand.products = Products.query.with_entities(Products.id,Products.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
 		brand.dictlen = len(brand.products)
-		return render_template('category.html', category=brand,form=form)
+		return render_template('category.html', category=brand)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
     app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)
