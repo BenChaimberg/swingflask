@@ -289,7 +289,7 @@
 {% block content %}
 	<div class="group">
 		<div id="image"><img src="{{ url_for('static', filename='images/lg/%s.jpg' % product.id ) }}" id="picture" alt="{{ product.title | safe }}"></div>
-		<div id="text"><b id="product-title">{{ product.title | safe }}</b><p>{{ product.text | safe }}</p></div>
+		<div id="text"><span id="product-title">{{ product.title | safe }}</span><p>{{ product.text | safe }}</p></div>
 	</div>
 	<div id="tabs" class="group">
 		<div class="label directions"><span>Directions</span></div>

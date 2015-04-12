@@ -320,6 +320,9 @@ html {overflow-y: scroll;}
 		text-decoration: underline;
 	}
 }
+#product-title {
+	font-weight: bold;
+}
 #mission {
 	margin-bottom: 10px;
 }
