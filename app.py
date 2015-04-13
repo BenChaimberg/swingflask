@@ -1,5 +1,5 @@
 import json,time
-from time import gmtime, strftime
+from time import localtime, strftime
 from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
 from flask.ext.mail import Mail, Message
@@ -7,8 +7,10 @@ from werkzeug.routing import BaseConverter
 import feedparser
 from static.search_products import products_search
 from static.search_forum import forum_search
-from forms import *
-from sql_classes import *
+import pymysql
+from sqlalchemy import update
+from forms import MessageForm, ForumSearchForm, LoginForm, BrochureForm, FrenchBrochureForm, ReferForm, FrenchReferForm
+from models import db, Infotable, Infolist, Categories, Brands, Products, Frenchinfotable, Frenchinfolist, Frenchcategories, Frenchproducts, Messages, Replies, Brochures
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -37,6 +39,7 @@ login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 28799
 app.config['SQLALCHEMY_POOL_TIMEOUT'] = 14
+db.init_app(app)
 
 class User(UserMixin):
     def __init__(self, id):
@@ -132,8 +135,7 @@ def start():
 
 @app.route('/main', methods=('GET', 'POST'))
 def home():
-	d = feedparser.parse('https://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')
-	return generic_page('main',request,feed=d['entries'][0]['link'])
+	return generic_page('main',request,feed=feedparser.parse('http://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')['entries'][0]['link'])
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
 def forumsearch(search_string):
@@ -195,9 +197,15 @@ def rightfinish():
 def forum(page=1):
 	message_form = MessageForm()
 	if message_form.validate_on_submit():
-		new_message = Messages(form.subject.data,form.name.data,form.email.data,form.notifyemail.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()),form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		new_message = Messages(message_form.subject.data,message_form.name.data,message_form.email.data,message_form.notifyemail.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),message_form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()))
 		db.session.add(new_message)
 		db.session.commit()
+		msg = Message()
+		msg.recipients = ['mchaimberg@swingpaints.com']
+		msg.sender = ('Swing Paints', 'info@swingpaints.com')
+		msg.subject = 'Swing Paints Forum Reply'
+		msg.html = 'Hello Mark,<br />%s has posted a new message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (new_message.name,new_message.IDmessage,new_message.mdate)
+		mail.send(msg)
 		return redirect('/message/'+str(new_message.IDmessage))
 	messages = Messages.query.with_entities(Messages.IDmessage,Messages.name,Messages.email,Messages.last_rdate,Messages.subject).order_by(Messages.last_rdate.desc()).paginate(int(page),50)
 	for message in messages.items:
@@ -210,11 +218,10 @@ def message(message_id):
 	message_form = MessageForm()
 	if message_form.validate_on_submit():
 		last_reply = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.desc()).first()
-		new_reply = Replies(message_id,message_form.subject.data,message_form.name.data,message_form.email.data,message_form.notifyemail.data,message_form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+		new_reply = Replies(message_id,message_form.subject.data,message_form.name.data,message_form.email.data,message_form.notifyemail.data,message_form.message.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()))
 		db.session.add(new_reply)
 		db.session.commit()
 		db.session.query(Messages).filter_by(IDmessage=message_id).update({'last_rdate':time.strftime("%Y-%m-%d %H:%M:%S", gmtime())})
-		db.session.commit()
 		msg = Message()
 		if last_reply.notifyemail == 'True':
 			msg.recipients = [last_reply.email]
@@ -224,7 +231,6 @@ def message(message_id):
 		msg.html = 'Hello %s,<br />%s has posted a reply to your message.<br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> to view the message board.<br />Yours sincerely,<br />Swing Paints' % (last_reply.name,new_reply.name,new_reply.IDmessage,new_reply.rdate)
 		mail.send(msg)
 	message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
-	print message.mdate,message.last_rdate
 	message.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(message.mdate),'%Y-%m-%d %H:%M:%S'))
 	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
 	for reply in replies:
@@ -270,26 +276,28 @@ def refer():
 def brochure():
 	brochure_form = BrochureForm()
 	brochure_frenchform = FrenchBrochureForm()
-	if brochure_form.validate_on_submit() or brochure_frenchform.validate_on_submit():
-		with open('brochurelist', 'r') as file:
-			data = json.load(file)
-		i=0
-		for item in data:
-			i+=1
-		if request.query_string == 'french': lang = 'fr'
-		else: lang = 'en'
-		writedata = {i:{'name':form.name.data,'email':form.email.data,'address':form.address.data,'city':form.city.data,'stateprov':form.stateprov.data,'zipcode':form.zipcode.data,'country':form.country.data,'time':time.strftime("%m/%d/%Y %I:%M:%S %p", gmtime()),'lang':lang}}
-		data.update(writedata)
-		with open('brochurelist', 'w') as file:
-			json.dump(data,file,sort_keys=True,indent=4)
+	if brochure_frenchform.validate_on_submit():
+		brochure = Brochures(brochure_frenchform.name.data,brochure_frenchform.email.data,brochure_frenchform.address.data,brochure_frenchform.city.data,brochure_frenchform.stateprov.data,brochure_frenchform.zipcode.data,brochure_frenchform.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'False')
+		db.session.add(brochure)
+		db.session.commit()
 		msg = Message()
 		msg.recipients = ['echaimberg@swingpaints.com']
 		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
-		msg.subject = "%s would like a free brochure!" % form.name.data
-		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (form.name.data,form.email.data,form.address.data,form.city.data,form.stateprov.data,form.zipcode.data,form.country.data)
-		mail.send(msg)
-		if request.query_string == 'french': return render_template('frenchbrochuresuccess.html')
-		else: return render_template('brochuresuccess.html')
+		msg.subject = "%s would like a free brochure!" % brochure_frenchform.name.data
+		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_frenchform.name.data,brochure_frenchform.email.data,brochure_frenchform.address.data,brochure_frenchform.city.data,brochure_frenchform.stateprov.data,brochure_frenchform.zipcode.data,brochure_frenchform.country.data)
+#		mail.send(msg)
+		return render_template('frenchbrochuresuccess.html')
+	if brochure_form.validate_on_submit():
+		brochure = Brochures(brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'True')
+		db.session.add(brochure)
+		db.session.commit()
+		msg = Message()
+		msg.recipients = ['echaimberg@swingpaints.com']
+		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
+		msg.subject = "%s would like a free brochure!" % brochure_form.name.data
+		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data)
+#		mail.send(msg)
+		return render_template('brochuresuccess.html')
 	if request.args.get('lang') == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform)
 	else: return render_template('brochure.html', brochure_form=brochure_form)
 

@@ -2,6 +2,17 @@ from flask_wtf import Form, validators, RecaptchaField
 import wtforms
 from wtforms import TextField, PasswordField, SelectField, RadioField, TextAreaField
 
+class MessageForm(Form):
+    name = TextField("Name", [wtforms.validators.Required('Please enter your name')])
+    email = TextField("E-mail", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
+    subject = TextField("Subject", [wtforms.validators.Required('Please enter a subject')])
+    message = TextAreaField("Message", [wtforms.validators.Required('Please enter your message')])
+    notifyemail = RadioField('Do you want notification of a response to your message?', choices=[('True','Yes'),('False','No')])
+    recaptcha = RecaptchaField()
+
+class ForumSearchForm(Form):
+    forum_search = TextField("", [wtforms.validators.Required('Please enter a search query')])
+
 class LoginForm(Form):
     username = TextField("Username:", [wtforms.validators.Required('Please enter your username')])
     password = PasswordField("Password:", [wtforms.validators.Required('Please enter your password')])
@@ -35,11 +46,3 @@ class FrenchReferForm(Form):
     visitoremail = TextField("Votre adresse de courriel", [wtforms.validators.Required('Veuillez entrer votre adresse de courriel'), wtforms.validators.Email()])
     friendname = TextField("Le nom de votre amie", [wtforms.validators.Required('Veuillez entrer le nom de votre amie')])
     friendemail = TextField("Son adresse de courriel", [wtforms.validators.Required('Veuillez entrer son adresse de courriel'), wtforms.validators.Email()])
-
-class MessageForm(Form):
-    name = TextField("Name", [wtforms.validators.Required('Please enter your name')])
-    email = TextField("E-mail", [wtforms.validators.Required('Please enter your email'), wtforms.validators.Email()])
-    subject = TextField("Subject", [wtforms.validators.Required('Please enter a subject')])
-    message = TextAreaField("Message", [wtforms.validators.Required('Please enter your message')])
-    notifyemail = RadioField('Do you want notification of a response to your message?', choices=[('True','Yes'),('False','No')])
-    recaptcha = RecaptchaField()

@@ -1,9 +1,6 @@
-import pymysql
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import update
-from app import app
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 class Infotable(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
@@ -153,3 +150,26 @@ class Replies(db.Model):
         self.notifyemail = notifyemail
         self.message = message
         self.rdate = rdate
+
+class Brochures(db.Model):
+    idbrochure = db.Column(db.Integer(), primary_key=True, nullable=False)
+    contact = db.Column(db.String(50),nullable=True)
+    email = db.Column(db.String(50),nullable=True)
+    address = db.Column(db.String(50),nullable=True)
+    city = db.Column(db.String(50),nullable=True)
+    province = db.Column(db.String(50),nullable=True)
+    postal_code = db.Column(db.String(50),nullable=True)
+    country = db.Column(db.String(50),nullable=True)
+    xdate = db.Column(db.DateTime(),nullable=True)
+    language = db.Column(db.Enum('True','False'),nullable=True)
+
+    def __init__(self, contact, email, address, city, province, postal_code, country, xdate, language):
+		self.contact = contact
+		self.email = email
+		self.address = address
+		self.city = city
+		self.province = province
+		self.postal_code = postal_code
+		self.country = country
+		self.xdate = xdate
+		self.language = language
