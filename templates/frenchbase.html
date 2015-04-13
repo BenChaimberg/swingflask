@@ -17,16 +17,10 @@
 					$(this).attr('data-width', $(this).parent().width());
 				});
 				canvassing(10);
-				$("#desktop-search").find("form").keyup(function(){
+				$("#div-search").find("form").keyup(function(){
 					console.log("keyup");
 					if ($("#search").val()) {
-						$(this).prop('action',"{{ url_for('.search',search_string='') }}"+$("#search").val().replace(/ /g,'+')+'?lang=french');
-					}
-				});
-				$("#mobile-search").find("form").keyup(function(){
-					console.log("keyup");
-					if ($("#search").val()) {
-						$(this).prop('action',"{{ url_for('.search',search_string='') }}"+$("#search").val().replace(/ /g,'+')+'?lang=french');
+						$(this).prop('action',"{{ url_for('.search',search_string='') }}"+$("#search").val().replace(/ /g,'+'));
 					}
 				});
 			});
@@ -51,24 +45,16 @@
 				<div id="mainleft" class="group">
 					<div id="logo">
 						<img src="{{ url_for('static', filename='images/top_logo.png') }}">
-						<div id="logotext">finition la solution de facilit&#xe9; depuis 1965</div>
+						<div id="logotext">finishing the easy way since 1965</div>
 					</div>
-					<div id="desktop-search">
-						<form method="POST" action="{{ url_for('.search',search_string='',lang='french') }}">
-						{{ form.hidden_tag() }}
-							{{ form.search(style="height:2%;width:50%;border-radius:5px;border:none;padding-left:10px;") }}
+					<div id="div-search">
+						<form method="POST">
+							<input id="search" type="text"></input>
 							<input id="submit" type="submit" value="Search"></input>
 						</form>
 					</div>
 					<div id="sidebar">
 					{% block sidebar %}
-						<div id="mobile-search">
-							<form method="POST" action="{{ url_for('.search',search_string='',lang='french') }}">
-							{{ form.hidden_tag() }}
-								{{ form.search(style="height:75%;margin-left:5px;width:65%;border-radius:10px;border:none;padding-left:10px;") }}
-								<input id="submit" type="submit" value="Search"></input>
-							</form>
-						</div>
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Produits</h1>
 						<ul>
@@ -85,14 +71,14 @@
 							<li><a href="{{ url_for('.category',categoryid='solvents',lang='french') }}">Solvants</a></li>
 							<li><a href="{{ url_for('.category',categoryid='clearance',lang='french') }}">Soldes</a></li>
 						</ul>
-						<h1 id="category-heading">Marques</h1>
-						<ul>
-							<li><a href="/category/circa">Circa 1850</a></li>
-							<li><a href="/category/klenks">Klenk's</a></li>
-							<li><a href="/category/antiquax">Antiquax</a></li>
-							<li><a href="/category/terranova">Terra Nova</a></li>
-							<li><a href="/category/gaudreault">Gaudreault Antiques</a></li>
-							<li><a href="/category/super">Super DeGooper</a></li>
+						<h1 id="brand-heading">Marques</h1>
+						<ul id="brand-list">
+							<li><a href="{{ url_for('.brand',brandid='circa',lang='french') }}">Circa 1850</a></li>
+							<li><a href="{{ url_for('.brand',brandid='klenks',lang='french') }}">Klenk's</a></li>
+							<li><a href="{{ url_for('.brand',brandid='antiquax',lang='french') }}">Antiquax</a></li>
+							<li><a href="{{ url_for('.brand',brandid='terranova',lang='french') }}">Terra Nova</a></li>
+							<li><a href="{{ url_for('.brand',brandid='gaudreault',lang='french') }}">Gaudreault Antiques</a></li>
+							<li><a href="{{ url_for('.brand',brandid='degooper',lang='french') }}">Super DeGooper</a></li>
 
 						</ul>
 					{% endblock %}
@@ -101,7 +87,7 @@
 				<div id="mainright" class="group">
 					<div id="links">
 						<ul>
-							<li><b><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></b></li>
+							<li><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></li>
 							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL DE L'ENTERPRISE</a></li></li>
 							<li><a href="{{ url_for('.locations',lang='french') }}">O&#xd9; ACHETER</a></li>
 							<li><a href="{{ url_for('.faq',lang='french') }}">FAQ</a></li>
@@ -112,7 +98,7 @@
 					<div id="content" class="group">
 						<div id="mobile-header">
 							<div id="mobile-header-left">☰</div>
-							<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Swing Paints" width="159" height="69"></div>
+							<div id="mobile-header-center"><img src="{{ url_for('static', filename='images/categoryswing.png') }}" alt="Peintures Swing" width="159" height="69"></div>
 							<div id="mobile-header-right"><a href="{{ url_for('.home',lang='french') }}">⌂</a></div>
 						</div>
 						<h1 id="main-heading">{% block categorytext %}{% endblock %}</h1>
