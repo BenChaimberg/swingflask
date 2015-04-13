@@ -84,7 +84,7 @@ def forum_search(search_string):
 				if not message in messages:
 					messages.append(message)
 			for message in messages:
-				replies_temp = Replies.query.filter(Replies.message.like('%'+search_item+'%')).filter(Replies.IDmessage == message.IDmessage).all()
+				replies_temp = Replies.query.filter(Replies.IDmessage == message.IDmessage).filter(Replies.message.like('%'+search_item+'%')).all()
 				for reply in replies_temp:
  					replies.append(reply)
 		for message in messages:
