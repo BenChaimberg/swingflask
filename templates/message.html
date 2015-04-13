@@ -73,7 +73,7 @@
 				});
 				$("title").html("Swing Paints Forum - {{ message.subject | safe }}");
 				$("#subject").val("Re: {{ message.subject | safe }}");
-				$("form").find("input, textarea").not("#subject, #submit").val('');
+				$("form").find("input, textarea").not("#csrf_token,#subject, #submit").val('');
 				function display(name,email,time,subject,text) {
 					var newRow  = document.getElementById("write").insertRow(-1);
 					var newCell = newRow.insertCell(-1);
@@ -108,7 +108,7 @@
 			</tr>
 		</table>
 		<h2>New message:</h2>
-		<form method="POST" action="/message/{{ message.IDmessage }}">
+		<form method="POST" action="{{ url_for('.message',message_id=message.IDmessage) }}">
 		{{ message_form.hidden_tag() }}
 			<div style="float:left;width:100%;"><ul>
 			{% for field in message_form %}
@@ -116,13 +116,14 @@
 					<li>{{ error | safe }}</li>
 				{% endfor %}
 			{% endfor %}
+				</ul>
 			{% for field in message_form %}
-				</ul><div>
+				<div>
 				{% if loop.index == 1 %}
 				{% else %}
 					{% if field.type == 'RecaptchaField' %}
 					{% else %}
-						{{ field.label }}
+						{{ field.label }}:
 					{% endif %}
 					{{ field }}
 				{% endif %}
