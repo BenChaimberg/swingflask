@@ -320,7 +320,7 @@ def product(productid): #if URL is at /product/####
 def category(categoryid):
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
-		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
+		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Frenchproducts.id.asc()).all()
 		category.dictlen = len(category.products)
 		return render_template('frenchcategory.html', category=category)
 	else:
@@ -333,7 +333,7 @@ def category(categoryid):
 def brand(brandid):
 	if request.args.get('lang') == 'french': #if URL ends with ?french
 		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
-		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
+		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Frenchproducts.id.asc()).all()
 		brand.dictlen = len(brand.products)
 		return render_template('frenchcategory.html', category=brand)
 	else:
