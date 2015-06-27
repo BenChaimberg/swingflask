@@ -23,12 +23,23 @@ $(document).ready(function(){
 			$('html, body').animate({scrollTop:currentPosition});
 		});
 		$(window).resize(function(){
-			$(document).find('div.fb-post').each(function() {
-				$(this).attr('data-width', $(this).parent().width());
-			});
-			if (FB) {
-				FB.XFBML.parse();
-			}
+			facebookWidthResize();
 		});
 	}
 });
+$(window).load(function(){
+	facebookWidthResize();
+});
+var facebookWidthResize = function(){
+	console.log('resize');
+	$(document).find('div.fb-post').each(function() {
+		$(this).attr('data-width', $(this).parent().width());
+	});
+	$(document).find('div.fb-page').each(function() {
+		$(this).attr('data-width', $(this).parent().width());
+		$(this).attr('data-height', $(window).height()-125);
+	});
+	if (FB) {
+		FB.XFBML.parse();
+	}
+}

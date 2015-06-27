@@ -275,12 +275,6 @@ html {overflow-y: scroll;}
 		min-height: 515px;
 		padding: 5px 15px 10px 35px;
 	}
-	#feature {
-		text-align: center;
-	}
-	#feature>h1 {
-		text-align: left;
-	}
 	#brand {
 		float: left;
 	}
@@ -328,6 +322,12 @@ html {overflow-y: scroll;}
 	#footer a:hover, #links a:hover, .more:hover, #sidebar a:hover {
 		text-decoration: underline;
 	}
+}
+#feature {
+	text-align: center;
+}
+#feature>h1 {
+	text-align: left;
 }
 #product-title {
 	font-weight: bold;
