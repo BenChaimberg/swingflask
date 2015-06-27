@@ -275,13 +275,22 @@ html {overflow-y: scroll;}
 		min-height: 515px;
 		padding: 5px 15px 10px 35px;
 	}
+	#feature {
+		text-align: center;
+	}
+	#feature>h1 {
+		text-align: left;
+	}
 	#brand {
 		float: left;
 	}
 	#new, #gallery, #forum {
-		width: 30%;
-		margin-right: 10px;
+		width: 32%;
+		margin-right: 2%;
 		float: left;
+	}
+	#forum {
+		margin-right: 0;
 	}
 	#footer {
 		position: relative;
