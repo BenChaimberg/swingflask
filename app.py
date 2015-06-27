@@ -75,15 +75,15 @@ def utility_processor(): #creates template context processor function
 @app.errorhandler(404)
 def notfound(e): #if HTTP returns 404 error
     return render_template('404.html'), 404 #render 404 template and return 404 error
-    
+
 @app.errorhandler(500)
 def apperror(e): #if HTTP returns 500 error
     return render_template('500.html'), 500 #render 500 template and return 500 error
-    
+
 @app.errorhandler(403)
 def forbidden(e): #if HTTP returns 403 error
     return render_template('403.html'), 403 #render 403 template and return 403 error
-    
+
 @app.errorhandler(401)
 def forbidden(e): #if HTTP returns 401 error
     return render_template('401.html'), 401 #render 401 template and return 401 error
@@ -135,7 +135,7 @@ def start():
 
 @app.route('/main', methods=('GET', 'POST'))
 def home():
-	return generic_page('main',request,feed=feedparser.parse('http://www.facebook.com/feeds/page.php?format=rss20&id=46670450858')['entries'][0]['link'])
+    return generic_page('main',request)
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
 def forumsearch(search_string):
