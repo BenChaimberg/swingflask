@@ -171,7 +171,7 @@ html {overflow-y: scroll;}
 		font-size: 12px;
 		color: #000000;
 		background-color: black;
-		background-image: url('images/wood.jpg');
+		background-image: url("/static/images/wood.jpg");
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		-webkit-background-size: 100% auto;
