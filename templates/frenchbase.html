@@ -16,7 +16,7 @@
 				$(document).find('div.fb-post').each(function() {
 					$(this).attr('data-width', $(this).parent().width());
 				});
-				canvassing(10);
+				canvassing();
 				$("#div-search").find("form").keyup(function(){
 					console.log("keyup");
 					if ($("#search").val()) {
@@ -31,20 +31,20 @@
 		<div id="fb-root"></div>
 		<script>
 			(function(d, s, id) {
-  				var js, fjs = d.getElementsByTagName(s)[0];
-  				if (d.getElementById(id)) return;
-  				js = d.createElement(s); js.id = id;
-  				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  				fjs.parentNode.insertBefore(js, fjs);
-			}
-			(document, 'script', 'facebook-jssdk'));
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.2";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
 		</script>
-		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="500"></canvas>
+		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		<div id="center">
 			<div id="main" class="group">
 				<div id="mainleft" class="group">
 					<div id="logo">
-						<img src="{{ url_for('static', filename='images/top_logo.png') }}">
+						<a href="{{ url_for('.home',lang='french') }}"><img src="{{ url_for('static', filename='images/top_logo.png') }}"></a>
 						<div id="logotext">finition la solution de facilit&#xe9; depuis 1965</div>
 					</div>
 					<div id="div-search">
@@ -57,29 +57,16 @@
 					{% block sidebar %}
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Produits</h1>
-						<ul>
-							<li><a href="{{ url_for('.category',categoryid='accessories',lang='french') }}">Accessoires et Outiles</a></li>
-							<li><a href="{{ url_for('.category',categoryid='epoxies',lang='french') }}">&#xc9;poxydes et Adh&#xe9;sifs</a></li>
-							<li><a href="{{ url_for('.category',categoryid='glueremovers',lang='french') }}">D&#xe9;capants pour Adh&#xe9;sif et Colle</a></li>
-							<li><a href="{{ url_for('.category',categoryid='varnishremovers',lang='french') }}">D&#xe9;capants pour<br />Peintures et Vernis</a></li>
-							<li><a href="{{ url_for('.category',categoryid='oils',lang='french') }}">Huiles de Finition</a></li>
-							<li><a href="{{ url_for('.category',categoryid='poly',lang='french') }}">Vernis et Polyur&#xe9;thanes</a></li>
-							<li><a href="{{ url_for('.category',categoryid='primers',lang='french') }}">Appr&#xeA;ts pour<br />Peinture et Tapisserie</a></li>
-							<li><a href="{{ url_for('.category',categoryid='stains',lang='french') }}">Teinture &#xE0; Bois Teinture Vernis</a></li>
-							<li><a href="{{ url_for('.category',categoryid='waxes',lang='french') }}">Cires, Polis, et Nettoyeurs</a></li>
-							<li><a href="{{ url_for('.category',categoryid='bath',lang='french') }}">Baignoire Vitrifier &#xc9;poxyde</a></li>
-							<li><a href="{{ url_for('.category',categoryid='solvents',lang='french') }}">Solvants</a></li>
-							<li><a href="{{ url_for('.category',categoryid='clearance',lang='french') }}">Soldes</a></li>
+						<ul id="category-list">
+							{% for category in categories %}
+							<li><a href="{{ url_for('.category',categoryid=category[0],lang='french') }}">{{ category[1] | safe }}</a></li>
+							{% endfor %}
 						</ul>
 						<h1 id="brand-heading">Marques</h1>
 						<ul id="brand-list">
-							<li><a href="{{ url_for('.brand',brandid='circa',lang='french') }}">Circa 1850</a></li>
-							<li><a href="{{ url_for('.brand',brandid='klenks',lang='french') }}">Klenk's</a></li>
-							<li><a href="{{ url_for('.brand',brandid='antiquax',lang='french') }}">Antiquax</a></li>
-							<li><a href="{{ url_for('.brand',brandid='terranova',lang='french') }}">Terra Nova</a></li>
-							<li><a href="{{ url_for('.brand',brandid='gaudreault',lang='french') }}">Gaudreault Antiques</a></li>
-							<li><a href="{{ url_for('.brand',brandid='degooper',lang='french') }}">Super DeGooper</a></li>
-
+							{% for brand in brands %}
+							<li><a href="{{ url_for('.brand',brandid=brand[0],lang='french') }}">{{ brand[1] | safe }}</a></li>
+							{% endfor %}
 						</ul>
 					{% endblock %}
 					</div>

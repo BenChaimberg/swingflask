@@ -16,16 +16,7 @@
 				$(document).find('div.fb-post').each(function() {
 					$(this).attr('data-width', $(this).parent().width());
 				});
-				canvassing(10);
-				var sidebarOffset = $("#sidebar").offset().top;
-				var contentOffset = $("#content").offset().top;
-				var sidebarHeight = $("#sidebar").height();
-				var contentPaddingTop = $("#content").css('padding-top').replace("px", "");
-				var contentPaddingBottom = $("#content").css('padding-bottom').replace("px", "");
-				var sidebarPaddingTop = $("#sidebar").css('padding-top').replace("px", "");
-				var sidebarPaddingBottom = $("#sidebar").css('padding-bottom').replace("px", "");
-				console.log('sidebarOffset: '+sidebarOffset+'; contentOffset: '+contentOffset+'; sidebarHeight: '+sidebarHeight+'; sidebarPaddingTop: '+sidebarPaddingTop+'; sidebarPaddingBottom: '+sidebarPaddingBottom+'; contentPaddingTop: '+contentPaddingTop+'; contentPaddingBottom: '+contentPaddingBottom);
-				// $("#content").css({'min-height':(sidebarHeight+sidebarOffset-contentOffset+sidebarPaddingBottom-contentPaddingTop-contentPaddingBottom)+'px'});
+				canvassing();
 				$("#div-search").find("form").keyup(function(){
 					console.log("keyup");
 					if ($("#search").val()) {
