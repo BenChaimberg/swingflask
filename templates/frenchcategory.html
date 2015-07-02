@@ -82,7 +82,7 @@
 		<div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div>
 		<div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;"></div>
 		</a>
-	<span>{{ x.title | replace("Swing Paints","") | safe }}</span>
+	<span>{{ x.title | replace("Peintures Swing","") | safe }}</span>
 </td>
 {% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}
