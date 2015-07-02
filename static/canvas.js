@@ -13,23 +13,24 @@ var canvassing = function(times){
 	ctx.scale(2, 2);
 	ctx.strokeStyle = "grey";
 	ctx.fillStyle = "black";
-	startx = 10;
-	starty = 19;
-	for (i=1;i<=times;i++){
+	var startx = 10;
+	var starty = 19;
+	// times = ($("#sidebar").height()-5)/(2*starty);
+	for (i=1;i<times;i++){
 		ctx.beginPath();
 		ctx.moveTo(startx, starty*i-2);
 		ctx.lineTo(startx+30, starty*i+1);
 		ctx.stroke();
-		
+
 		ctx.beginPath();
 		ctx.moveTo(startx, starty*i+2);
 		ctx.lineTo(startx+30, starty*i+5);
 		ctx.stroke();
-		
+
 		ctx.beginPath();
 		ctx.arc(startx,starty*i,4,0,2*Math.PI);
 		ctx.fill();
-		
+
 		ctx.beginPath();
 		ctx.arc(startx+30,starty*i+3,4,0,2*Math.PI);
 		ctx.fill();

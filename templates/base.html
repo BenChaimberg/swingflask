@@ -17,6 +17,15 @@
 					$(this).attr('data-width', $(this).parent().width());
 				});
 				canvassing(10);
+				var sidebarOffset = $("#sidebar").offset().top;
+				var contentOffset = $("#content").offset().top;
+				var sidebarHeight = $("#sidebar").height();
+				var contentPaddingTop = $("#content").css('padding-top').replace("px", "");
+				var contentPaddingBottom = $("#content").css('padding-bottom').replace("px", "");
+				var sidebarPaddingTop = $("#sidebar").css('padding-top').replace("px", "");
+				var sidebarPaddingBottom = $("#sidebar").css('padding-bottom').replace("px", "");
+				console.log('sidebarOffset: '+sidebarOffset+'; contentOffset: '+contentOffset+'; sidebarHeight: '+sidebarHeight+'; sidebarPaddingTop: '+sidebarPaddingTop+'; sidebarPaddingBottom: '+sidebarPaddingBottom+'; contentPaddingTop: '+contentPaddingTop+'; contentPaddingBottom: '+contentPaddingBottom);
+				// $("#content").css({'min-height':(sidebarHeight+sidebarOffset-contentOffset+sidebarPaddingBottom-contentPaddingTop-contentPaddingBottom)+'px'});
 				$("#div-search").find("form").keyup(function(){
 					console.log("keyup");
 					if ($("#search").val()) {
@@ -39,7 +48,7 @@
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
-		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="500"></canvas>
+		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		<div id="center">
 			<div id="main" class="group">
 				<div id="mainleft" class="group">
@@ -58,28 +67,15 @@
 						<a id="sidebar-before" href="#">&#x25c4;</a>
 						<h1 id="category-heading">Products</h1>
 						<ul id="category-list">
-							<li><a href="{{ url_for('.category',categoryid='accessories') }}">Accessories &amp; Tools</a></li>
-							<li><a href="{{ url_for('.category',categoryid='epoxies') }}">Epoxies &amp; Adhesives</a></li>
-							<li><a href="{{ url_for('.category',categoryid='glueremovers') }}">Adhesive &amp; Glue Removers</a></li>
-							<li><a href="{{ url_for('.category',categoryid='varnishremovers') }}">Paint &amp; Varnish Removers</a></li>
-							<li><a href="{{ url_for('.category',categoryid='oils') }}">Finishing Oils</a></li>
-							<li><a href="{{ url_for('.category',categoryid='poly') }}">Varnishes &amp; Polyurethanes</a></li>
-							<li><a href="{{ url_for('.category',categoryid='primers') }}">Paint &amp; Wallpaper Primers</a></li>
-							<li><a href="{{ url_for('.category',categoryid='stains') }}">Wood Stains &amp; Varnish Stains</a></li>
-							<li><a href="{{ url_for('.category',categoryid='waxes') }}">Waxes, Polishers &amp; Cleaners</a></li>
-							<li><a href="{{ url_for('.category',categoryid='bath') }}">Bathtub Reglazing Epoxy</a></li>
-							<li><a href="{{ url_for('.category',categoryid='solvents') }}">Solvents</a></li>
-							<li><a href="{{ url_for('.category',categoryid='clearance') }}">Clearance</a></li>
+							{% for category in categories %}
+							<li><a href="{{ url_for('.category',categoryid=category[0]) }}">{{ category[1] | safe }}</a></li>
+							{% endfor %}
 						</ul>
 						<h1 id="brand-heading">Brands</h1>
 						<ul id="brand-list">
-							<li><a href="{{ url_for('.brand',brandid='circa') }}">Circa 1850</a></li>
-							<li><a href="{{ url_for('.brand',brandid='klenks') }}">Klenk's</a></li>
-							<li><a href="{{ url_for('.brand',brandid='antiquax') }}">Antiquax</a></li>
-							<li><a href="{{ url_for('.brand',brandid='terranova') }}">Terra Nova</a></li>
-							<li><a href="{{ url_for('.brand',brandid='gaudreault') }}">Gaudreault Antiques</a></li>
-							<li><a href="{{ url_for('.brand',brandid='degooper') }}">Super DeGooper</a></li>
-
+							{% for brand in brands %}
+							<li><a href="{{ url_for('.brand',brandid=brand[0]) }}">{{ brand[1] | safe }}</a></li>
+							{% endfor %}
 						</ul>
 					{% endblock %}
 					</div>
@@ -114,7 +110,7 @@
 							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
 						</div>
 						<div id="end" style="padding-top:10px;">
-							&copy;2015 Swing Paints Ltd. Last modified: April 9, 2015
+							&copy;2015 Swing Paints Ltd. Last modified: July 1, 2015
 						</div>
 					</div>
 				</div>

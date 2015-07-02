@@ -31,7 +31,6 @@ $(window).load(function(){
 	facebookWidthResize();
 });
 var facebookWidthResize = function(){
-	console.log('resize');
 	$(document).find('div.fb-post').each(function() {
 		$(this).attr('data-width', $(this).parent().width());
 	});

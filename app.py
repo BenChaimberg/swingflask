@@ -53,11 +53,13 @@ def load_user(userid):
 def unauthorized():
 	abort(401)
 
-def generic_page(page,request,**kwargs):
-	if request.args.get('lang') == 'french':
-		page = 'french'+ page
-	page += '.html'
-	return render_template(page,**kwargs)
+def sidebar_lang_render(page,request,**kwargs):
+    if request.args.get('lang') == 'french':
+        page = 'french'+ page
+    page += '.html'
+    categories = Categories.query.with_entities(Categories.category,Categories.name).order_by(Categories.id.asc()).all()
+    brands = Brands.query.with_entities(Brands.brand,Brands.name).order_by(Brands.id.asc()).all()
+    return render_template(page,categories=categories,brands=brands,**kwargs)
 
 @app.context_processor
 def utility_processor(): #creates template context processor function
@@ -126,16 +128,26 @@ def logout():
     logout_user()
     return redirect('/home')
 
+@app.route('/test2')
+def test2():
+    message = Messages.query.filter_by(IDmessage=2046).first_or_404()
+    return str(message.IDmessage)
+
+@app.route('/test')
+def test():
+    message = Messages.query.with_entities(Messages.IDmessage).filter_by(IDmessage=2046).first_or_404()
+    return str(message.IDmessage)
+
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
 @app.route('/start', methods=('GET', 'POST'))
 def start():
-	return generic_page('start',request)
+	return sidebar_lang_render('start',request)
 
 @app.route('/main', methods=('GET', 'POST'))
 def home():
-    return generic_page('main',request)
+    return sidebar_lang_render('main',request)
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
 def forumsearch(search_string):
@@ -158,39 +170,39 @@ def search(search_string):
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
-	return generic_page('locations',request)
+	return sidebar_lang_render('locations',request)
 
 @app.route('/faq', methods=('GET', 'POST'))
 def faq():
-	return generic_page('faq',request)
+	return sidebar_lang_render('faq',request)
 
 @app.route('/contact')
 def contact():
-	return generic_page('contact',request)
+	return sidebar_lang_render('contact',request)
 
 @app.route('/marketing')
 def marketing():
-	return generic_page('marketing',request)
+	return sidebar_lang_render('marketing',request)
 
 @app.route('/about')
 def about():
-	return generic_page('about',request)
+	return sidebar_lang_render('about',request)
 
 @app.route('/colour')
 def colour():
-	return generic_page('colour',request)
+	return sidebar_lang_render('colour',request)
 
 @app.route('/aquacolour')
 def aquacolour():
-	return generic_page('aquacolour',request)
+	return sidebar_lang_render('aquacolour',request)
 
 @app.route('/rightstripper')
 def rightstripper():
-	return generic_page('rightstripper',request)
+	return sidebar_lang_render('rightstripper',request)
 
 @app.route('/rightfinish')
 def rightfinish():
-	return generic_page('rightfinish',request)
+	return sidebar_lang_render('rightfinish',request)
 
 @app.route('/forum/', methods=('GET', 'POST'))
 @app.route('/forum/<int:page>', methods=('GET', 'POST'))
@@ -211,7 +223,7 @@ def forum(page=1):
 	for message in messages.items:
 		message.replies = Replies.query.filter_by(IDmessage=message.IDmessage).count()
 		message.date = time.strftime('%H:%M %m/%d/%Y',time.strptime(str(message.last_rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('forum.html',messages=messages,message_form=message_form)
+	return sidebar_lang_render('forum',request,messages=messages,message_form=message_form)
 
 @app.route('/message/<int:message_id>', methods=('GET', 'POST'))
 def message(message_id):
@@ -235,7 +247,7 @@ def message(message_id):
 	replies = Replies.query.filter_by(IDmessage=message_id).order_by(Replies.rdate.asc()).all()
 	for reply in replies:
 		reply.date = time.strftime('%b %d, %Y<br />%H:%M:%S',time.strptime(str(reply.rdate),'%Y-%m-%d %H:%M:%S'))
-	return render_template('message.html',message=message,replies=replies,message_form=message_form)
+	return sidebar_lang_render('message',request,message=message,replies=replies,message_form=message_form)
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
@@ -252,9 +264,8 @@ def refer():
 			msg.sender = (visitorname, visitoremail)
 			msg.subject = "Re: Une recommandation d'un ami - Decouvrez Peintures Swing!"
 			msg.html = "%s,<br />S'il vous pla&#xee;t pardonnez l'intrusion, mais je crois que j'ai trouv&#xe9; quelque chose que vous seriez int&#xe9;ress&#xe9;. Je regardais &#xe0; travers les pages du site Web de cette soci&#xe9;t&#xe9; assez cool de finition du bois, Peintures Swing, et la pens&#xe9;e de vous. Donc, c&#x27;est la raison de cette \"presque \" e-mail personnelle. Vous pouvez les trouver <a href='http://swingpaints.herokuapp.com/?french'>ici</a>." % (friendname)
-			mail.send(msg)
-			return render_template('frenchrefersuccess.html')
-		return render_template('frenchrefer.html', refer_form=refer_form)
+			# mail.send(msg)
+			return sidebar_lang_render('refersuccess',request)
 	else: #if URL does not end with ?french
 		refer_form = ReferForm()
 		if refer_form.validate_on_submit():
@@ -268,38 +279,39 @@ def refer():
 			msg.sender = (visitorname, visitoremail)
 			msg.subject = "Re: A referral from a friend - Check out Swing Paints!"
 			msg.html = "%s,<br />Please forgive the intrusion but I think I found something that you'd be interested in. I was browsing through the pages of the website of this pretty cool wood finishing company, Swing Paints, and thought of you. So, that is the reason for this \"almost\" personal email. You can find them <a href='http://swingpaints.herokuapp.com'>here</a>." % (friendname)
-			mail.send(msg)
-			return render_template('refersuccess.html')
-		return render_template('refer.html', refer_form=refer_form)
+			# mail.send(msg)
+			return sidebar_lang_render('refersuccess',request)
+	return sidebar_lang_render('refer',request,refer_form=refer_form)
 
 @app.route('/brochure', methods=('GET', 'POST'))
 def brochure():
-	brochure_form = BrochureForm()
-	brochure_frenchform = FrenchBrochureForm()
-	if brochure_frenchform.validate_on_submit():
-		brochure = Brochures(brochure_frenchform.name.data,brochure_frenchform.email.data,brochure_frenchform.address.data,brochure_frenchform.city.data,brochure_frenchform.stateprov.data,brochure_frenchform.zipcode.data,brochure_frenchform.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'False')
-		db.session.add(brochure)
-		db.session.commit()
-		msg = Message()
-		msg.recipients = ['echaimberg@swingpaints.com']
-		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
-		msg.subject = "%s would like a free brochure!" % brochure_frenchform.name.data
-		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_frenchform.name.data,brochure_frenchform.email.data,brochure_frenchform.address.data,brochure_frenchform.city.data,brochure_frenchform.stateprov.data,brochure_frenchform.zipcode.data,brochure_frenchform.country.data)
-#		mail.send(msg)
-		return render_template('frenchbrochuresuccess.html')
-	if brochure_form.validate_on_submit():
-		brochure = Brochures(brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'True')
-		db.session.add(brochure)
-		db.session.commit()
-		msg = Message()
-		msg.recipients = ['echaimberg@swingpaints.com']
-		msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
-		msg.subject = "%s would like a free brochure!" % brochure_form.name.data
-		msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data)
-#		mail.send(msg)
-		return render_template('brochuresuccess.html')
-	if request.args.get('lang') == 'french': return render_template('frenchbrochure.html', brochure_form=brochure_frenchform)
-	else: return render_template('brochure.html', brochure_form=brochure_form)
+    if request.args.get('lang') == 'french':
+        brochure_form = FrenchBrochureForm()
+        if brochure_form.validate_on_submit():
+            brochure = Brochures(brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'False')
+            db.session.add(brochure)
+            db.session.commit()
+            msg = Message()
+            msg.recipients = ['echaimberg@swingpaints.com']
+            msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
+            msg.subject = "%s would like a free brochure!" % brochure_form.name.data
+            msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data)
+            # mail.send(msg)
+            return sidebar_lang_render('brochuresuccess',request)
+    else:
+        brochure_form = BrochureForm()
+        if brochure_form.validate_on_submit():
+            brochure = Brochures(brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data,time.strftime("%Y-%m-%d %H:%M:%S", localtime()),'True')
+            db.session.add(brochure)
+            db.session.commit()
+            msg = Message()
+            msg.recipients = ['echaimberg@swingpaints.com']
+            msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
+            msg.subject = "%s would like a free brochure!" % brochure_form.name.data
+            msg.html = "name:&nbsp;%s<br />email:&nbsp;%s<br />address:&nbsp;%s<br />city:&nbsp;%s<br />stateprov:&nbsp;%s<br />zipcode:&nbsp;%s<br />country:&nbsp;%s<br />lang:&nbsp;en" % (brochure_form.name.data,brochure_form.email.data,brochure_form.address.data,brochure_form.city.data,brochure_form.stateprov.data,brochure_form.zipcode.data,brochure_form.country.data)
+            mail.send(msg)
+            return sidebar_lang_render('brochuresuccess',request)
+    return sidebar_lang_render('brochure',request,brochure_form=brochure_form)
 
 @app.route('/product/<productid>')
 def product(productid): #if URL is at /product/####
@@ -308,13 +320,12 @@ def product(productid): #if URL is at /product/####
 		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
 		product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
 		category=Frenchcategories.query.filter_by(category=product.category).first().name
-		return render_template('frenchproduct.html',product=product,category=category)
 	else: #if URL does not end with ?french
 		product = Products.query.filter_by(id=productid).first_or_404()
 		product.infolist = Infolist.query.filter_by(productid=productid).all()
 		product.infotable = Infotable.query.filter_by(productid=productid).all()
 		category=Categories.query.filter_by(category=product.category).first().name
-		return render_template('product.html',product=product,category=category)
+	return sidebar_lang_render('product',request,product=product,category=category)
 
 @app.route('/category/<string:categoryid>')
 def category(categoryid):
@@ -322,12 +333,11 @@ def category(categoryid):
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Frenchproducts.id.asc()).all()
 		category.dictlen = len(category.products)
-		return render_template('frenchcategory.html', category=category)
 	else:
 		category = Categories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Products.query.with_entities(Products.id,Products.title).filter_by(category=categoryid).order_by(Products.id.asc()).all()
 		category.dictlen = len(category.products)
-		return render_template('category.html', category=category)
+	return sidebar_lang_render('category',request,category=category)
 
 @app.route('/brand/<string:brandid>')
 def brand(brandid):
@@ -335,12 +345,11 @@ def brand(brandid):
 		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
 		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Frenchproducts.id.asc()).all()
 		brand.dictlen = len(brand.products)
-		return render_template('frenchcategory.html', category=brand)
 	else:
 		brand = Brands.query.filter_by(brand=brandid).first_or_404()
 		brand.products = Products.query.with_entities(Products.id,Products.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Products.id.asc()).all()
 		brand.dictlen = len(brand.products)
-		return render_template('category.html', category=brand)
+	return sidebar_lang_render('category',request,category=brand)
 
 if __name__ == '__main__': #only run if executed directly from interpreter
     app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)
