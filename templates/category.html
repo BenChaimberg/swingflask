@@ -46,7 +46,7 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {
+	@media (min-width: 1025px) {
 		#category-table-mobile {
 			display:none;
 		}
@@ -58,6 +58,10 @@
 		}
 		#category-table-desktop {
 			width:100%;
+		}
+		#category-table-desktop img {
+			max-height: 150px;
+			max-width: 150px;
 		}
 	}
 </style>
@@ -79,10 +83,9 @@
 {% for x in category.products: %}
 <td>
 	<a href="../product/{{ x.id }}" style="text-decoration:none;">
-		<div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div>
-		<div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;"></div>
-		</a>
-	<span>{{ x.title | replace("Swing Paints","") | safe }}</span>
+		<img src="{{ url_for('static', filename='images/lg/%s' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
+	</a>
+	<div>{{ x.title | replace("Swing Paints","") | safe }}</div>
 </td>
 {% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}

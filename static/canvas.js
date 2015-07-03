@@ -1,6 +1,7 @@
 var resizings = function(){
 	$("#canvas").offset({ top: $("#sidebar").offset().top, left:$("#sidebar").offset().left+$("#sidebar").width()+15 });
-	if ($(window).width() >= 1024) {	var sidebarOffset = $("#sidebar").offset().top;
+	if ($(window).width() > 1024) {
+		var sidebarOffset = $("#sidebar").offset().top;
 		var contentOffset = $("#content").offset().top;
 		var sidebarHeight = $("#sidebar").height();
 		var contentPaddingTop = parseInt($("#content").css('padding-top').replace("px", ""));

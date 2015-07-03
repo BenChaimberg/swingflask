@@ -76,6 +76,10 @@
 			}
 		</style>
 		<script>
+			$(window).load(function(){
+				$(".recaptcha_input_area").find("input").attr("placeholder","Type the text in the image");
+				console.log('edited');
+			});
 			$(document).ready(function(){
 				for (i=1;i<={{ messages.pages }};i++){
 					if (i == {{ messages.page }}) {
@@ -119,7 +123,7 @@
 			</tr>
 			{% endfor %}
 		</table>
-		<div style="text-align:center;margin:0 auto;">Select page: 
+		<div style="text-align:center;margin:0 auto;">Select page:
 			<form>
 				<select id="pages" onChange="window.location.href='/forum/'+this.value">
 				</select>

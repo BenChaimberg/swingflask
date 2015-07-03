@@ -162,7 +162,7 @@ html {overflow-y: scroll;}
 	#content>:not(:nth-child(1)):not(.margined) {margin-left: 5px;margin-right: 5px;}
 	.threecontent div {margin-bottom: 5px;}
 }
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
 	html {
 		height: 100%;
 	}
