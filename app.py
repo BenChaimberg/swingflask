@@ -29,7 +29,7 @@ MAIL_USE_SSL= False
 MAIL_USERNAME = 'bchaimberg@swingpaints.com'
 MAIL_PASSWORD = 'webmaster'
 
-app = Flask(__name__) #created app as instance of Flask
+app = Flask(__name__)
 app.config.from_object(__name__)
 mail = Mail(app)
 app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
@@ -62,33 +62,33 @@ def sidebar_lang_render(page,request,**kwargs):
     return render_template(page,categories=categories,brands=brands,**kwargs)
 
 @app.context_processor
-def utility_processor(): #creates template context processor function
-	def product_category(category,id): #creates specific category for product function, takes arguments of all products in all categories and product id
-		for item in category: #for every category in categories
-			for item2 in category[item]: #for every product in category
-				if item2 == id: #if product is equal to productid
-					return item #return category
-				if (id == '1818' or id == '1819') and item2 == '1817': #if productid is 1818 or 1819, not in list, so uses 1817 instead
-					return item #return category
+def utility_processor():
+	def product_category(category,id):
+		for item in category:
+			for item2 in category[item]:
+				if item2 == id:
+					return item
+				if (id == '1818' or id == '1819') and item2 == '1817':
+					return item
 	def string_convert(x):
 		return str(x)
-	return dict(string_convert=string_convert,product_category=product_category) #returns function result)
+	return dict(string_convert=string_convert,product_category=product_category)
 
 @app.errorhandler(404)
-def notfound(e): #if HTTP returns 404 error
-    return render_template('404.html'), 404 #render 404 template and return 404 error
+def notfound(e):
+    return render_template('404.html'), 404
 
 @app.errorhandler(500)
-def apperror(e): #if HTTP returns 500 error
-    return render_template('500.html'), 500 #render 500 template and return 500 error
+def apperror(e):
+    return render_template('500.html'), 500
 
 @app.errorhandler(403)
-def forbidden(e): #if HTTP returns 403 error
-    return render_template('403.html'), 403 #render 403 template and return 403 error
+def forbidden(e):
+    return render_template('403.html'), 403
 
 @app.errorhandler(401)
-def forbidden(e): #if HTTP returns 401 error
-    return render_template('401.html'), 401 #render 401 template and return 401 error
+def forbidden(e):
+    return render_template('401.html'), 401
 
 @app.route('/static/<regex("[a-z_.-]*.py[ocd]{0,1}"):uid>')
 def error(uid):
@@ -251,7 +251,7 @@ def message(message_id):
 
 @app.route('/refer', methods=('GET', 'POST'))
 def refer():
-	if request.args.get('lang') == 'french': #if URL ends with ?french
+	if request.args.get('lang') == 'french':
 		refer_form = FrenchReferForm()
 		if refer_form.validate_on_submit():
 			visitorname = refer_form.visitorname.data
@@ -266,7 +266,7 @@ def refer():
 			msg.html = "%s,<br />S'il vous pla&#xee;t pardonnez l'intrusion, mais je crois que j'ai trouv&#xe9; quelque chose que vous seriez int&#xe9;ress&#xe9;. Je regardais &#xe0; travers les pages du site Web de cette soci&#xe9;t&#xe9; assez cool de finition du bois, Peintures Swing, et la pens&#xe9;e de vous. Donc, c&#x27;est la raison de cette \"presque \" e-mail personnelle. Vous pouvez les trouver <a href='http://swingpaints.herokuapp.com/?french'>ici</a>." % (friendname)
 			# mail.send(msg)
 			return sidebar_lang_render('refersuccess',request)
-	else: #if URL does not end with ?french
+	else:
 		refer_form = ReferForm()
 		if refer_form.validate_on_submit():
 			visitorname = refer_form.visitorname.data
@@ -314,13 +314,13 @@ def brochure():
     return sidebar_lang_render('brochure',request,brochure_form=brochure_form)
 
 @app.route('/product/<productid>')
-def product(productid): #if URL is at /product/####
-	if request.args.get('lang') == 'french': #if URL ends with ?french
+def product(productid):
+	if request.args.get('lang') == 'french':
 		product = Frenchproducts.query.filter_by(id=productid).first_or_404()
 		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
 		product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
 		category=Frenchcategories.query.filter_by(category=product.category).first().name
-	else: #if URL does not end with ?french
+	else:
 		product = Products.query.filter_by(id=productid).first_or_404()
 		product.infolist = Infolist.query.filter_by(productid=productid).all()
 		product.infotable = Infotable.query.filter_by(productid=productid).all()
@@ -329,7 +329,7 @@ def product(productid): #if URL is at /product/####
 
 @app.route('/category/<string:categoryid>')
 def category(categoryid):
-	if request.args.get('lang') == 'french': #if URL ends with ?french
+	if request.args.get('lang') == 'french':
 		category = Frenchcategories.query.filter_by(category=categoryid).first_or_404()
 		category.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter_by(category=categoryid).order_by(Frenchproducts.id.asc()).all()
 		category.dictlen = len(category.products)
@@ -341,7 +341,7 @@ def category(categoryid):
 
 @app.route('/brand/<string:brandid>')
 def brand(brandid):
-	if request.args.get('lang') == 'french': #if URL ends with ?french
+	if request.args.get('lang') == 'french':
 		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
 		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Frenchproducts.id.asc()).all()
 		brand.dictlen = len(brand.products)
@@ -351,5 +351,5 @@ def brand(brandid):
 		brand.dictlen = len(brand.products)
 	return sidebar_lang_render('category',request,category=brand)
 
-if __name__ == '__main__': #only run if executed directly from interpreter
-    app.run(debug=True,host='0.0.0.0') #run server with application (debug on, must be turned off for deployment)
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0')
