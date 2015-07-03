@@ -36,9 +36,10 @@ app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
 app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 28799
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 14
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://swingpaint305734:103569@sql.megasqlservers.com:3306/circa1850_swingpaints_com'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
+# app.config['SQLALCHEMY_POOL_RECYCLE'] = 28799
+# app.config['SQLALCHEMY_POOL_TIMEOUT'] = 14
 db.init_app(app)
 
 class User(UserMixin):
