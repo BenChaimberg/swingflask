@@ -111,7 +111,7 @@
 			display:none;
 		}
     }
-	@media (min-width: 1024px) {
+	@media (min-width: 1025px) {
 		#infotext {
 			 position:relative;
 			 right:5px;
@@ -241,7 +241,7 @@
 				});
 			});
 		}
-		if ($(window).width() >= 1024) {
+		if ($(window).width() > 1024) {
 			$(".stuff").insertAfter($("#tabs").children().last())
 			$(".label").click(function(event){
 				event.preventDefault();
@@ -321,14 +321,14 @@
 					{% endfor %}
 				</table>
 				<div style="text-align:left;">
-					{% if product.id == '400.499': %}
-					<a href="{{ url_for('aquacolor', lang='french') }}" class="directions"target="_blank">Colour Swatches</a>
-					{% elif product.id == '770.799': %}
-					<a href="{{ url_for('colour', lang='french') }}" class="directions"target="_blank">Colour Swatches</a>
-					{% elif product.id == '3220' or product.id == '3200' or product.id == '1800' or product.id == '1806' or product.id == '1820' or product.id == '1801': %}
-					<a href="{{ url_for('rightstripper', lang='french') }}" class="directions"target="_blank">Choosing the Right Stripper</a>
-					{% elif product.id == '760.769' or product.id ==  '1600.1603' or product.id ==  '1807' or product.id ==  '1802' or product.id ==  '1604' or product.id ==  '1819' or product.id ==  '1818' or product.id ==  '1817' or product.id ==  '1805' or product.id ==  '1815' or product.id ==  '1803' or product.id ==  '2100' or product.id ==  '1555' or product.id ==  '8100' or product.id ==  '1527' or product.id ==  '1557' or product.id ==  '1566' or product.id ==  '1418': %}
-					<a href="{{ url_for('rightfinish', lang='french') }}" class="directions"target="_blank">Choosing the Right Finish</a>
+					{% if product.id == 400 %}
+					<a href="{{ url_for('aquacolor', lang='french') }}" target="_blank">Colour Swatches</a>
+					{% elif product.id == 770 %}
+					<a href="{{ url_for('colour', lang='french') }}" target="_blank">Colour Swatches</a>
+					{% elif product.id == 3220 or product.id == 3200 or product.id == 1800 or product.id == 1806 or product.id == 1820 or product.id == 1801 %}
+					<a href="{{ url_for('rightstripper', lang='french') }}" target="_blank">Choosing the Right Stripper</a>
+					{% elif product.id == 760.769 or product.id ==  1600.1603 or product.id ==  1807 or product.id ==  1802 or product.id ==  1604 or product.id ==  1819 or product.id ==  1818 or product.id ==  1817 or product.id ==  1805 or product.id ==  1815 or product.id ==  1803 or product.id ==  2100 or product.id ==  1555 or product.id ==  8100 or product.id ==  1527 or product.id ==  1557 or product.id ==  1566 or product.id ==  1418 %}
+					<a href="{{ url_for('rightfinish', lang='french') }}" target="_blank">Choosing the Right Finish</a>
 					{% endif %}
 				</div>
 			</div>
@@ -365,7 +365,7 @@
 				</form>
 			</div>
 			<div class="buybutt">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US""></a>
+				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US"></a>
 			</div>
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
