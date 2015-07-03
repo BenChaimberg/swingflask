@@ -142,9 +142,6 @@ def test():
 @app.route('/home', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
 @app.route('/start', methods=('GET', 'POST'))
-def start():
-	return sidebar_lang_render('start',request)
-
 @app.route('/main', methods=('GET', 'POST'))
 def home():
     return sidebar_lang_render('main',request)
