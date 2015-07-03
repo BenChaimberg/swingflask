@@ -59,6 +59,10 @@
 		#category-table-desktop {
 			width:100%;
 		}
+		#category-table-desktop img {
+			max-height: 150px;
+			max-width: 150px;
+		}
 	}
 </style>
 {% endblock %}
@@ -68,9 +72,9 @@
 <table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
-	<a href="{{ url_for('product', productid='%s' % x.id,lang='french') }}">
-		<img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
-		<div>{{ category.products[x] | replace("<br />"," ") | replace("Peintures Swing","") | safe }}</div>
+	<a href="../product/{{ x.id }}">
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+		<div>{{ x.title | replace("<br />"," ") | replace("Peintures Swing","") | safe }}</div>
 	</a>
 </td></tr>
 {% endfor %}
@@ -78,11 +82,10 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="{{ url_for('product', productid='%s' % x.id,lang='french') }}" style="text-decoration:none;">
-		<div style="margin:0 auto;height:150px;width:150px;background:white;position:absolute;z-index:-1;"></div>
-		<div style="margin:0 auto;height:150px;width:150px;background-image: url({{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }});background-repeat: no-repeat;background-size: contain;background-position: center;border:1px solid #D3D3D3;"></div>
-		</a>
-	<span>{{ x.title | replace("Peintures Swing","") | safe }}</span>
+	<a href="../product/{{ x.id }}" style="text-decoration:none;">
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+	</a>
+	<div>{{ x.title | replace("Peintures Swing","") | safe }}</div>
 </td>
 {% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
 {% endfor %}

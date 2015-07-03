@@ -73,7 +73,7 @@
 {% for x in category.products: %}
 <tr><td>
 	<a href="../product/{{ x.id }}">
-		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 		<div>{{ x.title | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
 	</a>
 </td></tr>
@@ -83,7 +83,7 @@
 {% for x in category.products: %}
 <td>
 	<a href="../product/{{ x.id }}" style="text-decoration:none;">
-		<img src="{{ url_for('static', filename='images/lg/%s' % x.id ) }}" alt='{{ x.name | replace("<br />"," ") }}' title='{{ x.name | replace("<br />"," ") }}'>
+		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 	</a>
 	<div>{{ x.title | replace("Swing Paints","") | safe }}</div>
 </td>
