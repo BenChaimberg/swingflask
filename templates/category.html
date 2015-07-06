@@ -72,7 +72,7 @@
 <table id="category-table-mobile" class="margined">
 {% for x in category.products: %}
 <tr><td>
-	<a href="../product/{{ x.id }}">
+	<a href="{{ url_for('product',productid=x.id) }}">
 		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 		<div>{{ x.title | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
 	</a>
@@ -82,7 +82,7 @@
 <table id="category-table-desktop"><tr>
 {% for x in category.products: %}
 <td>
-	<a href="../product/{{ x.id }}" style="text-decoration:none;">
+	<a href="{{ url_for('product',productid=x.id) }}" style="text-decoration:none;">
 		<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 	</a>
 	<div>{{ x.title | replace("Swing Paints","") | safe }}</div>
