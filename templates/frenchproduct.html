@@ -110,7 +110,7 @@
 			padding-right:5px;
 			display:none;
 		}
-    }
+  }
 	@media (min-width: 1025px) {
 		#infotext {
 			 position:relative;
@@ -128,26 +128,6 @@
 		}
 		#infotable td {
 			 border:1px solid black;
-		}
-		.buystuff {
-			text-align:center;
-			display:none;
-			height:100%;
-			width:100%;
-		}
-		.buybutt {
-			width:49%;
-			height:100%;
-			display:inline;
-		}
-		.buybutt:nth-child(1) {
-			float:left;
-		}
-		.buybutt:nth-child(3) {
-			float:right;
-		}
-		.buybutt img {
-			width:100%;
 		}
 		.stuff {
 			display:none;
@@ -197,6 +177,42 @@
 		.directions.stuff {
 			display:block;
 		}
+		.buystuff {
+			text-align:center;
+			display:none;
+			height:100%;
+			width:100%;
+		}
+		.buybutt:nth-child(1) {
+			background-color: #851C1C;
+		}
+		.buybutt:nth-child(3) {
+			background-color: #325039;
+		}
+		.buybutt {
+			width: 48%;
+			/*height: 100%;*/
+			display: inline-block;
+			border-radius: 32.5px;
+			height: 65px;
+			text-align: center;
+			line-height: 24px;
+			margin: 1%;
+		}
+		.buybutt:nth-child(1) {
+			float:left;
+		}
+		.buybutt:nth-child(3) {
+			float:right;
+		}
+		.buybutt a {
+			color: white;
+			text-decoration: none;
+			font-size: 24px;
+		}
+		.buybutt img {
+			width: 100%;
+		}
 		#tabs {
 			margin-top:15px;
 		}
@@ -208,6 +224,9 @@
 		#image {
 			float: left;
 			margin-right: 10px;
+		}
+		#image img {
+			max-height: 240px;
 		}
 	}
 </style>
@@ -268,8 +287,8 @@
 				$(".buystuff").hide("fast",function(){
 					$(".buybutt").show("fast",function(){
 						var buyhght = $(".buybutt a img").height();
-						$(".buy-now.stuff").css({"height":buyhght+10});
-						$(".buy-now.stuff").css({"line-height":buyhght+10+"px"});
+						$(".purchase.stuff").css({"height":buyhght+10});
+						$(".purchase.stuff").css({"line-height":buyhght+10+"px"});
 					});
 				});
 			});
@@ -297,7 +316,7 @@
 			{% if product.directions %}
 			<p>{{ product.directions | safe }}</p>
 			{% else %}
-			<p>No Directions Available</p>
+			<p>Aucun directions disponibles.</p>
 			{% endif %}
 		</div>
 		<div class="label more-info"><span>Plus d'Information</span></div>
@@ -306,12 +325,12 @@
 				<table style="text-align:center;font-size:10;width:100%">
 					<tr>
 						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
-							<b>Product Code: </b>{{ product.id }}
+							<b>Code de Produit: </b>{{ product.id }}
 						</td>
 					</tr>
 					<tr>
-						<td style="width:58%">Size:</td>
-						<td style="width:42%">Case Pack:</td>
+						<td style="width:58%">Taille:</td>
+						<td style="width:42%">Emballage:</td>
 					</tr>
 					{% for item in product.infotable: %}
 					<tr>
@@ -340,10 +359,11 @@
 				</ul>
 			</div>
 		</div>
-		<div class="label buy-now"><span>Acheter</span></div>
-		<div class="stuff buy-now">
-			<div class="buybutt">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_can.jpg') }}" alt="Buy Canada"></a>
+		<div class="label purchase"><span>Acheter</span></div>
+		<div class="stuff purchase">
+			<p>Appuyez <a href="{{ url_for('locations',lang='french') }}">ici</a> pour trouver des locations qui vend nos produits.</p>
+			<!-- <div class="buybutt">
+				<a href="#">Buy This Product<br />CANADA</a>
 			</div>
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
@@ -353,19 +373,19 @@
 					<select style="font-size:12px" name="productpr">
 					{{ product.forms_can | safe }}
 					</select>
-					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to Canada cart" disabled>
 					{% endif %}
 				</form>
 			</div>
 			<div class="buybutt">
-				<a href="#"><img src="{{ url_for('static', filename='images/buy_butt_us.jpg') }}" alt="Buy US"></a>
+				<a href="#">Buy This Product<br />US</a>
 			</div>
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
@@ -375,24 +395,24 @@
 					<select style="font-size:12px" name="productpr">
 					{{ product.forms_us | safe }}
 					</select>
-					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart">
 					{% else %}
 					<select style="font-size:12px" name="productpr" disabled>
 						<option value=":0.00"> Not Available for Purchase </option>
 					</select>
-					<input type="hidden" value="{{ url_for('product',productid=product.id, lang='french',_external=True) }}" name="return">
+					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					<input type="submit" style="font-size:12px" value="Add to US cart" disabled>
 					{% endif %}
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<div class="label demonstrations"><span>D&#xe9;monstrations</span></div>
 		<div class="stuff demonstrations">
 			{% if product.demo %}
 			<iframe id="iframe" src="//www.youtube-nocookie.com/embed/{{ product.demo }}" frameborder="0" allowfullscreen></iframe>
 			{% else %}
-			<p>No Demonstration Available</p>
+			<p>Aucune démonstration disponible.</p>
 			{% endif %}
 		</div>
 	</div>
