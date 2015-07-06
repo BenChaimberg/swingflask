@@ -1,4 +1,4 @@
-import json,time
+import json, time, re
 from time import localtime, strftime
 from flask import Flask, render_template, url_for, request, abort, redirect
 from flask.ext.login import login_user, logout_user, current_user, login_required, fresh_login_required, LoginManager, UserMixin
@@ -55,10 +55,12 @@ def unauthorized():
 	abort(401)
 
 def sidebar_lang_render(page,request,**kwargs):
-    if request.args.get('lang') == 'french':
-        page = 'french'+ page
     page += '.html'
-    categories = Categories.query.with_entities(Categories.category,Categories.name).order_by(Categories.id.asc()).all()
+    if request.args.get('lang') == 'french':
+        page = 'french' + page
+        categories = Frenchcategories.query.with_entities(Frenchcategories.category,Frenchcategories.name).order_by(Frenchcategories.id.asc()).all()
+    else:
+        categories = Categories.query.with_entities(Categories.category,Categories.name).order_by(Categories.id.asc()).all()
     brands = Brands.query.with_entities(Brands.brand,Brands.name).order_by(Brands.id.asc()).all()
     return render_template(page,categories=categories,brands=brands,**kwargs)
 
@@ -91,9 +93,77 @@ def forbidden(e):
 def forbidden(e):
     return render_template('401.html'), 401
 
-@app.route('/static/<regex("[a-z_.-]*.py[ocd]{0,1}"):uid>')
+@app.route('/static/<regex("[a-z_.-]*\.py[ocd]?"):uid>')
 def error(uid):
 	abort(404)
+
+@app.route('/<regex("[0-9_]+((us)|(can)|(us_can))?\.htm"):uid>')
+def product_old_redirect(uid):
+    uid = re.sub(r'(us|can)?(_.+)?\.htm',r'',uid)
+    return redirect(url_for('product',productid=str(uid)))
+
+@app.route('/<regex("french/[0-9_]+\.htm"):uid>')
+def french_product_old_redirect(uid):
+    uid = re.sub(r'french/',r'',re.sub(r'\.htm',r'',uid))
+    return redirect(url_for('product',productid=str(uid),lang='french'))
+
+@app.route('/<regex(".*more_info_[0-9_]*\.htm"):regid>')
+def more_info_old_redirect(regid):
+    try:
+        uid = int(re.sub(r'_\d+',r'',str(regid)[10:-4]))
+        return redirect(url_for('product',productid=str(uid)))
+    except ValueError as e:
+        uid = re.sub(r'_\d+',r'',str(regid)[17:-4])
+        return redirect(url_for('product',productid=uid))
+
+@app.route('/<regex(".*directions_[0-9_]*\.htm"):regid>')
+def directions_old_redirect(regid):
+    try:
+        uid = int(re.sub(r'_\d+',r'',str(regid)[11:-4]))
+        return redirect(url_for('product',productid=str(uid)))
+    except ValueError as e:
+        uid = re.sub(r'_\d+',r'',str(regid)[18:-4])
+        return redirect(url_for('product',productid=uid))
+
+@app.route('/<regex("((?!a_).)*\.htm"):regid>')
+def category_old_redirect(regid):
+    uid = str(regid)[:-4]
+    category_hash = {'non_toxic':'waxes','oils_varnish_poly':'poly','paint_varnish_removers':'varnishremovers','paint_wallpaper_primers':'primers','specialty_paints_coating':'epoxies','waxes_polishes_cleaners':'waxes','wood_varnish_stains':'stains','accessories':'accessories'}
+    try:
+        return redirect(url_for('category',categoryid=category_hash[uid[0:]]))
+    except KeyError as e:
+        try:
+            return redirect(url_for('category',categoryid=category_hash[uid[7:]],lang='french'))
+        except KeyError as f:
+            abort(404)
+
+@app.route('/<regex("(french/)?a_.+\.htm"):regid>')
+def menu_old_redirect(regid):
+    uid = re.sub(r'^a_',r'',str(regid)[0:-4])
+    menu_hash = {'about_swing':'about','where_to_buy':'locations','faq':'faq','contact_swing':'contact','marketing':'marketing','free_brochure':'brochure'}
+    try:
+        return redirect(url_for(menu_hash[uid]))
+    except KeyError as e:
+        try:
+            return redirect(url_for(menu_hash[uid[9:]],lang='french'))
+        except KeyError as f:
+            abort(404)
+
+@app.route('/refer_a_friend.htm')
+def refer_old_redirect():
+    return redirect(url_for('refer'))
+
+@app.route('/french/refer_a_friend.htm')
+def french_refer_old_redirect():
+    return redirect(url_for('refer',lang='french'))
+
+@app.route('/right_stripper.htm')
+def right_stripper_old_redirect():
+    return redirect(url_for('right_stripper'))
+
+@app.route('/french/right_stripper.htm')
+def french_right_stripper_old_redirect():
+    return redirect(url_for('right_stripper',lang='french'))
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -128,16 +198,6 @@ def adminpage(page):
 def logout():
     logout_user()
     return redirect('/home')
-
-@app.route('/test2')
-def test2():
-    message = Messages.query.filter_by(IDmessage=2046).first_or_404()
-    return str(message.IDmessage)
-
-@app.route('/test')
-def test():
-    message = Messages.query.with_entities(Messages.IDmessage).filter_by(IDmessage=2046).first_or_404()
-    return str(message.IDmessage)
 
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home', methods=('GET', 'POST'))
@@ -313,17 +373,17 @@ def brochure():
 
 @app.route('/product/<productid>')
 def product(productid):
-	if request.args.get('lang') == 'french':
-		product = Frenchproducts.query.filter_by(id=productid).first_or_404()
-		product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
-		product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
-		category=Frenchcategories.query.filter_by(category=product.category).first().name
-	else:
-		product = Products.query.filter_by(id=productid).first_or_404()
-		product.infolist = Infolist.query.filter_by(productid=productid).all()
-		product.infotable = Infotable.query.filter_by(productid=productid).all()
-		category=Categories.query.filter_by(category=product.category).first().name
-	return sidebar_lang_render('product',request,product=product,category=category)
+    if request.args.get('lang') == 'french':
+        product = Frenchproducts.query.filter_by(id=productid).first_or_404()
+        product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
+        product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
+        category=Frenchcategories.query.filter_by(category=product.category).first().name
+    else:
+        product = Products.query.filter_by(id=productid).first_or_404()
+        product.infolist = Infolist.query.filter_by(productid=productid).all()
+        product.infotable = Infotable.query.filter_by(productid=productid).all()
+        category=Categories.query.filter_by(category=product.category).first().name
+    return sidebar_lang_render('product',request,product=product,category=category)
 
 @app.route('/category/<string:categoryid>')
 def category(categoryid):
@@ -340,8 +400,8 @@ def category(categoryid):
 @app.route('/brand/<string:brandid>')
 def brand(brandid):
 	if request.args.get('lang') == 'french':
-		brand = Brands.query.filter_by(brand=brandyid).first_or_404()
-		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Products.brand.like('%'+brandid+'%')).order_by(Frenchproducts.id.asc()).all()
+		brand = Brands.query.filter_by(brand=brandid).first_or_404()
+		brand.products = Frenchproducts.query.with_entities(Frenchproducts.id,Frenchproducts.title).filter(Frenchproducts.brand.like('%'+brandid+'%')).order_by(Frenchproducts.id.asc()).all()
 		brand.dictlen = len(brand.products)
 	else:
 		brand = Brands.query.filter_by(brand=brandid).first_or_404()
