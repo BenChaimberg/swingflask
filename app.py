@@ -375,12 +375,12 @@ def brochure():
 def product(productid):
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
-        product.infolist = Frenchinfolist.query.filter_by(productid=productid).all()
+        product.infolist = Frenchinfolist.query.filter_by(productid=productid).order_by(Frenchinfolist.id.asc()).all()
         product.infotable = Frenchinfotable.query.filter_by(productid=productid).all()
         category=Frenchcategories.query.filter_by(category=product.category).first().name
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
-        product.infolist = Infolist.query.filter_by(productid=productid).all()
+        product.infolist = Infolist.query.filter_by(productid=productid).order_by(Infolist.id.asc()).all()
         product.infotable = Infotable.query.filter_by(productid=productid).all()
         category=Categories.query.filter_by(category=product.category).first().name
     return sidebar_lang_render('product',request,product=product,category=category)
