@@ -62,8 +62,8 @@ app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
 app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://\
-    bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
+    'bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
 db.init_app(app)
 
 
@@ -634,7 +634,7 @@ def product(productid):
         ).order_by(Frenchinfolist.id.asc()).all()
         product.infotable = Frenchinfotable.query.filter_by(
             productid=productid
-        ).all()
+        ).order_by(Frenchinfotable.id.asc()).all()
         category = Frenchcategories.query.filter_by(
             category=product.category
         ).first().name
@@ -645,7 +645,7 @@ def product(productid):
         ).order_by(Infolist.id.asc()).all()
         product.infotable = Infotable.query.filter_by(
             productid=productid
-        ).all()
+        ).order_by(Infotable.id.asc()).all()
         category = Categories.query.filter_by(
             category=product.category
         ).first().name
