@@ -303,7 +303,7 @@
 	});
 </script>
 {% endblock %}
-{% block title %}{{ product.title }}{% endblock %}
+{% block title %}{{ product.title | safe }}{% endblock %}
 {% block categorytext %}{{ category | safe }}{% endblock %}
 {% block content %}
 	<div class="group">
