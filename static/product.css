@@ -1,0 +1,221 @@
+@media (max-width: 1024px) {
+  html, body { margin: 0px; padding: 0px; border: 0px; }
+  body,p {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000000;
+  }
+  a {
+    color: #336633;
+    text-decoration: none;
+  }
+  p { text-align: justify; }
+  #container,#content {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+  }
+  #image {
+    margin-top: 72px;
+    float: none;
+    clear: right;
+    padding:0;
+    position: relative;
+    text-align: center;
+  }
+  #text {
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .label span {
+    padding-left: 5px;
+  }
+  .label {
+    border-top: 1px solid black;
+    width: 100%;
+    clear: right;
+    height: 50px;
+    line-height: 50px;
+    font-size: 2em;
+    color: #336633;
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+  }
+  .label:nth-last-of-type(1) {
+    border-bottom: 1px solid black;
+  }
+  .label:after {
+    float: right;
+    content: "+";
+    padding-right: 5px;
+  }
+  .label.open:after {
+    content: "−";
+  }
+  #infotext {
+    position: relative;
+    right: 5px;
+    top: 5px;
+    width: 50%;
+    text-align: left;
+    font-weight: bold;
+    float: right;
+  }
+  #infotable {
+    position: relative;
+    float: left;
+    width: 50%;
+    padding-bottom: 5px;
+  }
+  #infotable>table {
+    text-align: center;
+    width: 100%;
+  }
+  #infotable tr:nth-child(1) td {
+    vertical-align: middle;
+    background: #eee;
+    height: 24px;
+    width: 100%;
+  }
+  #infotable td {
+    border: 1px solid black;
+    width: 50%;
+  }
+  #product-title {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+  .buystuff {
+    text-align: center;
+    display: none;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  .stuff {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: none;
+  }
+}
+@media (min-width: 1025px) {
+  #infotext {
+     position: relative;
+     right: 5px;
+     top: 5px;
+     width: 50%;
+     text-align: left;
+     font-weight: bold;
+     float: left;
+  }
+  #infotable {
+     width: 50%;
+     padding-bottom: 5px;
+     float: left;
+  }
+  #infotable>table {
+    text-align: center;
+    width: 100%;
+    margin-left: 5px;
+  }
+  #infotable tr:nth-child(1) td {
+    vertical-align: middle;
+    background: #eee;
+    height: 24px;
+    width: 100%;
+  }
+  #infotable td {
+    border: 1px solid black;
+  }
+  .stuff {
+    display: none;
+    padding-top: 25px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+  .stuff a {
+    text-decoration: underline;
+    color: #336633;
+  }
+  .stuff p {
+    margin: 5px;
+  }
+  .label:hover {
+    cursor: pointer;
+    background-color: #CCFFCC;
+  }
+  .demonstrations.label {
+    border-right: 1px solid black !important;
+  }
+  .label {
+    margin: 0;
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding: 2px 0;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: #eee;
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .directions.label:hover {
+    background-color: #FFFFFF;
+  }
+  .directions.label {
+    border-bottom: 0px solid black;
+    background-color: white;
+  }
+  .directions.stuff {
+    display: block;
+  }
+  .buystuff {
+    text-align: center;
+    display: none;
+    height: 100%;
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+  #buyreturn {
+    display: none;
+    text-align: center;
+  }
+  .buybutt:hover, #buyreturn:hover {
+    cursor: pointer;
+  }
+  #tabs {
+    margin-top: 15px;
+  }
+  #iframe {
+    width: 575px;
+    height: 430px;
+    margin: 5px;
+  }
+  #image {
+    float: left;
+    margin-right: 10px;
+  }
+  #image img {
+    max-height: 240px;
+  }
+}
+#buyreturn {
+  display: none;
+  text-align: center;
+}

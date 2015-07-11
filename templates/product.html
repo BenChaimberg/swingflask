@@ -1,294 +1,8 @@
 {% extends "base.html" %}
 {% block head %}
 {{ super() }}
-<style>
-	@media (max-width: 1024px) {
-		html, body { margin: 0px; padding: 0px; border: 0px; }
-		body,p {
-			font-family: Verdana, Arial, Helvetica, sans-serif;
-			font-size: 12px;
-			color: #000000;
-		}
-		a {
-			color: #336633;
-			text-decoration: none;
-		}
-		p { text-align: justify; }
-		#container,#content {
-			width: 100%;
-			height: 100%;
-			margin: 0px;
-		}
-		#image {
-			margin-top: 72px;
-			float: none;
-			clear: right;
-			padding:0;
-			position: relative;
-			text-align: center;
-		}
-		#text {
-			position: relative;
-			padding-left: 5px;
-			padding-right: 5px;
-		}
-		.label span {
-			padding-left: 5px;
-		}
-		.label {
-			border-top: 1px solid black;
-			width: 100%;
-			clear: right;
-			height: 50px;
-			line-height: 50px;
-			font-size: 2em;
-			color: #336633;
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-		.label:nth-last-of-type(1) {
-			border-bottom: 1px solid black;
-		}
-		.label:after {
-			float: right;
-			content: "+";
-			padding-right: 5px;
-		}
-		.label.open:after {
-			content: "−";
-		}
-		#infotext {
-			 position: relative;
-			 right: 5px;
-			 top: 5px;
-			 width: 50%;
-			 text-align: left;
-			 font-weight: bold;
-			 float: right;
-		}
-		#infotable {
-			 position: relative;
-			 float: left;
-			 width: 50%;
-			 padding-bottom: 5px;
-		}
-		#infotable td {
-			 border: 1px solid black;
-		}
-		#product-title {
-			font-weight: bold;
-			font-size: 16px;
-			text-align: center;
-		}
-		.buystuff {
-			text-align: center;
-			display: none;
-			height: 100%;
-			width: 100%;
-			padding-bottom: 10px;
-		}
-		/*.buybutt {
-			width: 49%;
-			display: inline;
-		}
-		.buybutt:nth-child(1) {
-			float: left;
-		}
-		.buybutt:nth-child(3) {
-			float: right;
-		}
-		.buybutt img {
-			height: 100%;
-			width: 100%;
-		}*/
-		.stuff {
-			padding-left: 5px;
-			padding-right: 5px;
-			display: none;
-		}
-  }
-	@media (min-width: 1025px) {
-		#infotext {
-			 position: relative;
-			 right: 5px;
-			 top: 5px;
-			 width: 50%;
-			 text-align: left;
-			 font-weight: bold;
-			 float: left;
-		}
-		#infotable {
-			 width: 50%;
-			 padding-bottom: 5px;
-			 float: left;
-		}
-		#infotable td {
-			 border: 1px solid black;
-		}
-		.stuff {
-			display: none;
-			padding-top: 25px;
-			border-bottom: 1px solid black;
-			border-left: 1px solid black;
-			border-right: 1px solid black;
-		}
-		.stuff a {
-			text-decoration: underline;
-			color: #336633;
-		}
-		.stuff p {
-			margin: 5px;
-		}
-		.label:hover {
-			cursor: pointer;
-			background-color: #CCFFCC;
-		}
-		.label:nth-last-of-type(5) {
-			border-right: 1px solid black;
-		}
-		.label {
-			margin: 0;
-			width: 24.78%;
-			float: left;
-			text-align: center;
-			padding: 2px 0;
-			border-top: 1px solid black;
-			border-left: 1px solid black;
-			border-bottom: 1px solid black;
-			background-color: #eee;
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-		.directions.label:hover {
-			background-color: #FFFFFF;
-		}
-		.directions.label {
-			border-bottom: 0px solid black;
-			background-color: white;
-		}
-		.directions.stuff {
-			display: block;
-		}
-		.buystuff {
-			text-align: center;
-			display: none;
-			height: 100%;
-			width: 100%;
-			margin-top: 6px;
-			margin-bottom: 10px;
-		}
-		/*.buybutt:nth-child(1) {
-			background-color: #851C1C;
-		}
-		.buybutt:nth-child(3) {
-			background-color: #325039;
-		}
-		.buybutt {
-			width: 25%;
-			height: 100%;
-			display: inline-block;
-			border-radius: 40px;
-			height: 40px;
-			text-align: center;
-			line-height: 19px;
-			margin: 5px auto;
-		}
-		.buybutt a {
-			color: white;
-			text-decoration: none;
-		}
-		.buybutt img {
-			width: 100%;
-		}*/
-		.buybutt:hover {
-			cursor: pointer;
-		}
-		#tabs {
-			margin-top: 15px;
-		}
-		#iframe {
-			width: 575px;
-			height: 430px;
-			margin: 5px;
-		}
-		#image {
-			float: left;
-			margin-right: 10px;
-		}
-		#image img {
-			max-height: 240px;
-		}
-	}
-</style>
-<script type='text/javascript'>
-	$(document).ready(function(){
-		if ($(window).width() <= 1024) {
-			$(window).resize(function(){
-				$("iframe").css({"height":.75*$(window).width()-10});
-				$("iframe").css({"width":$(window).width()-10});
-			});
-			$(".label").click(function(){
-				$("iframe").css({"height":.75*$(window).width()-10});
-				$("iframe").css({"width":$(window).width()-10});
-				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
-				$(this).next().slideToggle("slow",function(){
-					$('html, body').animate({scrollTop:$(this).prev().offset().top-71},500,function(){
-						$(".buystuff").hide("fast",function(){
-							$(".purchase p").show("fast");
-						});
-					});
-	    		});
-				$(this).siblings().removeClass("open");
-				$(this).toggleClass("open");
-			});
-		}
-		if ($(window).width() > 1024) {
-			$(".stuff").insertAfter($("#tabs").children().last())
-			$(".label").click(function(event){
-				event.preventDefault();
-				$(this).removeClass("label");
-				var labelclass = $(this).attr("class")
-				$(this).addClass("label");
-				labelclass = "." + labelclass
-				if ($(labelclass).not(".label").css("display") == "none") {
-					$(this).prev().css({"border-right":"1px solid black"});
-					$(this).next().not(".stuff").css({"border-left":"1px solid black"});
-					$(this).css({"border-left":"0px solid black"});
-					$(this).css({"border-right":"0px solid black"});
-					$(this).css({"border-bottom":"0px solid black"});
-					$(this).hover(function(){$(this).css({"background-color":"#FFFFFF"})},function(){$(this).css({"background-color":"#FFFFFF"})});
-					$(labelclass).not(".label").css({"display":"block"})
-				}
-				$(this).css({"background-color":"#FFFFFF"})
-				$(this).siblings().not(labelclass).not(".label").css({"display":"none"});
-				$(this).siblings().not(labelclass).not(".stuff").css({"border-bottom":"1px solid black"});
-				$(".label:nth-last-of-type(1)").css({"border-right":"1px solid black"});
-				$(".label:nth-of-type(1)").css({"border-left":"1px solid black"});
-				$(this).siblings().not(labelclass).not(".stuff").css({"background-color":"#eee"});
-				$(this).siblings().not(labelclass).not(".stuff").hover(function(){$(this).css({"background-color":"#CCFFCC"})},function(){$(this).css({"background-color":"#eee"})});
-				$(".buystuff").hide("fast",function(){
-					$(".purchase p").show("fast");
-				});
-			});
-		}
-		$(".buybutt").click(function(event){
-			event.preventDefault();
-			$('html, body').stop();
-			var clicked = $(".buybutt").index(this);
-			$(".purchase p").hide("fast",function(){
-				$($(".buystuff").get(clicked)).show("fast");
-			});
-		});
-	});
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename='product.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='product.css') }}">
 {% endblock %}
 {% block title %}{{ product.title | safe }}{% endblock %}
 {% block categorytext %}{{ category | safe }}{% endblock %}
@@ -309,24 +23,24 @@
 		<div class="label more-info"><span>More Info</span></div>
 		<div class="stuff more-info group">
 			<div id="infotable">
-				<table style="text-align:center;font-size:10;width:100%">
+				<table>
 					<tr>
-						<td colspan="2" style="vertical-align: middle;background: #f6f6f6;height:24;">
+						<td colspan="2">
 							<b>Product Code: </b>{{ product.id }}
 						</td>
 					</tr>
 					<tr>
-						<td style="width:58%">Size:</td>
-						<td style="width:42%">Case Pack:</td>
+						<td>Size:</td>
+						<td>Case Pack:</td>
 					</tr>
 					{% for item in product.infotable: %}
 					<tr>
-						<td style="font-weight:normal">{{ item.size | safe }}</td>
-						<td style="font-weight:normal">{{ item.quantity | safe }}</td>
+						<td>{{ item.size | safe }}</td>
+						<td>{{ item.quantity | safe }}</td>
 					</tr>
 					{% endfor %}
 				</table>
-				<div style="text-align:left;">
+				<p style="text-align:left;">
 					{% if product.id == 400 %}
 					<a href="{{ url_for('aquacolour') }}" target="_blank">Colour Swatches</a>
 					{% elif product.id == 770 %}
@@ -336,7 +50,7 @@
 					{% elif product.id == 760.769 or product.id ==  1600.1603 or product.id ==  1807 or product.id ==  1802 or product.id ==  1604 or product.id ==  1819 or product.id ==  1818 or product.id ==  1817 or product.id ==  1805 or product.id ==  1815 or product.id ==  1803 or product.id ==  2100 or product.id ==  1555 or product.id ==  8100 or product.id ==  1527 or product.id ==  1557 or product.id ==  1566 or product.id ==  1418 %}
 					<a href="{{ url_for('rightfinish') }}" target="_blank">Choosing the Right Finish</a>
 					{% endif %}
-				</div>
+				</p>
 			</div>
 			<div id="infotext">
 				<ul>
@@ -350,9 +64,6 @@
 		<div class="stuff purchase group">
 			<p>Our products are available at many retail locations. To find a store near you, please click on <a href="{{ url_for('locations') }}">WHERE TO BUY</a>.</p>
 			<p>You may also purchase our products using our online store by clicking <a class="buybutt">BUY NOW CANADA</a> or <a class="buybutt">BUY NOW USA</a>.</p>
-			<!-- <div class="buybutt">
-				<a href="#">Buy This Product<br />CANADA</a>
-			</div> -->
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
@@ -371,9 +82,6 @@
 					{% endif %}
 				</form>
 			</div>
-			<!-- <div class="buybutt">
-				<a href="#">Buy This Product<br />US</a>
-			</div> -->
 			<div class="buystuff">
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
@@ -392,6 +100,7 @@
 					{% endif %}
 				</form>
 			</div>
+			<div id="buyreturn"><a>Return</a></div>
 		</div>
 		<div class="label demonstrations"><span>Demonstrations</span></div>
 		<div class="stuff demonstrations">
