@@ -2,197 +2,173 @@
 {% block head %}
 {{ super() }}
 	<style>
-		#container {
-			width:906px;
+		#content table {
+			font-size: 9px;
+			width: 100%;
+			border-spacing: 0px;
+			border-right: 1px solid black;
+			border-bottom: 1px solid black;
 		}
-		table {
-			font-size:9px;
-			width:906px;
-			margin-left:4px;
+		#content td {
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			border-left: 1px solid black;
+			border-top: 1px solid black;
 		}
-		td {
-			text-align:center;
-			background:#f6f6f6;
-			padding-left:5px;
-			padding-right:5px;
+		#content tr:nth-child(1) td, #content td:nth-child(1) {
+			color: #ffffff;
+			background: #999999;
+			font-weight: bold;
 		}
-		tr:nth-child(1) td, td:nth-child(1) {
-			color:#ffffff;
-			background:#999999;
-			font-weight:bold;
+		#content table a {
+			color: #ffffff;
+			text-decoration: underline;
 		}
-		table a {
-			color:#ffffff;
-		}
-		table a:hover {
-			color:#1D432F;
-			text-decoration:underline;
+		#content table a:hover {
+			color: #336633;
+			text-decoration: underline;
 		}
 	</style>
 {% endblock %}
 {% block title %}Swing Paints - Stain 'n Varnish Colour Swatches{% endblock %}
 {% block categorytext %}Choosing the Right Finish{% endblock %}
 {% block content %}
-	<table border="1" cellspacing="0">
+	<table>
 		<tr>
-			<td colspan="2">PRODUCT</td>
+			<td>PRODUCT</td>
 			<td>FINISH CATEGORY</td>
 			<td>FINISH TYPE</td>
 			<td>SHEEN</td>
 			<td>DURABILITY</td>
 			<td>RESISTANCE TO WATER</td>
-			<td>EASE OF RECOATING</td>
 			<td>DRY TIME TO TOUCH</td>
 			<td>DRY TIME TO RECOAT</td>
 			<td>COVERAGE PER QUART (FT&sup2;)</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1600">ANTIQUAX</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1600.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1600') }}">ANTIQUAX</a></td>
 			<td>SURFACE</td>
 			<td>WAX</td>
 			<td>SEMI&#x2011;GLOSS</td>
 			<td>MEDIUM</td>
 			<td>VERY GOOD</td>
-			<td>EXCELLENT</td>
 			<td>N/A</td>
 			<td>N/A</td>
 			<td>N/A</td>
 		</tr>
 		<tr>
-			<td><a href="/product/760">ANTIQUE DANISH OIL</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/760.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='760') }}">ANTIQUE DANISH OIL</a></td>
 			<td>SURFACE</td>
 			<td>OIL/VARNISH</td>
 			<td>SEMI&#x2011;GLOSS</td>
 			<td>MEDIUM</td>
 			<td>VERY GOOD</td>
-			<td>EXCELLENT</td>
 			<td>2 HOURS</td>
 			<td>8 HOURS</td>
 			<td>150</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1805">ANTIQUE PASTE VARNISH</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1805.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1805') }}">ANTIQUE PASTE VARNISH</a></td>
 			<td>SURFACE</td>
 			<td>URETHANE</td>
 			<td>SEMI&#x2011;GLOSS</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>EXCELLENT</td>
 			<td>15 MINUTES</td>
 			<td>8 HOURS</td>
 			<td>100</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1815">EXTERIOR VARNISH</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1815.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1815') }}">EXTERIOR VARNISH</a></td>
 			<td>SURFACE</td>
 			<td>PHENOLIC&nbsp;TUNG</td>
 			<td>SEMI&#x2011;GLOSS</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>EXCELLENT</td>
 			<td>2 HOURS</td>
 			<td>24 HOURS</td>
 			<td>100</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1818">FAST DRY POLYURETHANE</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1818.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1818') }}">FAST DRY POLYURETHANE</a></td>
 			<td>SURFACE</td>
 			<td>POLYURETHANE</td>
 			<td>SATIN<br />SEMI&#x2011;GLOSS<br />GLOSS</td>
 			<td>HIGH</td>
 			<td>EXCELLENT</td>
-			<td>SANDING</td>
 			<td>1 HOUR</td>
 			<td>2 HOURS</td>
 			<td>100</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1803">LEMON OIL</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1803.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1803') }}">LEMON OIL</a></td>
 			<td>SURFACE</td>
 			<td>OIL</td>
 			<td>GLOSS</td>
 			<td>LOW</td>
 			<td>VERY GOOD</td>
-			<td>EXCELLENT</td>
 			<td>1 HOUR</td>
 			<td>1 HOUR</td>
 			<td>200</td>
 		</tr>
 		<tr>
-			<td><a href="/product/2100">NATUROIL</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/2100.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='2100') }}">NATUROIL</a></td>
 			<td>PENETRATING</td>
 			<td>LOW LUSTRE</td>
 			<td>GLOSS</td>
 			<td>LOW</td>
 			<td>GOOD</td>
-			<td>EXCELLENT</td>
 			<td>N/A</td>
 			<td>1 HOUR</td>
 			<td>250</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1555">NU&#x2011;LUSTRE&#x2011;55</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1555.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1555') }}">NU&#x2011;LUSTRE&#x2011;55</a></td>
 			<td>SURFACE</td>
 			<td>EPOXY</td>
 			<td>HI&#x2011;GLOSS</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>EXCELLENT</td>
 			<td>4 HOURS</td>
 			<td>24 HOURS</td>
 			<td>N/A</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1807">TUNG&#x27;N TEAK OIL</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1807.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1807') }}">TUNG&#x27;N TEAK OIL</a></td>
 			<td>PENETRATING</td>
 			<td>OIL</td>
 			<td>LOW&#x2011;LUSTRE</td>
 			<td>MEDIUM</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>1 HOUR</td>
 			<td>24 HOURS</td>
 			<td>200</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1802">TUNG OIL</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1802.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1802') }}">TUNG OIL</a></td>
 			<td>PENETRATING</td>
 			<td>OIL</td>
 			<td>LOW&#x2011;LUSTRE</td>
 			<td>MEDIUM</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>1 HOUR</td>
 			<td>24 HOURS</td>
 			<td>200</td>
 		</tr>
 		<tr>
-			<td><a href="/product/1418">AQUA WATER&#x2011;BASED VARNISH</a></td>
-			<td><img src="{{ url_for('static', filename='images/tn/1418.jpg') }}" width="50" height="50" border="0"></td>
+			<td><a href="{{ url_for('product', productid='1418') }}">AQUA WATER-BASED VARNISH</a></td>
 			<td>SURFACE</td>
 			<td>URETHANE</td>
 			<td>SATIN<br />SEMI&#x2011;GLOSS<br />GLOSS</td>
 			<td>HIGH</td>
-			<td>EXCELLENT</td>
 			<td>EXCELLENT</td>
 			<td>15 MINUTES</td>
 			<td>2 HOURS</td>
 			<td>100</td>
 		</tr>
 	</table>
-	<p style="text-align:center;">
-		Got a specific finishing problem and you're still not sure which product is best?<br />
-		Feel free to post your question on the <a href="http://www.swingpaints.com/forum.asp">INTERACTIVE FORUM</a>
-		to receive the most PERSONALIZED response
+	<p>
+		Got a specific finishing problem and you're still not sure which product is best? Feel free to post your question on the <a href="{{ url_for('forum') }}">INTERACTIVE FORUM</a> to receive the most PERSONALIZED response.
 	</p>
 {% endblock %}

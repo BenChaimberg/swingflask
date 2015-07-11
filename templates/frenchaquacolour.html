@@ -1,0 +1,10 @@
+{% extends "frenchbase.html" %}
+{% block head %}{{ super() }}<style>#content img{width:100%;}</style>{% endblock %}
+{% block title %}Peintures Swing - &#xc9;chantillons de Couleur d'Aqua{% endblock %}
+{% block categorytext %}&#xc9;chantillons de Couleur d'Aqua{% endblock %}
+{% block content %}
+	<img src="{{ url_for('static', filename='images/swatches/aqua.jpg') }}">
+	<p>
+    Les couleurs montr&#xe9;es ci-dessus sont les reproductions approximatives et seront affect&#xe9;es par diff&#xe9;rents &#xe9;crans d'ordinateur. Le r&#xe9;sultat obtenue sur le bois peut varier. Testez d'abord.
+	</p>
+{% endblock %}

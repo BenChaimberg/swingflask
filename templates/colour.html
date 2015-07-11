@@ -2,25 +2,21 @@
 {% block head %}
 {{ super() }}
 	<style>
-		#container {
-			width:750px;
+		div#content table {
+			width: 100%;
 		}
 		div#content td {
 			padding-bottom:10px;
 			font-size:10px;
-			width:12.5%;
+			width:16.666%;
 			text-align:center;
-		}
-		div#content td img {
-			width:56px;
-			height:86px;
 		}
 	</style>
 {% endblock %}
 {% block title %}Swing Paints - Stain 'n Varnish Colour Swatches{% endblock %}
 {% block categorytext %}Stain 'n Varnish Colour Swatches{% endblock %}
 {% block content %}
-	<table width="750px">
+	<table>
 		<tr>
 			<td><img src="{{ url_for('static', filename='images/swatches/1.jpg') }}"><br />BLACK<br />CHERRY #791</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/2.jpg') }}"><br />STEEL<br />BLUE #789</td>
@@ -28,8 +24,6 @@
 			<td><img src="{{ url_for('static', filename='images/swatches/4.jpg') }}"><br />EMERALD<br />BLUE #788</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/5.jpg') }}"><br />BURGUNDY<br />#786</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/6.jpg') }}"><br />FOREST<br />GREEN #787</td>
-			<td></td>
-			<td></td>
 		</tr>
 		<tr>
 			<td><img src="{{ url_for('static', filename='images/swatches/7.jpg') }}"><br />WHITE<br />BIRCH #779</td>
@@ -38,22 +32,23 @@
 			<td><img src="{{ url_for('static', filename='images/swatches/10.jpg') }}"><br />OLDE<br />GREY #785</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/11.jpg') }}"><br />SAGE<br />GREEN #784</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/12.jpg') }}"><br />SILVER<br />GREY #781</td>
-			<td><img src="{{ url_for('static', filename='images/swatches/13.jpg') }}"><br />CORAL<br />SAND #782</td>
-			<td><img src="{{ url_for('static', filename='images/swatches/14.jpg') }}"><br />FARM<br />BLUE #780</td>
 		</tr>
 		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/13.jpg') }}"><br />CORAL<br />SAND #782</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/14.jpg') }}"><br />FARM<br />BLUE #780</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/15.jpg') }}"><br />TEAK<br />#771</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/16.jpg') }}"><br />MAHOGANY<br />#775</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/17.jpg') }}"><br />SPECIAL<br />WALNUT #777</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/18.jpg') }}"><br />GOLDEN<br />OAK #776</td>
+		</tr>
+		<tr>
 			<td><img src="{{ url_for('static', filename='images/swatches/19.jpg') }}"><br />PECAN<br />#772</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/20.jpg') }}"><br />BLACK<br />OAK #778</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/21.jpg') }}"><br />PURITAN<br />PINE #773</td>
 			<td><img src="{{ url_for('static', filename='images/swatches/22.jpg') }}"><br />DARK<br />OAK #774</td>
 		</tr>
 	</table>
-	<div style="width:75%;text-align:left;margin:0 auto;">
-		The colours shown above are approximate reproductions and will be affected by individual computer screens.
-		Actual results on wood may vary. Test first.
-	</div>
+	<p>
+		The colours shown above are approximate reproductions and will be affected by individual computer screens. Actual results on wood may vary. Test first.
+	</p>
 {% endblock %}

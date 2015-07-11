@@ -1,72 +1,68 @@
-{% extends "base.html" %}
+{% extends "frenchbase.html" %}
 {% block head %}
 {{ super() }}
-	<style>
-		#content ul {
-			list-style: none;
-			padding: 0px;
-			margin: 5px 0;
-			width:25%;
-			float:left;
-			position:relative;
-		}
-		#content li {display: block; vertical-align: top;}
-		#content li:nth-child(1):before{
-			margin-right:10px;
-			content:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
-		}
-		#content li:nth-child(2):before{
-			margin-right:10px;
-			content:url('{{ url_for('static', filename='images/check.jpg') }}');
-		}
-		#content li:nth-child(3):before{
-			margin-right:10px;
-			content:url('{{ url_for('static', filename='images/x.jpg') }}');
-		}
-		#container {
-			width:1042px;
-		}
-		table {
-			font-size:9px;
-			width:500px;
-			margin-left:4px;
-		}
-		td {
-			height:20px;
-			width:20px;
-			text-align:center;
-			padding-left:5px;
-			padding-right:5px;
-		}
-		tr:nth-child(1) td, td:nth-child(1) {
-			color:#ffffff;
-			background:#999999;
-			font-weight:bold;
-		}
-		table a {
-			color:#ffffff;
-		}
-		table a:hover {
-			color:#1D432F;
-			text-decoration:underline;
-		}
-		.check, .circle, .x, .flame{
-			background-repeat:no-repeat;
-			background-position:center center;
-		}
-		.check {
-			background-image:url('{{ url_for('static', filename='images/check.jpg') }}');
-		}
-		.circle {
-			background-image:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
-		}
-		.x {
-			background-image:url('{{ url_for('static', filename='images/x.jpg') }}');
-		}
-		.flame {
-			background-image:url('{{ url_for('static', filename='images/flame.jpg') }}');
-		}
-	</style>
+<style>
+	#content ul {
+		list-style: none;
+		padding: 0px;
+		width:25%;
+		float:left;
+	}
+	#content li {display: block; vertical-align: top;}
+	#content li:nth-child(1):before{
+		margin-right:10px;
+		content:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
+	}
+	#content li:nth-child(2):before{
+		margin-right:10px;
+		content:url('{{ url_for('static', filename='images/check.jpg') }}');
+	}
+	#content li:nth-child(3):before{
+		margin-right:10px;
+		content:url('{{ url_for('static', filename='images/x.jpg') }}');
+	}
+	#content table {
+		font-size:9px;
+		width:100%;
+		margin-left:4px;
+	}
+	#content td {
+		height:20px;
+		width:14.285%;
+		text-align:center;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#content tr:nth-child(1) td, #content td:nth-child(1) {
+		color:#ffffff;
+		background:#999999;
+		font-weight:bold;
+	}
+	#content table a {
+		color:#ffffff;
+		text-decoration:underline;
+	}
+	#content table a:hover {
+		color:#1D432F;
+		text-decoration:underline;
+	}
+	.check, .circle, .x, .flame{
+		background-repeat:no-repeat;
+		background-position:center center;
+	}
+	.check {
+		background-image:url('{{ url_for('static', filename='images/check.jpg') }}');
+	}
+	.circle {
+		background-image:url('{{ url_for('static', filename='images/green_circle.jpg') }}');
+	}
+	.x {
+		background-image:url('{{ url_for('static', filename='images/x.jpg') }}');
+	}
+	.flame {
+		background-image:url('{{ url_for('static', filename='images/flame.jpg') }}');
+	}
+</style>
 {% endblock %}
 {% block title %}Swing Paints - Meilleur Décapant{% endblock %}
 {% block categorytext %}Choisir le Meilleur Décapant{% endblock %}
@@ -74,12 +70,12 @@
 	<table border="1" cellspacing="0">
 		<tr>
 			<td>PRODUIT</td>
-			<td>DÉCAPANT DOUX</td>
-			<td>DÉCAPANT À MEUBLES</td>
-			<td>REPOLISSEUR À BEAUX MEUBLES</td>
-			<td>DÉCAPANT EN PÂTE POUR PEINTURE ET VERNIS</td>
-			<td>SUPER DEGOOPER</td>
-			<td>WOOD BLEACH</td>
+			<td><a href="{{ url_for('product', productid='1820') }}">DÉCAPANT DOUX</a></td>
+			<td><a href="{{ url_for('product', productid='1800') }}">DÉCAPANT À MEUBLES</td>
+			<td><a href="{{ url_for('product', productid='1801') }}">REPOLISSEUR À BEAUX MEUBLES</td>
+			<td><a href="{{ url_for('product', productid='1806') }}">DÉCAPANT EN PÂTE POUR PEINTURE ET VERNIS</td>
+			<td><a href="{{ url_for('product', productid='3200') }}">SUPER DEGOOPER</td>
+			<td><a href="{{ url_for('product', productid='3220') }}">WOOD BLEACH</td>
 		</tr>
 		<tr>
 			<td>PEINTURE<br />-<br />HUILE</td>
@@ -230,8 +226,8 @@
 		<li>MEILLEUR</li>
 		<li>BON</li>
 		<li>NE PAS UTILISER</li>
-	</ul> 
-	<div style="float:right;position:relative;width:75%;margin-top:5px;">
+	</ul>
+	<p>
 		Avez-vous un problème spécifique et vous n'êtes toujours pas sûr du meilleur produit? Sentez-vous libre pour signaler votre question sur le <a style="text-decoration:underline;" href="{{ url_for('forum') }}">FORUM INTERACTIF</a> pour la réponse LA PLUS PERSONNALISÉE.
-	</div>
+	</p>
 {% endblock %}

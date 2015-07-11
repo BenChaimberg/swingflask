@@ -1,0 +1,54 @@
+{% extends "frenchbase.html" %}
+{% block head %}
+{{ super() }}
+	<style>
+		div#content table {
+			width: 100%;
+		}
+		div#content td {
+			padding-bottom:10px;
+			font-size:10px;
+			width:16.666%;
+			text-align:center;
+		}
+	</style>
+{% endblock %}
+{% block title %}Peintures Swing - &#xc9;chantillons de Couleur de Stain 'n Varnish{% endblock %}
+{% block categorytext %}&#xc9;chantillons de Couleur de Stain 'n Varnish{% endblock %}
+{% block content %}
+	<table>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/1.jpg') }}"><br />CERISE<br />NOIR #791</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/2.jpg') }}"><br />BLEU<br />ACIER #789</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/3.jpg') }}"><br />NOIR<br />SATIN&#xc9; #790</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/4.jpg') }}"><br />BLEU<br />&#xc9;MERAUDE #788</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/5.jpg') }}"><br />BOURGOGNE<br />#786</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/6.jpg') }}"><br />VERT<br />FOR&#xca;T #787</td>
+		</tr>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/7.jpg') }}"><br />BOULEAU<br />BLANC #779</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/8.jpg') }}"><br />MOUTARDE<br />#783</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/9.jpg') }}"><br />NATUREL<br />#770</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/10.jpg') }}"><br />GRIS<br />VIEILLOT #785</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/11.jpg') }}"><br />VERT<br />SAUGE #784</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/12.jpg') }}"><br />GRIS<br />ARGENT #781</td>
+		</tr>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/13.jpg') }}"><br />CORAIL<br />SABL&#xc9; #782</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/14.jpg') }}"><br />BLUE<br />CHAMP&#xca;TRE #780</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/15.jpg') }}"><br />TECK<br />#771</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/16.jpg') }}"><br />ACAJOU<br />#775</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/17.jpg') }}"><br />NOYER<br />SP&#xc9; #777</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/18.jpg') }}"><br />CH&#xca;NE<br />DOR&#xc9; #776</td>
+		</tr>
+		<tr>
+			<td><img src="{{ url_for('static', filename='images/swatches/19.jpg') }}"><br />PACANE<br />#772</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/20.jpg') }}"><br />CH&#xca;NE<br />NOIR #778</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/21.jpg') }}"><br />PIN<br />CLAIR #773</td>
+			<td><img src="{{ url_for('static', filename='images/swatches/22.jpg') }}"><br />CH&#xca;NE<br />SOMBRE #774</td>
+		</tr>
+	</table>
+	<p>
+    Les couleurs montr&#xe9;es ci-dessus sont les reproductions approximatives et seront affect&#xe9;es par diff&#xe9;rents &#xe9;crans d'ordinateur. Le r&#xe9;sultat obtenue sur le bois peut varier. Testez d'abord.
+	</p>
+{% endblock %}

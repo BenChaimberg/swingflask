@@ -361,11 +361,13 @@ def about():
     return sidebar_lang_render('about', request)
 
 
+@app.route('/color')
 @app.route('/colour')
 def colour():
     return sidebar_lang_render('colour', request)
 
 
+@app.route('/aquacolor')
 @app.route('/aquacolour')
 def aquacolour():
     return sidebar_lang_render('aquacolour', request)
@@ -402,7 +404,7 @@ def forum(page=1):
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
         msg.html = 'Hello Mark,<br />%s has posted a new message.<br />\
-            Click <a href="http://127.0.0.1:5000/message/%s#%s">here</a> \
+            Click <a href="http://www.swingpaints.com/message/%s#%s">here</a> \
             to view the message board.<br />Yours sincerely,<br />\
             Swing Paints' % (
             new_message.name,
@@ -464,7 +466,7 @@ def message(message_id):
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
         msg.html = 'Hello %s,<br />%s has posted a reply to your message.\
-            <br />Click <a href="http://127.0.0.1:5000/message/%s#%s">here\
+            <br />Click <a href="http://www.swingpaints.com/message/%s#%s">here\
             </a> to view the message board.<br />Yours sincerely,<br />\
             Swing Paints' % (
             last_reply.name,
@@ -517,7 +519,7 @@ def refer():
                 finition du bois, Peintures Swing, et la pens&#xe9;e de vous. \
                 Donc, c&#x27;est la raison de cette \"presque \" e-mail \
                 personnelle. Vous pouvez les trouver \
-                <a href='http://swingpaints.herokuapp.com/?french'>ici</a>.\
+                <a href='http://www.swingpaints.com/?french'>ici</a>.\
                 " % (friendname)
             # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
@@ -539,7 +541,7 @@ def refer():
                 through the pages of the website of this pretty cool wood \
                 finishing company, Swing Paints, and thought of you. So, that \
                 is the reason for this \"almost\" personal email. You can \
-                find them <a href='http://swingpaints.herokuapp.com'>here</a>.\
+                find them <a href='http://www.swingpaints.com'>here</a>.\
                 " % friendname
             # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)

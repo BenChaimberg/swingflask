@@ -5,10 +5,8 @@
 		#content ul {
 			list-style: none;
 			padding: 0px;
-			margin: 5px 0;
 			width:25%;
 			float:left;
-			position:relative;
 		}
 		#content li {display: block; vertical-align: top;}
 		#content li:nth-child(1):before{
@@ -23,30 +21,28 @@
 			margin-right:10px;
 			content:url('{{ url_for('static', filename='images/x.jpg') }}');
 		}
-		#container {
-			width:1042px;
-		}
-		table {
+		#content table {
 			font-size:9px;
-			width:500px;
+			width:100%;
 			margin-left:4px;
 		}
-		td {
+		#content td {
 			height:20px;
-			width:20px;
+			width:14.285%;
 			text-align:center;
 			padding-left:5px;
 			padding-right:5px;
 		}
-		tr:nth-child(1) td, td:nth-child(1) {
+		#content tr:nth-child(1) td, #content td:nth-child(1) {
 			color:#ffffff;
 			background:#999999;
 			font-weight:bold;
 		}
-		table a {
+		#content table a {
 			color:#ffffff;
+			text-decoration:underline;
 		}
-		table a:hover {
+		#content table a:hover {
 			color:#1D432F;
 			text-decoration:underline;
 		}
@@ -74,12 +70,12 @@
 	<table border="1" cellspacing="0">
 		<tr>
 			<td>PRODUCT</td>
-			<td>SOFT STRIPPER</td>
-			<td>FURNITURE STRIPPER</td>
-			<td>FURNITURE REFINISHER</td>
-			<td>HEAVY BODY P&amp;V REMOVER</td>
-			<td>SUPER DEGOOPER</td>
-			<td>WOOD BLEACH</td>
+			<td><a href="{{ url_for('product', productid='1820') }}">SOFT STRIPPER</a></td>
+			<td><a href="{{ url_for('product', productid='1800') }}">FURNITURE STRIPPER</td>
+			<td><a href="{{ url_for('product', productid='1801') }}">FURNITURE REFINISHER</td>
+			<td><a href="{{ url_for('product', productid='1806') }}">HEAVY BODY P&amp;V REMOVER</td>
+			<td><a href="{{ url_for('product', productid='3200') }}">SUPER DEGOOPER</td>
+			<td><a href="{{ url_for('product', productid='3220') }}">WOOD BLEACH</td>
 		</tr>
 		<tr>
 			<td>PAINT<br />-<br />OIL</td>
@@ -230,8 +226,8 @@
 		<li>BEST</li>
 		<li>GOOD</li>
 		<li>DO NOT USE</li>
-	</ul> 
-	<div style="float:right;position:relative;width:75%;margin-top:5px;">
-		Got a specific stripping problem and you're still not sure which product is best? Feel free to post your question on the <a style="text-decoration:underline;" href="{{ url_for('forum') }}">INTERACTIVE FORUM</a> to receive the most PERSONALIZED response
-	</div>
+	</ul>
+	<p>
+		Got a specific stripping problem and you're still not sure which product is best? Feel free to post your question on the <a style="text-decoration:underline;" href="{{ url_for('forum') }}">INTERACTIVE FORUM</a> to receive the most PERSONALIZED response.
+	</p>
 {% endblock %}
