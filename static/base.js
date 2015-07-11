@@ -1,12 +1,15 @@
 $(document).ready(function(){
+	var currentPosition
 	if ($(window).width() <= 1024) {
 		$("#links").insertBefore("#footer");
-		$("#div-search").insertBefore("#sidebar-before");
+		$("#div-search").insertBefore("#category-heading");
 		$("#category-list").prepend("<li>"+$("#category-heading").html()+"</li>");
 		$("#brand-list").prepend("<li>"+$("#brand-heading").html()+"</li>");
 		$("#mobile-header-left").click(function(){
-			var currentPosition = $(document).scrollTop();
-			$("#sidebar").animate({ marginLeft: "0%"} , 500);
+			currentPosition = $(document).scrollTop();
+			$("#sidebar").animate({ left: "0%"} , 500);
+			$("#content").animate({ marginLeft: "75%"} , 500);
+			$("#mobile-header").animate({ left: "75%"} , 500);
 			$("#sidebar").css({"-webkit-overflow-scrolling": "touch"});
 			$("body").css({"overflow":"hidden"});
 			$("body").css({"position":"fixed"});
@@ -16,7 +19,9 @@ $(document).ready(function(){
 			$('html, body').animate({scrollTop:0});
 		});
 		$("#sidebar-before").click(function(){
-			$("#sidebar").animate({ marginLeft: "-100%"} , 500);
+			$("#sidebar").animate({ left: "-100%"} , 500);
+			$("#content").animate({ marginLeft: "0%"} , 500);
+			$("#mobile-header").animate({ left: "0%"} , 500);
 			$("#sidebar").css({"-webkit-overflow-scrolling": "auto"});
 			$("body").css({"overflow":"default"});
 			$("body").css({"position":"default"});
