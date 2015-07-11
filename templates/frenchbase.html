@@ -6,11 +6,40 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='canvas.js') }}"></script>
-		<script type='text/javascript' src="{{ url_for('static', filename='mobile.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='base.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery.color-2.1.2.min.js') }}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
 		<title>{% block title %}{% endblock %}</title>
+		<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://www.swingpaints.com",
+			"sameAs" : [
+				"http://www.facebook.com/circa1850",
+				"http://www.twitter.com/yourProfile",
+				"http://plus.google.com/your_profile"
+			],
+      "logo": "http://www.swingpaints.com/images/top_logo.png",
+			"contactPoint" : [
+				{
+					"@type" : "ContactPoint",
+					"telephone" : "+1-603-643-0396",
+					"contactType" : "customer service",
+					"areaServed" : ["US","CA"],
+					"availableLanguage" : ["English","French"]
+				},
+				{
+					"@type" : "ContactPoint",
+					"telephone" : "+1-514-932-2157",
+					"contactType" : "customer service",
+					"areaServed" : ["US","CA"],
+					"availableLanguage" : ["English","French"]
+				}
+			]
+    }
+    </script>
 		<script>
 			$(document).ready(function(){
 				$(document).find('div.fb-post').each(function() {
@@ -44,12 +73,12 @@
 			<div id="main" class="group">
 				<div id="mainleft" class="group">
 					<div id="logo">
-						<a href="{{ url_for('.home',lang='french') }}"><img src="{{ url_for('static', filename='images/top_logo.png') }}"></a>
+						<a href="{{ url_for('.home',lang='french') }}"><img src="{{ url_for('static', filename='images/top_logo_white.png') }}"></a>
 						<div id="logotext">finition la solution de facilit&#xe9; depuis 1965</div>
 					</div>
 					<div id="div-search">
-						<form method="POST">
-							<input id="search" type="text"></input>
+						<form method="POST" action="/">
+							<input id="search" placeholder="Search" type="search"></input>
 							<input id="submit" type="submit" value="Search"></input>
 						</form>
 					</div>
