@@ -39,19 +39,33 @@ html {overflow-y: scroll;}
 		font-size: 36px;
 		float: left;
 	}
-	#sidebar {
-		overflow-y: scroll;
-		left: -100%;
-		top: 0px;
+	#back-handle {
 		position: fixed;
-		z-index: 3;
 		height: 100%;
 		width: 75%;
-		background: #333333;
+		z-index: 3;
+		-webkit-transform: translate3d(0,0,0);
+		left: -75%;
+		/*background: #000000;*/
+	}
+	#sidebar {
+		box-shadow:inset 0px 0px 50px 5px #000;
+		overflow-y: scroll;
+		left: -75%;
+		top: 0px;
+		position: fixed;
+		z-index: 4;
+		/*-webkit-transform: translate3d(0,0,0);*/
+		height: 100%;
+		width: 75%;
+		background: #444444;
+		border-right: 1px solid #444444;
 	}
 	#sidebar ul {
+		margin-right: 10px;
+		margin-left: 10px;
 		list-style: none;
-		padding-left: 5px;
+		padding-left: 0px;
 	}
 	#sidebar li a {
 		display: block;
@@ -63,11 +77,15 @@ html {overflow-y: scroll;}
 	#sidebar li {
 		border-top: 1px solid white;
 		width: 100%;
-		font-size: 18px;
+		font-size: 14px;
+		font-size: 4.25vw;
+		line-height: 6vw;
+		height: 6vw;
 		color: white;
 	}
 	#sidebar li:nth-of-type(1) {
 		font-weight:bold;
+		border-top-width: 0px;
 	}
 	#footer {
 		font-size: 9px;
