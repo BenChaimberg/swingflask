@@ -68,6 +68,7 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="0" name="currency">
+					<input type="hidden" value="0" name="lg">
 					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					{% if product.forms_can %}
 					<select style="font-size:12px" name="productpr">
@@ -86,6 +87,7 @@
 				<form method="post" action="http://www.aitsafe.com/cf/add.cfm">
 					<input type="hidden" value="4388412" name="userid">
 					<input type="hidden" value="1" name="currency">
+					<input type="hidden" value="0" name="lg">
 					<input type="hidden" value="{{ url_for('product',productid=product.id,_external=True) }}" name="return">
 					{% if product.forms_us %}
 					<select style="font-size:12px" name="productpr">
