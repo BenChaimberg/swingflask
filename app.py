@@ -467,8 +467,8 @@ def message(message_id):
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
         msg.html = 'Hello %s,<br />%s has posted a reply to your message.\
-            <br />Click <a href="http://www.swingpaints.com/message/%s#%s">here\
-            </a> to view the message board.<br />Yours sincerely,<br />\
+            <br />Click <a href="http://www.swingpaints.com/message/%s#%s">\
+            here</a> to view the message board.<br />Yours sincerely,<br />\
             Swing Paints' % (
             last_reply.name,
             new_reply.name,
