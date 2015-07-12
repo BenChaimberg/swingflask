@@ -83,14 +83,15 @@ def login_unauthorized():
 
 
 def sidebar_lang_render(page, request, **kwargs):
-    page += '.html'
+    page_html = ''.join([page, '.html'])
     if request.args.get('lang') == 'french':
-        page = 'french' + page
+        lang_page_html = ''.join(['french', page_html])
         categories = Frenchcategories.query.with_entities(
             Frenchcategories.category,
             Frenchcategories.name
         ).order_by(Frenchcategories.id.asc()).all()
     else:
+        lang_page_html = page_html
         categories = Categories.query.with_entities(
             Categories.category,
             Categories.name
@@ -100,7 +101,7 @@ def sidebar_lang_render(page, request, **kwargs):
         Brands.name
     ).order_by(Brands.id.asc()).all()
     return render_template(
-        page,
+        lang_page_html,
         categories=categories,
         brands=brands,
         **kwargs
