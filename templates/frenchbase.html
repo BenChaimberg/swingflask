@@ -102,13 +102,22 @@
 				</div>
 				<div id="mainright" class="group">
 					<div id="links">
-						<ul>
+						<ul id="links-desktop">
 							<li><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></li>
 							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL DE L'ENTERPRISE</a></li></li>
 							<li><a href="{{ url_for('.locations',lang='french') }}">O&#xd9; ACHETER</a></li>
 							<li><a href="{{ url_for('.faq',lang='french') }}">FAQ</a></li>
 							<li><a href="{{ url_for('.contact',lang='french') }}">COMMUNICATIONS</a></li>
 							<li><a href="http://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=8">VOIR LE PANIER</a></li>
+							<li><a href="?lang=english">ENGLISH</a></li>
+						</ul>
+						<ul id="links-mobile">
+							<li><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></li>
+							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL</a></li></li>
+							<li><a href="{{ url_for('.locations',lang='french') }}">O&#xd9; ACHETER</a></li>
+							<li><a href="{{ url_for('.faq',lang='french') }}">FAQ</a></li>
+							<li><a href="{{ url_for('.contact',lang='french') }}">CONTACTEZ</a></li>
+							<li><a href="http://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=8">PANIER</a></li>
 							<li><a href="?lang=english">ENGLISH</a></li>
 						</ul>
 					</div>
@@ -122,11 +131,17 @@
 					{% block content %}{% endblock %}
 					</div>
 					<div id="footer">
-						<ul>
+						<ul id="footer-desktop">
 							<li><a href="{{ url_for('.forum',lang='french') }}" class="noscript">FORUM INTERACTIF</a></li>
 							<li><a href="{{ url_for('.marketing',lang='french') }}">AIDE DU MARKETING ET DE VENTES</a></li>
 							<li><a href="{{ url_for('.refer',lang='french') }}" class="noscript">DITES-LE &#xc0; UNE AMIE</a></li>
 							<li><a href="{{ url_for('.brochure',lang='french') }}" class="noscript">BROCHURE GRATUITES</a></li>
+						</ul>
+						<ul id="footer-mobile">
+							<li><a href="{{ url_for('.forum',lang='french') }}" class="noscript">FORUM</a></li>
+							<li><a href="{{ url_for('.marketing',lang='french') }}">MARKETING</a></li>
+							<li><a href="{{ url_for('.refer',lang='french') }}" class="noscript">REF&#xc9;R&#xc9;Z</a></li>
+							<li><a href="{{ url_for('.brochure',lang='french') }}" class="noscript">BROCHURE</a></li>
 						</ul>
 						<div id="facebook">
 							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>

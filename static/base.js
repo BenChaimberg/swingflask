@@ -42,19 +42,22 @@ $(document).ready(function(){
 			}
 		});
 		$(window).resize(function(){
-			facebookWidthResize();
-			moveWidth = ($(window).width() * .75);
-			console.log(moveWidth);
-			$("#content, #mainright, html, body").width($(window).width());
-			$("#back-handle").offset({left:-moveWidth});
-			$("#back-handle").css({"width":"75%"});
-			$("#sidebar").css({"width":"75%"});
-			$("#sidebar").offset({ left: -moveWidth});
-			$("#sidebar").css({"-webkit-overflow-scrolling": "auto"});
-			$("#mainright").offset({ left: 0});
-			$("#mainright").css({"position":"default"});
-			$("#mobile-header").width("100%");
-			$("#mobile-header").offset({ left: 0} , 500);
+			if (windowWidth != $(window).width()) {
+				facebookWidthResize();
+				moveWidth = ($(window).width() * .75);
+				console.log(moveWidth);
+				$("#content, #mainright, html, body").width($(window).width());
+				$("#back-handle").offset({left:-moveWidth});
+				$("#back-handle").css({"width":"75%"});
+				$("#sidebar").css({"width":"75%"});
+				$("#sidebar").offset({ left: -moveWidth});
+				$("#sidebar").css({"-webkit-overflow-scrolling": "auto"});
+				$("#mainright").offset({ left: 0});
+				$("#mainright").css({"position":"default"});
+				$("#mobile-header").width("100%");
+				$("#mobile-header").offset({ left: 0} , 500);
+				windowWidth = $(window).width();
+			}
 		});
 	}
 });

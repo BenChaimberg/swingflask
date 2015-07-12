@@ -12,7 +12,7 @@ html {overflow-y: scroll;}
 		text-decoration: none;
 	}
 	p {text-align: justify;}
-	#logo, #canvas, #main-heading, #category-heading, #brand-heading, #facebook, #end, #forum-side {
+	#logo, #canvas, #main-heading, #category-heading, #brand-heading, #facebook, #end, #forum-side, #footer-desktop, #links-desktop {
 		display: none;
 	}
 	#content {
@@ -79,8 +79,8 @@ html {overflow-y: scroll;}
 		width: 100%;
 		font-size: 14px;
 		font-size: 4.25vw;
-		line-height: 6vw;
-		height: 6vw;
+		line-height: 7vw;
+		height: 7vw;
 		color: white;
 	}
 	#sidebar li:nth-of-type(1) {
@@ -102,21 +102,23 @@ html {overflow-y: scroll;}
 	}
 	#footer li:nth-child(odd),#links li:nth-child(odd) {
 		float:right;
-	}
-	#links li:nth-last-of-type(1) a {
-		line-height: 20px;
+		border-left: 1px solid white;
 	}
 	#links li:nth-of-type(1) {
 		border-bottom:1px solid white;
 	}
 	#footer li,#links li {
 		display: block;
-		width: 49.9%;
+		width: 50%;
 		background-color: #1D432F;
 		margin: 0;
 		padding: 0;
 		float: left;
 		height: 40px;
+		font-size: 5vw;
+		-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 	}
 	#footer li:before,#links li:before {
 		content: "";
@@ -127,7 +129,6 @@ html {overflow-y: scroll;}
 		height: 100%;
 		width: 100%;
 		display: block;
-		font-size: initial;
 		color: white;
 	}
 	#mobile-header {
@@ -195,7 +196,7 @@ html {overflow-y: scroll;}
 	a:hover {
 		text-decoration: underline;
 	}
-	#mobile-header, #sidebar-before {
+	#mobile-header, #sidebar-before, #footer-mobile, #links-mobile {
 		display: none;
 	}
 	#center {
