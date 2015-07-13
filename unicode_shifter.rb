@@ -1,6 +1,8 @@
 hash = { "à" => "&#xe0;", "â" => "&#xe2;", "é" => "&#xe9;", "è" => "&#xe8;", "ê" => "&#xea;", "î" => "&#xee;", "ô" => "&#xf4;", "û" => "&#xfb;", "À" => "&#xc0;", "Â" => "&#xc2;", "É" => "&#xc9;", "È" => "&#xc8;", "Ê" => "&#xca;", "Î" => "&#xce;", "Ô" => "&#xd4;", "Û" => "&#xdb;"}
-tst = String.new
-''.split("").each do |c|
-  tst += hash[c] || c
+utxt = String.new
+txt = gets.chomp
+txt.split("").each do |c|
+  utxt += hash[c] || c
 end
-puts tst
+system "clear" or system "cls"
+puts utxt
