@@ -206,6 +206,7 @@
     width: 575px;
     height: 430px;
     margin: 5px;
+    border-width: 0;
   }
   #image {
     float: left;
