@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-	{% block head %}
+	<head>{% block head %}
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="description" content="Circa 1850, Environmentally Friendly Paint and Varnish Remover, Wood Stains, Paints And Varnish, Polishes, Tung and Teak Oils.">
+		<meta name="google-site-verification" content="y5-Xr5brl7InEid-cPwODY_iUbEEbLXERQ9EzB7stHg">
 		<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.0.min.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='canvas.js') }}"></script>
 		<script type='text/javascript' src="{{ url_for('static', filename='base.js') }}"></script>
@@ -58,8 +58,7 @@
 				});
 			});
 		</script>
-	{% endblock %}
-	</head>
+	{% endblock %}</head>
 	<body>
 		<div id="fb-root"></div>
 		<script>
@@ -77,38 +76,32 @@
 			<div id="main" class="group">
 				<div id="mainleft" class="group">
 					<div id="logo">
-						<a href="{{ url_for('.home',lang='french') }}"><img src="{{ url_for('static', filename='images/top_logo_white.png') }}"></a>
+						<a href="{{ url_for('.home',lang='french') }}"><img src="{{ url_for('static', filename='images/top_logo_white.png') }}" alt="logo"></a>
 						<div id="logotext">finition la solution de facilit&#xe9; depuis 1965</div>
 					</div>
 					<div id="div-search">
 						<form method="POST" action="/">
-							<input id="search" placeholder="Search" type="search"></input>
-							<input id="submit" type="submit" value="Search"></input>
+							<input id="search" placeholder="Search" type="search">
+							<input id="submit" type="submit" value="Search">
 						</form>
 					</div>
 					<div id="sidebar">
-					{% block sidebar %}
-						<a id="sidebar-before" href="#">&#x25c4;</a>
-						<h1 id="category-heading">Produits</h1>
-						<ul id="category-list">
-							{% for category in categories %}
-							<li><a href="{{ url_for('.category',categoryid=category[0],lang='french') }}">{{ category[1] | safe }}</a></li>
-							{% endfor %}
+					{% block sidebar %}<h1 id="category-heading">Produits</h1>
+						<ul id="category-list">{% for category in categories %}
+							<li><a href="{{ url_for('.category',categoryid=category[0],lang='french') }}">{{ category[1] | safe }}</a></li>{% endfor %}
 						</ul>
 						<h1 id="brand-heading">Marques</h1>
-						<ul id="brand-list">
-							{% for brand in brands %}
-							<li><a href="{{ url_for('.brand',brandid=brand[0],lang='french') }}">{{ brand[1] | safe }}</a></li>
-							{% endfor %}
+						<ul id="brand-list">{% for brand in brands %}
+							<li><a href="{{ url_for('.brand',brandid=brand[0],lang='french') }}">{{ brand[1] | safe }}</a></li>{% endfor %}
 						</ul>
-					{% endblock %}
-					</div>
+					{% endblock %}</div>
+					<div id="back-handle"></div>
 				</div>
 				<div id="mainright" class="group">
 					<div id="links">
 						<ul id="links-desktop">
 							<li><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></li>
-							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL DE L'ENTERPRISE</a></li></li>
+							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL DE L'ENTERPRISE</a></li>
 							<li><a href="{{ url_for('.locations',lang='french') }}">O&#xd9; ACHETER</a></li>
 							<li><a href="{{ url_for('.faq',lang='french') }}">FAQ</a></li>
 							<li><a href="{{ url_for('.contact',lang='french') }}">COMMUNICATIONS</a></li>
@@ -117,7 +110,7 @@
 						</ul>
 						<ul id="links-mobile">
 							<li><a href="{{ url_for('.home',lang='french') }}">ACCEUIL</a></li>
-							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL</a></li></li>
+							<li><a href="{{ url_for('.about',lang='french') }}">PROFIL</a></li>
 							<li><a href="{{ url_for('.locations',lang='french') }}">O&#xd9; ACHETER</a></li>
 							<li><a href="{{ url_for('.faq',lang='french') }}">FAQ</a></li>
 							<li><a href="{{ url_for('.contact',lang='french') }}">CONTACTEZ</a></li>
@@ -132,7 +125,7 @@
 							<div id="mobile-header-right"><a href="{{ url_for('.home',lang='french') }}">⌂</a></div>
 						</div>
 						<h1 id="main-heading">{% block categorytext %}{% endblock %}</h1>
-					{% block content %}{% endblock %}
+						{% block content %}{% endblock %}
 					</div>
 					<div id="footer">
 						<ul id="footer-desktop">
@@ -151,7 +144,7 @@
 							<div class="fb-like" data-href="http://www.facebook.com/circa1850" data-send="false" data-layout="button_count" data-width="285" data-show-faces="false" data-action="recommend" data-font="lucida grande"></div>
 						</div>
 						<div id="end" style="padding-top:10px;">
-							&copy;2015 Swing Paints Ltd. Last modified: July 3, 2015
+							&copy;2015 Swing Paints Ltd. Last modified: July 13, 2015
 						</div>
 					</div>
 				</div>
