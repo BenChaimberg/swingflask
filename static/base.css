@@ -137,6 +137,7 @@ html {overflow-y: scroll;}
 		background-color: #1D432F;
 		width: 100%;
 		height: 72px;
+		line-height: 72px;
 		position: fixed;
 		color: white;
 	}
@@ -145,26 +146,27 @@ html {overflow-y: scroll;}
 	}
 	#mobile-header-left {
 		font-size: 36px;
-		height: 72px;
-		line-height: 72px;
 		text-align: left;
 		float: left;
-		height: 72px;
 		line-height: 72px;
-		width: 8%;
+		width: 14%;
 		padding-left: 1%;
 	}
 	#mobile-header-center {
 		float: left;
-		width: 82%;
+		width: 70%;
 		text-align: center;
+	}
+	#mobile-header-center img {
+		width: 50%;
+		vertical-align: middle;
 	}
 	#mobile-header-right {
 		float: left;
 		font-size: 48px;
-		height: 72px;
 		line-height: 64px;
-		width: 8%;
+		width: 14%;
+		padding-right: 1%;
 		text-align: right;
 	}
 	#content>:nth-child(3):not(#main-img) {margin-top: 77px;}
