@@ -1,98 +1,36 @@
 {% extends "frenchbase.html" %}
-{% block head %}
-{{ super() }}
-<style>
-	@media (max-width: 500px) {
-		p {
-			width:100%;
-		}
-	}
-	@media (min-width: 500px) and (max-width: 1024px) {
-		p {
-			width:500px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-	}
-	@media (max-width: 1024px) {
-		#category-title {
-			padding-bottom:5px;
-			font-weight:bold;
-			text-align:center;
-			font-size:14px;
-			border-bottom:1px solid black;
-		}
-		#category-table-mobile {
-			width:100%;
-		}
-		#category-table-mobile tr:last-of-type td {
-			border-bottom:none;
-		}
-		#category-table-mobile td {
-			border-bottom:1px solid black;
-			font-size:12px;
-			text-align:center;
-		}
-		#category-table-mobile td a {
-			width:100%;
-			height:100%;
-			display:block;
-			color:black;
-		}
-		#category-table-mobile td a img {
-			width:40%;
-		}
-		#category-table-desktop {
-			display:none;
-		}
-    }
-	@media (min-width: 1025px) {
-		#category-table-mobile {
-			display:none;
-		}
-		#category-table-desktop td {
-			font-size:12px;
-			width:33%;
-			text-align:center;
-			vertical-align:top;
-		}
-		#category-table-desktop {
-			width:100%;
-		}
-		#category-table-desktop img {
-			max-height: 150px;
-			max-width: 150px;
-		}
-	}
-</style>
+{% block head %}{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='category.css') }}">
 {% endblock %}
 {% block title %}{{ category.name | safe }}{% endblock %}
 {% block categorytext %}{{ category.name | safe }}{% endblock %}
 {% block content %}
-<table id="category-table-mobile" class="margined">
+<div id="category-table-mobile" class="margined">
 {% for x in category.products: %}
-<tr><td>
-	<a href="{{ url_for('product',productid=x.id,lang='french') }}">
-		<img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
-		<div>{{ x.title | replace("<br />"," ") | replace("Peintures Swing","") | safe }}</div>
+<div class="product group">
+	<a href="{{ url_for('product', productid=x.id, lang='french') }}">
+		<div class="product-img">
+			<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+		</div>
+		<div class="product-text group">
+			<div class="product-title">{{ x.title | replace("<br />"," ") | replace("Peintures Swing","") | safe }}</div>
+			<p>{{ x.text | truncate(end='...') | safe }}</p>
+		</div>
 	</a>
-</td></tr>
+</div>
 {% endfor %}
-</tr></table>
-<table id="category-table-desktop"><tr>
-{% for x in category.products: %}
-<td>
-	<a href="{{ url_for('product',productid=x.id,lang='french') }}" style="text-decoration:none;">
-		<img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
-	</a>
-	<div>{{ x.title | replace("Peintures Swing","") | safe }}</div>
-</td>
-{% if loop.index is divisibleby(3) %}</tr><tr>{% endif %}
-{% endfor %}
-{% if category.dictlen is not divisibleby(5) %}
-{% for i in range(0,5-(category.dictlen % 5)) %}
-<td></td>
-{% endfor %}
-{% endif %}
-</tr></table>
+</div>
+<table id="category-table-desktop">
+	<tr>{% for x in category.products: %}
+		<td>
+			<a href="{{ url_for('product', productid=x.id, lang='french') }}" style="text-decoration:none;">
+				<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+			</a>
+			<div>{{ x.title | replace("Peintures Swing","") | safe }}</div>
+		</td>{% if loop.index is divisibleby(3) %}
+	</tr>
+	<tr>{% endif %}{% endfor %}{% if category.dictlen is not divisibleby(5) %}{% for i in range(0,4-(category.dictlen % 5)) %}
+		<td></td>{% endfor %}{% endif %}
+	</tr>
+</table>
 {% endblock %}

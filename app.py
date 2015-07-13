@@ -658,7 +658,8 @@ def category(categoryid):
         ).first_or_404()
         category.products = Frenchproducts.query.with_entities(
             Frenchproducts.id,
-            Frenchproducts.title
+            Frenchproducts.title,
+            Frenchproducts.text
         ).filter_by(
             category=categoryid
         ).order_by(Frenchproducts.id.asc()).all()
@@ -669,7 +670,8 @@ def category(categoryid):
         ).first_or_404()
         category.products = Products.query.with_entities(
             Products.id,
-            Products.title
+            Products.title,
+            Products.text
         ).filter_by(category=categoryid).order_by(Products.id.asc()).all()
         category.dictlen = len(category.products)
     return sidebar_lang_render('category', request, category=category)
