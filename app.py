@@ -306,34 +306,24 @@ def home():
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
 def forumsearch(search_string):
-    while True:
-        plus = search_string.find('+')
-        if plus > 0:
-            search_string = search_string[:plus]+' '+search_string[plus+1:]
-        else:
-            break
+    unplus_search_string = re.sub(r'\+',' ',search_string)
     if request.query_string == 'french':
         return sidebar_lang_render('forumsearch', request)
     else:
         return sidebar_lang_render(
             'forumsearch',
             request,
-            searchitems=forum_search(search_string)
+            searchitems=forum_search(unplus_search_string)
         )
 
 
 @app.route('/search/<search_string>', methods=('GET', 'POST'))
 def search(search_string):
-    while True:
-        plus = search_string.find('+')
-        if plus > 0:
-            search_string = search_string[:plus]+' '+search_string[plus+1:]
-        else:
-            break
+    unplus_search_string = re.sub(r'\+',' ',search_string)
     return sidebar_lang_render(
         'search',
         request,
-        searchitems=products_search(search_string)
+        searchitems=products_search(unplus_search_string)
     )
 
 
