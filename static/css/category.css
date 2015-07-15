@@ -71,7 +71,6 @@
     display: block;
     padding: 5px 3%;
     opacity: 0;
-    font-size: .7vw
   }
   .product-overlay:hover {
     text-decoration: none;

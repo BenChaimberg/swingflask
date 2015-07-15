@@ -15,6 +15,9 @@ var resizings = function(){
 $(window).resize(function(){
 	resizings();
 });
+$(window).load(function(){
+	resizings();
+});
 var canvassing = function(){
 	resizings();
 	var ctx = $("#canvas").get(0).getContext('2d');
