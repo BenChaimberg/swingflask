@@ -15,18 +15,17 @@ var resizings = function(){
 $(window).resize(function(){
 	resizings();
 });
-$(window).load(function(){
-	resizings();
-});
 var canvassing = function(){
 	resizings();
 	var ctx = $("#canvas").get(0).getContext('2d');
+	// ctx.setTransform(1, 0, 0, 1, 0, 0);
+	// ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.scale(2, 2);
 	ctx.strokeStyle = "grey";
 	ctx.fillStyle = "black";
 	var startx = 10;
 	var starty = 19;
-	times = ($("#sidebar").height()-5)/(2*starty);
+	times = ($("#sidebar").height()-$("#footer").height()-$("#content").css('margin-bottom').replace("px","")-5)/(2*starty);
 	for (i=1;i<times;i++){
 		ctx.beginPath();
 		ctx.moveTo(startx, starty*i-2);
