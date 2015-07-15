@@ -50,7 +50,6 @@ class RegexConverter(BaseConverter):
 
 
 def regex_replace(value, find=r'', replace=r''):
-    print "value", value
     return re.sub(find, replace, value)
 
 MAIL_SERVER = 'mail.swingpaints.com'
