@@ -66,8 +66,7 @@ html {overflow-y: scroll;}
 	#sidebar li {
 		border-top: 1px solid white;
 		width: 100%;
-		font-size: 14px;
-		font-size: 4.25vw;
+		font-size: 3.75vw;
 		line-height: 7vw;
 		height: 7vw;
 		color: white;
