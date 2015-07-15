@@ -47,17 +47,66 @@
   #category-table-mobile {
     display: none;
   }
+  #category-table-desktop {
+    width: 100%;
+  }
   #category-table-desktop td {
     font-size: 12px;
     width: 33%;
     text-align: center;
     vertical-align: top;
+    position: relative;
+    padding-top: 10px;
   }
-  #category-table-desktop {
-    width: 100%;
+  .product-overlay {
+    position: absolute;
+    width: 94%;
+    height: 180px;
+    background-color: transparent;
+    color: transparent;
+    z-index: 5;
+    text-align: justify;
+    padding: 5px;
+    display: block;
+    padding: 5px 3%;
+  }
+  .product-overlay:hover {
+    background-color: rgba(102,51,0,.9);
+    color: white;
+    text-decoration: none;
+    -webkit-animation: fadein .3s;
+       -moz-animation: fadein .3s;
+        -ms-animation: fadein .3s;
+         -o-animation: fadein .3s;
+            animation: fadein .3s;
+  }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .product-overlay a {
+    color: transparent;
+  }
+  .product-overlay:hover a {
+    color: white;
   }
   #category-table-desktop img {
-    max-height: 150px;
-    max-width: 150px;
+    height: 150px;
   }
 }

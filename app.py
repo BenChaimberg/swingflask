@@ -48,6 +48,10 @@ class RegexConverter(BaseConverter):
         super(RegexConverter, self).__init__(url_map)
         self.regex = items[0]
 
+
+def regex_replace(value, find=r'', replace=r''):
+    return re.sub(find, replace, value)
+
 MAIL_SERVER = 'mail.swingpaints.com'
 MAIL_PORT = 25
 MAIL_USE_TLS = False
@@ -65,6 +69,7 @@ login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
     'bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
 db.init_app(app)
+app.jinja_env.filters['regex_replace'] = regex_replace
 
 
 class User(UserMixin):
