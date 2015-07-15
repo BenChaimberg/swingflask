@@ -50,6 +50,7 @@ class RegexConverter(BaseConverter):
 
 
 def regex_replace(value, find=r'', replace=r''):
+    print "value", value
     return re.sub(find, replace, value)
 
 MAIL_SERVER = 'mail.swingpaints.com'
@@ -688,7 +689,8 @@ def brand(brandid):
         brand = Brands.query.filter_by(brand=brandid).first_or_404()
         brand.products = Frenchproducts.query.with_entities(
             Frenchproducts.id,
-            Frenchproducts.title
+            Frenchproducts.title,
+            Frenchproducts.text
         ).filter(
             Frenchproducts.brand.like('%'+brandid+'%')
         ).order_by(Frenchproducts.id.asc()).all()
@@ -697,7 +699,8 @@ def brand(brandid):
         brand = Brands.query.filter_by(brand=brandid).first_or_404()
         brand.products = Products.query.with_entities(
             Products.id,
-            Products.title
+            Products.title,
+            Products.text
         ).filter(
             Products.brand.like('%'+brandid+'%')
         ).order_by(Products.id.asc()).all()
