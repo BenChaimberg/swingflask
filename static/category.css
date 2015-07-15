@@ -61,45 +61,19 @@
   .product-overlay {
     position: absolute;
     width: 94%;
-    height: 180px;
+    height: 175px;
     background-color: transparent;
     color: transparent;
     z-index: 5;
     text-align: justify;
-    padding: 5px;
     display: block;
     padding: 5px 3%;
+    opacity: 0;
   }
   .product-overlay:hover {
-    background-color: rgba(102,51,0,.9);
-    color: white;
     text-decoration: none;
-    -webkit-animation: fadein .3s;
-       -moz-animation: fadein .3s;
-        -ms-animation: fadein .3s;
-         -o-animation: fadein .3s;
-            animation: fadein .3s;
   }
-  @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @-moz-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @-ms-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @-o-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+
   .product-overlay a {
     color: transparent;
   }
@@ -108,5 +82,8 @@
   }
   #category-table-desktop img {
     height: 150px;
+  }
+  #category-table-desktop div {
+    height: 30px;
   }
 }
