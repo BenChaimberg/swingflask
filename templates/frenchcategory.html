@@ -10,7 +10,7 @@
 <div class="product group">
 	<a href="{{ url_for('product', productid=x.id, lang='french') }}">
 		<div class="product-img">
-			<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+			<img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 		</div>
 		<div class="product-text group">
 			<div class="product-title">{{ x.title | replace("<br />"," ") | replace("Peintures Swing","") | safe }}</div>
@@ -24,7 +24,7 @@
 	<tr>{% for x in category.products: %}
 		<td>
 			<a href="{{ url_for('product', productid=x.id, lang='french') }}" style="text-decoration:none;">
-				<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
+				<img src="{{ url_for('static', filename='images/french/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 			</a>
 			<div>{{ x.title | replace("Peintures Swing","") | safe }}</div>
 		</td>{% if loop.index is divisibleby(3) %}
