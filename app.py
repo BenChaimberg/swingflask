@@ -633,9 +633,12 @@ def product(productid):
         product.infotable = Frenchinfotable.query.filter_by(
             productid=productid
         ).order_by(Frenchinfotable.id.asc()).all()
-        category = Frenchcategories.query.filter_by(
-            category=product.category
-        ).first().name
+        try:
+            category = Frenchcategories.query.filter_by(
+                category=product.category
+            ).first().name
+        except AttributeError:
+            category = ''
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
         product.infolist = Infolist.query.filter_by(
@@ -644,9 +647,12 @@ def product(productid):
         product.infotable = Infotable.query.filter_by(
             productid=productid
         ).order_by(Infotable.id.asc()).all()
-        category = Categories.query.filter_by(
-            category=product.category
-        ).first().name
+        try:
+            category = Categories.query.filter_by(
+                category=product.category
+            ).first().name
+        except AttributeError:
+            category = ''
     return sidebar_lang_render(
         'product',
         request,
