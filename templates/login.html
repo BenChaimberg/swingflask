@@ -1,5 +1,19 @@
 {% extends "base.html" %}
-{% block categorytext %}Login{% endblock %}
+{% block categorytext %}Administrator Login{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+#content div:last-of-type {
+  text-align: center;
+}
+#content div {
+  clear: right;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+{% endblock %}
 {% block content %}
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -12,8 +26,8 @@
 {% endwith %}
 <form method="POST" action="/login">
     {{ login_form.hidden_tag() }}
-    <div style="clear:right;">{{ login_form.username.label }} {{ login_form.username(size=20) }} {% for error in login_form.username.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;">{{ login_form.password.label }} {{ login_form.password(size=20) }} {% for error in login_form.password.errors %} {{ error | safe }} {% endfor %}</div>
-    <div style="clear:right;"><input type="submit" value="Submit"></div>
+    <div>{{ login_form.username.label }} {{ login_form.username(size=20, style='float: right;') }} {% for error in login_form.username.errors %} {{ error | safe }} {% endfor %}</div>
+    <div>{{ login_form.password.label }} {{ login_form.password(size=20, style='float: right;') }} {% for error in login_form.password.errors %} {{ error | safe }} {% endfor %}</div>
+    <div><input type="submit" value="Submit"></div>
 </form>
 {% endblock %}
