@@ -3,6 +3,14 @@ from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+class Newsletter(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    email = db.Column(db.String(250), nullable=False)
+
+    def __init__(self, email):
+        self.email = email
+
+
 class Infotable(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     productid = db.Column(db.Integer(), nullable=False)

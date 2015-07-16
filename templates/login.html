@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block categorytext %}Login{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <form method="POST" action="/login">
     {{ login_form.hidden_tag() }}
     <div style="clear:right;">{{ login_form.username.label }} {{ login_form.username(size=20) }} {% for error in login_form.username.errors %} {{ error | safe }} {% endfor %}</div>

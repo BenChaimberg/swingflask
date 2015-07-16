@@ -1,17 +1,25 @@
-import json
 import time
 import re
-from flask import Flask, render_template, url_for, request, abort, redirect
+import os
+from flask import (
+    Flask,
+    render_template,
+    url_for,
+    request,
+    abort,
+    redirect,
+    flash
+)
 from flask.ext.login import (
     login_user,
     logout_user,
-    # current_user,
+    current_user,
     login_required,
-    fresh_login_required,
     LoginManager,
     UserMixin
 )
 from flask.ext.mail import Mail, Message
+from flask.ext.admin import Admin
 from werkzeug.routing import BaseConverter
 from search_products import products_search
 from search_forum import forum_search
@@ -25,19 +33,21 @@ from forms import (
 )
 from models import (
     db,
-    Infotable,
-    Infolist,
-    Categories,
     Brands,
-    Products,
-    Frenchinfotable,
-    Frenchinfolist,
+    Brochures,
+    Categories,
     Frenchcategories,
+    Frenchinfolist,
+    Frenchinfotable,
     Frenchproducts,
+    Infolist,
+    Infotable,
     Messages,
-    Replies,
-    Brochures
+    Newsletter,
+    Products,
+    Replies
 )
+from admin import CustomModelView, CustomFileAdmin, ProtectedAdminIndexView
 
 RECAPTCHA_PUBLIC_KEY = '6LfnzAMTAAAAAD9RAodwUlTy8ju-gB_kb7_reass'
 RECAPTCHA_PRIVATE_KEY = '6LfnzAMTAAAAAHvSepf1FyNClFx78uoVK7FBAfW2'
@@ -66,25 +76,61 @@ app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
 app.url_map.converters['regex'] = RegexConverter
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "users.login"
+admin = Admin(
+    index_view=ProtectedAdminIndexView()
+)
+admin.init_app(app)
+admin.add_view(
+    CustomModelView(Brands, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Brochures, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Categories, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Frenchcategories, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Frenchinfolist, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Frenchinfotable, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Frenchproducts, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Infolist, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Infotable, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Messages, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Newsletter, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Products, db.session, category='Database')
+)
+admin.add_view(
+    CustomModelView(Replies, db.session, category='Database')
+)
+admin.add_view(
+    CustomFileAdmin(
+        os.path.join(os.path.dirname(__file__), 'static'),
+        '/static/',
+        name='Static Files'
+    )
+)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
     'bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
 db.init_app(app)
 app.jinja_env.filters['regex_replace'] = regex_replace
-
-
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
-
-
-@login_manager.user_loader
-def load_user(userid):
-    return User(userid)
-
-
-@login_manager.unauthorized_handler
-def login_unauthorized():
-    abort(401)
 
 
 def sidebar_lang_render(page, request, **kwargs):
@@ -254,9 +300,46 @@ def french_right_stripper_old_redirect():
     return redirect(url_for('right_stripper', lang='french'))
 
 
+@app.route('/401')
+def e401():
+    abort(401)
+
+
+@app.route('/403')
+def e403():
+    abort(403)
+
+
+@app.route('/404')
+def e404():
+    abort(404)
+
+
+@app.route('/500')
+def e500():
+    abort(500)
+
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+
+@login_manager.user_loader
+def load_user(userid):
+    return User(userid)
+
+
+@login_manager.unauthorized_handler
+def login_unauthorized():
+    abort(401)
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
+    if current_user.is_authenticated():
+        return redirect('/admin/')
     if login_form.validate_on_submit():
         if (
             login_form.username.data == 'administrator' and
@@ -265,32 +348,9 @@ def login():
             user = load_user(login_form.username.data)
             login_user(user)
             return redirect('/admin/')
-    return render_template("login.html", login_form=login_form)
-
-
-@app.route('/admin/')
-@fresh_login_required
-def admin_root():
-    return render_template('admin.html')
-
-
-@app.route('/admin/<page>')
-@fresh_login_required
-def admin_page(page):
-    if page == 'brochure':
-        with open('brochurelist', 'r') as file:
-            data = json.load(file)
-        return render_template('adminbrochure.html', data=data, len=len(data))
-    elif page == 'newsletter':
-        with open('mailinglist', 'r') as file:
-            data = json.load(file)
-        return render_template(
-            'adminnewsletter.html',
-            data=data,
-            len=len(data)
-        )
-    else:
-        abort(404)
+        else:
+            flash('Invalid credentials')
+    return sidebar_lang_render("login", request, login_form=login_form)
 
 
 @app.route("/logout")
@@ -311,7 +371,7 @@ def home():
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
 def forumsearch(search_string):
-    unplus_search_string = re.sub(r'\+',' ',search_string)
+    unplus_search_string = re.sub(r'\+', ' ', search_string)
     if request.query_string == 'french':
         return sidebar_lang_render('forumsearch', request)
     else:
@@ -324,7 +384,7 @@ def forumsearch(search_string):
 
 @app.route('/search/<search_string>', methods=('GET', 'POST'))
 def search(search_string):
-    unplus_search_string = re.sub(r'\+',' ',search_string)
+    unplus_search_string = re.sub(r'\+', ' ', search_string)
     return sidebar_lang_render(
         'search',
         request,
