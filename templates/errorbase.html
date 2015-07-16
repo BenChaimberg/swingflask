@@ -1,0 +1,50 @@
+<html lang="en">
+	<head>
+    {% block head %}
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="description" content="Swing Paints Error Page">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+		<style>
+			p,
+      div {
+        text-align: center;
+        color:white;
+      }
+			a {
+        color: white;
+        text-decoration: none;
+      }
+			a:hover {
+        text-decoration: underline;
+      }
+      body {
+    		font-family: Verdana, Arial, Helvetica, sans-serif;
+        background-color: #C1C1C1;
+      }
+      #main-error {
+        color: #FFFFFF;
+        font-weight: bold;
+        padding: 100px;
+        font-size: 36px;
+      }
+		</style>
+    {% endblock %}
+	</head>
+	<body>
+		<p id="main-error">
+			{% block code %}{% endblock %}<br /><br />
+			{% block descen %}{% endblock %}<br /><br />
+			{% block descfr %}{% endblock %}
+		</p>
+		<div>
+      {% block options %}
+			[ <a href="{{ url_for('home') }}">Home | Acceuil</a> ]<br />
+			[ <a href="javascript:history.back()">Back | Retour</a> ]
+      {% endblock %}
+		</div>
+	</body>
+</html>

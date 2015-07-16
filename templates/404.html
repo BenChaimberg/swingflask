@@ -1,24 +1,8 @@
-<html lang="en">
-	<head>
-		<title>Peintures Swing Paints - Erreur 404 Error</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-		<style>
-			div{text-align:center;color:white;}
-			a:hover{text-decoration:underline;}
-			a{color:white;}
-		</style>
-	</head>
-	<body bgcolor="#C1C1C1">
-		<div style="color:#FFFFFF;font-weight:bold;padding:100px;font-size:36px;">
-			404<br /><br />
-			The file you were searching for was not found on this server.<br /><br />
-			Le fichier que vous cherchiez n'a pas été trouvée sur ce serveur.
-		</div>
-		<div>
-			[ <a href="/home">Home | Acceuil</a> ]<br />
-			[ <a href="javascript:history.back()">Back | Retour</a> ]
-		</div>
-	</body>
-</html>
+{% extends 'errorbase.html' %}
+{% block title %}Peintures Swing Paints - Erreur 404 Error{% endblock %}
+{% block code %}404{% endblock %}
+{% block descen %}The file you were searching for was not found on this server.{% endblock %}
+{% block descfr %}Le fichier que vous cherchiez n'a pas été trouvée sur ce serveur.{% endblock %}
+{% block options %}
+{{ super() }}
+{% endblock %}
