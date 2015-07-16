@@ -47,7 +47,19 @@ from models import (
     Products,
     Replies
 )
-from admin import CustomModelView, CustomFileAdmin, ProtectedAdminIndexView
+from admin import (
+    MessageModelView,
+    ReplyModelView,
+    ProductModelView,
+    CategoryModelView,
+    BrandModelView,
+    NewsletterModelView,
+    InfoTableModelView,
+    InfoListModelView,
+    BrochureModelView,
+    CustomFileAdmin,
+    ProtectedAdminIndexView
+)
 
 RECAPTCHA_PUBLIC_KEY = '6LfnzAMTAAAAAD9RAodwUlTy8ju-gB_kb7_reass'
 RECAPTCHA_PRIVATE_KEY = '6LfnzAMTAAAAAHvSepf1FyNClFx78uoVK7FBAfW2'
@@ -82,49 +94,50 @@ admin = Admin(
 )
 admin.init_app(app)
 admin.add_view(
-    CustomModelView(Brands, db.session, category='Database')
+    BrandModelView(Brands, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Brochures, db.session, category='Database')
+    BrochureModelView(Brochures, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Categories, db.session, category='Database')
+    CategoryModelView(Categories, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Frenchcategories, db.session, category='Database')
+    CategoryModelView(Frenchcategories, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Frenchinfolist, db.session, category='Database')
+    InfoListModelView(Frenchinfolist, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Frenchinfotable, db.session, category='Database')
+    InfoTableModelView(Frenchinfotable, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Frenchproducts, db.session, category='Database')
+    ProductModelView(Frenchproducts, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Infolist, db.session, category='Database')
+    InfoListModelView(Infolist, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Infotable, db.session, category='Database')
+    InfoTableModelView(Infotable, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Messages, db.session, category='Database')
+    MessageModelView(Messages, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Newsletter, db.session, category='Database')
+    NewsletterModelView(Newsletter, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Products, db.session, category='Database')
+    ProductModelView(Products, db.session, category='Database')
 )
 admin.add_view(
-    CustomModelView(Replies, db.session, category='Database')
+    ReplyModelView(Replies, db.session, category='Database')
 )
 admin.add_view(
     CustomFileAdmin(
         os.path.join(os.path.dirname(__file__), 'static'),
         '/static/',
-        name='Static Files'
+        name='Static Files',
+        endpoint='static'
     )
 )
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \

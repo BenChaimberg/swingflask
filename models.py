@@ -7,7 +7,7 @@ class Newsletter(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     email = db.Column(db.String(250), nullable=False)
 
-    def __init__(self, email):
+    def __init__(self, email=''):
         self.email = email
 
 
@@ -17,7 +17,7 @@ class Infotable(db.Model):
     size = db.Column(db.Text(convert_unicode=True), nullable=False)
     quantity = db.Column(db.Text(convert_unicode=True), nullable=False)
 
-    def __init__(self, productid, size, quantity):
+    def __init__(self, productid='', size='', quantity=''):
         self.productid = productid
         self.size = size
         self.quantity = quantity
@@ -28,7 +28,7 @@ class Infolist(db.Model):
     productid = db.Column(db.Integer(), nullable=False)
     infolist = db.Column(db.Text(convert_unicode=True), nullable=True)
 
-    def __init__(self, productid, infolist):
+    def __init__(self, productid='', infolist=''):
         self.productid = productid
         self.infolist = infolist
 
@@ -38,7 +38,7 @@ class Categories(db.Model):
     category = db.Column(db.Text(), nullable=False)
     name = db.Column(db.Text(), nullable=False)
 
-    def __init__(self, category, name):
+    def __init__(self, category='', name=''):
         self.category = category
         self.name = name
 
@@ -48,7 +48,7 @@ class Brands(db.Model):
     brand = db.Column(db.Text(), nullable=False)
     name = db.Column(db.Text(), nullable=False)
 
-    def __init__(self, brand, name):
+    def __init__(self, brand='', name=''):
         self.brand = brand
         self.name = name
 
@@ -66,15 +66,15 @@ class Products(db.Model):
 
     def __init__(
         self,
-        id,
-        title,
-        demo,
-        text,
-        directions,
-        forms_us,
-        forms_can,
-        category,
-        brand
+        id='',
+        title='',
+        demo='',
+        text='',
+        directions='',
+        forms_us='',
+        forms_can='',
+        category='',
+        brand=''
     ):
         self.id = id
         self.title = title
@@ -93,7 +93,7 @@ class Frenchinfotable(db.Model):
     size = db.Column(db.Text(convert_unicode=True), nullable=False)
     quantity = db.Column(db.Text(convert_unicode=True), nullable=False)
 
-    def __init__(self, productid, size, quantity):
+    def __init__(self, productid='', size='', quantity=''):
         self.productid = productid
         self.size = size
         self.quantity = quantity
@@ -104,7 +104,7 @@ class Frenchinfolist(db.Model):
     productid = db.Column(db.Integer(), nullable=False)
     infolist = db.Column(db.Text(convert_unicode=True), nullable=True)
 
-    def __init__(self, productid, infolist):
+    def __init__(self, productid='', infolist=''):
         self.productid = productid
         self.infolist = infolist
 
@@ -114,7 +114,7 @@ class Frenchcategories(db.Model):
     category = db.Column(db.Text(), nullable=False)
     name = db.Column(db.Text(), nullable=False)
 
-    def __init__(self, category, name):
+    def __init__(self, category='', name=''):
         self.category = category
         self.name = name
 
@@ -131,16 +131,16 @@ class Frenchproducts(db.Model):
     brand = db.Column(db.Text(), nullable=False)
 
     def __init__(
-        self,
-        id,
-        title,
-        demo,
-        text,
-        directions,
-        forms_us,
-        forms_can,
-        category,
-        brand
+        self='',
+        id='',
+        title='',
+        demo='',
+        text='',
+        directions='',
+        forms_us='',
+        forms_can='',
+        category='',
+        brand=''
     ):
         self.id = id
         self.title = title
@@ -165,13 +165,13 @@ class Messages(db.Model):
 
     def __init__(
         self,
-        subject,
-        name,
-        email,
-        notifyemail,
-        mdate,
-        message,
-        last_rdate
+        subject='',
+        name='',
+        email='',
+        notifyemail='',
+        mdate='',
+        message='',
+        last_rdate=''
     ):
         self.subject = subject
         self.name = name
@@ -194,13 +194,13 @@ class Replies(db.Model):
 
     def __init__(
         self,
-        IDmessage,
-        subject,
-        name,
-        email,
-        notifyemail,
-        message,
-        rdate
+        IDmessage='',
+        subject='',
+        name='',
+        email='',
+        notifyemail='',
+        message='',
+        rdate=''
     ):
         self.IDmessage = IDmessage
         self.subject = subject
@@ -225,15 +225,15 @@ class Brochures(db.Model):
 
     def __init__(
         self,
-        contact,
-        email,
-        address,
-        city,
-        province,
-        postal_code,
-        country,
-        xdate,
-        language
+        contact='',
+        email='',
+        address='',
+        city='',
+        province='',
+        postal_code='',
+        country='',
+        xdate='',
+        language=''
     ):
         self.contact = contact
         self.email = email
