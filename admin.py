@@ -124,6 +124,31 @@ class InfoListModelView(CustomModelView):
 class CustomFileAdmin(FileAdmin):
     list_template = 'admin/right_links_file.html'
 
+    def git_commit(self, name):
+        bashCommand = 'git commit -m "admin edit ' + str(name) + '"'
+        import subprocess
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        print output
+
+    def git_add(self, name):
+        bashCommand = 'git add ' + str(name)
+        import subprocess
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        print output
+
+    def git_rm(self, name):
+        bashCommand = 'git rm ' + str(name)
+        import subprocess
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        print output
+
+    def on_file_upload(self, full_path, dir_base, filename):
+        self.git_add(filename)
+        self.git_commit(filename)
+
     def is_accessible(self):
         return current_user.is_authenticated()
 
