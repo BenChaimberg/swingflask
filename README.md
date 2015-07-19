@@ -10,5 +10,8 @@ $ sudo pip install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
 (venv) $ pip install -r requirements.txt
+# If pip raises 'EnvironmentError: mysql_config not found':
+# Install mysql and add it to your PATH:
+# export PATH=$PATH:/usr/local/mysql/bin
 (venv) $ python app.py
 ```
