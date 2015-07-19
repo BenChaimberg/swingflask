@@ -292,13 +292,13 @@ html {overflow-y: scroll;}
 	display: block;
 	color: white;
 }
-#links-desktop  {
+#links  {
 	text-align: center;
-	margin: 0 15px;
 }
-#links-desktop  ul {
+#links-desktop {
 	list-style: none;
 	padding: 0;
+	margin: 0 15px;
 }
 #links-desktop  li {
 	display: inline;
