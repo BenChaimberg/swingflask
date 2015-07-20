@@ -1,0 +1,68 @@
+ul#notifyemail {
+  list-style:none;
+  display:inline;
+  padding:0;
+}
+#content label {
+  float:left;
+}
+#content input:not(#submit):not(#notifyemail-0):not(#notifyemail-1),textarea {
+  float:right;
+  width:75%;
+}
+textarea {
+  height:100px;
+}
+#notifyemail label,.recaptcha_input_area input {
+  float:none;
+}
+#submit {
+  width:auto;
+}
+#notifyemail input {
+  float:none;
+  width:auto;
+}
+#notifyemail li {
+  display:inline;
+  padding-right:10px;
+}
+form div div {
+  clear:right;
+}
+#forum-side a {
+  color:white;
+}
+ul#forum-side {
+  list-style:none;
+  padding:0;
+  margin:0 auto;
+}
+#forum-side li {
+  margin:0 auto;
+}
+@media (max-width: 1024px) {
+  #recaptcha_table td:nth-of-type(3) {
+    display: none;
+  }
+}
+#pages ul {
+  list-style: none;
+  padding: 0;
+}
+#pages li {
+  display: inline;
+}
+#pages li:before {
+  content: '|';
+  color: #336633;
+}
+#pages li:nth-of-type(1):before {
+  content: '';
+}
+#pages a {
+  padding: 0 5px;
+}
+#search-form {
+  text-align: center;
+}

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Swing Paints Forum{% endblock %}
+{% block title %}Swing Paints Forum - Page {{ messages.page }}{% endblock %}
 {% block head %}
 {{ super() }}
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forum.css') }}">
+		<script type='text/javascript' src="{{ url_for('static', filename='js/forum.js') }}"></script>
 		<style>
 			tr:nth-child(even) {
 				background-color:#CCCCCC;
@@ -17,69 +19,8 @@
 				border-bottom:1px solid black;
 				background-color:#FFFFFF;
 			}
-			ul#notifyemail {
-				list-style:none;
-				display:inline;
-				padding:0;
-			}
-			#content label {
-				float:left;
-			}
-			#content input:not(#submit):not(#notifyemail-0):not(#notifyemail-1),textarea {
-				float:right;
-				width:75%;
-			}
-			textarea {
-				height:100px;
-			}
-			#notifyemail label,.recaptcha_input_area input {
-				float:none;
-			}
-			#submit {
-				width:auto;
-			}
-			#notifyemail input {
-				float:none;
-				width:auto;
-			}
-			#notifyemail li {
-				display:inline;
-				padding-right:10px;
-			}
-			form div div {
-				clear:right;
-			}
-			@media (max-width: 1024px) {
-				#recaptcha_table td:nth-of-type(3) {
-					display: none;
-				}
-			}
-			#pages ul {
-				list-style: none;
-				padding: 0;
-			}
-			#pages li {
-				display: inline;
-			}
-			#pages li:before {
-				content: '|';
-				color: #336633;
-			}
-			#pages li:nth-of-type(1):before {
-				content: '';
-			}
-			#pages a {
-				padding: 0 5px;
-			}
-			#search-form {
-				text-align: center;
-			}
 		</style>
 		<script>
-			$(window).load(function(){
-				$(".recaptcha_input_area").find("input").attr("placeholder","Type the text in the image");
-				console.log('edited');
-			});
 			$(document).ready(function(){
 				for (i=1;i<={{ messages.pages }};i++){
 					if (i == {{ messages.page }}) {
@@ -104,7 +45,7 @@
 				<input id="submit" type="submit" value="Search Forum">
 		    </div>
 		</form>
-		<table id="write">
+		<table>
 			<tr>
 				<td>Subject</td>
 				<td>Author</td>
@@ -117,16 +58,12 @@
 				<td>{{ message.name }}</td>
 				<td>{{ message.replies }}</td>
 				<td>{{ message.date }}</td>
-				{% if current_user.is_authenticated() %}
-				<td>Delete</td>
-				{% endif %}
 			</tr>
 			{% endfor %}
 		</table>
 		<div style="text-align:center;margin:0 auto;">Select page:
 			<form>
-				<select id="pages" onChange="window.location.href='/forum/'+this.value">
-				</select>
+				<select id="pages" onChange="window.location.href='/forum/'+this.value"></select>
 			</form>
 		</div>
 		<h2>New message:</h2>
