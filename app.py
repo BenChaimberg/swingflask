@@ -141,7 +141,7 @@ admin.add_view(
     )
 )
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
-    'bchaimberg:webmaster@104.131.172.123:3306/circa1850_swingpaints_com'
+    'bchaimberg:webmaster@184.154.219.237:3306/circa1850_swingpaints_com'
 db.init_app(app)
 app.jinja_env.filters['regex_replace'] = regex_replace
 
