@@ -36,6 +36,37 @@ class MessageForm(Form):
     recaptcha = RecaptchaField()
 
 
+class FrenchMessageForm(Form):
+    name = TextField(
+        "Nom",
+        [wtforms.validators.Required('Veuillez entrez votre nom')]
+    )
+    email = TextField(
+        "Adresse de Couriel",
+        [
+            wtforms.validators.Required(
+                'Veuillez entrez votre adresse de courriel'
+            ),
+            wtforms.validators.Email()
+        ]
+    )
+    subject = TextField(
+        "Sujet",
+        [wtforms.validators.Required('Veuillez entrez un sujet')]
+    )
+    message = TextAreaField(
+        "Message",
+        [wtforms.validators.Required('Veuillez entrez un message')]
+    )
+    notifyemail = RadioField(
+        'Voulez-vous la notification d&#x0027;un r&#x00E9;ponse &#x00E0; votre\
+            message?\
+        ',
+        choices=[('True', 'Oui'), ('False', 'Non')]
+    )
+    recaptcha = RecaptchaField()
+
+
 class LoginForm(Form):
     username = TextField(
         "Username:",

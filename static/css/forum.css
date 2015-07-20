@@ -1,45 +1,49 @@
-ul#notifyemail {
-  list-style:none;
-  display:inline;
-  padding:0;
-}
 #content label {
-  float:left;
+  float: left;
 }
 #content input:not(#submit):not(#notifyemail-0):not(#notifyemail-1),textarea {
-  float:right;
-  width:75%;
+  float: right;
+  width: 75%;
 }
 textarea {
-  height:100px;
+  height: 100px;
 }
 #notifyemail label,.recaptcha_input_area input {
-  float:none;
+  float: none;
 }
 #submit {
-  width:auto;
+  width: auto;
 }
-#notifyemail input {
-  float:none;
-  width:auto;
+#message-form input[type=submit] {
+  float: right;
+}
+#notifyemail {
+  list-style: none;
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+#notifyemail {
+  float: right;
+  width: auto;
 }
 #notifyemail li {
-  display:inline;
-  padding-right:10px;
+  display: inline;
+  padding-right: 10px;
 }
 form div div {
-  clear:right;
+  clear: right;
 }
 #forum-side a {
-  color:white;
+  color: white;
 }
 ul#forum-side {
-  list-style:none;
-  padding:0;
-  margin:0 auto;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
 }
 #forum-side li {
-  margin:0 auto;
+  margin: 0 auto;
 }
 @media (max-width: 1024px) {
   #recaptcha_table td:nth-of-type(3) {

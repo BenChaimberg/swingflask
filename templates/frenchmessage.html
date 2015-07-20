@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
-{% block title %}Swing Paints Forum - {{ message.subject | safe }}{% endblock %}
+{% extends 'frenchbase.html' %}
+{% block title %}Forum Peintures Swing - {{ message.subject | safe }}{% endblock %}
 {% block head %}
 {{ super() }}
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forum.css') }}">
-		<script type='text/javascript' src="{{ url_for('static', filename='js/forum.js') }}"></script>
+		<script type='text/javascript' src="{{ url_for('static', filename='js/frenchforum.js') }}"></script>
 		<style>
 			td:nth-child(1) {
 				width:15%;
@@ -52,15 +52,15 @@
 			});
 		</script>
 {% endblock %}
-{% block categorytext %}Forum Message{% endblock %}
+{% block categorytext %}Message de Forum{% endblock %}
 {% block content %}
 		<table id="write">
 			<tr style="background-color:#666666;color:white;">
-				<td style="font-weight:bold;">From</td>
+				<td style="font-weight:bold;">De</td>
 				<td style="font-weight:bold;">Message</td>
 			</tr>
 		</table>
-		<h2>New message:</h2>
+		<h2>Nouveau message:</h2>
 		<form id='message-form' method="POST" action="{{ url_for('.message',message_id=message.IDmessage) }}">
 		{{ message_form.hidden_tag() }}
 			<div style="float:left;width:100%;"><ul>
@@ -82,12 +82,12 @@
 				{% endif %}
 				</div>
 			{% endfor %}
-				<div><input id="submit" type="submit" value="Submit"></div>
+				<div><input id="submit" type="submit" value="Soumettez"></div>
 		    </div>
 		</form>
 		<ul id="forum-side" style="position:fixed;color:white;top:150px;">
-			<li>[ <a id="top" href="#">top &#8593;</a> ]</li>
-			<li>[ <a id="forum-back" href="{{ url_for('forum', page=1) }}">forum &#8592;</a> ]</li>
-			<li>[ <a id="bottom" href="#">bottom &#8595;</a> ]</li>
+			<li>[ <a id="top" href="#">haut &#8593;</a> ]</li>
+			<li>[ <a id="forum-back" href="{{ url_for('forum', page=1, lang='french') }}">forum &#8592;</a> ]</li>
+			<li>[ <a id="bottom" href="#">bas &#8595;</a> ]</li>
 		</ul>
 {% endblock %}

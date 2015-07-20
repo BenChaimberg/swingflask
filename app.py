@@ -25,6 +25,7 @@ from search_products import products_search
 from search_forum import forum_search
 from forms import (
     MessageForm,
+    FrenchMessageForm,
     LoginForm,
     BrochureForm,
     FrenchBrochureForm,
@@ -455,7 +456,10 @@ def rightfinish():
 @app.route('/forum/', methods=('GET', 'POST'))
 @app.route('/forum/<int:page>', methods=('GET', 'POST'))
 def forum(page=1):
-    message_form = MessageForm()
+    if request.args.get('lang') == 'french':
+        message_form = FrenchMessageForm()
+    else:
+        message_form = MessageForm()
     if message_form.validate_on_submit():
         new_message = Messages(
             message_form.subject.data,
@@ -469,19 +473,31 @@ def forum(page=1):
         db.session.add(new_message)
         db.session.commit()
         msg = Message()
-        msg.recipients = ['mchaimberg@swingpaints.com']
+        msg.recipients = ['bchaimberg@swingpaints.com']
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
-        msg.subject = 'Swing Paints Forum Reply'
-        msg.html = 'Hello Mark,<br />%s has posted a new message.<br />\
-            Click <a href="http://www.swingpaints.com/message/%s#%s">here</a> \
-            to view the message board.<br />Yours sincerely,<br />\
-            Swing Paints' % (
-            new_message.name,
-            new_message.IDmessage,
-            new_message.mdate
-        )
+        msg.subject = 'Swing Paints Forum Message'
+        msg.html = 'Hello Mark,<br />' + \
+            message_form.name.data + \
+            ' has posted a new message.<br />Click <a href="' + \
+            url_for(
+                'message',
+                message_id=new_message.IDmessage,
+                _external=True
+            ) + \
+            '">here</a> to view the message board.<br />Yours sincerely,\
+            <br />Swing Paints'
         mail.send(msg)
-        return redirect('/message/'+str(new_message.IDmessage))
+        if request.args.get('lang') == 'french':
+            return redirect(url_for(
+                'message',
+                message_id=new_message.IDmessage,
+                lang='french'
+            ))
+        else:
+            return redirect(url_for(
+                'message',
+                message_id=new_message.IDmessage
+            ))
     messages = Messages.query.with_entities(
         Messages.IDmessage,
         Messages.name,
@@ -507,11 +523,22 @@ def forum(page=1):
 
 @app.route('/message/<int:message_id>', methods=('GET', 'POST'))
 def message(message_id):
-    message_form = MessageForm()
+    if request.args.get('lang') == 'french':
+        message_form = FrenchMessageForm()
+    else:
+        message_form = MessageForm()
+    message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
     if message_form.validate_on_submit():
-        last_reply = Replies.query.filter_by(
+        print message_form.notifyemail.data
+        last_reply = Replies.query.with_entities(
+            Replies.name,
+            Replies.email,
+            Replies.notifyemail
+        ).filter_by(
             IDmessage=message_id
         ).order_by(Replies.rdate.desc()).first()
+        if not last_reply:
+            last_reply = message
         new_reply = Replies(
             message_id,
             message_form.subject.data,
@@ -531,20 +558,22 @@ def message(message_id):
         msg = Message()
         if last_reply.notifyemail == 'True':
             msg.recipients = [last_reply.email]
-        msg.bcc = ['mchaimberg@swingpaints.com']
+        msg.bcc = ['bchaimberg@swingpaints.com']
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
-        msg.html = 'Hello %s,<br />%s has posted a reply to your message.\
-            <br />Click <a href="http://www.swingpaints.com/message/%s#%s">\
-            here</a> to view the message board.<br />Yours sincerely,<br />\
-            Swing Paints' % (
-            last_reply.name,
-            new_reply.name,
-            new_reply.IDmessage,
-            new_reply.rdate
-        )
+        msg.html = 'Hello ' + \
+            last_reply.name + \
+            ',<br />' + \
+            new_reply.name +\
+            ' has posted a reply to your message.<br />Click <a href="' + \
+            url_for(
+                'message',
+                message_id=message_id,
+                _external=True
+            ) + \
+            '">here</a> to view the message board.<br />Yours sincerely,<br />\
+            Swing Paints'
         mail.send(msg)
-    message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
     message.date = time.strftime(
         '%b %d, %Y<br />%H:%M:%S',
         time.strptime(str(message.mdate), '%Y-%m-%d %H:%M:%S')
