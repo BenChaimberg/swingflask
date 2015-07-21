@@ -805,8 +805,8 @@ def category(categoryid):
             Frenchproducts.id,
             Frenchproducts.title,
             Frenchproducts.text
-        ).filter_by(
-            category=categoryid
+        ).filter(
+            Products.category.like('%'+categoryid+'%')
         ).order_by(Frenchproducts.id.asc()).all()
         category.dictlen = len(category.products)
     else:
@@ -817,7 +817,9 @@ def category(categoryid):
             Products.id,
             Products.title,
             Products.text
-        ).filter_by(category=categoryid).order_by(Products.id.asc()).all()
+        ).filter(
+            Products.category.like('%'+categoryid+'%')
+        ).order_by(Products.id.asc()).all()
         category.dictlen = len(category.products)
     return sidebar_lang_render('category', request, category=category)
 
