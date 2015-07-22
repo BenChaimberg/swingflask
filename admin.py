@@ -126,7 +126,7 @@ class CustomFileAdmin(FileAdmin):
     list_template = 'admin/right_links_file.html'
 
     def git_commit(self, name):
-        bashCommand = 'git commit -m "admin edit ' + str(name) + '"'
+        bashCommand = 'git commit -m "admin_edit_' + str(name) + '"'
         import subprocess
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output = process.communicate()[0]
