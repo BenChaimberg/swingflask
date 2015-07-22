@@ -824,7 +824,7 @@ def category(categoryid):
             Frenchproducts.title,
             Frenchproducts.text
         ).filter(
-            Products.category.like('%'+categoryid+'%')
+            Frenchproducts.category.like('%'+categoryid+'%')
         ).order_by(Frenchproducts.id.asc()).all()
         category.dictlen = len(category.products)
     else:
