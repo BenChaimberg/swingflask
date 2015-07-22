@@ -1,6 +1,7 @@
 import time
 import re
 import os
+import werkzeug
 from flask import (
     Flask,
     render_template,
@@ -344,6 +345,23 @@ def right_stripper_old_redirect():
 @app.route('/french/right_stripper.htm')
 def french_right_stripper_old_redirect():
     return redirect(url_for('right_stripper', lang='french'))
+
+@app.route('/forum.asp')
+def forum_old_redirect():
+    try:
+        return redirect(url_for('forum', page=request.args.get('pg')))
+    except ValueError:
+        abort(404)
+
+
+@app.route('/viewmessage.asp')
+def message_old_redirect():
+    try:
+        return redirect(url_for('message', message_id=request.args.get('id')))
+    except ValueError:
+        abort(404)
+    except werkzeug.routing.BuildError:
+        abort(404)
 
 
 @app.route('/401')
