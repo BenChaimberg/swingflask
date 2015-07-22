@@ -48,19 +48,20 @@ class BrandModelView(CustomModelView):
         'name',
     ]
 
+
 class BrochureModelView(CustomModelView):
     column_default_sort = 'idbrochure'
-    column_filters = ('idbrochure','language',)
+    column_filters = ('idbrochure', 'language',)
     form_columns = [
         'contact',
-		'email',
-		'address',
-		'city',
-		'province',
-		'postal_code',
-		'country',
-		'xdate',
-		'language',
+        'email',
+        'address',
+        'city',
+        'province',
+        'postal_code',
+        'country',
+        'xdate',
+        'language',
     ]
 
 
@@ -68,56 +69,56 @@ class NewsletterModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)
     form_columns = [
-		'email'
+        'email'
     ]
 
 
 class MessageModelView(CustomModelView):
     column_default_sort = 'IDmessage'
-    column_filters = ('IDmessage','mdate','last_rdate','notifyemail',)
+    column_filters = ('IDmessage', 'mdate', 'last_rdate', 'notifyemail',)
     form_columns = [
-		'subject',
-		'name',
-		'email',
-		'notifyemail',
-		'mdate',
-		'message',
-		'last_rdate',
+        'subject',
+        'name',
+        'email',
+        'notifyemail',
+        'mdate',
+        'message',
+        'last_rdate',
     ]
 
 
 class ReplyModelView(CustomModelView):
     column_default_sort = 'IDreply'
-    column_filters = ('IDmessage','IDreply','rdate','notifyemail',)
+    column_filters = ('IDmessage', 'IDreply', 'rdate', 'notifyemail',)
     form_columns = [
-		'IDmessage',
+        'IDmessage',
         'subject',
-		'name',
-		'email',
-		'notifyemail',
-		'message',
-		'rdate',
+        'name',
+        'email',
+        'notifyemail',
+        'message',
+        'rdate',
     ]
 
 
 class InfoTableModelView(CustomModelView):
     column_default_sort = 'id'
-    column_filters = ('id','productid',)
+    column_filters = ('id', 'productid',)
     form_columns = [
         'id',
-		'productid',
-		'size',
-		'quantity'
+        'productid',
+        'size',
+        'quantity'
     ]
 
 
 class InfoListModelView(CustomModelView):
     column_default_sort = 'id'
-    column_filters = ('id','productid',)
+    column_filters = ('id', 'productid',)
     form_columns = [
         'id',
-		'productid',
-		'infolist'
+        'productid',
+        'infolist'
     ]
 
 
