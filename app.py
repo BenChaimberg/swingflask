@@ -337,6 +337,16 @@ def french_refer_old_redirect():
     return redirect(url_for('refer', lang='french'))
 
 
+@app.route('/main.html')
+def main_old_redirect():
+    return redirect(url_for('home'))
+
+
+@app.route('/french/main.html')
+def french_main_old_redirect():
+    return redirect(url_for('home', lang='french'))
+
+
 @app.route('/right_stripper.htm')
 def right_stripper_old_redirect():
     return redirect(url_for('right_stripper'))
