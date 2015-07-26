@@ -1,5 +1,6 @@
 from sqlalchemy import or_
 from models import Products
+import re
 
 
 def products_search(search_string):
@@ -25,17 +26,8 @@ def products_search(search_string):
             Products.directions.like('%'+search_item+'%')
         )).all()
     for product in products:
-        while not product.text.find('<') == -1:
-            product.text = product.text[:product.text.find('<')] + \
-                ' ' + \
-                product.text[product.text.find('>')+1:]
-        while not product.directions.find('<') == -1:
-            product.directions = product.directions[
-                :
-                product.directions.find('<')
-            ] + \
-                ' ' + \
-                product.directions[product.directions.find('>')+1:]
+        product.text = re.sub(r'<[^>]*>', r'', product.text)
+        product.directions = re.sub(r'<[^>]*>', r'', product.directions)
     for product in products:
         found_site = [product, []]
         found_sites.append(found_site)
