@@ -12,7 +12,7 @@ $(document).ready(function(){
         $('html, body').animate({scrollTop:$(this).prev().offset().top-71},500,function(){
           $("#buyreturn").hide("fast");
           $(".buystuff").hide("fast",function(){
-            $(".purchase p").show("fast");
+            $(".purchase p").not("#buyreturn").show("fast");
           });
         });
         });
@@ -46,14 +46,14 @@ $(document).ready(function(){
       $(this).siblings().not(labelclass).not(".stuff").hover(function(){$(this).css({"background-color":"#CCFFCC"})},function(){$(this).css({"background-color":"#eee"})});
       $("#buyreturn").hide("fast");
       $(".buystuff").hide("fast",function(){
-        $(".purchase p").show("fast");
+        $(".purchase p").not("#buyreturn").show("fast");
       });
     });
   }
   $("#buyreturn").click(function(event){
     $("#buyreturn").hide("fast");
     $(".buystuff").hide("fast",function(){
-      $(".purchase p").show("fast");
+      $(".purchase p").not("#buyreturn").show("fast");
     });
   });
   $(".buybutt").click(function(event){
