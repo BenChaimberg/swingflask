@@ -21,7 +21,7 @@ from flask.ext.login import (
 )
 from flask.ext.mail import Mail, Message
 from flask.ext.admin import Admin
-from werkzeug.routing import BaseConverter
+from werkzeug.routing import BaseConverter, BuildError
 from search_products import products_search
 from search_forum import forum_search
 from forms import (
@@ -221,7 +221,10 @@ def error(uid):
 @app.route('/productMobile.php')
 @app.route('/productIE.php')
 def product_php_old_redirect():
-    return redirect(url_for('product', productid=request.args.get('id')))
+    try:
+        return redirect(url_for('product', productid=request.args.get('id')))
+    except BuildError:
+        abort(404)
 
 
 @app.route('/<regex("[0-9_]+((us)|(can)|(us_can))?\.htm"):uid>')
@@ -313,7 +316,6 @@ def menu_old_redirect(regid):
         'where_to_buy': 'locations',
         'faq': 'faq',
         'contact_swing': 'contact',
-        'marketing': 'marketing',
         'free_brochure': 'brochure'
     }
     try:
@@ -332,8 +334,18 @@ def refer_old_redirect():
 
 
 @app.route('/french/refer_a_friend.htm')
-@app.route('/french/refer_a_friend.php')
 def french_refer_old_redirect():
+    return redirect(url_for('refer', lang='french'))
+
+
+@app.route('/marketing.htm')
+@app.route('/marketing.php')
+def marketing_old_redirect():
+    return redirect(url_for('refer'))
+
+
+@app.route('/french/marketing.htm')
+def french_marketing_old_redirect():
     return redirect(url_for('refer', lang='french'))
 
 
