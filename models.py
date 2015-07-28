@@ -27,10 +27,12 @@ class Infolist(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     productid = db.Column(db.Integer(), nullable=False)
     infolist = db.Column(db.Text(convert_unicode=True), nullable=True)
+    infolistfr = db.Column(db.Text(convert_unicode=True), nullable=True)
 
-    def __init__(self, productid='', infolist=''):
+    def __init__(self, productid='', infolist='', infolistfr=''):
         self.productid = productid
         self.infolist = infolist
+        self.infolistfr = infolistfr
 
 
 class Categories(db.Model):

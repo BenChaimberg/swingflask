@@ -55,7 +55,7 @@
 			<div id="infotext">
 				<ul>
 				{% for item in product.infolist: %}
-					<li>{{ item.infolist | safe }}</li>
+					<li>{{ item[0] | safe }}</li>
 				{% endfor %}
 				</ul>
 			</div>

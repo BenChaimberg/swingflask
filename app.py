@@ -368,6 +368,7 @@ def right_stripper_old_redirect():
 def french_right_stripper_old_redirect():
     return redirect(url_for('right_stripper', lang='french'))
 
+
 @app.route('/forum.asp')
 def forum_old_redirect():
     try:
@@ -801,32 +802,30 @@ def brochure():
 def product(productid):
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
-        product.infolist = Frenchinfolist.query.filter_by(
+        product.infolist = Infolist.query.with_entities(
+            Infolist.infolistfr
+        ).filter_by(
             productid=productid
-        ).order_by(Frenchinfolist.id.asc()).all()
+        ).order_by(Infolist.id.asc()).all()
         product.infotable = Frenchinfotable.query.filter_by(
             productid=productid
         ).order_by(Frenchinfotable.id.asc()).all()
-        try:
-            category = Frenchcategories.query.filter_by(
-                category=product.category
-            ).first().name
-        except AttributeError:
-            category = ''
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
-        product.infolist = Infolist.query.filter_by(
+        product.infolist = Infolist.query.with_entities(
+            Infolist.infolist
+        ).filter_by(
             productid=productid
         ).order_by(Infolist.id.asc()).all()
         product.infotable = Infotable.query.filter_by(
             productid=productid
         ).order_by(Infotable.id.asc()).all()
-        try:
-            category = Categories.query.filter_by(
-                category=product.category
-            ).first().name
-        except AttributeError:
-            category = ''
+    try:
+        category = Categories.query.filter_by(
+            category=product.category
+        ).first().name
+    except AttributeError:
+        category = ''
     return sidebar_lang_render(
         'product',
         request,
