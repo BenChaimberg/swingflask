@@ -533,7 +533,7 @@ def forum(page=1):
         db.session.add(new_message)
         db.session.commit()
         msg = Message()
-        msg.recipients = ['bchaimberg@swingpaints.com']
+        msg.recipients = ['mchaimberg@swingpaints.com']
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Message'
         msg.html = 'Hello Mark,<br />' + \
@@ -618,7 +618,7 @@ def message(message_id):
         msg = Message()
         if last_reply.notifyemail == 'True':
             msg.recipients = [last_reply.email]
-        msg.bcc = ['bchaimberg@swingpaints.com']
+        msg.bcc = ['mchaimberg@swingpaints.com']
         msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
         msg.html = 'Hello ' + \
