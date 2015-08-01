@@ -504,6 +504,11 @@ def about():
     return sidebar_lang_render('about', request)
 
 
+@app.route('/gallery')
+def gallery():
+    return sidebar_lang_render('gallery', request)
+
+
 @app.route('/color')
 @app.route('/colour')
 def colour():
