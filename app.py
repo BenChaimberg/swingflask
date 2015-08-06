@@ -315,6 +315,14 @@ def menu_old_redirect(regid):
         'about_swing': 'about',
         'where_to_buy': 'locations',
         'faq': 'faq',
+        'faq1': 'faq',
+        'faq2': 'faq',
+        'faq3': 'faq',
+        'faq4': 'faq',
+        'faq5': 'faq',
+        'faq6': 'faq',
+        'faq7': 'faq',
+        'faq8': 'faq',
         'contact_swing': 'contact',
         'free_brochure': 'brochure'
     }
