@@ -820,9 +820,12 @@ def product(productid):
         ).filter_by(
             productid=productid
         ).order_by(Infolist.id.asc()).all()
-        product.infotable = Frenchinfotable.query.filter_by(
+        product.infotable = Infotable.query.with_entities(
+            Infotable.sizefr,
+            Infotable.quantityfr
+        ).filter_by(
             productid=productid
-        ).order_by(Frenchinfotable.id.asc()).all()
+        ).order_by(Infotable.id.asc()).all()
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
         product.infolist = Infolist.query.with_entities(
@@ -830,7 +833,10 @@ def product(productid):
         ).filter_by(
             productid=productid
         ).order_by(Infolist.id.asc()).all()
-        product.infotable = Infotable.query.filter_by(
+        product.infotable = Infotable.query.with_entities(
+            Infotable.size,
+            Infotable.quantity
+        ).filter_by(
             productid=productid
         ).order_by(Infotable.id.asc()).all()
     try:

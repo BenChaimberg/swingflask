@@ -16,11 +16,15 @@ class Infotable(db.Model):
     productid = db.Column(db.Integer(), nullable=False)
     size = db.Column(db.Text(convert_unicode=True), nullable=False)
     quantity = db.Column(db.Text(convert_unicode=True), nullable=False)
+    sizefr = db.Column(db.Text(convert_unicode=True), nullable=False)
+    quantityfr = db.Column(db.Text(convert_unicode=True), nullable=False)
 
-    def __init__(self, productid='', size='', quantity=''):
+    def __init__(self, productid='', size='', quantity='', sizefr='', quantityfr=''):
         self.productid = productid
         self.size = size
         self.quantity = quantity
+        self.sizefr = sizefr
+        self.quantityfr = quantityfr
 
 
 class Infolist(db.Model):

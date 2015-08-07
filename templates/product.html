@@ -35,8 +35,8 @@
 					</tr>
 					{% for item in product.infotable: %}
 					<tr>
-						<td>{{ item.size | safe }}</td>
-						<td>{{ item.quantity | safe }}</td>
+						<td>{{ item[0] | safe }}</td>
+						<td>{{ item[1] | safe }}</td>
 					</tr>
 					{% endfor %}
 				</table>
