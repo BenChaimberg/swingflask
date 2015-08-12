@@ -81,6 +81,15 @@
        }(document, 'script', 'facebook-jssdk'));
     </script>
 		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+		    <ul id="flashes">
+		    {% for message, category in messages %}
+		      <li class="flash {{ category }}">{{ message }}<a href="#" class="close">&#x00D7;</a></li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
 		<div id="center">
 			<div id="main" class="group">
 				<div id="mainleft" class="group">

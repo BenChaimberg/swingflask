@@ -174,6 +174,12 @@ def sidebar_lang_render(page, request, **kwargs):
     )
 
 
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash('error', ''.join(['Form error: ', error]))
+
+
 @app.context_processor
 def utility_processor():
     def product_category(category, id):
@@ -572,7 +578,8 @@ def forum(page=1):
             ) + \
             '">here</a> to view the message board.<br />Yours sincerely,\
             <br />Swing Paints'
-        mail.send(msg)
+        # mail.send(msg)
+        flash('success','Success! Your message has been posted to the forum.')
         if request.args.get('lang') == 'french':
             return redirect(url_for(
                 'message',
@@ -599,6 +606,7 @@ def forum(page=1):
             '%H:%M %m/%d/%Y',
             time.strptime(str(message.last_rdate), '%Y-%m-%d %H:%M:%S')
         )
+    flash_errors(message_form)
     return sidebar_lang_render(
         'forum',
         request,
@@ -659,7 +667,18 @@ def message(message_id):
             ) + \
             '">here</a> to view the message board.<br />Yours sincerely,<br />\
             Swing Paints'
-        mail.send(msg)
+        # mail.send(msg)
+        flash('success','Success! Your reply has been posted to the forum.')
+        return redirect(url_for(
+            'message',
+            message_id=message_id,
+            _anchor=str(
+                time.strftime(
+                    '%b %d, %Y<br />%H:%M:%S',
+                    time.strptime(str(new_reply.rdate), '%Y-%m-%d %H:%M:%S')
+                )
+            )
+        ))
     message.date = time.strftime(
         '%b %d, %Y<br />%H:%M:%S',
         time.strptime(str(message.mdate), '%Y-%m-%d %H:%M:%S')
@@ -672,6 +691,7 @@ def message(message_id):
             '%b %d, %Y<br />%H:%M:%S',
             time.strptime(str(reply.rdate), '%Y-%m-%d %H:%M:%S')
         )
+    flash_errors(message_form)
     return sidebar_lang_render(
         'message',
         request,

@@ -59,6 +59,11 @@ $(document).ready(function(){
 				windowWidth = $(window).width();
 			}
 		});
+	} else {
+		$('.close').click(function(event){
+			event.preventDefault();
+			$(this).parent().fadeOut('fast');
+		});
 	}
 });
 $(window).load(function(){

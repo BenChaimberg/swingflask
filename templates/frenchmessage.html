@@ -18,7 +18,7 @@
 		</style>
 		<script>
 			$(document).ready(function(){
-				$("#forum-side").offset({left:$("#content").offset().left+650,top:$("#top").offset().top});
+				$("#forum-side").offset({left:$("#content").offset().left+650,top:$("#top").offset().top+$('#flashes').height()});
 				$("#top").click(function(){
 					$('html, body').animate({scrollTop:0});
 				});
@@ -26,7 +26,9 @@
 					$('html, body').animate({scrollTop:$('body').height()});
 				});
 				$("#subject").val("Re: {{ message.subject | safe }}");
+				{% if not message_form.errors %}
 				$("form").find("input, textarea").not("#csrf_token, #subject, #submit, #notifyemail-0, #notifyemail-1").val('');
+				{% endif %}
 				function display(name,email,time,subject,text) {
 					var newRow  = document.getElementById("write").insertRow(-1);
 					var newCell = newRow.insertCell(-1);
@@ -63,13 +65,7 @@
 		<h2>Nouveau message:</h2>
 		<form id='message-form' method="POST" action="{{ url_for('.message',message_id=message.IDmessage) }}">
 		{{ message_form.hidden_tag() }}
-			<div style="float:left;width:100%;"><ul>
-			{% for field in message_form %}
-				{% for error in field.errors %}
-					<li>{{ error | safe }}</li>
-				{% endfor %}
-			{% endfor %}
-				</ul>
+			<div style="float:left;width:100%;">
 			{% for field in message_form %}
 				<div>
 				{% if loop.index == 1 %}

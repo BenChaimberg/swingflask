@@ -138,7 +138,7 @@ html {overflow-y: scroll;}
 		padding-left: 0;
 		padding-right: 15px;
 	}
-	#sidebar li: before {
+	#sidebar li:before {
 		content: '\25b6\a0';
 		color: grey;
 	}
@@ -190,6 +190,44 @@ html {overflow-y: scroll;}
 		text-align: center;
 		color: #FFFFFF;
 		font-size: 9px;
+	}
+	#flashes {
+    list-style: none;
+    width: 1025px;
+    z-index: 3;
+    padding: 0;
+    margin: 0 auto;
+	}
+	.flash {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    border-radius: 5px;
+    height: 24px;
+    line-height: 24px;
+		border-style: solid;
+		border-width: 1px;
+	}
+	.success {
+    color: #3c763d;
+    background-color: #bbeab5;
+    border-color: #3c763d;
+	}
+	.error {
+    color: #992222;
+    background-color: #f28989;
+    border-color: #f4abab;
+	}
+	.close:hover {
+		color: black;
+		text-decoration: none;
+	}
+	.close {
+		float: right;
+		display: inline-block;
+		color: #555555;
+		text-decoration: none;
+		padding-right: 5px;
 	}
 }
 @media (min-width: 513px) and (max-width: 1024px) {
