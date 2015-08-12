@@ -578,7 +578,7 @@ def forum(page=1):
             ) + \
             '">here</a> to view the message board.<br />Yours sincerely,\
             <br />Swing Paints'
-        # mail.send(msg)
+        mail.send(msg)
         flash('success','Success! Your message has been posted to the forum.')
         if request.args.get('lang') == 'french':
             return redirect(url_for(
@@ -667,7 +667,7 @@ def message(message_id):
             ) + \
             '">here</a> to view the message board.<br />Yours sincerely,<br />\
             Swing Paints'
-        # mail.send(msg)
+        mail.send(msg)
         flash('success','Success! Your reply has been posted to the forum.')
         return redirect(url_for(
             'message',
@@ -725,7 +725,7 @@ def refer():
                 personnelle. Vous pouvez les trouver \
                 <a href='http://www.swingpaints.com/?french'>ici</a>.\
                 " % (friendname)
-            # mail.send(msg)
+            mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     else:
         refer_form = ReferForm()
@@ -747,7 +747,7 @@ def refer():
                 is the reason for this \"almost\" personal email. You can \
                 find them <a href='http://www.swingpaints.com'>here</a>.\
                 " % friendname
-            # mail.send(msg)
+            mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     return sidebar_lang_render('refer', request, refer_form=refer_form)
 
@@ -787,7 +787,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            # mail.send(msg)
+            mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     else:
         brochure_form = BrochureForm()
@@ -822,7 +822,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            # mail.send(msg)
+            mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     return sidebar_lang_render(
         'brochure',
