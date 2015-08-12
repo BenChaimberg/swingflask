@@ -2,6 +2,10 @@ $(document).ready(function(){
 	var windowWidth = $(window).width();
 	var currentPosition;
 	var moveWidth;
+	$('.close').click(function(event){
+		event.preventDefault();
+		$(this).parent().fadeOut('fast');
+	});
 	if ($(window).width() <= 1024) {
 		$("#links").insertBefore("#footer");
 		$("#div-search").insertBefore("#category-heading");
@@ -58,11 +62,6 @@ $(document).ready(function(){
 				$("#mobile-header").offset({ left: 0} , 500);
 				windowWidth = $(window).width();
 			}
-		});
-	} else {
-		$('.close').click(function(event){
-			event.preventDefault();
-			$(this).parent().fadeOut('fast');
 		});
 	}
 });
