@@ -49,6 +49,9 @@ ul#forum-side {
   #recaptcha_table td:nth-of-type(3) {
     display: none;
   }
+  #write td:nth-child(2) {
+    word-break: break-word;
+  }
 }
 #pages ul {
   list-style: none;
