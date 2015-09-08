@@ -81,7 +81,8 @@ MAIL_PORT = 25
 MAIL_USE_TLS = False
 MAIL_USE_SSL = False
 MAIL_USERNAME = 'bchaimberg@swingpaints.com'
-MAIL_PASSWORD = 'webmaster'
+MAIL_PASSWORD = 'H1o2c5k7ey'
+MAIL_DEFAULT_SENDER = 'info@swingpaints.com'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -566,7 +567,6 @@ def forum(page=1):
         db.session.commit()
         msg = Message()
         msg.recipients = ['mchaimberg@swingpaints.com']
-        msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Message'
         msg.html = 'Hello Mark,<br />' + \
             message_form.name.data + \
@@ -653,7 +653,6 @@ def message(message_id):
         if last_reply.notifyemail == 'True':
             msg.recipients = [last_reply.email]
         msg.bcc = ['mchaimberg@swingpaints.com']
-        msg.sender = ('Swing Paints', 'info@swingpaints.com')
         msg.subject = 'Swing Paints Forum Reply'
         msg.html = 'Hello ' + \
             last_reply.name + \
@@ -772,7 +771,6 @@ def brochure():
             db.session.commit()
             msg = Message()
             msg.recipients = ['echaimberg@swingpaints.com']
-            msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
             msg.subject = "%s would like a free brochure!" % (
                 brochure_form.name.data
             )
@@ -807,7 +805,6 @@ def brochure():
             db.session.commit()
             msg = Message()
             msg.recipients = ['echaimberg@swingpaints.com']
-            msg.sender = ("Swing Paints", "swingpaints@swingpaints.com")
             msg.subject = "%s would like a free brochure!" % (
                 brochure_form.name.data
             )
