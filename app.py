@@ -24,7 +24,9 @@ from flask.ext.admin import Admin
 from werkzeug.routing import BaseConverter, BuildError
 from search_products import products_search
 from search_forum import forum_search
+from locations import postal_dist, CodeException
 from forms import (
+    LocationsForm,
     MessageForm,
     FrenchMessageForm,
     LoginForm,
@@ -496,7 +498,36 @@ def search(search_string):
 
 @app.route('/locations', methods=('GET', 'POST'))
 def locations():
-    return sidebar_lang_render('locations', request)
+    locations_form = LocationsForm()
+    if request.method == 'POST':
+        if locations_form.validate():
+            try:
+                distances = postal_dist(
+                    locations_form.postalcode.data,
+                    locations_form.measure.data,
+                    locations_form.results.data
+                )
+            except CodeException:
+                flash('error', 'Invalid postal code')
+                return sidebar_lang_render(
+                    'locations',
+                    request,
+                    locations_form=locations_form
+                )
+            else:
+                return sidebar_lang_render(
+                    'locations',
+                    request,
+                    locations_form=locations_form,
+                    distances=distances
+                )
+        else:
+            flash_errors(locations_form)
+    return sidebar_lang_render(
+        'locations',
+        request,
+        locations_form=locations_form
+    )
 
 
 @app.route('/faq', methods=('GET', 'POST'))
@@ -579,7 +610,7 @@ def forum(page=1):
             '">here</a> to view the message board.<br />Yours sincerely,\
             <br />Swing Paints'
         mail.send(msg)
-        flash('success','Success! Your message has been posted to the forum.')
+        flash('success', 'Success! Your message has been posted to the forum.')
         if request.args.get('lang') == 'french':
             return redirect(url_for(
                 'message',
@@ -667,7 +698,7 @@ def message(message_id):
             '">here</a> to view the message board.<br />Yours sincerely,<br />\
             Swing Paints'
         mail.send(msg)
-        flash('success','Success! Your reply has been posted to the forum.')
+        flash('success', 'Success! Your reply has been posted to the forum.')
         return redirect(url_for(
             'message',
             message_id=message_id,

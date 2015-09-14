@@ -9,6 +9,50 @@ from wtforms import (
 )
 
 
+class LocationsForm(Form):
+    postalcode = TextField(
+        "Your postal code",
+        [wtforms.validators.Required('Please enter your postal code')]
+    )
+    measure = RadioField(
+        'Distance measure',
+        choices=[('miles', 'miles'), ('km', 'kilometers')],
+        default='km'
+    )
+    results = RadioField(
+        "Number of results",
+        choices=[('10', '10'), ('25', '25'), ('50', '50')],
+        default='25'
+    )
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+        if not len(str(self.postalcode.data)) == 6:
+            self.postalcode.errors.append('Invalid postal code (length)')
+            return False
+        if not ''.join([
+            str(self.postalcode.data)[0],
+            str(self.postalcode.data)[2],
+            str(self.postalcode.data)[4]
+        ]).isalpha():
+            self.postalcode.errors.append(
+                'Invalid postal code (example: A1A1A1)'
+            )
+            return False
+        if not ''.join([
+            str(self.postalcode.data)[1],
+            str(self.postalcode.data)[3],
+            str(self.postalcode.data)[5]
+        ]).isdigit():
+            self.postalcode.errors.append(
+                'Invalid postal code (example: A1A1A1)'
+            )
+            return False
+        return True
+
+
 class MessageForm(Form):
     name = TextField(
         "Name",

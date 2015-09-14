@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<style>
+  #measure, #results {
+    list-style: none;
+    display: inline;
+    padding: 0;
+    margin: 0;
+  }
+  #measure li, #results li {
+    display: inline;
+    padding-right: 10px;
+  }
+</style>
+{% endblock %}
+{% block title %}Swing Paints - Locations{% endblock %}
+{% block categorytext %}Locations{% endblock %}
+{% block content %}
+<p>
+  Use the form below to find the stores closest to you that sell Swing Paints products.
+</p>
+<form method="POST" action="{{ url_for('.locations') }}">
+  {% for field in locations_form %}
+    {% if loop.index == 1 %}
+      {{ locations_form.hidden_tag() }}
+    {% else %}
+      {{ field.label }}: {{ field }}<br />
+    {% endif %}
+  {% endfor %}
+  <input id="submit" type="submit" value="Submit">
+</form>
+{% if distances %}
+  {% for distance in distances %}
+    <a href="http://maps.google.com/?q={{ distance.address | safe }}, {{ distance.city | safe }}{% if distance.province %}, {{ distance.province }}{% endif %} {{ distance.postalcode }}" target="_BLANK">
+      {{ distance.name | safe }}
+    </a>
+    {% if distance.telephone %}
+      (<a href="tel:+1{{ distance.telephone | replace('-','') }}">{{ distance.telephone }}</a>)
+    {% endif %} is approximately
+    {% if distance.measure == "miles" %} {{ distance.distance_mi }} miles {% endif %}
+    {% if distance.measure == "km" %} {{ distance.distance_km }} kilometers {% endif %}
+    away from your location.<br />
+  {% endfor %}
+{% endif %}
+{% endblock %}

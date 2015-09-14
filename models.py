@@ -3,6 +3,38 @@ from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+class Locations(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    name = db.Column(db.String(250), nullable=True)
+    address = db.Column(db.String(250), nullable=True)
+    city = db.Column(db.String(250), nullable=True)
+    province = db.Column(db.String(250), nullable=True)
+    postalcode = db.Column(db.String(250), nullable=True)
+    telephone = db.Column(db.String(250), nullable=True)
+    latitude = db.Column(db.Float(), nullable=True)
+    longitude = db.Column(db.Float(), nullable=True)
+
+    def __init__(
+        self,
+        name='',
+        address='',
+        city='',
+        province='',
+        postalcode='',
+        telephone='',
+        latitude='',
+        longitude=''
+    ):
+        self.name = name
+        self.address = address
+        self.city = city
+        self.province = province
+        self.postalcode = postalcode
+        self.telephone = telephone
+        self.latitude = latitude
+        self.longitude = longitude
+
+
 class Newsletter(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     email = db.Column(db.String(250), nullable=False)
@@ -19,7 +51,14 @@ class Infotable(db.Model):
     sizefr = db.Column(db.Text(convert_unicode=True), nullable=False)
     quantityfr = db.Column(db.Text(convert_unicode=True), nullable=False)
 
-    def __init__(self, productid='', size='', quantity='', sizefr='', quantityfr=''):
+    def __init__(
+        self,
+        productid='',
+        size='',
+        quantity='',
+        sizefr='',
+        quantityfr=''
+    ):
         self.productid = productid
         self.size = size
         self.quantity = quantity
