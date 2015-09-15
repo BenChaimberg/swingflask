@@ -30,6 +30,7 @@ def postal_dist(postalcode, measure, results):
         Locations.longitude.like(''.join([str(user_longitude_trunc+1), '%'])),
         Locations.longitude.like(''.join([str(user_longitude_trunc), '%'])),
     )).all()
+    locations_close = []
     for location in locations:
         location.distance_deg = math.pow(
             math.pow(
@@ -43,17 +44,17 @@ def postal_dist(postalcode, measure, results):
         )
         location.measure = measure
         if location.measure == 'miles':
-            location.distance_mi = '%.1f' % round(
-                location.distance_deg * 69,
-                1
-            )
+            distance_multiplier = 69
         else:
-            location.distance_km = '%.1f' % round(
-                location.distance_deg * 111.04446,
-                1
-            )
+            distance_multiplier = 111.04446
+        location.distance = '%.1f' % round(
+            location.distance_deg * distance_multiplier,
+            1
+        )
+        if location.distance_deg < float(results) / distance_multiplier:
+            locations_close.append(location)
     sorted_locations = sorted(
-        locations,
+        locations_close,
         key=lambda location: location.distance_deg
     )
-    return sorted_locations[:int(results)]
+    return sorted_locations

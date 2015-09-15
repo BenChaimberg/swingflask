@@ -61,7 +61,6 @@
 				});
 				canvassing();
 				$("#div-search").find("form").keyup(function(){
-					console.log("keyup");
 					if ($("#search").val()) {
 						$(this).prop('action',"{{ url_for('.search',search_string='') }}"+$("#search").val().replace(/ /g,'+'));
 					}

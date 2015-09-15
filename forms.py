@@ -20,7 +20,7 @@ class LocationsForm(Form):
         default='km'
     )
     results = RadioField(
-        "Number of results",
+        "Show me locations within",
         choices=[('10', '10'), ('25', '25'), ('50', '50')],
         default='25'
     )

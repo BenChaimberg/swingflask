@@ -1,0 +1,664 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<style>
+	@media (max-width: 1024px) {
+		html, body { margin: 0px; padding: 0px; border: 0px; }
+		body,p {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #000000;
+		}
+		a {
+			color:#336633;
+			text-decoration:none;
+		}
+		p { text-align:justify; }
+		#content {
+			width:100%;
+			height:100%;
+			margin: 0px;
+		}
+		.label span {
+			padding-left:5px;
+		}
+		.label {
+			border-top:2px solid black;
+			width:100%;
+			clear:right;
+			height:50px;
+			line-height:50px;
+			font-size:2em;
+			color:#336633;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.label:nth-last-of-type(1) {
+			border-bottom:2px solid black;
+		}
+		.label:after {
+			float:right;
+			content:"+";
+			padding-right:5px;
+		}
+		.label.open:after {
+			content:"−";
+		}
+		.stuff {
+			padding-left:5px;
+			padding-right:5px;
+			display:none;
+		}
+		.stuff table {
+			border-collapse:collapse;
+		}
+		.stuff td {
+			border-top:1px solid black;
+		}
+    }
+	@media (min-width: 1024px) {
+		.stuff {
+			display:none;
+			padding-top:25px;
+			border-bottom:1px solid black;
+			border-left:1px solid black;
+			border-right:1px solid black;
+		}
+		.stuff a {
+			text-decoration:underline;
+			color:#336633;
+		}
+		.stuff p {
+			margin:5px;
+		}
+		.label:hover {
+			cursor:pointer;
+			background-color:#CCFFCC;
+		}
+		.label:nth-last-of-type(5) {
+			border-right:1px solid black;
+		}
+		.label {
+			margin: 0;
+			width: 14.09%;
+			float: left;
+			text-align: center;
+			padding: 2px 0;
+			border-top:1px solid black;
+			border-left:1px solid black;
+			border-bottom:1px solid black;
+			background-color:#eee;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		#tabs {
+			margin-top:15px;
+		}
+		.canada.label:hover {
+			background-color:#FFFFFF;
+		}
+		.canada.label {
+			border-bottom:0px solid black;
+			background-color:white;
+		}
+		.canada.stuff {
+			display:block;
+		}
+	}
+</style>
+<script type='text/javascript'>
+	$(document).ready(function(){
+		if ($(window).width() <= 1024) {
+			$(".label").click(function(){
+				$("iframe").css({"height":.75*$(window).width()-10});
+				$("iframe").css({"width":$(window).width()-10});
+				$(this).siblings().not(".label").not($(this).next()).slideUp("slow");
+				$(this).next().slideToggle("slow",function(){
+					$('html, body').animate({scrollTop:$(this).prev().offset().top-70},500,function(){
+						$(".buystuff").hide("fast",function(){
+							$(".buybutt").show("fast");
+						});
+					});
+	    		});
+				$(this).siblings().removeClass("open");
+				$(this).toggleClass("open");
+			});
+		}
+		if ($(window).width() > 1024) {
+			$(".stuff").insertAfter($("#tabs").children().last())
+			$(".label").click(function(event){
+				event.preventDefault();
+				$(this).removeClass("label");
+				var labelclass = $(this).attr("class")
+				$(this).addClass("label");
+				labelclass = "." + labelclass
+				if ($(labelclass).not(".label").css("display") == "none") {
+					$(this).prev().css({"border-right":"1px solid black"});
+					$(this).next().not(".stuff").css({"border-left":"1px solid black"});
+					$(this).css({"border-left":"0px solid black"});
+					$(this).css({"border-right":"0px solid black"});
+					$(this).css({"border-bottom":"0px solid black"});
+					$(this).hover(function(){$(this).css({"background-color":"#FFFFFF"})},function(){$(this).css({"background-color":"#FFFFFF"})});
+					$(labelclass).not(".label").css({"display":"block"})
+				}
+				$(this).css({"background-color":"#FFFFFF"})
+				$(this).siblings().not(labelclass).not(".label").css({"display":"none"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"border-bottom":"1px solid black"});
+				$(".label:nth-last-of-type(1)").css({"border-right":"1px solid black"});
+				$(".label:nth-of-type(1)").css({"border-left":"1px solid black"});
+				$(this).siblings().not(labelclass).not(".stuff").css({"background-color":"#eee"});
+				$(this).siblings().not(labelclass).not(".stuff").hover(function(){$(this).css({"background-color":"#CCFFCC"})},function(){$(this).css({"background-color":"#eee"})});
+				$(".buystuff").hide("fast",function(){
+					$(".buybutt").show("fast",function(){
+						var buyhght = $(".buybutt a img").height();
+						$(".buy-now.stuff").css({"height":buyhght+10});
+						$(".buy-now.stuff").css({"line-height":buyhght+10+"px"});
+					});
+				});
+			});
+		}
+	});
+</script>
+{% endblock %}
+{% block title %}Swing Paints - Locations{% endblock %}
+{% block categorytext %}Locations{% endblock %}
+{% block content %}
+<div id="tabs" class="group">
+	<div class="label canada"><span>Canada</span></div>
+	<div class="stuff canada">
+		<table width="100%">
+			<tr>
+				<td><p>Canadian Tire</p></td>
+				<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint &amp; Varnish Remover</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.castle.ca/locator_nationalmap.php" target="_new">Castle Building Centres</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.icipaints.ca/about/store.jsp" target="_new">Dulux Paints</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p>Home Depot</p></td>
+				<td><p>- selection varies by individual store location<p></td>
+			</tr>
+			<tr>
+				<td><p>Home Hardware</p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.icipaints.ca/about/store.jsp" target="_new">ICI - Glidden</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p>Lowes</p></td>
+				<td><p> - Stripping Kit for Dummies<p></td>
+			</tr>
+			<tr>
+				<td><p>Pro Hardware</p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.rona.ca/webapp/wcs/stores/servlet/locators/storelocator.jsp?storeId=10001&langId=-1&height=#620px" target="_new">RoNa</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.timbr.com/geolocation.php">Tim-BR-Mart</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.truserv.ca/pls/truserv_pub/truserv.app?p_sec_id=3" target="_new">TruServe</a></p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products<p></td>
+			</tr>
+			<tr>
+				<td><p>Wal-Mart</p></td>
+				<td><p>- Circa 1850 Furniture Stripper, Circa 1850 Soft Strip</p><p>- Circa 1850 Heavy Body Paint &amp; Varnish Remover, Super DeGooper<p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label quebec"><span>Quebec</span></div>
+	<div class="stuff quebec">
+		<table width="100%">
+			<tr>
+				<td><p><a href="http://www.antiquerssupply.com" target="_new">Antiquers Supply</a> (Montreal)</p></td>
+				<td><p>- complete selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Arthur Rivest (Ste-Julienne)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Au Balcon Rustique (Laval)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.bmr-legroupe.ca/bmr/dealers.asp" target="_new">BMR</a></p></td>
+				<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.algonquindirect.com" target="new">Boiseries Algonquin</a> (Mirabel)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Bois Ideal (Montreal)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.boiserieslachute.ca" target="new">Boiseries Lachute</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bonhomme</a></p></td>
+				<td><p> - selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p>Cantin et fils (Quebec)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Chez Le Peintre (Laval)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Co-op Federée</p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+			</tr>
+			<tr>
+				<td><p>Empire (Montreal)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Henri Jean et fils (La Malbaie)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>JTM Sawmill (St-Lazare)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.juneau.ca" target="new">Juneau et freres</a> (Quebec)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Materiaux Construction</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Robidoux (Cazaville)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.ocoderre.com" target="new">O. Coderre</a> (St-Jacques)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Patiorama (Quebec, Lévis, Vanier)</p></td>
+				<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.patrickmorin.com/magasins.asp" target="new">Patrick Morin</a></p></td>
+				<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+			</tr>
+			<tr>
+				<td><p>Pilon (Gatineau)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.potvinbouchard.qc.ca/succursales.htm" target="_blank">Potvin Bouchard</a></p></td>
+				<td><p> - selection varies by individual store location</p><p>- stores can order most products</p></td>
+			</tr>
+			<tr>
+				<td><p>Probex (Roxboro)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Quincaillerie Delormier (Montréal)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Quincaillerie Gauthier (Labelle)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Quincaillerie Hogg (Montréal)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Quincaillerie Liege (Montréal)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Quincaillerie A. Pouliot (Beauharnois)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Renocentre DG (Montreal)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Reno Depot</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Trevi Pools &amp; Spas (Quebec)</p></td>
+				<td><p>- Marine Grade Tung'n Teak Oil</p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label ontario"><span>Ontario</span></div>
+	<div class="stuff ontario">
+		<table width="100%">
+			<tr>
+				<td><p>Abernethy&apos;s Paint &amp; Wallpaper</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Bond's Décor (Ottawa)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.bonhomme.ca/index.php?module=CMS&func=view&id=43" target="new">Bytown Lumber</a></p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p>Canadian Auto (Windsor)</p></td>
+				<td><p>- most products</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.europeanglass.ca/" target="new">EGP</a> (Ottawa)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Exclusive Paints (Toronto)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.houseofcolourinc.ca/" target="new">House of Colour</a> (Bolton)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>New York Paints (Toronto)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Newcastle Home Décor (Newcastle)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Orangeville Paint and Paper (Orangeville)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Paint Colours (Toronto)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Pierre Marcoux Decoration (Rockland)</p></td>
+				<td><p>- excellent selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.randallspaints.com/ran_2007/Index.html#" target="new">Randall's</a></p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p>Reims (Toronto)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Whitby Decorating Centre (Whitby)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Weeks Home Hardware (Waterdown)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label w-canada"><span>W. Canada</span></div>
+	<div class="stuff w-canada">
+		<table>
+			<tr>
+				<td><p>Cloverdale Paint</p></td>
+				<td><p>- Circa 1850 Furniture Stripper, Heavy Body Remover, Tung Oil</p><p>- Wallpaper Prep-Coat, Swing Professional Remover</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.paintedmonton.com/days" target="_blank">Day's Paint</a> (Edmonton)</p></td>
+				<td><p>- most products</p></td>
+			</tr>
+			<tr>
+				<td><p>Federated Co-op</p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.fargeys.com/" target="_new">Fargey's Paint<a/> (AB)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Freddie's Paint (AB)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>General Paint</p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.irlybird.com/dlrn.shtm" target="_new">IRLY</a> (BC)</p></td>
+				<td><p>- selection varies by individual store location</p><p>- stores can order most products</p></td>
+			</tr>
+			<tr>
+				<td><p>Kans of Any Colour (Edmonton)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Overwall's Paint (Calgary)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.sunnysidehomeandgarden.com" target="_blank">Sunnyside Greenhouse</a> (Calgary)</p></td>
+				<td><p>- Tung'n Teak Oil</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.totembuildingsupplies.com/" target="_new">Totem Building Supplies (AB)</a></p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.windsorplywood.com" target="_blank">Windsor Plywood</a></p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label e-canada"><span>E. Canada</span></div>
+	<div class="stuff e-canada">
+		<table>
+			<tr>
+				<td><p><a href="http://www.centralns.ca/contact_us.html" target="_new">Central Supplies</a> (NS)</p></td>
+				<td><p>- selection varies by individual store location</p></td>
+			</tr>
+			<tr>
+				<td><p>Kent Building Supplies</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>MacKinnon&#x27;s Colour Centre</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.pierceys.ns.ca" target="_blank">Piercey&#x27;s</a></p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Schurman's Building Supplies (PE)</p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p>Wheaton's</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label us"><span>US</span></div>
+	<div class="stuff us">
+		<table>
+			<tr>
+				<td><p><a href="http://www.hamiltonmarine.com" target="_new">Hamilton Marine</a></p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.jamestowndistributors.com" target="_new">Jamestown Distributors</a></p></td>
+				<td><p>- good selection</p></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">EASTERN US</td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.hardwarestore.com" target="_new">Aubuchon Hardware</a></p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p>Litchfield Paint &amp; Wallpaper (Litchfield, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>John Boyle Decorating Center (New Britain, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>McDermott Paint &amp; Wallpaper (Greenwich, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Taylor's Paint Center (Fairfield, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>United Paint &amp; Wallpaper (Wethersfield, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Branford Paint (Branford, CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Ring's End Lumber (CT)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Creative Walls (Springfield, MA)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.factorypaint.com" target="_new">Factory Paint</a> (S. Weymouth, Plymouth, N. Pembroke MA)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Hometown Paint (Franklin, MA)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Lexington, MA)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Needham, MA)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Waltham Wallpaper &amp; Paint (MA)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Eagle Paint &amp; Wallpaper (Englewood, NJ)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Painten Place (NJ)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Elmont Paint (NY)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Janovic Paint &amp; Decorating (Manhattan, Long Island City, NY)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Ring's End Lumber (NY)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Rochester, NY)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Southampton, NY)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Newtown Square, PA)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (VA)</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">CENTRAL US</td>
+			</tr>
+			<tr>
+				<td><p>Sherwin Williams (Columbia Heights, MN)<font style="color:#ff0000"> NEW</font></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td><p>Calumet Paint &amp; Wallpaper</p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;color:#3333ff;font-size:12px">WESTERN US</td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.canoeonline.net" target="_new">Canoe</a> (OR)</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.heathceramics.com" target="_new">Heath Ceramics</a> (CA)</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.hemingwayandpickett.com" target="_new">Hemingway and Pickett</a> (CA)</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://okstore.la/index.php" target="_new">OK</a> (CA)</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.tableartonline.com" target="_new">TableArt</a> (CA)</p></td>
+				<td><p>- Terra Nova</p></td>
+			</tr>
+			<tr>
+				<td><p><a href="http://www.dunnedwards.com" target="_new">Dunn Edwards</a></p></td>
+				<td><p>- Wallpaper Prep-Coat</p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="label pacific"><span>S. Pacific</span></div>
+	<div class="stuff pacific">
+		<table width="100%">
+			<tr>
+				<td><p>Mason's Hardware Do-It Center (Palau)</p></td>
+				<td><p>- Nu-Lustre-55</p></td>
+			</tr>
+		</table>
+	</div>
+</div>
+{% endblock %}
