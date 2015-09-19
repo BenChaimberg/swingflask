@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<style>
+  #measure, #results {
+    list-style: none;
+    display: inline;
+    padding: 0;
+    margin: 0;
+  }
+  #measure li, #results li {
+    display: inline;
+    padding-right: 10px;
+  }
+</style>
+<script>
+var measureSwitch = function(){
+  if ($("#measure input:checked").val() == "miles"){
+    $(".measure").html("mi.");
+  } else {
+    $(".measure").html("km.");
+  }
+}
+$(document).ready(function(){
+  measureSwitch();
+  $("#measure").change(function(){
+    measureSwitch();
+  });
+});
+</script>
+{% endblock %}
+{% block title %}Swing Paints - Locations{% endblock %}
+{% block categorytext %}Locations{% endblock %}
+{% block content %}
+<p>
+  Use the form below to find the stores closest to you that sell Swing Paints products.
+</p>
+<form method="POST" action="{{ url_for('.locations') }}">
+  {% for field in locations_form %}
+    {% if loop.index == 1 %}
+      {{ locations_form.hidden_tag() }}
+    {% elif loop.index == 4 %}
+      {{ field.label }}:
+      {% for subfield in field %}
+        {{ subfield }}{{ subfield.label }} <span class="measure">km.</span>
+      {% endfor %}<br />
+    {% else %}
+      {{ field.label }}: {{ field }}<br />
+    {% endif %}
+  {% endfor %}
+  <input id="submit" type="submit" value="Submit">
+</form>
+  {% if us %}
+  <p>
+      Postal code within the US, please refer to <a href="http://www.jamestowndistributors.com/userportal/search.do?freeText=circa%201850&resultPref=all&page=GRID" target="_blank">Jamestown Distributors</a>.
+  </p>
+  {% endif %}
+  {% if too_far %}
+    <p>
+        No locations within specified range. Expand your search or enter a new base location.
+    </p>
+  {% endif %}
+  {% if distances %}
+  <p>
+    {% for distance in distances[1:] %}
+    <a href="http://maps.google.com/?q={{ distance.address | safe }}, {{ distance.city | safe }}{% if distance.province %}, {{ distance.province }}{% endif %} {{ distance.postalcode }}" target="_blank">{{ distance.name | safe }}</a>{% if distance.telephone %} (<a href="tel:+1{{ distance.telephone | replace('-','') }}">{{ distance.telephone }}</a>){% endif %} is approximately {{ distance.distance }}{% if distance.measure == "miles" %} miles {% else %} kilometers {% endif %}away from your location.<br />
+    {% endfor %}
+  </p>
+  {% endif %}
+{% endblock %}

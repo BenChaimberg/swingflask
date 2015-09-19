@@ -515,11 +515,22 @@ def locations():
                     locations_form=locations_form
                 )
             else:
+                if len(locations_form.postalcode.data) <= 5:
+                    us=True
+                if len(distances) is 0:
+                    return sidebar_lang_render(
+                        'locations',
+                        request,
+                        locations_form=locations_form,
+                        too_far=True,
+                        us=us
+                    )
                 return sidebar_lang_render(
                     'locations',
                     request,
                     locations_form=locations_form,
-                    distances=distances
+                    distances=distances,
+                    us=us
                 )
         else:
             flash_errors(locations_form)

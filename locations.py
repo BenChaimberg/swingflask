@@ -3,6 +3,7 @@ from sqlalchemy import or_
 import urllib2
 import json
 import math
+import re
 
 
 class CodeException(Exception):
@@ -53,6 +54,8 @@ def postal_dist(postalcode, measure, results):
         )
         if location.distance_deg < float(results) / distance_multiplier:
             locations_close.append(location)
+    if len(locations_close) == 0:
+        return locations_close
     sorted_locations = sorted(
         locations_close,
         key=lambda location: location.distance_deg

@@ -7,6 +7,7 @@ from wtforms import (
     RadioField,
     TextAreaField
 )
+import re
 
 
 class LocationsForm(Form):
@@ -29,7 +30,10 @@ class LocationsForm(Form):
         rv = Form.validate(self)
         if not rv:
             return False
-        if not len(str(self.postalcode.data)) == 6:
+        if len(str(self.postalcode.data)) is 5 and int(self.postalcode.data):
+            return True
+        self.postalcode.data = re.sub(r'\s', r'', self.postalcode.data)
+        if not len(str(self.postalcode.data)) is 6:
             self.postalcode.errors.append('Invalid postal code (length)')
             return False
         if not ''.join([
