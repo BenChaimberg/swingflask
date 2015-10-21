@@ -65,9 +65,6 @@ $(document).ready(function(){
 		});
 	}
 });
-$(window).load(function(){
-	facebookWidthResize();
-});
 var facebookWidthResize = function(){
 	$(document).find('div.fb-post').each(function() {
 		$(this).attr('data-width', $(this).parent().width());
@@ -76,7 +73,8 @@ var facebookWidthResize = function(){
 		$(this).attr('data-width', $(this).parent().width());
 		$(this).attr('data-height', $(window).height()-125);
 	});
-	if (FB) {
-		FB.XFBML.parse();
-	}
+	FB.XFBML.parse();
 }
+$(window).load(function(){
+	facebookWidthResize();
+});
