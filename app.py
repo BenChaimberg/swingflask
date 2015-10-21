@@ -516,7 +516,7 @@ def locations():
                 )
             else:
                 if len(locations_form.postalcode.data) <= 5:
-                    us=True
+                    us = True
                 if len(distances) is 0:
                     return sidebar_lang_render(
                         'locations',

@@ -3,7 +3,6 @@ from sqlalchemy import or_
 import urllib2
 import json
 import math
-import re
 
 
 class CodeException(Exception):

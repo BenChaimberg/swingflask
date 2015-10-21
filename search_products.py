@@ -9,7 +9,7 @@ def products_search(search_string):
     found_index = -1
     html = ''
     found_sites = []
-    products = []
+    multiple_products = []
     while True:
         try_index = found_index+1
         found_index = search_string.find(' ', try_index)
@@ -20,11 +20,15 @@ def products_search(search_string):
             search_items.append(search_string)
             break
     for search_item in search_items:
-        products += Products.query.filter(or_(
+        multiple_products += Products.query.filter(or_(
             Products.text.like('%'+search_item+'%'),
             Products.title.like('%'+search_item+'%'),
             Products.directions.like('%'+search_item+'%')
         )).all()
+    products = set(multiple_products)
+    for product in products:
+        print product.id
+    raw_input()
     for product in products:
         product.text = re.sub(r'<[^>]*>', r'', product.text)
         product.directions = re.sub(r'<[^>]*>', r'', product.directions)
