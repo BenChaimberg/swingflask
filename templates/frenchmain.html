@@ -23,20 +23,14 @@ $(window).load(function(){
 		<h1>Featured</h1>
 	</div>
 	<div class="threecontent group" style="margin-top:10px">
-		<div id="new">
-			<div style="width:100%;height:188px;background-color:black;color:white;">imgfiller</div>
-			<h3>New &amp; Noteworthy</h3>
-			<p>Your guide to what's new, what's hot &amp; what's interesting.</p>
-			<a href="" class="more">More</a>
-		</div>
 		<div id="gallery">
-			<img src="{{ url_for('static', filename='images/gallery.jpg') }}" style="width:100%;">
+			<a href="{{ url_for('gallery', lang='french') }}" style="text-decoration:none;"><img src="{{ url_for('static', filename='images/gallery.jpg') }}" style="width:100%;"></a>
 			<h3>Project Gallery</h3>
 			<p>Check out some of our customers' great projects</p>
 			<a href="{{ url_for('gallery', lang='french') }}" class="more">More</a>
 		</div>
 		<div id="forum">
-			<div style="width:100%;height:188px;background-color:black;color:white;">imgfiller</div>
+			<a href="{{ url_for('forum', lang='french') }}" style="text-decoration:none;"><div style="width:100%;height:287px;line-height:287px;background-color:#009933;color:white;text-align:center;font-size:200px;font-weight:bold;"><div style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;">?</div></div></a>
 			<h3>Interactive Forum</h3>
 			<p>Your ultimate resource for questions &amp; answers about refinishing.</p>
 			<a href="{{ url_for('forum', lang='french') }}" class="more">More</a>

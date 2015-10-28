@@ -180,10 +180,17 @@ html {overflow-y: scroll;}
 	#brand {
 		float: left;
 	}
-	#new, #gallery, #forum {
-		width: 32%;
-		margin-right: 2%;
+	#gallery, #forum {
+		width: 49%;
+		margin-right: 1%;
 		float: left;
+	}
+	#gallery h3, #forum h3 {
+		margin-top: .5em;
+		margin-bottom: .5em;
+	}
+	#gallery p, #forum p {
+		margin-top: 0em;
 	}
 	#forum {
 		margin-right: 0;
