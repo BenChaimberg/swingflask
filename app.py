@@ -885,6 +885,12 @@ def product(productid):
         ).filter_by(
             productid=productid
         ).order_by(Infotable.id.asc()).all()
+        try:
+            category = Frenchcategories.query.filter_by(
+                category=product.category
+            ).first().name
+        except AttributeError:
+            category = ''
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
         product.infolist = Infolist.query.with_entities(
@@ -898,12 +904,12 @@ def product(productid):
         ).filter_by(
             productid=productid
         ).order_by(Infotable.id.asc()).all()
-    try:
-        category = Categories.query.filter_by(
-            category=product.category
-        ).first().name
-    except AttributeError:
-        category = ''
+        try:
+            category = Categories.query.filter_by(
+                category=product.category
+            ).first().name
+        except AttributeError:
+            category = ''
     return sidebar_lang_render(
         'product',
         request,
