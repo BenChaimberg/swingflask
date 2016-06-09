@@ -28,7 +28,6 @@ def products_search(search_string):
     products = set(multiple_products)
     for product in products:
         print product.id
-    raw_input()
     for product in products:
         product.text = re.sub(r'<[^>]*>', r'', product.text)
         product.directions = re.sub(r'<[^>]*>', r'', product.directions)
@@ -132,6 +131,9 @@ def products_search(search_string):
                     break
         html += '<ul>'
         for final in found_sorted:
+            print final[0].title
+            final[0].title = re.sub(r'<[^>]*>', r' ', final[0].title)
+            print final[0].title
             html += '<li><h2><a href="/product/' + \
                 str(final[0].id) + \
                 '">' + \
