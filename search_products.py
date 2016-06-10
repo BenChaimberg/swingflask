@@ -131,13 +131,11 @@ def products_search(search_string):
                     break
         html += '<ul>'
         for final in found_sorted:
-            print final[0].title
-            final[0].title = re.sub(r'<[^>]*>', r' ', final[0].title)
-            print final[0].title
+            final_title = re.sub(r'<[^>]*>', r' ', final[0].title)
             html += '<li><h2><a href="/product/' + \
                 str(final[0].id) + \
                 '">' + \
-                final[0].title + \
+                final_title + \
                 '</a></h2>'
             for text in final[1]:
                 html += text + '&hellip;'
