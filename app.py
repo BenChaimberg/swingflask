@@ -11,7 +11,7 @@ from flask import (
     redirect,
     flash
 )
-from flask.ext.login import (
+from flask_login import (
     login_user,
     logout_user,
     current_user,
@@ -19,8 +19,8 @@ from flask.ext.login import (
     LoginManager,
     UserMixin
 )
-from flask.ext.mail import Mail, Message
-from flask.ext.admin import Admin
+from flask_mail import Mail, Message
+from flask_admin import Admin
 from werkzeug.routing import BaseConverter, BuildError
 from search_products import products_search
 from search_forum import forum_search
@@ -974,4 +974,4 @@ def brand(brandid):
     return sidebar_lang_render('category', request, category=brand)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run()
