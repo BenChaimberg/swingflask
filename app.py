@@ -872,10 +872,23 @@ def brochure():
     )
 
 
-@app.route('/product/<productid>')
-def product(productid):
+@app.route('/product/<regex("\d+\/.*"):regid>')
+def product_string(regid):
+    productid = int(re.sub(r'(\d+)\/.*', r'\1', regid))
+    stringid = re.sub(r'\d+\/(\w+)', r'\1', regid)
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
+        subbed_title = re.sub(r'(?:<br>|\s)', '-', product.title)
+        if not stringid == subbed_title:
+            return redirect(url_for(
+                'product_string',
+                regid=''.join([
+                    str(productid),
+                    '/',
+                    subbed_title
+                ]),
+                lang='french'
+            ))
         product.infolist = Infolist.query.with_entities(
             Infolist.infolistfr
         ).filter_by(
@@ -895,6 +908,16 @@ def product(productid):
             category = ''
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
+        subbed_title = re.sub(r'(?:<br>|\s)', '-', product.title)
+        if not stringid == subbed_title:
+            return redirect(url_for(
+                'product_string',
+                regid=''.join([
+                    str(productid),
+                    '/',
+                    subbed_title
+                ])
+            ))
         product.infolist = Infolist.query.with_entities(
             Infolist.infolist
         ).filter_by(
@@ -918,6 +941,21 @@ def product(productid):
         product=product,
         category=category
     )
+
+
+@app.route('/product/<productid>')
+def product(productid):
+    if request.args.get('lang') == 'french':
+        return redirect(url_for(
+            'product_string',
+            regid=''.join([productid, '/']),
+            lang='french'
+        ))
+    return redirect(url_for(
+        'product_string',
+        regid=''.join([productid, '/'])
+    ))
+
 
 
 @app.route('/category/<string:categoryid>')
