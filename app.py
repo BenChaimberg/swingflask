@@ -231,7 +231,10 @@ def error(uid):
 @app.route('/productIE.php')
 def product_php_old_redirect():
     try:
-        return redirect(url_for('product', productid=request.args.get('id')))
+        return redirect(url_for(
+            'product',
+            productid=request.args.get('id')
+        ), code=301)
     except BuildError:
         abort(404)
 
@@ -239,33 +242,36 @@ def product_php_old_redirect():
 @app.route('/<regex("[0-9_]+((us)|(can)|(us_can))?\.htm"):uid>')
 def product_old_redirect(uid):
     uid = re.sub(r'(us|can)?(_.+)?\.htm', r'', uid)
-    return redirect(url_for('product', productid=str(uid)))
+    return redirect(url_for('product', productid=str(uid)), code=301)
 
 
 @app.route('/<regex("french/[0-9_]+\.htm"):uid>')
 def french_product_old_redirect(uid):
     uid = re.sub(r'french/', r'', re.sub(r'\.htm', r'', uid))
-    return redirect(url_for('product', productid=str(uid), lang='french'))
+    return redirect(url_for(
+        'product',
+        productid=str(uid), lang='french'
+    ),code=301)
 
 
 @app.route('/<regex(".*more_info_[0-9_]*\.htm"):regid>')
 def more_info_old_redirect(regid):
     try:
         uid = int(re.sub(r'_\d+', r'', str(regid)[10:-4]))
-        return redirect(url_for('product', productid=str(uid)))
+        return redirect(url_for('product', productid=str(uid)), code=301)
     except ValueError:
         uid = re.sub(r'_\d+', r'', str(regid)[17:-4])
-        return redirect(url_for('product', productid=uid))
+        return redirect(url_for('product', productid=uid), code=301)
 
 
 @app.route('/<regex(".*directions_[0-9_]*\.htm"):regid>')
 def directions_old_redirect(regid):
     try:
         uid = int(re.sub(r'_\d+', r'', str(regid)[11:-4]))
-        return redirect(url_for('product', productid=str(uid)))
+        return redirect(url_for('product', productid=str(uid)), code=301)
     except ValueError:
         uid = re.sub(r'_\d+', r'', str(regid)[18:-4])
-        return redirect(url_for('product', productid=uid))
+        return redirect(url_for('product', productid=uid), code=301)
 
 
 @app.route('/category.php')
@@ -286,7 +292,7 @@ def category_php_old_redirect():
         return redirect(url_for(
             'category',
             categoryid=category_hash[request.args.get('type')]
-        ))
+        ), code=301)
     except KeyError:
         abort(404)
 
@@ -305,14 +311,17 @@ def category_old_redirect(regid):
         'accessories': 'accessories'
     }
     try:
-        return redirect(url_for('category', categoryid=category_hash[uid[0:]]))
+        return redirect(url_for(
+            'category',
+            categoryid=category_hash[uid[0:]]
+        ), code=301)
     except KeyError:
         try:
             return redirect(url_for(
                 'category',
                 categoryid=category_hash[uid[7:]],
                 lang='french'
-            ))
+            ), code=301)
         except KeyError:
             abort(404)
 
@@ -336,10 +345,13 @@ def menu_old_redirect(regid):
         'free_brochure': 'brochure'
     }
     try:
-        return redirect(url_for(menu_hash[uid]))
+        return redirect(url_for(menu_hash[uid]), code=301)
     except KeyError:
         try:
-            return redirect(url_for(menu_hash[uid[9:]], lang='french'))
+            return redirect(url_for(
+                menu_hash[uid[9:]],
+                lang='french'
+            ), code=301)
         except KeyError:
             abort(404)
 
@@ -347,49 +359,52 @@ def menu_old_redirect(regid):
 @app.route('/refer_a_friend.htm')
 @app.route('/refer.php')
 def refer_old_redirect():
-    return redirect(url_for('refer'))
+    return redirect(url_for('refer'), code=301)
 
 
 @app.route('/french/refer_a_friend.htm')
 def french_refer_old_redirect():
-    return redirect(url_for('refer', lang='french'))
+    return redirect(url_for('refer', lang='french'), code=301)
 
 
 @app.route('/marketing.htm')
 @app.route('/marketing.php')
 def marketing_old_redirect():
-    return redirect(url_for('refer'))
+    return redirect(url_for('refer'), code=301)
 
 
 @app.route('/french/marketing.htm')
 def french_marketing_old_redirect():
-    return redirect(url_for('refer', lang='french'))
+    return redirect(url_for('refer', lang='french'), code=301)
 
 
 @app.route('/main.html')
 def main_old_redirect():
-    return redirect(url_for('home'))
+    return redirect(url_for('home'), code=301)
 
 
 @app.route('/french/main.html')
 def french_main_old_redirect():
-    return redirect(url_for('home', lang='french'))
+    return redirect(url_for('home', lang='french'), code=301)
 
 
 @app.route('/right_stripper.htm')
 def right_stripper_old_redirect():
-    return redirect(url_for('right_stripper'))
+    return redirect(url_for('right_stripper'), code=301)
 
 
 @app.route('/french/right_stripper.htm')
 def french_right_stripper_old_redirect():
-    return redirect(url_for('right_stripper', lang='french'))
+    return redirect(url_for('right_stripper', lang='french'), code=301)
 
 
 @app.route('/forum.asp')
 def forum_old_redirect():
     try:
-        return redirect(url_for('forum', page=request.args.get('pg')))
+        return redirect(url_for(
+            'forum',
+            page=request.args.get('pg')
+        ), code=301)
     except ValueError:
         abort(404)
 
@@ -397,7 +412,10 @@ def forum_old_redirect():
 @app.route('/viewmessage.asp')
 def message_old_redirect():
     try:
-        return redirect(url_for('message', message_id=request.args.get('id')))
+        return redirect(url_for(
+            'message',
+            message_id=request.args.get('id')
+        ), code=301)
     except ValueError:
         abort(404)
     except werkzeug.routing.BuildError:
@@ -879,6 +897,12 @@ def product_string(regid):
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
         subbed_title = re.sub(r'(?:<br>|\s)', '-', product.title)
+        m = re.search(r'&#x\d+;', subbed_title)
+        while m is not None:
+            subbed_title = subbed_title[:m.start()] + \
+                unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
+                subbed_title[m.end():]
+            m = re.search(r'&#x\d+;', subbed_title)
         if not stringid == subbed_title:
             return redirect(url_for(
                 'product_string',
@@ -888,7 +912,7 @@ def product_string(regid):
                     subbed_title
                 ]),
                 lang='french'
-            ))
+            ), code=301)
         product.infolist = Infolist.query.with_entities(
             Infolist.infolistfr
         ).filter_by(
@@ -909,6 +933,12 @@ def product_string(regid):
     else:
         product = Products.query.filter_by(id=productid).first_or_404()
         subbed_title = re.sub(r'(?:<br>|\s)', '-', product.title)
+        m = re.search(r'&#x\d+;', subbed_title)
+        while m is not None:
+            subbed_title = subbed_title[:m.start()] + \
+                unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
+                subbed_title[m.end():]
+            m = re.search(r'&#x\d+;', subbed_title)
         if not stringid == subbed_title:
             return redirect(url_for(
                 'product_string',
@@ -917,7 +947,7 @@ def product_string(regid):
                     '/',
                     subbed_title
                 ])
-            ))
+            ), code=301)
         product.infolist = Infolist.query.with_entities(
             Infolist.infolist
         ).filter_by(
@@ -950,12 +980,11 @@ def product(productid):
             'product_string',
             regid=''.join([productid, '/']),
             lang='french'
-        ))
+        ), code=301)
     return redirect(url_for(
         'product_string',
         regid=''.join([productid, '/'])
-    ))
-
+    ), code=301)
 
 
 @app.route('/category/<string:categoryid>')
