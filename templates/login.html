@@ -15,19 +15,10 @@
 </style>
 {% endblock %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
 <form method="POST" action="/login">
     {{ login_form.hidden_tag() }}
-    <div>{{ login_form.username.label }} {{ login_form.username(size=20, style='float: right;') }} {% for error in login_form.username.errors %} {{ error | safe }} {% endfor %}</div>
-    <div>{{ login_form.password.label }} {{ login_form.password(size=20, style='float: right;') }} {% for error in login_form.password.errors %} {{ error | safe }} {% endfor %}</div>
+    <div>{{ login_form.username.label }} {{ login_form.username(size=20, style='float: right;') }}</div>
+    <div>{{ login_form.password.label }} {{ login_form.password(size=20, style='float: right;') }}</div>
     <div><input type="submit" value="Submit"></div>
 </form>
 {% endblock %}

@@ -1,6 +1,7 @@
 import time
 import re
 import os
+import ConfigParser
 import werkzeug
 from flask import (
     Flask,
@@ -65,35 +66,48 @@ from admin import (
     ProtectedAdminIndexView
 )
 
-RECAPTCHA_PUBLIC_KEY = '6LfnzAMTAAAAAD9RAodwUlTy8ju-gB_kb7_reass'
-RECAPTCHA_PRIVATE_KEY = '6LfnzAMTAAAAAHvSepf1FyNClFx78uoVK7FBAfW2'
+config = ConfigParser.RawConfigParser()
+config.read('swingflask.conf')
 
+MAIL_SERVER = config.get('mail', 'server')
+MAIL_PORT = config.getint('mail', 'port')
+MAIL_USE_TLS = config.getboolean('mail', 'tls')
+MAIL_USE_SSL = config.getboolean('mail', 'ssl')
+MAIL_USERNAME = config.get('mail', 'username')
+MAIL_PASSWORD = config.get('mail', 'password')
+MAIL_DEFAULT_SENDER = config.get('mail', 'sender')
 
-class RegexConverter(BaseConverter):
-    def __init__(self, url_map, *items):
-        super(RegexConverter, self).__init__(url_map)
-        self.regex = items[0]
-
-
-def regex_replace(value, find=r'', replace=r''):
-    return re.sub(find, replace, value)
-
-MAIL_SERVER = 'mail.swingpaints.com'
-MAIL_PORT = 25
-MAIL_USE_TLS = False
-MAIL_USE_SSL = False
-MAIL_USERNAME = 'bchaimberg@swingpaints.com'
-MAIL_PASSWORD = 'H1o2c5k7ey'
-MAIL_DEFAULT_SENDER = 'info@swingpaints.com'
+RECAPTCHA_PUBLIC_KEY = config.get('recaptcha', 'public_key')
+RECAPTCHA_PRIVATE_KEY = config.get('recaptcha', 'private_key')
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['DEBUG'] = config.getboolean('app', 'debug')
+app.config['SECRET_KEY'] = config.get('app', 'secret_key')
+app.config['SQLALCHEMY_DATABASE_URI'] = ''.join([
+    config.get('mysql', 'dialect'),
+    '+',
+    config.get('mysql', 'driver'),
+    '://',
+    config.get('mysql', 'username'),
+    ':',
+    config.get('mysql', 'password'),
+    '@',
+    config.get('mysql', 'host'),
+    ':',
+    config.get('mysql', 'port'),
+    '/',
+    config.get('mysql', 'database')
+])
+
+db.init_app(app)
+
 mail = Mail(app)
-app.secret_key = '3dc26edf9d4f51a973bfc4b92171aac'
-app.url_map.converters['regex'] = RegexConverter
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "users.login"
+
 admin = Admin(
     index_view=ProtectedAdminIndexView()
 )
@@ -145,9 +159,19 @@ admin.add_view(
         endpoint='static'
     )
 )
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
-    'bchaimberg:webmaster@184.154.219.237:3306/circa1850_swingpaints_com'
-db.init_app(app)
+
+
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
+
+app.url_map.converters['regex'] = RegexConverter
+
+
+def regex_replace(value, find=r'', replace=r''):
+    return re.sub(find, replace, value)
+
 app.jinja_env.filters['regex_replace'] = regex_replace
 
 
@@ -221,11 +245,6 @@ def unauthorized(e):
     return render_template('401.html'), 401
 
 
-@app.route('/static/<regex("[a-z_.-]*\.py[ocd]?"):uid>')
-def error(uid):
-    abort(404)
-
-
 @app.route('/product.php')
 @app.route('/productMobile.php')
 @app.route('/productIE.php')
@@ -251,7 +270,7 @@ def french_product_old_redirect(uid):
     return redirect(url_for(
         'product',
         productid=str(uid), lang='french'
-    ),code=301)
+    ), code=301)
 
 
 @app.route('/<regex(".*more_info_[0-9_]*\.htm"):regid>')
@@ -463,15 +482,11 @@ def login():
     if current_user.is_authenticated():
         return redirect('/admin/')
     if login_form.validate_on_submit():
-        if (
-            login_form.username.data == 'administrator' and
-            login_form.password.data == 'supersecurepassword'
-        ):
-            user = load_user(login_form.username.data)
-            login_user(user)
-            return redirect('/admin/')
-        else:
-            flash('Invalid credentials')
+        user = load_user(login_form.username.data)
+        login_user(user)
+        return redirect('/admin/')
+    else:
+        flash_errors(login_form)
     return sidebar_lang_render("login", request, login_form=login_form)
 
 
@@ -652,13 +667,9 @@ def forum(page=1):
                 'message',
                 message_id=new_message.IDmessage
             ))
-    messages = Messages.query.with_entities(
-        Messages.IDmessage,
-        Messages.name,
-        Messages.email,
-        Messages.last_rdate,
-        Messages.subject
-    ).order_by(Messages.last_rdate.desc()).paginate(int(page), 50)
+    messages = Messages.query.order_by(
+        Messages.last_rdate.desc()
+    ).paginate(int(page), 50)
     for message in messages.items:
         message.replies = Replies.query.filter_by(
             IDmessage=message.IDmessage

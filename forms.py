@@ -1,3 +1,5 @@
+import ConfigParser
+import re
 from flask_wtf import Form, RecaptchaField
 import wtforms
 from wtforms import (
@@ -7,7 +9,6 @@ from wtforms import (
     RadioField,
     TextAreaField
 )
-import re
 
 
 class LocationsForm(Form):
@@ -124,6 +125,19 @@ class LoginForm(Form):
         "Password:",
         [wtforms.validators.Required('Please enter your password')]
     )
+
+    def validate(self):
+        rv = Form.validate(self)
+        config = ConfigParser.RawConfigParser()
+        config.read('swingflask.conf')
+        if (
+            self.username.data == config.get('admin', 'username')
+            and self.password.data == config.get('admin', 'password')
+        ):
+            return True
+        else:
+            self.username.errors.append('Invalid credentials')
+            return False
 
 
 class BrochureForm(Form):
