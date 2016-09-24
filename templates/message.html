@@ -18,7 +18,7 @@
 		</style>
 		<script>
 			$(document).ready(function(){
-				$("#forum-side").offset({left:$("#content").offset().left+650,top:$("#top").offset().top+$('#flashes').height()});
+				$("#forum-side").offset({left:$("#content").offset().left+$("#content").outerWidth(true),top:$("#top").offset().top+$('#flashes').height()});
 				$("#top").click(function(){
 					$('html, body').animate({scrollTop:0});
 				});
