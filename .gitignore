@@ -1,4 +1,4 @@
 .DS_STORE
 venv/
 *.py[ocd]
-swingflask.conf
+*.conf
