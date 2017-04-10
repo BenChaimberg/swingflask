@@ -50,8 +50,9 @@ class BrandModelView(CustomModelView):
 
 
 class BrochureModelView(CustomModelView):
-    column_default_sort = 'idbrochure'
-    column_filters = ('idbrochure', 'language',)
+    column_default_sort = ('xdate', True)
+    column_filters = ('idbrochure', 'language', 'xdate',)
+    can_export = True
     form_columns = [
         'contact',
         'email',
