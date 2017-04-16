@@ -125,12 +125,6 @@ admin.add_view(
     CategoryModelView(Frenchcategories, db.session, category='Database')
 )
 admin.add_view(
-    InfoListModelView(Frenchinfolist, db.session, category='Database')
-)
-admin.add_view(
-    InfoTableModelView(Frenchinfotable, db.session, category='Database')
-)
-admin.add_view(
     ProductModelView(Frenchproducts, db.session, category='Database')
 )
 admin.add_view(
@@ -166,11 +160,13 @@ class RegexConverter(BaseConverter):
         super(RegexConverter, self).__init__(url_map)
         self.regex = items[0]
 
+
 app.url_map.converters['regex'] = RegexConverter
 
 
 def regex_replace(value, find=r'', replace=r''):
     return re.sub(find, replace, value)
+
 
 app.jinja_env.filters['regex_replace'] = regex_replace
 
@@ -548,6 +544,7 @@ def locations():
                     locations_form=locations_form
                 )
             else:
+                us = False
                 if len(locations_form.postalcode.data) <= 5:
                     us = True
                 if len(distances) is 0:
@@ -1050,6 +1047,7 @@ def brand(brandid):
         ).order_by(Products.id.asc()).all()
         brand.dictlen = len(brand.products)
     return sidebar_lang_render('category', request, category=brand)
+
 
 if __name__ == '__main__':
     app.run()

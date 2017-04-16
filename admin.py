@@ -16,6 +16,7 @@ class CustomModelView(ModelView):
 class ProductModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)
+    can_export = True
     form_columns = [
         'id',
         'title',
@@ -32,6 +33,7 @@ class ProductModelView(CustomModelView):
 class CategoryModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)
+    can_export = True
     form_columns = [
         'id',
         'category',
@@ -42,6 +44,7 @@ class CategoryModelView(CustomModelView):
 class BrandModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)
+    can_export = True
     form_columns = [
         'id',
         'brand',
@@ -69,6 +72,7 @@ class BrochureModelView(CustomModelView):
 class NewsletterModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)
+    can_export = True
     form_columns = [
         'email'
     ]
@@ -77,6 +81,7 @@ class NewsletterModelView(CustomModelView):
 class MessageModelView(CustomModelView):
     column_default_sort = 'IDmessage'
     column_filters = ('IDmessage', 'mdate', 'last_rdate', 'notifyemail',)
+    can_export = True
     form_columns = [
         'subject',
         'name',
@@ -91,6 +96,7 @@ class MessageModelView(CustomModelView):
 class ReplyModelView(CustomModelView):
     column_default_sort = 'IDreply'
     column_filters = ('IDmessage', 'IDreply', 'rdate', 'notifyemail',)
+    can_export = True
     form_columns = [
         'IDmessage',
         'subject',
@@ -105,6 +111,7 @@ class ReplyModelView(CustomModelView):
 class InfoTableModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id', 'productid',)
+    can_export = True
     form_columns = [
         'id',
         'productid',
@@ -116,6 +123,7 @@ class InfoTableModelView(CustomModelView):
 class InfoListModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id', 'productid',)
+    can_export = True
     form_columns = [
         'id',
         'productid',
