@@ -27,45 +27,42 @@ def products_search(search_string):
         )).all()
     products = set(multiple_products)
     for product in products:
-        print product.id
-    for product in products:
-        product.text = re.sub(r'<[^>]*>', r'', product.text)
-        product.directions = re.sub(r'<[^>]*>', r'', product.directions)
-    for product in products:
+        text = re.sub(r'<[^>]*>', r'', product.text)
+        directions = re.sub(r'<[^>]*>', r'', product.directions)
         found_site = [product, []]
         found_sites.append(found_site)
         for search_item in search_items:
             found_index = -1
             while True:
                 try_index = found_index+1
-                found_index = product.text.lower().find(
+                found_index = text.lower().find(
                     search_item,
                     try_index
                 )
                 if not found_index < 0:
-                    space_index = len(product.text)-found_index
+                    space_index = len(text)-found_index
                     space_index2 = found_index
                     for i in range(0, 3):
-                        space_index = product.text[::-1].find(
+                        space_index = text[::-1].find(
                             ' ',
                             space_index+1
                         )
                     if space_index < 0:
-                        space_index = len(product.text)
+                        space_index = len(text)
                     for i in range(0, 4):
-                        if product.text.find(' ', space_index2+1) > 0:
-                            space_index2 = product.text.find(
+                        if text.find(' ', space_index2+1) > 0:
+                            space_index2 = text.find(
                                 ' ',
                                 space_index2+1
                             )
                     found_sites[-1][1].append(
-                        product.text[
-                            len(product.text)-space_index:
+                        text[
+                            len(text)-space_index:
                             found_index
-                        ]+'<b>'+product.text[
+                        ]+'<b>'+text[
                             found_index:
                             found_index+len(search_item)
-                        ]+'</b>'+product.text[
+                        ]+'</b>'+text[
                             found_index+len(search_item):
                             space_index2
                         ]
@@ -75,38 +72,38 @@ def products_search(search_string):
             found_index = -1
             while True:
                 try_index = found_index+1
-                found_index = product.directions.lower().find(
+                found_index = directions.lower().find(
                     search_item,
                     try_index
                 )
                 if not found_index < 0:
-                    space_index = len(product.directions)-found_index
+                    space_index = len(directions)-found_index
                     space_index2 = found_index
                     for i in range(0, 3):
-                        space_index = product.directions[::-1].find(
+                        space_index = directions[::-1].find(
                             ' ',
                             space_index+1
                         )
                         if space_index < 0:
-                            space_index = len(product.directions)
+                            space_index = len(directions)
                             break
                     for i in range(0, 4):
-                        if product.directions.find(
+                        if directions.find(
                             ' ',
                             space_index2+1
                         ) > 0:
-                            space_index2 = product.directions.find(
+                            space_index2 = directions.find(
                                 ' ',
                                 space_index2+1
                             )
                     found_sites[-1][1].append(
-                        product.directions[
-                            len(product.directions)-space_index:
+                        directions[
+                            len(directions)-space_index:
                             found_index
-                        ]+'<b>'+product.directions[
+                        ]+'<b>'+directions[
                             found_index:
                             found_index+len(search_item)
-                        ]+'</b>'+product.directions[
+                        ]+'</b>'+directions[
                             found_index+len(search_item):
                             space_index2
                         ]
