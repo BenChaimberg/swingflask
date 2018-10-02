@@ -116,7 +116,9 @@ class InfoTableModelView(CustomModelView):
         'id',
         'productid',
         'size',
-        'quantity'
+        'quantity',
+        'sizefr',
+        'quantityfr'
     ]
 
 
@@ -127,7 +129,8 @@ class InfoListModelView(CustomModelView):
     form_columns = [
         'id',
         'productid',
-        'infolist'
+        'infolist',
+        'infolistfr'
     ]
 
 
