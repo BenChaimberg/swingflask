@@ -173,10 +173,10 @@ class Frenchproducts(db.Model):
     forms_us = db.Column(db.Text(), nullable=True)
     forms_can = db.Column(db.Text(), nullable=True)
     category = db.Column(db.Text(), nullable=False)
-    brand = db.Column(db.Text(), nullable=False)
+    brand = db.Column(db.Text(), nullable=True)
 
     def __init__(
-        self='',
+        self,
         id='',
         title='',
         demo='',

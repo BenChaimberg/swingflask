@@ -12,7 +12,8 @@
 		<div id="text"><span id="product-title">{{ product.title | replace("<br>", " ") | safe }}</span><p>{{ product.text | safe }}</p></div>
 	</div>
 	<div id="tabs" class="group">
-		<div class="label directions"><span>Directions</span></div>
+	  <div class="label directions">Mode d'Emploi<span>
+	  </span></div>
 		<div class="stuff directions">
 			{% if product.directions %}
 			<p>{{ product.directions | safe }}</p>
