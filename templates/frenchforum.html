@@ -70,17 +70,15 @@
 		<form id="message-form" method="POST">
 		{{ message_form.hidden_tag() }}
 			<div style="float:left;width:100%;">
-			{% for field in message_form %}
+			  {% for field in message_form %}
+			  {% if field.type != 'CSRFTokenField' %}
 				<div>
-				{% if loop.index == 1 %}
-				{% else %}
-					{% if field.type == 'RecaptchaField' %}
-					{% else %}
+				  {% if field.type != 'RecaptchaField' %}
 						{{ field.label }}:
 					{% endif %}
 					{{ field }}
-				{% endif %}
 				</div>
+				{% endif %}
 			{% endfor %}
 				<div><input id="submit" type="submit" value="Soumettez"></div>
 		    </div>
