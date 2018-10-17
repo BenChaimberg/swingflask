@@ -692,7 +692,6 @@ def message(message_id):
         message_form = MessageForm()
     message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
     if message_form.validate_on_submit():
-        print message_form.notifyemail.data
         last_reply = Replies.query.with_entities(
             Replies.name,
             Replies.email,

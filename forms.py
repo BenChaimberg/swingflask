@@ -1,6 +1,6 @@
 import ConfigParser
 import re
-from flask_wtf import Form, RecaptchaField
+from flask_wtf import FlaskForm, RecaptchaField
 import wtforms
 from wtforms import (
     TextField,
@@ -11,7 +11,7 @@ from wtforms import (
 )
 
 
-class LocationsForm(Form):
+class LocationsForm(FlaskForm):
     postalcode = TextField(
         "Your postal code",
         [wtforms.validators.Required('Please enter your postal code')]
@@ -58,7 +58,7 @@ class LocationsForm(Form):
         return True
 
 
-class MessageForm(Form):
+class MessageForm(FlaskForm):
     name = TextField(
         "Name",
         [wtforms.validators.Required('Please enter your name')]
@@ -85,7 +85,7 @@ class MessageForm(Form):
     recaptcha = RecaptchaField()
 
 
-class FrenchMessageForm(Form):
+class FrenchMessageForm(FlaskForm):
     name = TextField(
         "Nom",
         [wtforms.validators.Required('Veuillez entrez votre nom')]
@@ -116,7 +116,7 @@ class FrenchMessageForm(Form):
     recaptcha = RecaptchaField()
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     username = TextField(
         "Username:",
         [wtforms.validators.Required('Please enter your username')]
@@ -140,7 +140,7 @@ class LoginForm(Form):
             return False
 
 
-class BrochureForm(Form):
+class BrochureForm(FlaskForm):
     name = TextField(
         "Name",
         [wtforms.validators.Required('Please enter your name')]
@@ -521,7 +521,7 @@ class BrochureForm(Form):
     )
 
 
-class FrenchBrochureForm(Form):
+class FrenchBrochureForm(FlaskForm):
     name = TextField(
         "Nom",
         [wtforms.validators.Required('Veuillez entrer votre nom')]
@@ -906,7 +906,7 @@ class FrenchBrochureForm(Form):
     )
 
 
-class ReferForm(Form):
+class ReferForm(FlaskForm):
     visitorname = TextField(
         "Your name",
         [wtforms.validators.Required('Please enter your name')]
@@ -933,7 +933,7 @@ class ReferForm(Form):
     )
 
 
-class FrenchReferForm(Form):
+class FrenchReferForm(FlaskForm):
     visitorname = TextField(
         "Votre nom",
         [wtforms.validators.Required('Veuillez entrer votre nom')]
