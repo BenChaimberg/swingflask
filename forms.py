@@ -28,7 +28,7 @@ class LocationsForm(FlaskForm):
     )
 
     def validate(self):
-        rv = Form.validate(self)
+        rv = FlaskForm.validate(self)
         if not rv:
             return False
         if len(str(self.postalcode.data)) is 5 and int(self.postalcode.data):
@@ -127,7 +127,7 @@ class LoginForm(FlaskForm):
     )
 
     def validate(self):
-        rv = Form.validate(self)
+        rv = FlaskForm.validate(self)
         config = ConfigParser.RawConfigParser()
         config.read('swingflask.conf')
         if (
