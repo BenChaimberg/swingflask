@@ -22,6 +22,7 @@ from flask_login import (
 )
 from flask_mail import Mail, Message
 from flask_admin import Admin
+from flask_sslify import SSLify
 from werkzeug.routing import BaseConverter, BuildError
 from search_products import products_search
 from search_forum import forum_search
@@ -154,6 +155,7 @@ admin.add_view(
     )
 )
 
+sslify = SSLify(app)
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
@@ -692,7 +694,6 @@ def message(message_id):
         message_form = MessageForm()
     message = Messages.query.filter_by(IDmessage=message_id).first_or_404()
     if message_form.validate_on_submit():
-        print message_form.notifyemail.data
         last_reply = Replies.query.with_entities(
             Replies.name,
             Replies.email,
