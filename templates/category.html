@@ -16,7 +16,7 @@
 		</div>
 		<div class="product-text group">
 			<div class="product-title">{{ x.title | replace("<br />"," ") | replace("Swing Paints","") | safe }}</div>
-			<p>{{ x.text | regex_replace("</p>","") | regex_replace("<p(\s.*)?>","") | truncate(end='...') | safe }}</p>
+			<p>{{ x.text | regex_replace("</p>","") | regex_replace("<p(\s.*)?>","") | regex_replace("</a>","") | regex_replace("<a(\s.*)?>","") | truncate(end='...') | safe }}</p>
 		</div>
 	</a>
 </div>
@@ -25,7 +25,7 @@
 <table id="category-table-desktop">
 	<tr>{% for x in category.products: %}
 		<td>
-			<a href="{{ url_for('product', productid=x.id) }}" class="product-overlay">{{ x.text | regex_replace("</p>","") | regex_replace("<p(\s.*)?>","") | truncate(length=225, end='...READ MORE') | safe }}</a>
+			<a href="{{ url_for('product', productid=x.id) }}" class="product-overlay">{{ x.text | regex_replace("</p>","") | regex_replace("<p(\s.*)?>","") | regex_replace("</a>","") | regex_replace("<a(\s.*)?>","") | truncate(length=225, end='...READ MORE') | safe }}</a>
 			<img src="{{ url_for('static', filename='images/lg/%s.jpg' % x.id ) }}" alt='{{ x.title | replace("<br />"," ") | safe }}' title='{{ x.title | replace("<br />"," ") | safe }}'>
 			<div>{{ x.title | replace("Swing Paints","") | safe }}</div>
 		</td>{% if loop.index is divisibleby(3) %}
