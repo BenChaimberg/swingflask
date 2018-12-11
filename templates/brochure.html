@@ -28,8 +28,7 @@
 	<div style="width:48%;float:left;">
 	{% for field in brochure_form %}
 		<div style="clear:right;">
-		{% if loop.index == 1 %}
-		{% else %}
+		{% if field.type != 'CSRFTokenField' %}
 			{{ field.label }}:
 			{% if field.type == "SelectField" %}
 				<select id="{{ field.name }}" name="{{ field.name }}" style="width:50%">

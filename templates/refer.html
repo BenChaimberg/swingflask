@@ -29,8 +29,7 @@
 	{% endfor %}
 	</ul>
     {% for field in refer_form %}
-    	{% if loop.index == 1 %}
-		{% else %}
+    	{% if field.type != 'CSRFTokenField' %}
 		<div style="clear:right;">
 			{{ field.label }}:
 			{{ field(size=20) }}
