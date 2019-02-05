@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Swing Paints Forum - {{ message.subject | safe }}{% endblock %}
+{% block title %}Swing Paints Forum - {{ message.subject }}{% endblock %}
 {% block head %}
 {{ super() }}
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forum.css') }}">
@@ -28,7 +28,7 @@
 				$("#bottom").click(function(){
 					$('html, body').animate({scrollTop:$('body').height()});
 				});
-				$("#subject").val("Re: {{ message.subject | safe }}");
+				$("#subject").val("Re: {{ message.subject }}");
 				{% if not message_form.errors %}
 				$("form").find("input, textarea").not("#csrf_token, #subject, #submit, #notifyemail-0, #notifyemail-1").val('');
 				{% endif %}
