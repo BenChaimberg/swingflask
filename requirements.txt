@@ -6,6 +6,7 @@ Flask==1.0.2
 Flask-Admin==1.5.3
 Flask-Login==0.2.10
 Flask-Mail==0.9.1
+Flask-Sitemap==0.3.0
 Flask-SQLAlchemy==2.1
 Flask-SSLify==0.1.5
 Flask-WTF==0.14.2

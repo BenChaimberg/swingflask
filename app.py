@@ -22,10 +22,12 @@ from flask_login import (
 )
 from flask_mail import Mail, Message
 from flask_admin import Admin
+from flask_sitemap import Sitemap
 from flask_sslify import SSLify
 from werkzeug.routing import BaseConverter, BuildError
 from search_products import products_search
 from search_forum import forum_search
+from sqlalchemy import func
 from locations import postal_dist, CodeException
 from forms import (
     LocationsForm,
@@ -100,6 +102,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = ''.join([
     '/',
     config.get('mysql', 'database')
 ])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
@@ -154,6 +157,8 @@ admin.add_view(
         endpoint='static'
     )
 )
+
+sitemap = Sitemap(app)
 
 sslify = SSLify(app)
 
@@ -241,6 +246,17 @@ def forbidden(e):
 @app.errorhandler(401)
 def unauthorized(e):
     return render_template('401.html'), 401
+
+
+def product_title_sub(title):
+    subbed_title = re.sub(r'(?:<br>|\s)', '-', title)
+    m = re.search(r'&#x\d+;', subbed_title)
+    while m is not None:
+        subbed_title = subbed_title[:m.start()] + \
+            unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
+            subbed_title[m.end():]
+        m = re.search(r'&#x\d+;', subbed_title)
+    return subbed_title
 
 
 @app.route('/product.php')
@@ -502,6 +518,27 @@ def logout():
 @app.route('/main', methods=('GET', 'POST'))
 def home():
     return sidebar_lang_render('main', request)
+
+
+@sitemap.register_generator
+def sitemap_generator():
+    endpoints = ['home', 'locations', 'faq', 'contact', 'marketing', 'about', 'gallery', 'colour', 'aquacolour', 'rightstripper', 'rightfinish', 'refer', 'brochure']
+    for endpoint in endpoints:
+        yield (endpoint, {})
+        yield (endpoint, {'lang': 'french'})
+    last_reply = db.session.query(db.func.max(Messages.last_rdate)).scalar().isoformat() + "-5:00"
+    for page in range(Messages.query.paginate(1, 50).pages):
+        yield ('forum', {'page': page+1}, last_reply)
+    for category in Categories.query.with_entities(Categories.category).all():
+        yield ('category', {'categoryid': category[0]})
+    for brand in Brands.query.with_entities(Brands.brand).all():
+        yield ('brand', {'brandid': brand[0]})
+    for product in Products.query.with_entities(Products.id, Products.title).all():
+        yield ('product_string', {'regid': str(product[0]) + '/' + product_title_sub(product[1])})
+    for frenchproduct in Frenchproducts.query.with_entities(Frenchproducts.id, Frenchproducts.title).all():
+        yield ('product_string', {'regid': str(frenchproduct[0]) + '/' + product_title_sub(frenchproduct[1]), 'lang': 'french'})
+    for message in Messages.query.with_entities(Messages.IDmessage, Messages.last_rdate).all():
+        yield ('message', {'message_id': message[0]}, message[1].isoformat() + "-05:00")
 
 
 @app.route('/forumsearch/<search_string>', methods=('GET', 'POST'))
@@ -905,13 +942,7 @@ def product_string(regid):
     stringid = re.sub(r'\d+\/(\w+)', r'\1', regid)
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
-        subbed_title = re.sub(r'(?:<br>|\s)', '-', product.title)
-        m = re.search(r'&#x\d+;', subbed_title)
-        while m is not None:
-            subbed_title = subbed_title[:m.start()] + \
-                unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
-                subbed_title[m.end():]
-            m = re.search(r'&#x\d+;', subbed_title)
+        subbed_title = product_title_sub(product.title)
         if not stringid == subbed_title:
             return redirect(url_for(
                 'product_string',
