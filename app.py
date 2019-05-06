@@ -526,7 +526,7 @@ def sitemap_generator():
     for endpoint in endpoints:
         yield (endpoint, {})
         yield (endpoint, {'lang': 'french'})
-    last_reply = db.session.query(db.func.max(Messages.last_rdate)).scalar().isoformat() + "-5:00"
+    last_reply = db.session.query(db.func.max(Messages.last_rdate)).scalar().isoformat() + "-05:00"
     for page in range(Messages.query.paginate(1, 50).pages):
         yield ('forum', {'page': page+1}, last_reply)
     for category in Categories.query.with_entities(Categories.category).all():
