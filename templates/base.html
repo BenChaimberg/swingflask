@@ -76,19 +76,11 @@
 			  appId      : '1013304338702296',
 			  cookie     : true,
 			  xfbml      : true,
-			  version    : 'v3.1'
+			  version    : 'v6.0'
 		      });
-		      FB.AppEvents.logPageView();
 		  };
-
-		  (function(d, s, id){
-		      var js, fjs = d.getElementsByTagName(s)[0];
-		      if (d.getElementById(id)) {return;}
-		      js = d.createElement(s); js.id = id;
-		      js.src = "https://connect.facebook.net/en_US/sdk.js";
-		      fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
 		</script>
+		<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}

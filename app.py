@@ -517,7 +517,7 @@ def logout():
 @app.route('/start', methods=('GET', 'POST'))
 @app.route('/main', methods=('GET', 'POST'))
 def home():
-    return sidebar_lang_render('main', request, fbToken=config.get('facebook', 'token'))
+    return sidebar_lang_render('main', request, fb_token=config.get('facebook', 'token'))
 
 
 @sitemap.register_generator
