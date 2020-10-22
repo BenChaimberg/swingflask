@@ -3,19 +3,19 @@
 {% block head %}
 {{ super() }}
 <script>
-$(window).load(function(){
-	var pageAccessToken = '1013304338702296|fbad99fd05fd048adfb8e3c00449cd66';
-	FB.api(
-		'/circa1850/posts',
-		{
-			access_token : pageAccessToken
-		},
-		function(response) {
-			$('#feature h1').after('<div class="fb-post" data-href="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '" data-width="750"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '"><p>' + response.data[0].message + '</p>Posted by <a href="https://www.facebook.com/Circa1850">Circa 1850 Refinishing, Restoration and Renovation Products</a> on&nbsp;<a href="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '">Wednesday, May 29, 2013</a></blockquote></div></div>');
-			FB.XFBML.parse();
-		}
-	);
-});
+  $(window).load(function(){
+      var pageAccessToken = '{{ fb_token }}';
+      FB.api(
+	  '/circa1850/feed',
+	  {
+	      access_token : pageAccessToken
+	  },
+	  function(response) {
+	      $('#feature h1').after('<div class="fb-post" data-href="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '" data-width="750"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '"><p>' + response.data[0].message + '</p>Posted by <a href="https://www.facebook.com/Circa1850">Circa 1850 Refinishing, Restoration and Renovation Products</a> on&nbsp;<a href="https://www.facebook.com/circa1850/posts/' + response.data[0].id.split('_')[1] + '">Wednesday, May 29, 2013</a></blockquote></div></div>');
+	      FB.XFBML.parse();
+	  }
+      );
+  });
 </script>
 {% endblock %}
 {% block content %}

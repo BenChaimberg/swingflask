@@ -76,19 +76,11 @@
 			  appId      : '1013304338702296',
 			  cookie     : true,
 			  xfbml      : true,
-			  version    : 'v3.1'
+			  version    : 'v6.0'
 		      });
-		      FB.AppEvents.logPageView();
 		  };
-
-		  (function(d, s, id){
-		      var js, fjs = d.getElementsByTagName(s)[0];
-		      if (d.getElementById(id)) {return;}
-		      js = d.createElement(s); js.id = id;
-		      js.src = "https://connect.facebook.net/en_US/sdk.js";
-		      fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
 		</script>
+		<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}
@@ -132,7 +124,7 @@
 							<li><a href="{{ url_for('.locations') }}">WHERE TO BUY</a></li>
 							<li><a href="{{ url_for('.faq') }}">FAQ</a></li>
 							<li><a href="{{ url_for('.contact') }}">CONTACTS</a></li>
-							<li><a href="http://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=0">VIEW CART</a></li>
+							<li><a href="https://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=0">VIEW CART</a></li>
 							<li><a href="?lang=french">FRAN&#xc7;AIS</a></li>
 						</ul>
 						<ul id="links-mobile">
@@ -141,7 +133,7 @@
 							<li><a href="{{ url_for('.locations') }}">LOCATIONS</a></li>
 							<li><a href="{{ url_for('.faq') }}">FAQ</a></li>
 							<li><a href="{{ url_for('.contact') }}">CONTACTS</a></li>
-							<li><a href="http://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=0">CART</a></li>
+							<li><a href="https://www.aitsafe.com/cf/review.cfm?userid=4388412&return={{ request.url }}&lg=0">CART</a></li>
 							<li><a href="?lang=french">FRAN&#xc7;AIS</a></li>
 						</ul>
 					</div>
