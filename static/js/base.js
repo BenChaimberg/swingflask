@@ -75,6 +75,3 @@ var facebookWidthResize = function(){
 	});
 	FB.XFBML.parse();
 }
-$(window).load(function(){
-	facebookWidthResize();
-});

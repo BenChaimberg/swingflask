@@ -72,24 +72,18 @@
 	<body>
 		<div id="fb-root"></div>
 		<script>
-			window.fbAsyncInit = function() {
-				FB.init({
-					appId      : '1013304338702296',
-					xfbml      : true,
-					version    : 'v2.2'
-				});
-				if (FB) {
-					FB.XFBML.parse();
-				}
-			};
-			(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&version=v2.2";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
+		  window.fbAsyncInit = function() {
+		      FB.init({
+			  appId      : '1013304338702296',
+			  cookie     : true,
+			  xfbml      : true,
+			  version    : 'v6.0'
+		      });
+		      facebookWidthResize();
+		      {% block fbscript %}{% endblock %}
+		  };
 		</script>
+		<script async defer src="https://connect.facebook.net/fr_CA/sdk.js"></script>
 		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}
