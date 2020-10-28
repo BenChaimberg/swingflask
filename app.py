@@ -85,7 +85,6 @@ RECAPTCHA_PRIVATE_KEY = config.get('recaptcha', 'private_key')
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config['DEBUG'] = config.getboolean('app', 'debug')
 app.config['SECRET_KEY'] = config.get('app', 'secret_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = ''.join([
     config.get('mysql', 'dialect'),
@@ -1079,7 +1078,3 @@ def brand(brandid):
         ).order_by(Products.id.asc()).all()
         brand.dictlen = len(brand.products)
     return sidebar_lang_render('category', request, category=brand)
-
-
-if __name__ == '__main__':
-    app.run()
