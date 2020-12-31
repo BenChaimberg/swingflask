@@ -4,21 +4,21 @@ Welcome to the revamping of the Swing Paints [website](http://www.swingpaints.co
 
 #### To run locally (NIX): ####
 ```
+# Install mysql and add it to your PATH:
+$ export PATH=$PATH:/usr/local/mysql/bin
+$ export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
+
 # Download the source code
 $ git clone https://github.com/BenChaimberg/swingflask.git
 $ cd swingflask
 
-# Install a virtual environment to silo this project's dependencies
-$ sudo pip install virtualenv
+# Install a virtual environment to silo this project's dependencies. Add `--ignore-installed six` if you run into a "Cannot uninstall" error.
+$ sudo -H pip install virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
 
 # Install dependencies
 (venv) $ pip install -r requirements.txt
-
-# If pip raises 'EnvironmentError: mysql_config not found':
-# Install mysql and add it to your PATH:
-$ export PATH=$PATH:/usr/local/mysql/bin
 
 # Create a self-signed certificate to enable SSL
 # You may need to trust the certificate in order to skip browser warning screens (in macOS, this is through Keychain Access)
