@@ -1,5 +1,37 @@
 {% extends "base.html" %}
+{% block head %}{{ super() }}
+<style>
+  .items {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around
+  }
+  .item {
+      width: 150px;
+      margin: 10px;
+  }
+  .item-img>img {
+      width: 150px;
+  }
+  .item-title {
+      text-align: center;
+      word-wrap: break-word;
+  }
+</style>
+{% endblock %}
 {% block title %}Swing Paints - Gallery{% endblock %}
 {% block content %}
-<h1>Under Construction</h1>
+<h1>Gallery</h1>
+<div class="items">
+{% for item in items %}
+<div class="item">
+	<a href="{{ url_for('gallery_feature', featureid=item.id) }}">
+		<div class="item-img">
+			<img src="{{ url_for('static', filename='images/gallery/%s' % item.path ) }}" alt='{{ item.title }}' title='{{ item.title }}'>
+		</div>
+		<div class="item-title">{{ item.title }}</div>
+	</a>
+</div>
+{% endfor %}
+</div>
 {% endblock %}

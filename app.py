@@ -48,6 +48,7 @@ from models import (
     Frenchinfolist,
     Frenchinfotable,
     Frenchproducts,
+    Gallery,
     Infolist,
     Infotable,
     Messages,
@@ -65,6 +66,7 @@ from admin import (
     InfoTableModelView,
     InfoListModelView,
     BrochureModelView,
+    GalleryModelView,
     CustomFileAdmin,
     ProtectedAdminIndexView
 )
@@ -120,6 +122,9 @@ admin.add_view(
 )
 admin.add_view(
     BrochureModelView(Brochures, db.session, category='Database')
+)
+admin.add_view(
+    GalleryModelView(Gallery, db.session, category='Database')
 )
 admin.add_view(
     CategoryModelView(Categories, db.session, category='Database')
@@ -631,7 +636,32 @@ def about():
 
 @app.route('/gallery')
 def gallery():
-    return sidebar_lang_render('gallery', request)
+    items = Gallery.query.with_entities(
+        Gallery.id,
+        Gallery.title,
+        Gallery.path,
+    ).order_by(Gallery.id.asc()).all()
+    return sidebar_lang_render('gallery', request, items=items)
+
+
+@app.route('/gallery/<int:featureid>')
+def gallery_feature(featureid):
+    feature = Gallery.query.with_entities(
+        Gallery.id,
+        Gallery.title,
+        Gallery.path,
+    ).filter_by(id = featureid).first_or_404()
+    before = Gallery.query.with_entities(
+        Gallery.id,
+        Gallery.title,
+        Gallery.path,
+    ).filter(Gallery.id < featureid).all()
+    after = Gallery.query.with_entities(
+        Gallery.id,
+        Gallery.title,
+        Gallery.path,
+    ).filter(Gallery.id > featureid).all()
+    return sidebar_lang_render('gallery_feature', request, feature=feature, before=before, after=after, gallerylen=len(before)+len(after)+1)
 
 
 @app.route('/color')
