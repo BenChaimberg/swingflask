@@ -69,6 +69,17 @@ class BrochureModelView(CustomModelView):
     ]
 
 
+class GalleryModelView(CustomModelView):
+    column_default_sort = 'id'
+    column_filters = ('id', 'title', 'path',)
+    can_export = True
+    form_columns = [
+        'id',
+        'title',
+        'path',
+    ]
+
+
 class NewsletterModelView(CustomModelView):
     column_default_sort = 'id'
     column_filters = ('id',)

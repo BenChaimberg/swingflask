@@ -289,3 +289,17 @@ class Brochures(db.Model):
         self.country = country
         self.xdate = xdate
         self.language = language
+
+
+class Gallery(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    title = db.Column(db.String(50), nullable=True)
+    path = db.Column(db.String(50), nullable=True)
+
+    def __init__(
+        self,
+        title='',
+        path='',
+    ):
+        self.title = title
+        self.path = path
