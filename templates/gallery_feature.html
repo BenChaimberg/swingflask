@@ -64,7 +64,7 @@
     </style>
   </head>
   <body>
-    <a href="{{ url_for('gallery') }}" style="color: white;">< Back</a>
+    <a href="{{ url_for('gallery') }}" style="color: white; font-family: sans-serif">< BACK</a>
     <div id="feature">
       <a href="{% if feature.id > 1 %}{{ url_for('gallery_feature', featureid=(feature.id-1)) }}{% else %}#{% endif %}"><</a>
       <div>
