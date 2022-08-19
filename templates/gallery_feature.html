@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{ feature.title }}</title>
+    <title>{{ feature.title | replace("<br>", " ") }}</title>
     <style>
       body {
 	  background-color: #333;
@@ -64,12 +64,12 @@
     </style>
   </head>
   <body>
-    <a href="{{ url_for('gallery') }}" style="color: white;">< Back</a>
+    <a href="{{ url_for('gallery') }}" style="color: white; font-family: sans-serif">< BACK</a>
     <div id="feature">
       <a href="{% if feature.id > 1 %}{{ url_for('gallery_feature', featureid=(feature.id-1)) }}{% else %}#{% endif %}"><</a>
       <div>
-	<img src="{{ url_for('static', filename='images/gallery/%s' % feature.path ) }}" alt='{{ feature.title }}' title='{{ feature.title }}'>
-	<span>{{ feature.title }}</span>
+	<img src="{{ url_for('static', filename='images/gallery/%s' % feature.path ) }}" alt='{{ feature.title | replace("<br>", " ") }}' title='{{ feature.title | replace("<br>", " ") }}'>
+	<span style="font-family: sans-serif">{{ feature.description | default("", true) | safe }}</span>
       </div>
       <a href="{% if feature.id < gallerylen %}{{ url_for('gallery_feature', featureid=(feature.id+1)) }}{% else %}#{% endif %}">></a>
     </div>

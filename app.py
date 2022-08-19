@@ -650,6 +650,7 @@ def gallery_feature(featureid):
         Gallery.id,
         Gallery.title,
         Gallery.path,
+        Gallery.description,
     ).filter_by(id = featureid).first_or_404()
     before = Gallery.query.with_entities(
         Gallery.id,
