@@ -27,9 +27,9 @@
 <div class="item">
 	<a href="{{ url_for('gallery_feature', featureid=item.id) }}">
 		<div class="item-img">
-			<img src="{{ url_for('static', filename='images/gallery/%s' % item.path ) }}" alt='{{ item.title }}' title='{{ item.title }}'>
+			<img src="{{ url_for('static', filename='images/gallery/%s' % item.path ) }}" alt='{{ item.title | replace("<br>", " ") }}' title='{{ item.title | replace("<br>", " ") }}'>
 		</div>
-		<div class="item-title">{{ item.title }}</div>
+		<div class="item-title">{{ item.title | safe }}</div>
 	</a>
 </div>
 {% endfor %}
