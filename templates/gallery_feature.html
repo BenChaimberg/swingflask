@@ -69,7 +69,7 @@
       <a href="{% if feature.id > 1 %}{{ url_for('gallery_feature', featureid=(feature.id-1)) }}{% else %}#{% endif %}"><</a>
       <div>
 	<img src="{{ url_for('static', filename='images/gallery/%s' % feature.path ) }}" alt='{{ feature.title }}' title='{{ feature.title }}'>
-	<span>{{ feature.title }}</span>
+	<span>{{ feature.description | default("", true) }}</span>
       </div>
       <a href="{% if feature.id < gallerylen %}{{ url_for('gallery_feature', featureid=(feature.id+1)) }}{% else %}#{% endif %}">></a>
     </div>

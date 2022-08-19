@@ -71,12 +71,13 @@ class BrochureModelView(CustomModelView):
 
 class GalleryModelView(CustomModelView):
     column_default_sort = 'id'
-    column_filters = ('id', 'title', 'path',)
+    column_filters = ('id', 'title', 'path', 'description')
     can_export = True
     form_columns = [
         'id',
         'title',
         'path',
+        'description'
     ]
 
 
