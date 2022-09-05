@@ -295,7 +295,7 @@ class Gallery(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     title = db.Column(db.String(50), nullable=True)
     path = db.Column(db.String(50), nullable=True)
-    description = db.Column(db.String(250), nullable=True)
+    description = db.Column(db.Text(), nullable=True)
 
     def __init__(
         self,
