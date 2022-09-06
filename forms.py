@@ -1,9 +1,9 @@
-import ConfigParser
+import configparser
 import re
 from flask_wtf import FlaskForm, RecaptchaField
 import wtforms
 from wtforms import (
-    TextField,
+    StringField,
     PasswordField,
     SelectField,
     RadioField,
@@ -12,9 +12,9 @@ from wtforms import (
 
 
 class LocationsForm(FlaskForm):
-    postalcode = TextField(
+    postalcode = StringField(
         "Your postal code",
-        [wtforms.validators.Required('Please enter your postal code')]
+        [wtforms.validators.InputRequired('Please enter your postal code')]
     )
     measure = RadioField(
         'Distance measure',
@@ -31,10 +31,10 @@ class LocationsForm(FlaskForm):
         rv = FlaskForm.validate(self)
         if not rv:
             return False
-        if len(str(self.postalcode.data)) is 5 and int(self.postalcode.data):
+        if len(str(self.postalcode.data)) == 5 and int(self.postalcode.data):
             return True
         self.postalcode.data = re.sub(r'\s', r'', self.postalcode.data)
-        if not len(str(self.postalcode.data)) is 6:
+        if not len(str(self.postalcode.data)) == 6:
             self.postalcode.errors.append('Invalid postal code (length)')
             return False
         if not ''.join([
@@ -59,24 +59,24 @@ class LocationsForm(FlaskForm):
 
 
 class MessageForm(FlaskForm):
-    name = TextField(
+    name = StringField(
         "Name",
-        [wtforms.validators.Required('Please enter your name')]
+        [wtforms.validators.InputRequired('Please enter your name')]
     )
-    email = TextField(
+    email = StringField(
         "E-mail",
         [
-            wtforms.validators.Required('Please enter your email'),
+            wtforms.validators.InputRequired('Please enter your email'),
             wtforms.validators.Email()
         ]
     )
-    subject = TextField(
+    subject = StringField(
         "Subject",
-        [wtforms.validators.Required('Please enter a subject')]
+        [wtforms.validators.InputRequired('Please enter a subject')]
     )
     message = TextAreaField(
         "Message",
-        [wtforms.validators.Required('Please enter your message')]
+        [wtforms.validators.InputRequired('Please enter your message')]
     )
     notifyemail = RadioField(
         'Do you want notification of a response to your message?',
@@ -86,26 +86,26 @@ class MessageForm(FlaskForm):
 
 
 class FrenchMessageForm(FlaskForm):
-    name = TextField(
+    name = StringField(
         "Nom",
-        [wtforms.validators.Required('Veuillez entrez votre nom')]
+        [wtforms.validators.InputRequired('Veuillez entrez votre nom')]
     )
-    email = TextField(
+    email = StringField(
         "Adresse de Couriel",
         [
-            wtforms.validators.Required(
+            wtforms.validators.InputRequired(
                 'Veuillez entrez votre adresse de courriel'
             ),
             wtforms.validators.Email()
         ]
     )
-    subject = TextField(
+    subject = StringField(
         "Sujet",
-        [wtforms.validators.Required('Veuillez entrez un sujet')]
+        [wtforms.validators.InputRequired('Veuillez entrez un sujet')]
     )
     message = TextAreaField(
         "Message",
-        [wtforms.validators.Required('Veuillez entrez un message')]
+        [wtforms.validators.InputRequired('Veuillez entrez un message')]
     )
     notifyemail = RadioField(
         'Voulez-vous la notification d&#x0027;un r&#x00E9;ponse &#x00E0; votre\
@@ -117,18 +117,18 @@ class FrenchMessageForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = TextField(
+    username = StringField(
         "Username:",
-        [wtforms.validators.Required('Please enter your username')]
+        [wtforms.validators.InputRequired('Please enter your username')]
     )
     password = PasswordField(
         "Password:",
-        [wtforms.validators.Required('Please enter your password')]
+        [wtforms.validators.InputRequired('Please enter your password')]
     )
 
     def validate(self):
         rv = FlaskForm.validate(self)
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         config.read('swingflask.conf')
         if (
             self.username.data == config.get('admin', 'username')
@@ -141,28 +141,28 @@ class LoginForm(FlaskForm):
 
 
 class BrochureForm(FlaskForm):
-    name = TextField(
+    name = StringField(
         "Name",
-        [wtforms.validators.Required('Please enter your name')]
+        [wtforms.validators.InputRequired('Please enter your name')]
     )
-    email = TextField(
+    email = StringField(
         "E-mail",
         [
-            wtforms.validators.Required('Please enter your email'),
+            wtforms.validators.InputRequired('Please enter your email'),
             wtforms.validators.Email()
         ]
     )
-    address = TextField(
+    address = StringField(
         "Address",
-        [wtforms.validators.Required('Please enter your address')]
+        [wtforms.validators.InputRequired('Please enter your address')]
     )
-    city = TextField(
+    city = StringField(
         "City",
-        [wtforms.validators.Required('Please enter your city')]
+        [wtforms.validators.InputRequired('Please enter your city')]
     )
     stateprov = SelectField(
         "State/Prov",
-        [wtforms.validators.Required('Please enter your state or province')],
+        [wtforms.validators.InputRequired('Please enter your state or province')],
         choices=[
             ('', ''),
             ('Alberta', 'Alberta'),
@@ -231,13 +231,13 @@ class BrochureForm(FlaskForm):
             ('Wyoming', 'Wyoming')
         ]
     )
-    zipcode = TextField(
+    zipcode = StringField(
         "Zip/Postal Code",
-        [wtforms.validators.Required('Please enter your zip or postal code')]
+        [wtforms.validators.InputRequired('Please enter your zip or postal code')]
     )
     country = SelectField(
         "Country",
-        [wtforms.validators.Required('Please enter your country')],
+        [wtforms.validators.InputRequired('Please enter your country')],
         choices=[
             ('', ''),
             ('Afghanistan', 'Afghanistan'),
@@ -522,29 +522,29 @@ class BrochureForm(FlaskForm):
 
 
 class FrenchBrochureForm(FlaskForm):
-    name = TextField(
+    name = StringField(
         "Nom",
-        [wtforms.validators.Required('Veuillez entrer votre nom')]
+        [wtforms.validators.InputRequired('Veuillez entrer votre nom')]
     )
-    email = TextField(
+    email = StringField(
         "Couriel",
         [
-            wtforms.validators.Required('Veuillez entrer votre couriel'),
+            wtforms.validators.InputRequired('Veuillez entrer votre couriel'),
             wtforms.validators.Email()
         ]
     )
-    address = TextField(
+    address = StringField(
         "Adresse",
-        [wtforms.validators.Required('Veuillez entrer votre adresse')]
+        [wtforms.validators.InputRequired('Veuillez entrer votre adresse')]
     )
-    city = TextField(
+    city = StringField(
         "Ville",
-        [wtforms.validators.Required('Veuillez entrer votre ville')]
+        [wtforms.validators.InputRequired('Veuillez entrer votre ville')]
     )
     stateprov = SelectField(
         "&#xc9;tat/Province",
         [
-            wtforms.validators.Required(
+            wtforms.validators.InputRequired(
                 'Veuillez entrer votre &#xe9;tat ou province'
             )
         ],
@@ -616,13 +616,13 @@ class FrenchBrochureForm(FlaskForm):
             ('Wyoming', 'Wyoming')
         ]
     )
-    zipcode = TextField(
+    zipcode = StringField(
         "Zip/Code Postal",
-        [wtforms.validators.Required('Veuillez entrer votre code postal')]
+        [wtforms.validators.InputRequired('Veuillez entrer votre code postal')]
     )
     country = SelectField(
         "Pays",
-        [wtforms.validators.Required('Veuillez entrer votre pays')],
+        [wtforms.validators.InputRequired('Veuillez entrer votre pays')],
         choices=[
             ('', ''),
             ('Afghanistan', 'Afghanistan'),
@@ -907,25 +907,25 @@ class FrenchBrochureForm(FlaskForm):
 
 
 class ReferForm(FlaskForm):
-    visitorname = TextField(
+    visitorname = StringField(
         "Your name",
-        [wtforms.validators.Required('Please enter your name')]
+        [wtforms.validators.InputRequired('Please enter your name')]
     )
-    visitoremail = TextField(
+    visitoremail = StringField(
         "Your email",
         [
-            wtforms.validators.Required('Please enter your email'),
+            wtforms.validators.InputRequired('Please enter your email'),
             wtforms.validators.Email()
         ]
     )
-    friendname = TextField(
+    friendname = StringField(
         "Your friend's name",
-        [wtforms.validators.Required('Please enter your friend&apos;s name')]
+        [wtforms.validators.InputRequired('Please enter your friend&apos;s name')]
     )
-    friendemail = TextField(
+    friendemail = StringField(
         "Your friend's email",
         [
-            wtforms.validators.Required(
+            wtforms.validators.InputRequired(
                 'Please enter your friend&apos;s email'
             ),
             wtforms.validators.Email()
@@ -934,27 +934,27 @@ class ReferForm(FlaskForm):
 
 
 class FrenchReferForm(FlaskForm):
-    visitorname = TextField(
+    visitorname = StringField(
         "Votre nom",
-        [wtforms.validators.Required('Veuillez entrer votre nom')]
+        [wtforms.validators.InputRequired('Veuillez entrer votre nom')]
     )
-    visitoremail = TextField(
+    visitoremail = StringField(
         "Votre adresse de courriel",
         [
-            wtforms.validators.Required(
+            wtforms.validators.InputRequired(
                 'Veuillez entrer votre adresse de courriel'
             ),
             wtforms.validators.Email()
         ]
     )
-    friendname = TextField(
+    friendname = StringField(
         "Le nom de votre amie",
-        [wtforms.validators.Required('Veuillez entrer le nom de votre amie')]
+        [wtforms.validators.InputRequired('Veuillez entrer le nom de votre amie')]
     )
-    friendemail = TextField(
+    friendemail = StringField(
         "Son adresse de courriel",
         [
-            wtforms.validators.Required(
+            wtforms.validators.InputRequired(
                 'Veuillez entrer son adresse de courriel'
             ),
             wtforms.validators.Email()

@@ -10,7 +10,7 @@ class CustomModelView(ModelView):
     list_template = 'admin/right_links_model.html'
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 class ProductModelView(CustomModelView):
@@ -155,12 +155,12 @@ class CustomFileAdmin(FileAdmin):
     can_rename = False
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 class ProtectedAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return redirect(url_for('login'))
         return super(ProtectedAdminIndexView, self).index()

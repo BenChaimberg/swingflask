@@ -1,7 +1,7 @@
 import time
 import re
 import os
-import ConfigParser
+import configparser
 import werkzeug
 from flask import (
     Flask,
@@ -71,7 +71,7 @@ from admin import (
     ProtectedAdminIndexView
 )
 
-config = ConfigParser.RawConfigParser()
+config = configparser.RawConfigParser()
 config.read('swingflask.conf')
 
 MAIL_SERVER = config.get('mail', 'server')
@@ -497,7 +497,7 @@ def login_unauthorized():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect('/admin/')
     if login_form.validate_on_submit():
         user = load_user(login_form.username.data)
@@ -590,7 +590,7 @@ def locations():
                 us = False
                 if len(locations_form.postalcode.data) <= 5:
                     us = True
-                if len(distances) is 0:
+                if len(distances) == 0:
                     return sidebar_lang_render(
                         'locations',
                         request,
@@ -966,21 +966,17 @@ def brochure():
     )
 
 
-@app.route('/product/<regex("\d+\/.*"):regid>')
-def product_string(regid):
-    productid = int(re.sub(r'(\d+)\/.*', r'\1', regid))
-    stringid = re.sub(r'\d+\/(\w+)', r'\1', regid)
+@app.route('/product/<int:productid>', defaults={"title":""})
+@app.route('/product/<int:productid>/<string:title>')
+def product_string(productid, title):
     if request.args.get('lang') == 'french':
         product = Frenchproducts.query.filter_by(id=productid).first_or_404()
         subbed_title = product_title_sub(product.title)
-        if not stringid == subbed_title:
+        if not title == subbed_title:
             return redirect(url_for(
                 'product_string',
-                regid=''.join([
-                    str(productid),
-                    '/',
-                    subbed_title
-                ]),
+                productid=productid,
+                title=subbed_title,
                 lang='french'
             ), code=301)
         product.infolist = Infolist.query.with_entities(
@@ -1009,14 +1005,11 @@ def product_string(regid):
                 unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
                 subbed_title[m.end():]
             m = re.search(r'&#x\d+;', subbed_title)
-        if not stringid == subbed_title:
+        if not title == subbed_title:
             return redirect(url_for(
                 'product_string',
-                regid=''.join([
-                    str(productid),
-                    '/',
-                    subbed_title
-                ])
+                productid=productid,
+                title=subbed_title,
             ), code=301)
         product.infolist = Infolist.query.with_entities(
             Infolist.infolist
@@ -1048,12 +1041,14 @@ def product(productid):
     if request.args.get('lang') == 'french':
         return redirect(url_for(
             'product_string',
-            regid=''.join([productid, '/']),
+            productid=productid,
+            title="",
             lang='french'
         ), code=301)
     return redirect(url_for(
         'product_string',
-        regid=''.join([productid, '/'])
+        productid=productid,
+        title="",
     ), code=301)
 
 

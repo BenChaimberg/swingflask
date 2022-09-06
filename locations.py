@@ -1,6 +1,6 @@
 from models import Locations
 from sqlalchemy import or_
-import urllib2
+import urllib
 import json
 import math
 
@@ -10,7 +10,7 @@ class CodeException(Exception):
 
 
 def postal_dist(postalcode, measure, results):
-    response = urllib2.urlopen(''.join([
+    response = urllib.request.urlopen(''.join([
         'http://geocoder.ca/?postal=',
         postalcode,
         '&geoit=xml&json=1'
