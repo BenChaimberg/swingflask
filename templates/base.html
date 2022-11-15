@@ -69,20 +69,8 @@
 		</script>
 	{% endblock %}</head>
 	<body>
-		<div id="fb-root"></div>
-		<script>
-		  window.fbAsyncInit = function() {
-		      FB.init({
-			  appId      : '1013304338702296',
-			  cookie     : true,
-			  xfbml      : true,
-			  version    : 'v6.0'
-		      });
-		      facebookWidthResize();
-		      {% block fbscript %}{% endblock %}
-		  };
-		</script>
-		<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+	        <div id="fb-root"></div>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=1013304338702296&autoLogAppEvents=1" nonce="YaMGHMx6"></script>
 		<canvas id="canvas" style="position:fixed;z-index:2;" width="90" height="1000"></canvas>
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}
