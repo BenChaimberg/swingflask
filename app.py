@@ -254,7 +254,7 @@ def product_title_sub(title):
     m = re.search(r'&#x\d+;', subbed_title)
     while m is not None:
         subbed_title = subbed_title[:m.start()] + \
-            unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
+            chr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
             subbed_title[m.end():]
         m = re.search(r'&#x\d+;', subbed_title)
     return subbed_title
@@ -999,7 +999,7 @@ def product_string(productid, title):
         m = re.search(r'&#x\d+;', subbed_title)
         while m is not None:
             subbed_title = subbed_title[:m.start()] + \
-                unichr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
+                chr(int(subbed_title[m.start()+3:m.end()-1], 16)) + \
                 subbed_title[m.end():]
             m = re.search(r'&#x\d+;', subbed_title)
         if not title == subbed_title:
