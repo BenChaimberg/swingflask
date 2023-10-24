@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
 {{ super() }}
+<meta name="description" content="This is a Swing Paints product page for {{ product.title | replace('<br>', ' ') | safe }}">
 <script type="text/javascript" src="{{ url_for('static', filename='js/product.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/product.css') }}">
 {% endblock %}
