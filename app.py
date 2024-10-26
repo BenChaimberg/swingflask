@@ -920,7 +920,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     else:
         brochure_form = BrochureForm()
@@ -954,7 +954,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     return sidebar_lang_render(
         'brochure',
