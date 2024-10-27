@@ -859,7 +859,7 @@ def refer():
                 personnelle. Vous pouvez les trouver \
                 <a href='http://www.swingpaints.com/?french'>ici</a>.\
                 " % (friendname)
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     else:
         refer_form = ReferForm()
@@ -881,7 +881,7 @@ def refer():
                 is the reason for this \"almost\" personal email. You can \
                 find them <a href='http://www.swingpaints.com'>here</a>.\
                 " % friendname
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     return sidebar_lang_render('refer', request, refer_form=refer_form)
 
