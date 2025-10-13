@@ -859,7 +859,7 @@ def refer():
                 personnelle. Vous pouvez les trouver \
                 <a href='http://www.swingpaints.com/?french'>ici</a>.\
                 " % (friendname)
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     else:
         refer_form = ReferForm()
@@ -881,7 +881,7 @@ def refer():
                 is the reason for this \"almost\" personal email. You can \
                 find them <a href='http://www.swingpaints.com'>here</a>.\
                 " % friendname
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('refersuccess', request)
     return sidebar_lang_render('refer', request, refer_form=refer_form)
 
@@ -920,7 +920,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     else:
         brochure_form = BrochureForm()
@@ -954,7 +954,7 @@ def brochure():
                 brochure_form.zipcode.data,
                 brochure_form.country.data
             )
-            mail.send(msg)
+            # mail.send(msg)
             return sidebar_lang_render('brochuresuccess', request)
     return sidebar_lang_render(
         'brochure',
