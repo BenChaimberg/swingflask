@@ -3,6 +3,7 @@
 {{ super() }}
 <script type="text/javascript" src="{{ url_for('static', filename='js/product.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/product.css') }}">
+<meta name="description" content="{{ product.meta_description | default(product.text, true) | safe }}">
 {% endblock %}
 {% block title %}{{ product.title | replace("<br>", " ") | safe }}{% endblock %}
 {% block categorytext %}{{ category | safe }}{% endblock %}
