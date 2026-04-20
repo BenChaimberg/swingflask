@@ -26,7 +26,8 @@ class ProductModelView(CustomModelView):
         'forms_us',
         'forms_can',
         'category',
-        'brand'
+        'brand',
+        'meta_description',
     ]
 
 
@@ -38,6 +39,7 @@ class CategoryModelView(CustomModelView):
         'id',
         'category',
         'name',
+        'meta_description'
     ]
 
 
