@@ -9,8 +9,8 @@ Materials Swing Paints offers a variety of take-away brochures, sample boards, s
 ### Photos & Literature ###
 A complete set of 4-colour photos is available to you to promote the Swing Paints line. Product information sheets detail the preparation and uses of our complete line to assist in your sale.
 
-### MSDS ###
-Material Safety Data Sheets are available on our complete line upon request. Request MSDS 
+### SDS ###
+Safety Data Sheets are available on our complete line upon request. Request SDS 
 
 ### Sales Support and Customer Service ###
 Our team of trained representatives is ready and able to assist you in any way possible. Each one has years of experience in the coatings field. Swing Paints also offers refinishing classes to both the trade and consumers. 
