@@ -82,10 +82,12 @@ class Categories(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     category = db.Column(db.Text(), nullable=False)
     name = db.Column(db.Text(), nullable=False)
+    meta_description = db.Column(db.Text(), nullable=True)
 
-    def __init__(self, category='', name=''):
+    def __init__(self, category='', name='', meta_description=''):
         self.category = category
         self.name = name
+        self.meta_description = meta_description
 
 
 class Brands(db.Model):
@@ -108,6 +110,7 @@ class Products(db.Model):
     forms_can = db.Column(db.Text(), nullable=True)
     category = db.Column(db.Text(), nullable=False)
     brand = db.Column(db.Text(), nullable=True)
+    meta_description = db.Column(db.Text(), nullable=True)
 
     def __init__(
         self,
@@ -119,7 +122,8 @@ class Products(db.Model):
         forms_us='',
         forms_can='',
         category='',
-        brand=''
+        brand='',
+        meta_description=''
     ):
         self.id = id
         self.title = title
@@ -130,6 +134,7 @@ class Products(db.Model):
         self.forms_can = forms_can
         self.category = category
         self.brand = brand
+        self.meta_description = meta_description
 
 
 class Frenchinfotable(db.Model):
@@ -158,10 +163,12 @@ class Frenchcategories(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     category = db.Column(db.Text(), nullable=False)
     name = db.Column(db.Text(), nullable=False)
+    meta_description = db.Column(db.Text(), nullable=True)
 
-    def __init__(self, category='', name=''):
+    def __init__(self, category='', name='', meta_description=''):
         self.category = category
         self.name = name
+        self.meta_description = meta_description
 
 
 class Frenchproducts(db.Model):
@@ -174,6 +181,7 @@ class Frenchproducts(db.Model):
     forms_can = db.Column(db.Text(), nullable=True)
     category = db.Column(db.Text(), nullable=False)
     brand = db.Column(db.Text(), nullable=True)
+    meta_description = db.Column(db.Text(), nullable=True)
 
     def __init__(
         self,
@@ -185,7 +193,8 @@ class Frenchproducts(db.Model):
         forms_us='',
         forms_can='',
         category='',
-        brand=''
+        brand='',
+        meta_description=''
     ):
         self.id = id
         self.title = title
@@ -196,6 +205,7 @@ class Frenchproducts(db.Model):
         self.forms_can = forms_can
         self.category = category
         self.brand = brand
+        self.meta_description = meta_description
 
 
 class Messages(db.Model):
