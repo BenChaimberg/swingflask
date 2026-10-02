@@ -535,9 +535,9 @@ def sitemap_generator():
     for brand in Brands.query.with_entities(Brands.brand).all():
         yield ('brand', {'brandid': brand[0]})
     for product in Products.query.with_entities(Products.id, Products.title).all():
-        yield ('product_string', {'regid': str(product[0]) + '/' + product_title_sub(product[1])})
+        yield ('product_string', {'productid': str(product[0]), 'title': product_title_sub(product[1])})
     for frenchproduct in Frenchproducts.query.with_entities(Frenchproducts.id, Frenchproducts.title).all():
-        yield ('product_string', {'regid': str(frenchproduct[0]) + '/' + product_title_sub(frenchproduct[1]), 'lang': 'french'})
+        yield ('product_string', {'productid': str(frenchproduct[0]), 'title': product_title_sub(frenchproduct[1]), 'lang': 'french'})
     for message in Messages.query.with_entities(Messages.IDmessage, Messages.last_rdate).all():
         yield ('message', {'message_id': message[0]}, message[1].isoformat() + "-05:00")
 
